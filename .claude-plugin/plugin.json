@@ -1,0 +1,10 @@
+{
+  "name": "prhythm",
+  "description": "Prhythm — 提案のリズムを生み出すエージェントスキル集",
+  "version": "0.1.0",
+  "author": {
+    "name": "shunsaku-studio"
+  },
+  "repository": "https://github.com/shunsaku-studio/Prhythm",
+  "license": "MIT"
+}
