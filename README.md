@@ -17,7 +17,11 @@ Claude Code からプラグインとしてインストール:
 
 ## スキル一覧
 
-スキルは `skills/<skill-name>/SKILL.md` として追加されます。現在準備中です。
+| スキル | 説明 |
+|--------|------|
+| [prhythm-skill-review](skills/prhythm-skill-review/) | スキルの README 整備と品質レビュー |
+
+スキルは `skills/<skill-name>/SKILL.md` として追加されます。
 
 ## Slidev (プレゼン用)
 
