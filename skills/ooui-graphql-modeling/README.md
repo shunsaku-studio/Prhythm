@@ -1,4 +1,4 @@
-# graphql-schema-design
+# ooui-graphql-modeling
 
 ## 概要
 
@@ -31,31 +31,31 @@
 **新規スキーマ** — Phase 0 → 1 → 2 → 3。各ゲートで OK をもらってから次へ:
 
 ```
-/graphql-schema-design ブログアプリのスキーマを設計して。ユーザーは記事を書いて公開したい、いいねしたい
+/ooui-graphql-modeling ブログアプリのスキーマを設計して。ユーザーは記事を書いて公開したい、いいねしたい
 ```
 
 **型・関係の追加・修正** — Phase 1 のみ:
 
 ```
-/graphql-schema-design schema.graphql に Comment 型と Article との関係を追加して
+/ooui-graphql-modeling schema.graphql に Comment 型と Article との関係を追加して
 ```
 
 **mutation の追加** — Phase 2 のみ（構造が固まっている前提）:
 
 ```
-/graphql-schema-design articleLike と articlePublish の mutation を追加して
+/ooui-graphql-modeling articleLike と articlePublish の mutation を追加して
 ```
 
 **既存 SDL の編集** — 直接編集後に validate:
 
 ```bash
-bash skills/graphql-schema-design/scripts/validate-schema.sh src/model/schema.graphql
+bash skills/ooui-graphql-modeling/scripts/validate-schema.sh src/model/schema.graphql
 ```
 
 ## 構成
 
 ```
-graphql-schema-design/
+ooui-graphql-modeling/
 ├── README.md              # このファイル（人間向け）
 ├── SKILL.md               # エージェント向け手順
 ├── references/
@@ -91,4 +91,6 @@ graphql-schema-design/
 
 ## 関連スキル
 
-現時点で併用前提の Prhythm スキルはない。
+| スキル | 関係 |
+|--------|------|
+| ooui-architect | 後続 — Phase 3 完了後、設計した type から OOUI の画面ひな形（一覧・詳細・アクション）へ進む |

@@ -1,0 +1,40 @@
+{
+  "pages": {
+    "groups": [
+      ":NODE:",
+      ":BLANK_LINE:",
+      ":PACKAGE:",
+      ":BLANK_LINE:",
+      ["@/env", "@/env/**"],
+      ":BLANK_LINE:",
+      ["@/common", "@/common/**"],
+      ":BLANK_LINE:",
+      ["@/gql", "@/gql/**"],
+      ":BLANK_LINE:",
+      ["@/model", "@/model/**"],
+      ":BLANK_LINE:",
+      ["@/pages", "@/pages/**"],
+      ":BLANK_LINE:",
+      ":PATH:"
+    ]
+  },
+  "app": {
+    "groups": [
+      ":NODE:",
+      ":BLANK_LINE:",
+      ":PACKAGE:",
+      ":BLANK_LINE:",
+      ["@/env", "@/env/**"],
+      ":BLANK_LINE:",
+      ["@/common", "@/common/**"],
+      ":BLANK_LINE:",
+      ["@/gql", "@/gql/**"],
+      ":BLANK_LINE:",
+      ["@/model", "@/model/**"],
+      ":BLANK_LINE:",
+      ["@/app", "@/app/**"],
+      ":BLANK_LINE:",
+      ":PATH:"
+    ]
+  }
+}

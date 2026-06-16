@@ -1,12 +1,12 @@
 ---
-name: graphql-schema-design
+name: ooui-graphql-modeling
 description: >-
   Proto-stage GraphQL SDL design: capability→type, verbs→mutation, domain-first.
   Use when designing domain schema, GraphQL SDL, schema.graphql, or domain modeling.
 disable-model-invocation: false
 ---
 
-# GraphQL Schema Design
+# OOUI GraphQL Modeling
 
 Phased domain modeling: user requirements → structure → mutations → validate.  
 **Input:** requirements in the conversation (app summary, tasks, reference products).  
@@ -89,8 +89,8 @@ At Phase 1 **Structure ready**, paste the summary in chat. Do not create separat
 ## Common commands
 
 ```sh
-bash skills/graphql-schema-design/scripts/init-schema.sh
-bash skills/graphql-schema-design/scripts/validate-schema.sh src/model/schema.graphql
+bash skills/ooui-graphql-modeling/scripts/init-schema.sh
+bash skills/ooui-graphql-modeling/scripts/validate-schema.sh src/model/schema.graphql
 ```
 
 ## After Phase 3

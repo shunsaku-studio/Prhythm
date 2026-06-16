@@ -8,7 +8,7 @@ Phased gates are mandatory. Read [principles.md](principles.md) and [modeling-pa
 ## Phase 0 — init
 
 ```sh
-bash skills/graphql-schema-design/scripts/init-schema.sh
+bash skills/ooui-graphql-modeling/scripts/init-schema.sh
 ```
 
 - Creates `src/model/schema.graphql` stub (`Query` only)
@@ -38,7 +38,7 @@ Read [extraction.md](extraction.md) Step 0 first.
 9. Run validate + modeling-patterns self-review
 
 ```sh
-bash skills/graphql-schema-design/scripts/validate-schema.sh src/model/schema.graphql
+bash skills/ooui-graphql-modeling/scripts/validate-schema.sh src/model/schema.graphql
 ```
 
 **Stop.** Show:
@@ -80,7 +80,7 @@ Reply "OK" to validate and finish, or give fixes.
 Start only after mutations OK.
 
 ```sh
-bash skills/graphql-schema-design/scripts/validate-schema.sh src/model/schema.graphql
+bash skills/ooui-graphql-modeling/scripts/validate-schema.sh src/model/schema.graphql
 ```
 
 Tell the user:

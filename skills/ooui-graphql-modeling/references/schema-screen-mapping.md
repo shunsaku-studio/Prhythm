@@ -24,7 +24,7 @@ Paste `src/model/schema.graphql` into [Basedash GraphQL schema visualizer](https
 [../templates/example.graphql](../templates/example.graphql)
 
 ```sh
-bash skills/graphql-schema-design/scripts/validate-schema.sh skills/graphql-schema-design/templates/example.graphql
+bash skills/ooui-graphql-modeling/scripts/validate-schema.sh skills/ooui-graphql-modeling/templates/example.graphql
 ```
 
 ## Production and deep dives
