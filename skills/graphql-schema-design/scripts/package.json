@@ -1,0 +1,8 @@
+{
+  "name": "graphql-schema-design-scripts",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "graphql": "^16.9.0"
+  }
+}

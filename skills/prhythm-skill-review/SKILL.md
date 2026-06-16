@@ -31,10 +31,15 @@ Default review is **Layer A only**. Use **layer-b** or **layer-c** modes only wh
 2. Read [references/readme-template.md](references/readme-template.md).
 3. Create or update `README.md` in Japanese with these 8 headings:
    - 概要, 利用メリット, 利用シーン, 使い方, 構成, 前提条件, 注意事項, 関連スキル
-4. Write **利用メリット** from user value, not trigger conditions.
-5. Write **使い方** from the target skill's workflows and trigger terms. Do not copy prhythm-skill-review commands.
-6. Align terminology with SKILL.md. Do not duplicate full procedures.
-7. Run validate:
+4. Write **利用メリット** — answer "what becomes better for the user?" (outcomes, shared understanding, less rework). See [readme-template.md](references/readme-template.md).
+   - DO: user/team value, before/after state, downstream wins (e.g. connects to next workflow step)
+   - DON'T: trigger terms, phase names, naming rules, scripts, gates, or other SKILL.md implementation detail
+5. Write **利用シーン** — situations where those outcomes matter. Align with 利用メリット (ideally 1:1). See [readme-template.md](references/readme-template.md).
+   - DO: user problems, timing ("before X", "when Y is unclear"), tie each bullet to a benefit
+   - DON'T: technical operations, slash commands, trigger-term lists — those belong in **使い方**
+6. Write **使い方** from the target skill's workflows and trigger terms. Do not copy prhythm-skill-review commands.
+7. Align terminology with SKILL.md. Do not duplicate full procedures.
+8. Run validate:
 
 ```bash
 bash skills/prhythm-skill-review/scripts/validate-skill.sh path/to/skill-dir
@@ -63,6 +68,8 @@ bash skills/prhythm-skill-review/scripts/validate-skill.sh path/to/skill-dir
 - Flag hedging language (see **Hedging patterns** in [review-rubric.md](references/review-rubric.md)).
 - Prefer imperative verbs and **If X → Y** branches.
 - Check progressive disclosure: long content belongs in `references/`, not SKILL.md.
+- Flag README **利用メリット** that list implementation detail (phases, scripts, naming rules) instead of user/team outcomes — see [readme-template.md](references/readme-template.md).
+- Flag README **利用シーン** that list technical operations or commands instead of user situations aligned with メリット — see [readme-template.md](references/readme-template.md).
 - Mark Observability as N/A for pure reference skills with no workflow.
 
 Do NOT run Layer B or C unless the user explicitly requests efficacy or behavioral testing.
