@@ -35,6 +35,7 @@ bash scripts/link-cursor-skills.sh
 | スキル | 説明 |
 |--------|------|
 | [prhythm-skill-review](skills/prhythm-skill-review/) | スキルの README 整備と品質レビュー |
+| [competitive-research](skills/competitive-research/) | 新規プロダクト・機能向けに競合・参考サービスを調査し、設計判断に使えるインサイトを出す |
 | [ooui-graphql-modeling](skills/ooui-graphql-modeling/) | プロト段階の GraphQL SDL 設計（ドメイン中心・段階的ゲート） |
 | [ooui-architect](skills/ooui-architect/) | OOUI の common/model/ルーティング dir 構成、scaffold、4-file コンポーネント |
 | [usecase-mapper](skills/usecase-mapper/) | コードベースや仕様書から**ユースケース一覧・ユースケース図**を生成し `docs/usecase-map.md` に出力する |

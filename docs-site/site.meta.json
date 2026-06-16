@@ -20,6 +20,7 @@
       "text": "Skills",
       "items": [
         { "skill": "create-html-deck" },
+        { "skill": "competitive-research" },
         { "skill": "ooui-architect", "expand": true },
         { "skill": "ooui-graphql-modeling" },
         { "skill": "prhythm-skill-pr" },
