@@ -10,7 +10,7 @@ allowed-tools: Bash(node:*), Bash(pnpm:*), Bash(git:*), Bash(which:*), Bash(ls:*
 
 コードベースを分析し、ユースケース（アクターが達成する目的単位の操作）中心のマップを `docs/usecase-map.md` に生成する。ユースケース一覧・ユースケース図を主役に、ドメイン単位の API・画面・フロー図を併記する。
 
-> 出力イメージは [`examples/usecase-map.sample.md`](examples/usecase-map.sample.md)（架空プロダクト「TripMate」のサンプル）を参照。
+> 人間向けの概要・使い方は [`README.md`](README.md) を参照。
 
 ---
 

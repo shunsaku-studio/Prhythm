@@ -17,7 +17,11 @@ Claude Code からプラグインとしてインストール:
 
 ## スキル一覧
 
-スキルは `skills/<skill-name>/SKILL.md` として追加されます。現在準備中です。
+スキルは `skills/<skill-name>/` に配置されます。
+
+| スキル | 説明 |
+|---|---|
+| [usecase-mapper](skills/usecase-mapper/) | コードベースや仕様書から**ユースケース一覧・ユースケース図**を生成し `docs/usecase-map.md` に出力する |
 
 ## Slidev (プレゼン用)
 
