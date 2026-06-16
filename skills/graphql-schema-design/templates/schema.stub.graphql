@@ -1,0 +1,5 @@
+# Populated in Phase 1. Remove this comment when writing types.
+
+type Query {
+  _empty: String
+}
