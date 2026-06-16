@@ -15,6 +15,21 @@ Claude Code からプラグインとしてインストール:
 /plugin install prhythm@shunsaku-studio/Prhythm
 ```
 
+### Cursor でこのリポジトリを開発する場合
+
+スキルの正本は `skills/`。Cursor が `/` スラッシュコマンド用に読むのは `.cursor/skills/` だけなので、**symlink でつなぐ**（コピーしない）。
+
+```bash
+bash scripts/link-cursor-skills.sh
+```
+
+| パス | 役割 |
+|------|------|
+| `skills/<name>/` | 正本。編集・validate・PR はここ |
+| `.cursor/skills/<name>/` | Cursor 検出用 symlink → `skills/<name>/` |
+
+ファイルツリー上は両方に同じ内容が見えるが、実体は `skills/` のみ。`/prhythm-skill-review` などメタスキルは `disable-model-invocation: true` のため、スラッシュで明示呼び出しする。
+
 ## スキル一覧
 
 | スキル | 説明 |
@@ -42,7 +57,10 @@ npm run export:pdf             # PDF にエクスポート
 Prhythm/
 ├── .claude-plugin/
 │   └── plugin.json            # プラグインマニフェスト
-├── skills/                    # Agent Skills (SKILL.md) を配置
+├── .cursor/skills/            # Cursor 用 symlink → skills/*（link-cursor-skills.sh）
+├── skills/                    # Agent Skills 正本 (SKILL.md)
+├── scripts/
+│   └── link-cursor-skills.sh  # .cursor/skills/ symlink 生成
 ├── slides.md                  # Slidev スライド
 ├── package.json               # Slidev + playwright-chromium
 └── README.md
