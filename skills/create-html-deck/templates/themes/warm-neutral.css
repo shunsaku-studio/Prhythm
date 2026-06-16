@@ -1,0 +1,14 @@
+/* Theme: warm-neutral — soft corporate */
+:root {
+  --paper: #faf8f5;
+  --surface: #ffffff;
+  --subtle: #f0ebe3;
+  --line: #e8e0d4;
+  --line-strong: #d9cfc0;
+  --ink: #2c2825;
+  --ink-2: #6b635a;
+  --ink-3: #9c9288;
+  --grad: linear-gradient(95deg, #c96442 0%, #d97757 40%, #e8a87c 100%);
+  --sans: "Source Sans 3", "Noto Sans JP", system-ui, sans-serif;
+  --mono: "Source Code Pro", ui-monospace, monospace;
+}

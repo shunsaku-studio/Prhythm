@@ -1,0 +1,14 @@
+/* Theme: minimal-mono — Swiss, monochrome */
+:root {
+  --paper: #ffffff;
+  --surface: #ffffff;
+  --subtle: #f4f4f5;
+  --line: #e4e4e7;
+  --line-strong: #d4d4d8;
+  --ink: #09090b;
+  --ink-2: #52525b;
+  --ink-3: #a1a1aa;
+  --grad: linear-gradient(95deg, #18181b 0%, #3f3f46 100%);
+  --sans: "IBM Plex Sans", "Noto Sans JP", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
