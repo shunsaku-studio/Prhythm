@@ -1,30 +1,30 @@
-## Summary
+## 概要
 
-<!-- 1–3 bullet points: what changed and why -->
+<!-- 1〜3 行: 何を変えたか・なぜか（日本語） -->
 
 -
 
-## Changes
+## 変更内容
 
-<!-- Optional: affected skills, paths, or commits -->
+<!-- 任意: 対象スキル、パス、コミット -->
 
-| Area | Details |
-|------|---------|
-| Skills | <!-- e.g. skills/graphql-schema-design (new) --> |
-| Other | <!-- docs, scripts, repo config --> |
+| 領域 | 内容 |
+|------|------|
+| スキル | <!-- 例: skills/graphql-schema-design（新規） --> |
+| その他 | <!-- ドキュメント、スクリプト、リポジトリ設定 --> |
 
-## Skill checklist
+## スキルチェックリスト
 
-<!-- Delete this entire section if the PR does not touch `skills/` -->
+<!-- `skills/` を触らない PR ならこのセクションごと削除 -->
 
-- [ ] New/updated skill has `SKILL.md` (English) and `README.md` (Japanese, 8 headings)
-- [ ] `bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/<name>` passes
-- [ ] Root [README.md](README.md) skills catalog updated (new skills only)
-- [ ] No secrets, `.env`, credentials, or `node_modules/` committed
-- [ ] Layer A review passed or fixes applied (`prhythm-skill-review`)
+- [ ] 新規/更新スキルに `SKILL.md`（英語）と `README.md`（日本語・8 見出し）がある
+- [ ] `bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/<name>` が pass
+- [ ] ルート [README.md](README.md) のスキル一覧を更新した（新規スキルのみ）
+- [ ] secrets、`.env`、認証情報、`node_modules/` を commit していない
+- [ ] Layer A レビュー pass、または本 PR で修正済み（`prhythm-skill-review`）
 
-## Test plan
+## テスト計画
 
-- [ ] Validate script run for each changed skill
-- [ ] Manual smoke test (describe trigger phrase / expected behavior)
-- [ ] N/A — docs-only change
+- [ ] 変更した各スキルで validate スクリプトを実行した
+- [ ] 手動スモークテスト（トリガー文言・期待動作を記載）
+- [ ] 該当なし — ドキュメントのみの変更

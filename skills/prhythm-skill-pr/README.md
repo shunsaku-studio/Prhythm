@@ -8,7 +8,7 @@ preflight（validate・README カタログ確認）→ PR 本文ドラフト →
 ## 利用メリット
 
 - **PR 前の抜け漏れを減らせる** — validate や README カタログ更新を PR 作成前にチェックできる
-- **PR 本文が毎回同じ型になる** — Summary / Skill checklist / Test plan が揃い、レビューが楽になる
+- **PR 本文が毎回同じ型になる** — 概要 / スキルチェックリスト / テスト計画が揃い、レビューが楽になる（本文は日本語）
 - **スキル追加の手順が再利用できる** — ブランチごとに gh コマンドを毎回考え直さなくていい
 
 ## 利用シーン
@@ -60,6 +60,7 @@ GitHub UI 用テンプレ: [.github/PULL_REQUEST_TEMPLATE/skill_addition.md](../
 
 ## 注意事項
 
+- PR **本文は日本語**（タイトルは `feat: add ...` など英語で可）
 - validate 失敗時は PR を作らず、先に修正する
 - 新スキルはルート [README.md](../../README.md) のスキル一覧への追記が必須
 - コミット・push は依頼内容に含まれる場合のみ実行（未コミット変更があるときは確認）

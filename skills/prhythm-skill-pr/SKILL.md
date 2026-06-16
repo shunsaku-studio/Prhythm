@@ -67,9 +67,9 @@ Do not commit secrets. Do not push force to `main`.
 
 Use [pr-body-template.md](references/pr-body-template.md).
 
-- **Title:** imperative, ≤72 chars — e.g. `feat: add graphql-schema-design skill`
-- **Body:** fill Summary, Skill table, checklist (checked items only if verified), Test plan
-- Multi-skill branch → one summary bullet per skill
+- **Title:** English, imperative, ≤72 chars — e.g. `feat: add graphql-schema-design skill`
+- **Body:** **Japanese.** Fill 概要, スキル table, スキルチェックリスト (check only if verified), テスト計画
+- Multi-skill branch → one 概要 bullet per skill
 
 ### 5. Push and create
 
@@ -101,6 +101,7 @@ Match recent `git log` style when history exists.
 - Open PR without running validate for touched skills
 - Skip root README catalog update for new skills
 - Commit `.env`, credentials, or `node_modules/`
+- Write PR body in English — body must be Japanese (title may stay English)
 
 ## References
 

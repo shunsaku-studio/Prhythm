@@ -1,55 +1,55 @@
-# PR Body Template
+# PR 本文テンプレート
 
-Fill placeholders. Remove HTML comments before `gh pr create`.
+プレースホルダを埋める。**本文は日本語**（タイトルは conventional commits の英語で可）。HTML コメントは `gh pr create` 前に削除。
 
 ```markdown
-## Summary
+## 概要
 
-- {bullet: what skill does / why adding it}
-- {bullet: secondary change if any — e.g. prhythm-skill-review criteria update}
+- {何を追加/変更したか・なぜか}
+- {副次変更があれば — 例: prhythm-skill-review の README 品質基準の見直し}
 
-## Skill
+## スキル
 
-| Field | Value |
-|-------|-------|
-| Path | `skills/{skill-name}/` |
-| Type | new / update |
+| 項目 | 値 |
+|------|-----|
+| パス | `skills/{skill-name}/` |
+| 種別 | 新規 / 更新 |
 | `disable-model-invocation` | {true / false} |
 
-## Skill checklist
+## スキルチェックリスト
 
-- [x] `SKILL.md` — English, under 500 lines
-- [x] `README.md` — Japanese, 8 headings
+- [x] `SKILL.md` — 英語、500 行未満
+- [x] `README.md` — 日本語、8 見出し
 - [x] `validate-skill.sh` pass
-- [x] Root README catalog updated
-- [x] No secrets or node_modules committed
-- [x] Layer A review — Approve
+- [x] ルート README のスキル一覧を更新
+- [x] secrets や node_modules を commit していない
+- [x] Layer A レビュー — Approve
 
-## Test plan
+## テスト計画
 
 - [x] `bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/{skill-name}`
-- [ ] {manual trigger test — e.g. "/graphql-schema-design ブログのスキーマを設計して"}
+- [ ] {手動スモーク — 例: 「/graphql-schema-design ブログのスキーマを設計して」}
 ```
 
-## Multi-skill branch
+## 複数スキルが同一ブランチの場合
 
-Add one Summary bullet per skill. Repeat Skill table or use a list:
+概要にスキルごと 1 行。Skill テーブルを繰り返すか、一覧表にまとめる:
 
 ```markdown
-## Summary
+## 概要
 
-- feat: add `graphql-schema-design` — proto GraphQL SDL design with phased gates
-- refactor: tighten `prhythm-skill-review` README quality criteria
+- `graphql-schema-design` を新規追加 — プロト段階の GraphQL SDL 設計（段階ゲート付き）
+- `prhythm-skill-review` を更新 — README の利用メリット/利用シーン品質基準を明確化
 
-## Changes
+## 変更内容
 
-| Skill | Type |
-|-------|------|
-| `graphql-schema-design` | new |
-| `prhythm-skill-review` | update |
+| スキル | 種別 |
+|--------|------|
+| `graphql-schema-design` | 新規 |
+| `prhythm-skill-review` | 更新 |
 ```
 
-## Title examples
+## タイトル例（英語）
 
 ```
 feat: add graphql-schema-design skill

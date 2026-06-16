@@ -29,6 +29,7 @@ bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/<name>
 
 ## PR body
 
-- [ ] Summary explains **why**, not just file list
-- [ ] Skill checklist items checked only when verified
-- [ ] Test plan includes validate script run
+- [ ] **本文は日本語**（タイトルのみ英語 conventional commits で可）
+- [ ] 概要に **なぜ** 変えたかを書いた（ファイル一覧だけにしない）
+- [ ] スキルチェックリストは確認済み項目だけ `[x]`
+- [ ] テスト計画に validate スクリプト実行を含めた
