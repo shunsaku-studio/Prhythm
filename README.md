@@ -41,7 +41,26 @@ bash scripts/link-cursor-skills.sh
 | [prhythm-skill-pr](skills/prhythm-skill-pr/) | スキル追加・更新の PR 作成（preflight + gh） |
 | [create-html-deck](skills/create-html-deck/) | HTML スライドデッキを deck-stage ビューアで段階的に構築（アウトライン→テーマ→プレビュー） |
 | [shadcn-explorer](skills/shadcn-explorer/) | shadcn/ui エコシステム（200+ registry / 60+ テーマ）からコンポーネント・block・テーマ候補をリアルタイム検索 |
-スキルは `skills/<skill-name>/SKILL.md` として追加されます。
+
+スキルは `skills/<skill-name>/SKILL.md` として追加されます。人間向けの説明は各スキルの `README.md`（[ドキュメントサイト](#ドキュメントサイト) でも閲覧可）。
+
+## ドキュメントサイト
+
+[VitePress](https://vitepress.dev/) でスキルカタログを公開する（公開 URL: https://shunsaku-studio.github.io/Prhythm/）。正本は `skills/` の README のみ — ビルド時に `scripts/sync-docs.mjs` が `docs-site/.generated/` を生成する（git 管理外）。
+
+```bash
+cd docs-site && npm install   # 初回のみ
+npm run docs:dev              # sync + ローカルプレビュー
+npm run docs:build            # 静的ビルド
+```
+
+| パス | 役割 |
+|------|------|
+| `docs-site/site.meta.json` | nav / sidebar / カスタムページの定義 |
+| `docs-site/pages/` | スキル以外の Markdown 正本 |
+| `skills/<name>/README.md` | スキル紹介ページの正本 |
+
+`main` への push で [GitHub Pages](https://docs.github.com/pages) に自動デプロイ（`.github/workflows/pages.yml`）。リポジトリ Settings → Pages → Source: **GitHub Actions** が必要。
 
 ## Slidev (プレゼン用)
 
@@ -61,11 +80,15 @@ Prhythm/
 ├── .claude-plugin/
 │   └── plugin.json            # プラグインマニフェスト
 ├── .cursor/skills/            # Cursor 用 symlink → skills/*（link-cursor-skills.sh）
-├── skills/                    # Agent Skills 正本 (SKILL.md)
+├── .github/workflows/
+│   └── pages.yml              # ドキュメント GitHub Pages デプロイ
+├── docs-site/                 # VitePress サイト（site.meta.json + pages/）
+├── skills/                    # Agent Skills 正本 (SKILL.md + README.md)
 ├── scripts/
-│   └── link-cursor-skills.sh  # .cursor/skills/ symlink 生成
+│   ├── link-cursor-skills.sh  # .cursor/skills/ symlink 生成
+│   └── sync-docs.mjs          # skills/ → docs-site/.generated/ 同期
 ├── slides.md                  # Slidev スライド
-├── package.json               # Slidev + playwright-chromium
+├── package.json               # Slidev + docs npm scripts
 └── README.md
 ```
 
