@@ -71,4 +71,4 @@ GitHub UI 用テンプレ: [.github/PULL_REQUEST_TEMPLATE/skill_addition.md](../
 | スキル | 関係 |
 |--------|------|
 | [prhythm-skill-review](../prhythm-skill-review/) | PR 前の Layer A レビュー・validate |
-| [graphql-schema-design](../graphql-schema-design/) | 例: スキル追加 PR の対象 |
+| [ooui-graphql-modeling](../ooui-graphql-modeling/) | 例: スキル追加 PR の対象 |

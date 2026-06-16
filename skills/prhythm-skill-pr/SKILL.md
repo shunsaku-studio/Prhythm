@@ -67,7 +67,7 @@ Do not commit secrets. Do not push force to `main`.
 
 Use [pr-body-template.md](references/pr-body-template.md).
 
-- **Title:** English, imperative, ≤72 chars — e.g. `feat: add graphql-schema-design skill`
+- **Title:** English, imperative, ≤72 chars — e.g. `feat: add ooui-graphql-modeling skill`
 - **Body:** **Japanese.** Fill 概要, スキル table, スキルチェックリスト (check only if verified), テスト計画
 - Multi-skill branch → one 概要 bullet per skill
 

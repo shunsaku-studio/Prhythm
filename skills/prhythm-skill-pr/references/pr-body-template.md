@@ -28,7 +28,7 @@
 ## テスト計画
 
 - [x] `bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/{skill-name}`
-- [ ] {手動スモーク — 例: 「/graphql-schema-design ブログのスキーマを設計して」}
+- [ ] {手動スモーク — 例: 「/ooui-graphql-modeling ブログのスキーマを設計して」}
 ```
 
 ## 複数スキルが同一ブランチの場合
@@ -38,21 +38,21 @@
 ```markdown
 ## 概要
 
-- `graphql-schema-design` を新規追加 — プロト段階の GraphQL SDL 設計（段階ゲート付き）
+- `ooui-graphql-modeling` を新規追加 — プロト段階の GraphQL SDL 設計（段階ゲート付き）
 - `prhythm-skill-review` を更新 — README の利用メリット/利用シーン品質基準を明確化
 
 ## 変更内容
 
 | スキル | 種別 |
 |--------|------|
-| `graphql-schema-design` | 新規 |
+| `ooui-graphql-modeling` | 新規 |
 | `prhythm-skill-review` | 更新 |
 ```
 
 ## タイトル例（英語）
 
 ```
-feat: add graphql-schema-design skill
+feat: add ooui-graphql-modeling skill
 feat: add prhythm-skill-pr meta-skill
 refactor: improve prhythm-skill-review README rubric
 ```
