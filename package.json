@@ -9,7 +9,10 @@
     "export": "slidev export",
     "export:pptx": "slidev export --format pptx",
     "export:pdf": "slidev export --format pdf",
-    "export:png": "slidev export --format png"
+    "export:png": "slidev export --format png",
+    "docs:sync": "node scripts/sync-docs.mjs",
+    "docs:dev": "npm run dev --prefix docs-site",
+    "docs:build": "npm run build --prefix docs-site"
   },
   "devDependencies": {
     "@slidev/cli": "^51.0.0",
