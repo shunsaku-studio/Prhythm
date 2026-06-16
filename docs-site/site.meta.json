@@ -21,6 +21,7 @@
       "items": [
         { "skill": "create-html-deck" },
         { "skill": "competitive-research" },
+        { "skill": "prototype-design-md" },
         { "skill": "ooui-architect", "expand": true },
         { "skill": "ooui-graphql-modeling" },
         { "skill": "prhythm-skill-pr" },
