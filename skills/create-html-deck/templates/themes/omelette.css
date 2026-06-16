@@ -1,0 +1,20 @@
+/* Theme: omelette — legacy Omelette starter (pink → purple → blue grad) */
+:root {
+  --paper: #fbfaf7;
+  --surface: #ffffff;
+  --subtle: #f2f0ea;
+  --line: #e6e3db;
+  --line-strong: #d6d2c8;
+  --ink: #19171f;
+  --ink-2: #6a6670;
+  --ink-3: #a29ea7;
+  --grad: linear-gradient(
+    95deg,
+    #de52b0 0%,
+    #be39d2 26%,
+    #8b4fea 56%,
+    #4b85fd 100%
+  );
+  --sans: system-ui, -apple-system, "Segoe UI", "Noto Sans JP", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}

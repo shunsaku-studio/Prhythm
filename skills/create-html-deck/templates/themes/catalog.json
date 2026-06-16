@@ -1,0 +1,37 @@
+[
+  {
+    "id": "default",
+    "label": "Default（Violet Bloom）",
+    "description": "shadcn Violet Bloom 由来。紫グラデ・白背景。スキル標準。"
+  },
+  {
+    "id": "violet-bloom",
+    "label": "Violet Bloom",
+    "description": "default と同じ（明示指定用）。"
+  },
+  {
+    "id": "project",
+    "label": "Project",
+    "description": "リポジトリの CSS 変数（src/styles.css 等）から自動マッピング。"
+  },
+  {
+    "id": "omelette",
+    "label": "Omelette",
+    "description": "旧スキル標準。温かいオフホワイト + ピンク紫青グラデ。"
+  },
+  {
+    "id": "minimal-mono",
+    "label": "Minimal Mono",
+    "description": "白黒ベース、IBM Plex、スイス寄りのミニマル。"
+  },
+  {
+    "id": "warm-neutral",
+    "label": "Warm Neutral",
+    "description": "ベージュ系コーポレート、テラコッタアクセント。"
+  },
+  {
+    "id": "dark-editorial",
+    "label": "Dark Editorial",
+    "description": "ダーク背景、セリフ寄り、雑誌風。"
+  }
+]

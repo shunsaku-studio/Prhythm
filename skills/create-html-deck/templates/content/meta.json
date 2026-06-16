@@ -1,0 +1,8 @@
+{
+  "deckName": "{{DECK_NAME}}",
+  "title": "{{DECK_TITLE}}",
+  "lang": "ja",
+  "theme": "default",
+  "themeLabel": "Default（Violet Bloom）",
+  "canvas": { "width": 1920, "height": 1080 }
+}
