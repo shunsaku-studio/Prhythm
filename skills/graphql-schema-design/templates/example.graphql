@@ -1,0 +1,23 @@
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+}
+
+type Article {
+  id: ID!
+  title: String!
+  summary: String!
+  body: String!
+  status: ArticleStatus!
+  publishedAt: String
+}
+
+type Query {
+  _empty: String
+}
+
+type Mutation {
+  articleCreate(title: String!, summary: String!, body: String!): Article!
+  articlePublish(id: ID!): Article!
+  articleUnpublish(id: ID!): Article!
+}
