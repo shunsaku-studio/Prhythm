@@ -5,3 +5,9 @@ dist/
 
 # Slidev
 .slidev/
+
+# Docs (generated from skills/ at build time — SSOT is skills/)
+docs-site/.generated/
+docs-site/.vitepress/dist/
+docs-site/.vitepress/cache/
+docs-site/node_modules/
