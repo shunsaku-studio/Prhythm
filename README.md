@@ -20,6 +20,8 @@ Claude Code からプラグインとしてインストール:
 | スキル | 説明 |
 |--------|------|
 | [prhythm-skill-review](skills/prhythm-skill-review/) | スキルの README 整備と品質レビュー |
+| [graphql-schema-design](skills/graphql-schema-design/) | プロト段階の GraphQL SDL 設計（ドメイン中心・段階的ゲート） |
+| [prhythm-skill-pr](skills/prhythm-skill-pr/) | スキル追加・更新の PR 作成（preflight + gh） |
 
 スキルは `skills/<skill-name>/SKILL.md` として追加されます。
 
