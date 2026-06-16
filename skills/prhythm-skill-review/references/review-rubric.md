@@ -58,6 +58,30 @@ Score each dimension 1–5. Use observable evidence from SKILL.md and README.md.
 
 Skip or mark N/A for reference-only skills with no workflow.
 
+## README 利用メリット（review / standardize）
+
+| Score | Criteria |
+|-------|----------|
+| 5 | Outcomes for user/team; no implementation detail; each bullet answers "what becomes better?" |
+| 4 | Mostly outcome-focused; one bullet drifts into HOW |
+| 3 | Mix of value and implementation (phases, scripts, naming rules) |
+| 2 | Mostly trigger terms, commands, or SKILL.md mechanics |
+| 1 | Missing, generic, or unreadable to humans |
+
+Flag as **Suggestion** when README 利用メリット scores ≤ 3. Reference: [readme-template.md](readme-template.md).
+
+## README 利用シーン（review / standardize）
+
+| Score | Criteria |
+|-------|----------|
+| 5 | User situations/problems; aligned with 利用メリット; no commands or technical ops |
+| 4 | Mostly situation-focused; one bullet drifts into HOW or misaligned with メリット |
+| 3 | Mix of situations and technical operations (add type, re-validate, run phase) |
+| 2 | Mostly commands, trigger terms, or SKILL.md mechanics |
+| 1 | Missing, generic, or disconnected from メリット |
+
+Flag as **Suggestion** when README 利用シーン scores ≤ 3. Reference: [readme-template.md](readme-template.md).
+
 ## Verdict
 
 | Verdict | Rule |

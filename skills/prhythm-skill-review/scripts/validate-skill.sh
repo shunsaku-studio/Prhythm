@@ -46,7 +46,18 @@ fi
 FRONTMATTER=$(awk '/^---$/{n++; if(n==1) next; if(n==2) exit} n==1' "$SKILL_MD")
 
 NAME=$(echo "$FRONTMATTER" | grep -E '^name:' | head -1 | sed 's/^name:[[:space:]]*//' | tr -d '\r')
-DESCRIPTION=$(echo "$FRONTMATTER" | awk '/^description:/ {sub(/^description:[[:space:]]*/, ""); desc=$0; getline; while ($0 !~ /^[a-zA-Z_]/ && NF) {desc=desc " " $0; getline}; print desc; exit}' | tr -d '\r')
+DESCRIPTION=$(echo "$FRONTMATTER" | awk '
+/^description:/ {
+  sub(/^description:[[:space:]]*/, "")
+  desc = $0
+  if (desc == ">-") desc = ""
+  while (getline > 0) {
+    if ($0 ~ /^---$/ || $0 ~ /^[a-zA-Z_][a-zA-Z0-9_-]*:/) break
+    if (NF) desc = (desc == "" ? $0 : desc " " $0)
+  }
+  print desc
+  exit
+}' | tr -d '\r')
 
 # Fallback simple description extract
 if [[ -z "$DESCRIPTION" ]]; then

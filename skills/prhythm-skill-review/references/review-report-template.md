@@ -40,6 +40,8 @@
 |-------|--------|
 | README.md exists | yes / no |
 | Required headings (8) | pass / fail |
+| 利用メリット (user outcomes) | pass / revise / n/a |
+| 利用シーン (aligned situations) | pass / revise / n/a |
 | Terminology aligned with SKILL.md | yes / partial / no |
 
 ## Suggested edits (optional)
