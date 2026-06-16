@@ -36,6 +36,7 @@ bash scripts/link-cursor-skills.sh
 |--------|------|
 | [prhythm-skill-review](skills/prhythm-skill-review/) | スキルの README 整備と品質レビュー |
 | [ooui-graphql-modeling](skills/ooui-graphql-modeling/) | プロト段階の GraphQL SDL 設計（ドメイン中心・段階的ゲート） |
+| [ooui-architect](skills/ooui-architect/) | OOUI の common/model/ルーティング dir 構成、scaffold、4-file コンポーネント |
 | [prhythm-skill-pr](skills/prhythm-skill-pr/) | スキル追加・更新の PR 作成（preflight + gh） |
 
 スキルは `skills/<skill-name>/SKILL.md` として追加されます。
