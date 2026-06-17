@@ -36,6 +36,7 @@ bash scripts/link-cursor-skills.sh
 |--------|------|
 | [prhythm-skill-review](skills/prhythm-skill-review/) | スキルの README 整備と品質レビュー |
 | [competitive-research](skills/competitive-research/) | 新規プロダクト・機能向けに競合・参考サービスを調査し、設計判断に使えるインサイトを出す |
+| [product-vision-and-concept](skills/product-vision-and-concept/) | 対話でプロダクトのビジョン・コンセプト（一行ステートメント + Why/Who/What/差別化）を言語化する |
 | [prototype-design-md](skills/prototype-design-md/) | プロトタイプ段階の DESIGN.md — UI 生成前の判断ブリーフ（feel・サーフェス・禁止・コンポーネント選び） |
 | [ooui-graphql-modeling](skills/ooui-graphql-modeling/) | プロト段階の GraphQL SDL 設計（ドメイン中心・段階的ゲート） |
 | [ooui-architect](skills/ooui-architect/) | OOUI の common/model/ルーティング dir 構成、scaffold、4-file コンポーネント |
