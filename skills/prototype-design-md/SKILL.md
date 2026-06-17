@@ -2,8 +2,9 @@
 name: prototype-design-md
 description: >-
   Write the initial DESIGN.md for prototype phase — a one-page brief AI reads
-  before UI generation. Product feel, surface/density, forbidden patterns,
-  component selection. Design tokens own values; DESIGN.md owns judgment.
+  before v0, Cursor, or other UI generation. Product feel, surface/density,
+  forbidden patterns, component selection. Use when feel is vague (getdesign.md).
+  Design tokens own values; DESIGN.md owns judgment.
 disable-model-invocation: true
 ---
 
@@ -13,7 +14,8 @@ disable-model-invocation: true
 **Not:** token hex, full component specs, or pixel-perfect layout.
 
 Read [prototype-brief.md](references/prototype-brief.md) for the content model.  
-Read [workflow.md](references/workflow.md) for gates.
+Read [workflow.md](references/workflow.md) for gates.  
+Read [theme-discovery.md](references/theme-discovery.md) for Phase 0 ([getdesign.md](https://getdesign.md/)).
 
 ## What this file is
 
@@ -32,8 +34,9 @@ AI reads DESIGN.md **before** generating UI. Prototype grows; this brief stays t
 5. **Component Selection, not specs** — which pattern when; defer hover/padding tokens
 6. **Forbidden Patterns verifiable** — [anti-slop.md](references/anti-slop.md)
 7. **Responsive priority is intake-driven** — not always desktop-first
-8. **One gate** — intent OK → write + lint. See [workflow.md](references/workflow.md)
-9. **Before Phase 1:** [intake.md](references/intake.md) + [prototype-brief.md](references/prototype-brief.md)
+8. **One gate** — Phase 1 intent OK → Phase 2 write + lint. See [workflow.md](references/workflow.md)
+9. **Phase 0 (when feel vague):** 5 reference themes from getdesign.md + token strategy A/B/C — [theme-discovery.md](references/theme-discovery.md). **Each candidate must include `https://getdesign.md/<slug>/design-md`** (or webdesignhot fallback if 404)
+10. **Before Phase 1:** [intake.md](references/intake.md) + [prototype-brief.md](references/prototype-brief.md)
 
 ## Five pillars (map to sections)
 
@@ -62,9 +65,11 @@ node skills/prototype-design-md/scripts/detect-project-tokens.mjs
 
 | Intent | Flow |
 |--------|------|
-| New prototype brief | 1 → 2 |
+| New prototype (vague feel) | 0 → 1 → 2 |
+| New prototype (clear direction) | 0 (light) → 1 → 2 |
 | Guardrails only | 1 (light) → 2 |
 | After tokens themed | detect → 1 → 2 |
+| Existing brand locked | 1 → 2 (token strategy C) |
 | Post-prototype detail | edit DESIGN.md or split spec files — out of scope here |
 
 ## NEVER
@@ -75,6 +80,8 @@ node skills/prototype-design-md/scripts/detect-project-tokens.mjs
 - Universal "always Table" / "always desktop-first" without surface/intake
 - Multiple approval sub-gates
 - Inter / Roboto / Arial without explicit request
+- Phase 0 shortlist entries without a preview URL
+- getdesign.md URLs for slugs not in `npx getdesign@latest list` (catalog mismatch)
 
 ## Commands
 
@@ -82,6 +89,10 @@ node skills/prototype-design-md/scripts/detect-project-tokens.mjs
 bash skills/prototype-design-md/scripts/init-design-md.sh
 bash skills/prototype-design-md/scripts/lint-design-md.sh [DESIGN.md]
 node skills/prototype-design-md/scripts/detect-project-tokens.mjs
+npx getdesign@latest list
+npx @webdesignhot/design-md category <name>
+npx @webdesignhot/design-md add <slug> -o /tmp/ref.md
+npx @webdesignhot/design-md export /tmp/ref.md --to css
 ```
 
 ## After Phase 2

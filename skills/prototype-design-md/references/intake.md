@@ -4,6 +4,8 @@ Gather before Phase 1. Ask **missing required** items only.
 
 **Goal:** enough for prototype brief (feel + surface + forbidden). Not pixel spec.
 
+If feel is vague or user names a reference brand, run [Phase 0 theme discovery](theme-discovery.md) first (5 candidates + token strategy).
+
 ## Required
 
 | Field | Question |
@@ -20,7 +22,8 @@ Gather before Phase 1. Ask **missing required** items only.
 |-------|------|
 | Secondary/tertiary surfaces | Mixed product (settings form, onboarding) |
 | Density | Unclear from surface + purpose |
-| Reference products | Vague tone or "like X" |
+| Reference products | Vague tone or "like X" → Phase 0 shortlist |
+| Token strategy | After Phase 0 slug pick — A/B/C ([theme-discovery.md](theme-discovery.md)) |
 | Responsive priority | Mobile-critical vs desktop-first |
 | Tech stack | CSS path guess |
 | Existing brand | Locked colors/fonts mentioned |
