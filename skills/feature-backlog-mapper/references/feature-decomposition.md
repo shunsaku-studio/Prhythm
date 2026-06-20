@@ -82,3 +82,21 @@ After decomposition, you should have:
 - No feature without a UC anchor (or all unanchored ones explicitly `(UC候補)`)
 
 Proceed to MoSCoW prioritization in [moscow-criteria.md](moscow-criteria.md).
+
+## 関連流派 (補足)
+
+UC → Feature 分解とは別に、ユーザー体験全体を可視化するアプローチがある。本スキルは UC 駆動で構造化を優先するが、以下の流派の発想は補助的に取り込める。
+
+| 流派 | 発想 | 強み | 本スキルでの位置付け |
+|------|------|------|---------------------|
+| **User Story Mapping** (Jeff Patton, 2005) | ユーザーの行動順序を横軸（バックボーン）、深さを縦軸でマップする | リリース計画とユーザージャーニーが一目で揃う、横断機能や時間順序が見える | Mode A の「機能のグルーピング見出し」を時系列で並べる場合の補助。バックボーン = ドメイン × アクティビティの横並びとして読み替える |
+| **Event Storming** (Alberto Brandolini, 2013) | ドメインイベント（業務上で起きること）を起点に、コマンド・アグリゲート・ポリシーを付箋で発掘する | 業務ロジックの境界・並行性・状態遷移が早期に見える、DDD への接続が良い | UC が薄い / 業務ロジックが複雑なプロジェクトで、UC 抽出時のヒアリング補助として（実行は `usecase-mapper` に戻る） |
+| **Impact Mapping** (Gojko Adzic, 2012) | Goal → Actors → Impacts → Deliverables の 4 階層で目的駆動の機能発見 | 「なぜ作るか」と「何を作るか」が紐付く、Must の根拠提示に強い | Vision (Why) と UC / 機能 (What) を繋ぐ橋として、`product-vision-and-concept` 出力をより細粒度に展開する補助 |
+
+### いつこれらを参照するか
+
+- **User Story Mapping**: ユーザー導線が長い B2C プロダクトで、リリース順序とユーザー価値の累積を見せたい時
+- **Event Storming**: 既存業務システムをリプレースする / B2B で複雑な業務ロジックがある時
+- **Impact Mapping**: vision はあるが UC がまだ薄い・Must の根拠説明をより強化したい時
+
+これらは UC → Feature 分解を **置き換えない**。本スキルは `docs/usecase-map.md` の UC ID を起点に動くため、別フレームの成果物は UC 一覧に組み込んでから入力にする。

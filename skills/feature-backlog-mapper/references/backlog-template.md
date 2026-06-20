@@ -159,3 +159,28 @@ Verify each PBI has all of:
 - INVEST.S が ✅ なのに見積が XL → 矛盾、分割するか見積を直す
 - ユーザーストーリーの actor が「ユーザー」だけ → ペルソナ・ロールに具体化
 - DoD が「テストを書く」だけ → 観測可能な完了状態（境界値、E2E、ログ、ドキュメント）まで分解
+
+## Definition of Ready (DoR) — optional sub-section
+
+Scrum 標準 artifact として **DoR** (PBI が「Ready = スプリントに取り込み可能」な状態) を定義したいチーム向け。本スキルでは optional だが、PBI 詳細に「DoR チェックリスト」サブセクションを追加して以下を確認できる:
+
+```markdown
+**Definition of Ready**
+- [ ] User Story が `As a / I want / so that` 形式で書かれている
+- [ ] AC が 3 個以上、すべて Given/When/Then 形式
+- [ ] 見積が XS〜L の範囲（XL は分割済）
+- [ ] 依存 PBI（F IDs）が明示されている
+- [ ] AC のうち少なくとも 1 つが失敗系 / 境界値をカバー
+- [ ] PBI の owner（PO 確認済 / dev tech lead 確認済）が決まっている
+```
+
+DoR と DoD の使い分け:
+
+| 観点 | DoR (Ready) | DoD (Done) |
+|------|------------|-----------|
+| いつ満たす | スプリント計画前 | スプリント終了時 |
+| 主体 | PO + dev リーダー | dev チーム |
+| 基準 | 「取り組める状態か」 | 「完了したか」 |
+| 失敗時 | スプリントに入れない | スプリントを終わらせない |
+
+DoR を入れるかは、**チームの Scrum 成熟度** と **Refinement の運用** 次第。プロト段階では省略し、本格開発移行時に導入するパターンが多い。

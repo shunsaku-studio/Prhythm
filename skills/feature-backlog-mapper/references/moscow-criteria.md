@@ -79,3 +79,22 @@ After MoSCoW, you should have:
 - Every Won't has a 1-line reason and lives outside the inventory
 
 Proceed to writing cards (Mode A) or PBIs (Mode B) using [proposal-template.md](proposal-template.md) or [backlog-template.md](backlog-template.md).
+
+## 代替優先度フレームワーク (補足)
+
+MoSCoW が本スキルの primary だが、ユーザーが別フレームワークでの判定を求めた場合に対応する切り口。本スキルの出力は MoSCoW を保ち、補助として下記を引用する。
+
+| フレーム | 用途 | 強み | 弱み | 本スキルでの位置付け |
+|---------|------|------|------|---------------------|
+| **Kano model** (Noriaki Kano, 1984) | ユーザー満足度との非線形関係を捉える | Must-be / One-dimensional / Attractive / Indifferent / Reverse の 5 区分で「あって当然」と「あるとうれしい」を明示分離 | 5 区分のヒアリングが必要、軽量プロジェクトには重い | Should の中で「Attractive (delighter)」を識別したい場合に補助として併用 |
+| **WSJF** (Weighted Shortest Job First, SAFe) | 大規模プロジェクトでの実行順序最適化 | Cost of Delay / Job Size の比で算出、定量的な順位付け | 数値化のオーバーヘッド大、提案フェーズには重い | Mode B のスプリント切り出し提案で、Must が多すぎる場合の二次優先度として |
+| **RICE** (Reach × Impact × Confidence ÷ Effort) | 多数の機能候補の相対比較 | 4 軸の積で simple、議論の起点になりやすい | Confidence が定性的でブレやすい | Could の中で「採用するか否か」を decision するときの sub-tool |
+| **ICE** (Impact × Confidence × Ease) | グロース実験の優先度付け | 3 軸で simple、RICE より軽い | スコアの一貫性が個人差に依存 | uncertainty-map の検証アクション選定時の補助（grow と検証の境目） |
+
+### いつ MoSCoW 以外を選ぶか
+
+- **Kano 併用**: Should/Could が多く、「驚きの機能」「魅力的品質」を切り出してアピールしたい提案フェーズ
+- **WSJF 併用**: Must が 20 件超で、SAFe / 大規模プロセスを採用しているチーム
+- **RICE / ICE 併用**: グロース機能（コア外の数値改善系）の優先順位付けが主目的のとき
+
+これらは MoSCoW を **置き換えない**。Must / Should / Could / Won't のラベルは維持し、別フレームの結果は注記列に追加する形で併記する。

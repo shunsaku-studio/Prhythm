@@ -97,3 +97,48 @@ so that メンバーが招待される
 ## Hand-off
 
 PBIs that fail AC granularity get sent back to Step 4 of [SKILL.md](../SKILL.md) for rewrite. Do not let a PBI ship to backlog with AC < 3 or AC that fail the testability check.
+
+## Job Story 形式 (代替形式の注記)
+
+User Story 形式 (`As a / I want / so that`) は本スキルの primary だが、近年は **Job Story** (Alan Klement / Intercom 流) も普及している。**Job Story** は **Job to be Done (JTBD)** の文脈に近く、状況・動機・期待結果を明示する。
+
+### Job Story 形式
+
+```
+When <situation>,
+I want to <motivation>,
+so I can <expected outcome>.
+```
+
+### 使い分け
+
+| 観点 | User Story | Job Story |
+|------|-----------|-----------|
+| 焦点 | actor / role 中心 | situation 中心 |
+| 強み | チームメンバー（actor）が複数いる場合の整理に向く | 状況・タイミングを記述しやすい、ペルソナを過剰定義しない |
+| 弱み | 「ペルソナ＝役割」になりがちで、状況の差を捕えにくい | 同じ状況に複数の actor が混在する場合、誰の動機かが曖昧になる |
+| 推奨ケース | B2B SaaS、ロール（PM / dev / PO）が分離した業務システム | B2C、ライフスタイル系、行動データ駆動のグロース機能 |
+
+### 例（同じ機能を両形式で）
+
+User Story 形式:
+
+```
+As a 組織オーナー
+I want メンバーをメールで招待できる
+so that 知っているメンバーを 1 分でチームに追加できる
+```
+
+Job Story 形式:
+
+```
+When チームに新メンバーを迎える状況になったとき
+I want to メールアドレス 1 つで招待を送れるようにしたい
+so I can 知っているメンバーを 1 分でチームに追加できる
+```
+
+### 本スキルでの方針
+
+- Mode B PBI は **User Story 形式を primary** とする（Scrum 標準互換、INVEST チェックが回しやすい）
+- ユーザーが Job Story を希望した場合（特に JTBD interview 由来の仮説検証文脈）、**PBI 詳細の補助欄として併記** する形で対応
+- 両形式を混在させない（バックログ全体で統一する）
