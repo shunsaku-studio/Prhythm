@@ -4,6 +4,12 @@
 
 `usecase-mapper` が出力した `docs/usecase-map.md` の UC ID を起点に、各ユースケースを機能（Feature）に分解し、MoSCoW で優先度を付けた状態で `docs/feature-list.md` に書き出します。同じ Feature ID を引き継ぎ、開発スプリントに割れる **プロダクトバックログ** へ詳細化することもできます（ユーザーストーリー・受入基準・見積・依存・DoD・INVEST）。
 
+- **入力:** `docs/usecase-map.md`（必須）/ `docs/product-vision.md`（推奨）/ 競合調査・ヒアリングノート（任意）
+- **出力:** Mode A は `docs/feature-list.md`（機能カード版）、Mode B は `docs/product-backlog.md`（PBI 版）
+- **スコープ外:** ユースケース抽出（→ `usecase-mapper`）/ ビジョン言語化（→ `product-vision-and-concept`）/ 仮説検証（→ `uncertainty-map`）/ スキーマ・UI 設計（→ `ooui-graphql-modeling` / `ooui-architect`）
+
+> **用語**: 本スキルの「Must 機能 / コア機能」は **What の核**（システムが何をするか）を指します。下流の `uncertainty-map` の「コア仮説 / コア価値」は **Why の核**（vision を成立させる暗黙の前提）で、両者は別レイヤーです。Must 機能はそれぞれ 1 つ以上の暗黙の仮説を持ち、それが `uncertainty-map` のコア仮説候補になります。
+
 ---
 
 ## 概要
@@ -47,6 +53,43 @@ Claude Code / Cursor 上で次のように依頼すると起動します。
 スラッシュ無しでも、機能一覧・要件定義書・プロダクトバックログ・MoSCoW・ユーザーストーリー・受入基準などのキーワードを含む依頼で自動起動します。
 
 入力ソース（usecase-map.md・ビジョン・競合調査ノートなど）が複数ある場合は、依頼時に対象を伝えてください。
+
+## 出力例（抜粋）
+
+**Mode A — 機能カード形式 (`docs/feature-list.md`)**
+
+```markdown
+| F ID | 機能名 | UC ID | 概要(1行) | 優先度 | 状態 |
+|---|---|---|---|---|---|
+| F-D01-01 | メール+パスワードでログイン | UC-D01-01 | 認証してセッション開始 | Must | 仮 |
+| F-D02-01 | 共有リンク発行 | UC-D02-03 | URL 1 個でファイル共有 | Must | 仮 |
+| F-X-01 | 操作監査ログ | UC-D01-01, UC-D02-03 | 主要操作を tamper-evident に記録 | Must | 仮 |
+
+### F-D01-01 メール+パスワードでログイン
+- **優先度**: Must — 根拠: ビジョン「個人で使い始められる」には認証が必須
+- **入力**: email (string), password (string ≥ 8 文字)
+- **出力**: セッション (JWT or Cookie), `/dashboard` へリダイレクト
+- **基本ルール**: 失敗 5 回でアカウントロック 15 分 / パスワードは bcrypt で保存
+- **受入のスケッチ**: 正しい credentials → ダッシュボード遷移 / 誤り → エラーメッセージ
+```
+
+**Mode B — PBI 形式 (`docs/product-backlog.md`)**
+
+```markdown
+### F-D01-01 メール+パスワードでログイン
+- **見積**: M (T-Shirt) ≒ 2-3 day
+- **依存**: F-X-01
+
+**ユーザーストーリー**
+As a 一般ユーザー / I want メールとパスワードでログインできる / so that 自分のアカウントの作業を再開できる
+
+**受入基準**
+- AC1 — 正常系: Given 登録済みの email と正しい password / When `/login` 送信 / Then `/dashboard` リダイレクト
+- AC2 — 失敗: Given 誤った password / When 送信 / Then エラー表示
+- AC3 — ロック: Given 同一 email で 5 回失敗 / When 6 回目 / Then 15 分ロック表示
+```
+
+詳細テンプレートは [`references/proposal-template.md`](references/proposal-template.md) と [`references/backlog-template.md`](references/backlog-template.md) を参照。
 
 ## 構成
 

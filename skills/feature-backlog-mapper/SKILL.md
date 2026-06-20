@@ -170,11 +170,12 @@ The stance behind the workflow. When references conflict with these, the princip
 
 1. **UC anchor first** — Never invent a feature without a UC ID. If needed, label it `(UC候補)` and propose adding a UC via [usecase-mapper](../usecase-mapper/SKILL.md).
 2. **Must requires rationale** — Every Must has a 1-line vision / UC / cost justification. Refuse Must without it; downgrade silently is also forbidden.
-3. **Won't is honest** — Reject ideas openly in the「棄却したアイデアと理由」section with reason. Never drop silently to make the inventory cleaner.
-4. **Coverage transparency** — Always report `<observed>/<total UC>` numerator/denominator. "Fully covered" is a number, not a feeling.
-5. **Mode separation** — Mode A is judgment (what to build), Mode B is sprint readiness (how to build it). Do not mix outputs in one file.
-6. **Diff-update is the default for re-runs** — Preserve existing F IDs verbatim. Full regeneration is only on explicit "ゼロから作り直して".
-7. **Always land the deliverable** — Every session ends with the Final deliverable block, even when partial. The user must always know the current state.
+3. **Must (What の核) ≠ コア仮説 (Why の核)** — Must 機能は「システムが何をするか」を決める。これに対し下流の `uncertainty-map` スキルが扱う「コア仮説」は「vision を成立させる暗黙の前提」を指す。両者は別レイヤー。Must を決めるのが本スキル、Must の背後にある暗黙の前提を仮説として検証対象に翻訳するのが `uncertainty-map`。
+4. **Won't is honest** — Reject ideas openly in the「棄却したアイデアと理由」section with reason. Never drop silently to make the inventory cleaner.
+5. **Coverage transparency** — Always report `<observed>/<total UC>` numerator/denominator. "Fully covered" is a number, not a feeling. 未カバー UC は理由（仕様確認待ち / 次フェーズ / Won't）を必ず明記。
+6. **Mode separation** — Mode A is judgment (what to build), Mode B is sprint readiness (how to build it). Do not mix outputs in one file.
+7. **Diff-update is the default for re-runs** — Preserve existing F IDs verbatim. Full regeneration is only on explicit "ゼロから作り直して".
+8. **Always land the deliverable** — Every session ends with the Final deliverable block, even when partial. The user must always know the current state.
 
 ## Anti-patterns for the agent
 

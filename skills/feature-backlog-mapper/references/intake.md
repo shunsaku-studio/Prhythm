@@ -51,11 +51,40 @@ Run the fallback in this order. Do **not** silently invent UC IDs.
 
 1. **Suggest `/usecase-mapper` first.** One sentence: "先に `usecase-mapper` でユースケースマップを作ると機能の根拠が明確になります。先に走らせますか？"
 2. If the user accepts → stop here and let `usecase-mapper` run; resume after.
-3. If the user declines → run a **single-turn UC interview**:
-   - Ask for 1-3 actors and 3-6 use cases in one message
-   - Accept partial answers; do not loop more than once
-   - Mint provisional UC IDs `UC-PROV-NN` and write them inline at the top of the output (not into a new `usecase-map.md`)
-   - Tag every emitted feature with `(UC候補)` so the missing anchor is visible
+3. If the user declines → run a **single-turn UC interview** (template below).
+
+### Single-turn UC interview template (verbatim)
+
+Send **one message** with the prompts below. Accept partial answers; do not loop more than once.
+
+```
+docs/usecase-map.md が無いので、最低限の文脈を 1 メッセージで教えてください
+（推奨は先に /usecase-mapper を走らせること）。
+
+1. プロダクト名 / 一行ビジョン: <空欄>
+2. アクター 1-3 種類: <例: 一般ユーザー / 管理者 / 組織オーナー>
+3. ユースケース 3-6 件（誰が・何を達成するか の 1 行）:
+   - <例: 一般ユーザーがメールでログインする>
+   - <例: 一般ユーザーがファイルを共有する>
+   - <例: 管理者がメンバーを招待する>
+
+回答に基づき機能一覧を作成し、すべて `(UC候補)` ラベル + 暫定 UC ID `UC-PROV-NN` で出力します。
+1 ループのみで確定し、ループは追加しません。
+```
+
+### Dialog branch handling (verbatim)
+
+User の応答パターンに対する agent の振る舞い:
+
+| User reply | Agent action |
+|------------|--------------|
+| 「OK」「お願い」「進めて」 | そのまま emit へ。再質問しない |
+| Partial reply（actor だけ / UC だけ） | 答えられた部分のみ反映、足りない部分は `(仮)` で埋め、`(UC候補)` ラベルで出力 |
+| 「全部 Must で」 | 拒否: "Must の根拠を 1 行で書けない項目は Should に降ります（vision / 制約 / コストの 3 物差し）。" |
+| 「UC ID 列は省いて」 | 拒否: "UC ID 列を抜くと、機能の根拠が再構成できなくなります。1 行追加で十分です。" |
+| 「とりあえず競合の機能も入れて」 | 拒否: "UC アンカーが無い機能は追加しません。UC を追加するか、機能を取下げるかを選んでください。" |
+| 追加 UC が出てきた | 1 件まで受付、UC-PROV-NN+1 を発行。N+1 件目以降は「次の更新サイクルで」と回答 |
+| 「もう一度確認したい」 | 1 ラウンドのみ追加質問可。2 ラウンド目以降は emit を強制し、不確定項目には `(仮)` ラベル |
 
 ## Anti-fabrication policy (inherits from usecase-mapper)
 

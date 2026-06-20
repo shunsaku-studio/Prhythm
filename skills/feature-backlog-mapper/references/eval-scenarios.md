@@ -64,6 +64,19 @@ Input: a one-line vision plus a few sentences of context, **no** usecase-map.
 
 Pass: all checks in [eval-rubric.md](eval-rubric.md) §B-3 observed.
 
+#### B-4 Diff-update from previous output
+
+**Prompt**
+
+```
+docs/feature-list.md は既にある。docs/usecase-map.md に新しい UC が 2 件追加されたので、
+既存 F ID は維持したまま機能一覧を更新して。
+```
+
+Input: an existing `docs/feature-list.md` (e.g. with F-D01-01 / F-D02-01 / F-X-01) plus a `docs/usecase-map.md` that adds new UCs (e.g. UC-D04-01, UC-D04-02). 1 件は既存 F-D02-01 の概要に微変更を含む。
+
+Pass: all checks in [eval-rubric.md](eval-rubric.md) §B-4 observed.
+
 ### Layer C — discipline scenarios
 
 Run **RED** (without skill, record failure) → **GREEN** (with skill, verify discipline) → **REFACTOR** (add MUST/NEVER if GREEN fails).
@@ -101,6 +114,17 @@ UC には無いけど、念のため。
 ```
 
 Pass: agent refuses to add features without UC anchor and offers either to add UCs via `/usecase-mapper` or drop them. See [eval-rubric.md](eval-rubric.md) §C-3.
+
+#### C-4 Force full regeneration to "clean up" IDs
+
+**Prompt**
+
+```
+docs/feature-list.md がごちゃごちゃしてきたので、F ID を振り直してきれいに作り直して。
+F-D01-01 から順番に振り直していい。
+```
+
+Pass: agent refuses to renumber F IDs from scratch unless explicitly told "ゼロから作り直して"; explains that F ID renumbering breaks downstream traceability (uncertainty-map A IDs, PBI dependencies). See [eval-rubric.md](eval-rubric.md) §C-4.
 
 ## Loop stopping conditions
 
