@@ -47,6 +47,19 @@ Turn use cases into a prioritized feature inventory (Mode A) or sprint-ready pro
 
 Read reference files at the relevant step. Do not load all upfront.
 
+## Mode flow (entry-point shortcuts)
+
+| Situation | Flow |
+|-----------|------|
+| `docs/usecase-map.md` exists, fresh inventory | Step 0 → 1 (Mode A) → 2 → 3 → 4 → 5 |
+| Mode A artifact exists, sprint-ready needed | Step 0 → 1 (Mode B) → 2 (skip when F IDs exist) → 3 → 4 → 5 |
+| `docs/feature-list.md` or `docs/product-backlog.md` exists (re-run) | Step 0 (diff-update) → 4 (changed rows only) → 5 |
+| `usecase-map.md` missing, user wants quick draft | Step 0 (single-turn UC interview) → 2 → 3 → 4 → 5 with `(UC候補)` labels |
+| User pasted requirements doc, no UC | Step 0 (suggest `/usecase-mapper` first) → if declined, fallback above |
+| Vision changed, want to re-balance MoSCoW | Step 0 (diff-update) → 3 (re-apply yardstick) → 5 |
+
+Announce the chosen flow in one line before Step 1 emit.
+
 ## Workflow
 
 ### Step 0 — Confirm inputs
@@ -110,16 +123,32 @@ Read [references/quality-checklist.md](references/quality-checklist.md). Verify:
 
 Write to `docs/feature-list.md` (Mode A) or `docs/product-backlog.md` (Mode B). For Mode B, also append a「スプリント切り出し提案」block with Must totals and dependency chains.
 
-## Report back
+## Final deliverable
 
-After emitting, tell the user:
+Every session ends with the report block below — even partial / interrupted sessions. **Do not exit without it.**
 
 ```
-docs/feature-list.md (or docs/product-backlog.md) に出力しました。
-- カバレッジ: <observed>/<total UC> 件
-- Must: N 件 / Should: N / Could: N / Won't: N
-- 次の一手: prototype-design-md / ooui-architect / ooui-graphql-modeling のいずれかへ
+✅ docs/feature-list.md (Mode A) または docs/product-backlog.md (Mode B) に出力しました
+- カバレッジ: <observed>/<total UC> 件 (UC anchor 確認済)
+- 内訳: Must <m> / Should <s> / Could <c> / Won't <w>
+- 棄却: <r> 件（理由は「棄却したアイデアと理由」セクション）
+- 差分更新: 新規 +<a> / 変更 <ch> / 削除 -<d>（diff-update mode のとき）
+- 次の一手: /prototype-design-md → /uncertainty-map → /ooui-architect / /ooui-graphql-modeling
 ```
+
+Output file shape (Mode A — summary; full template in [references/proposal-template.md](references/proposal-template.md)):
+
+- 概要 / 想定ターゲット / 一行価値（vision 引用）
+- Must / Should / Could 各表（機能カード: I/O・基本ルール・制約・受入スケッチ）
+- 「棄却したアイデアと理由」セクション
+- カバレッジ・サマリ
+
+Output file shape (Mode B — summary; full template in [references/backlog-template.md](references/backlog-template.md)):
+
+- 概要 + Must 件数
+- PBI 群（User Story + AC × 3-5 + 見積 + 依存 F IDs + DoD + INVEST self-check）
+- 「スプリント切り出し提案」（Must 累計 + 依存チェーン）
+- 棄却サブセクション
 
 ## NEVER
 
@@ -134,6 +163,31 @@ docs/feature-list.md (or docs/product-backlog.md) に出力しました。
 - Inherit F IDs from Mode A when generating Mode B
 - Keep `—` for unverifiable cells; never fabricate API paths or screen routes
 - Output report block back to the user with coverage and MoSCoW counts
+
+## Principles
+
+The stance behind the workflow. When references conflict with these, the principles win.
+
+1. **UC anchor first** — Never invent a feature without a UC ID. If needed, label it `(UC候補)` and propose adding a UC via [usecase-mapper](../usecase-mapper/SKILL.md).
+2. **Must requires rationale** — Every Must has a 1-line vision / UC / cost justification. Refuse Must without it; downgrade silently is also forbidden.
+3. **Won't is honest** — Reject ideas openly in the「棄却したアイデアと理由」section with reason. Never drop silently to make the inventory cleaner.
+4. **Coverage transparency** — Always report `<observed>/<total UC>` numerator/denominator. "Fully covered" is a number, not a feeling.
+5. **Mode separation** — Mode A is judgment (what to build), Mode B is sprint readiness (how to build it). Do not mix outputs in one file.
+6. **Diff-update is the default for re-runs** — Preserve existing F IDs verbatim. Full regeneration is only on explicit "ゼロから作り直して".
+7. **Always land the deliverable** — Every session ends with the Final deliverable block, even when partial. The user must always know the current state.
+
+## Anti-patterns for the agent
+
+- Asking the user clarifying questions one-by-one across many turns instead of one batched intake
+- Asking "do you want Must / Should / Could split?" — apply MoSCoW with rationale first, then confirm
+- Dropping UC IDs from cards because "the user knows the context"
+- Marking everything Must to please the user under pressure (refuse and downgrade)
+- Skipping the rejection section to keep the deliverable shorter
+- Re-using a retired F ID in diff-update mode (always allocate next Seq)
+- Claiming "fully covered" without checking the numerator/denominator
+- Producing Mode B without ever running Mode A internally first
+- Generating a backlog when `docs/usecase-map.md` is obviously missing instead of suggesting `/usecase-mapper`
+- Loading all references upfront instead of on-demand at each step
 
 ## Self-evaluation loop
 
