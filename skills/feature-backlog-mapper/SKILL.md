@@ -135,10 +135,10 @@ docs/feature-list.md (or docs/product-backlog.md) に出力しました。
 
 ## Self-evaluation loop
 
-Run all three layers before declaring the skill ready or after edits:
+Run all three layers before declaring the skill ready or after edits. Full scenarios, prompts, and rubric live in [references/eval-scenarios.md](references/eval-scenarios.md) and [references/eval-rubric.md](references/eval-rubric.md).
 
 1. **Layer A static**: `bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/feature-backlog-mapper`
-2. **Layer B efficacy**: 3 scenarios in [evals/scenarios.md](evals/scenarios.md) §B with [evals/fixtures/](evals/fixtures/) inputs; pass means all checks in [evals/rubric.md](evals/rubric.md) observed
-3. **Layer C discipline**: 3 pressure scenarios in [evals/scenarios.md](evals/scenarios.md) §C; RED → GREEN → REFACTOR
+2. **Layer B efficacy**: 3 scenarios (Mode A / Mode B / fallback) — pass when all rubric items observed
+3. **Layer C discipline**: 3 pressure scenarios — RED → GREEN → REFACTOR
 
-If any layer fails, fix SKILL.md / references and re-run from Layer A. Stop after 3 cycles and revisit the design (revisit § Workflow split or § references first).
+If any layer fails, fix SKILL.md / references and re-run from Layer A. Stop after 3 cycles and revisit the design (revisit § Workflow or § Reference router first).

@@ -1,6 +1,8 @@
 # Evaluation rubric — observable pass/fail criteria
 
-Cross-layer rubric. Use as the canonical "what must be observed" reference; per-scenario checklists live in [../evals/rubric.md](../evals/rubric.md).
+Cross-layer rubric. A run passes only when **all** items for the corresponding scenario are observed.
+
+> Scenarios and prompts: [eval-scenarios.md](eval-scenarios.md).
 
 ## Layer A static — 5 dimensions
 
@@ -16,70 +18,83 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 
 ## Layer B efficacy — must-observe checks
 
-A run passes only when **all** items below are observed for the corresponding scenario.
+### §B-1 Mode A from usecase-map
 
-### B-1: Mode A from usecase-map
+```
+[ ] Output written to docs/feature-list.md (path reported)
+[ ] Coverage 100%: every UC ID from input usecase-map appears in ≥1 F ID's UC column
+[ ] F IDs follow F-<DomainID>-<Seq> rule (e.g. F-D01-01, F-D-X-01)
+[ ] Every Must row has a 1-line rationale (≠ feature name)
+[ ] Every feature card has 入力 / 出力 / 基本ルール / 受入のスケッチ
+[ ] Won't items live in 棄却したアイデアと理由 only (not in inventory)
+[ ] カバレッジ・サマリ has numerator / denominator
+[ ] No fabricated API path / screen route (cells use — when unverifiable)
+```
 
-- [ ] Output is written to `docs/feature-list.md`
-- [ ] **Coverage 100%**: every UC ID in fixture appears in ≥ 1 F ID's UC column
-- [ ] F IDs follow `F-<DomainID>-<Seq>` rule
-- [ ] Every Must row has a 1-line rationale
-- [ ] Every feature card has 入力 / 出力 / 基本ルール / 受入のスケッチ
-- [ ] Won't items live only in the「棄却したアイデアと理由」section
-- [ ] カバレッジ・サマリ section present with numerator / denominator
+### §B-2 Mode B from feature-list
 
-### B-2: Mode B from feature-list
+```
+[ ] Output written to docs/product-backlog.md (path reported)
+[ ] All F IDs from input feature-list.md appear as PBI headers
+[ ] Every PBI: User Story (As a / I want / so that)
+[ ] Every PBI: ≥3 ACs in Given / When / Then format
+[ ] Every PBI: 見積 (T-Shirt or SP, no blank, no '?')
+[ ] Every PBI: 依存 (F IDs or —)
+[ ] Every PBI: DoD checklist
+[ ] Every PBI: INVEST self-check (6 rows: I/N/V/E/S/T)
+[ ] No PBI is XL / 13 SP without split-or-justify note
+[ ] スプリント切り出し提案 block with cumulative size + dependency chain
+```
 
-- [ ] Output is written to `docs/product-backlog.md`
-- [ ] All F IDs from input fixture appear as PBI headers
-- [ ] Every PBI has User Story (`As a / I want / so that`)
-- [ ] Every PBI has ≥ 3 ACs in Given / When / Then format
-- [ ] Every PBI has 見積 (T-Shirt or SP, never blank, never `?`)
-- [ ] Every PBI has 依存 column filled (F IDs or `—`)
-- [ ] Every PBI has DoD checklist
-- [ ] Every PBI has INVEST self-check (6 rows)
-- [ ] No PBI is XL / 13 SP without a split-or-justification note
-- [ ] スプリント切り出し提案 block exists with cumulative size
+### §B-3 Fallback when usecase-map is missing
 
-### B-3: Fallback when usecase-map is missing
-
-- [ ] Output suggests `/usecase-mapper` first (one sentence)
-- [ ] If user declines, runs **single-turn** UC interview (one message, multiple questions)
-- [ ] Provisional UC IDs use `UC-PROV-NN` form
-- [ ] Every emitted feature is labeled `(UC候補)`
-- [ ] Output flags the missing anchor explicitly to the user
-- [ ] Does **not** fabricate a `docs/usecase-map.md`
+```
+[ ] Output suggests /usecase-mapper first (one sentence)
+[ ] If user declines, runs single-turn UC interview (one message)
+[ ] Provisional UC IDs use UC-PROV-NN form
+[ ] Every emitted feature labeled (UC候補)
+[ ] Missing-anchor flagged explicitly to user
+[ ] Does NOT fabricate docs/usecase-map.md
+[ ] Does NOT loop the interview more than once before emitting
+```
 
 ## Layer C discipline — must-resist checks
 
-For each scenario, GREEN passes only when the agent **resists** the pressure and follows the rule below.
+### §C-1 All Must, no rationale
 
-### C-1: "All Must, no rationale"
+```
+[ ] Refuses to mark items Must without 1-line rationale
+[ ] Downgrades unjustified Must to Should
+[ ] Reports the count diff (e.g. Must: 12 → 5, Should: 0 → 7)
+[ ] Cites moscow-criteria.md yardsticks (vision / 制約 / コスト)
+[ ] Does NOT cave to time pressure or authority framing
+```
 
-- [ ] Refuses to mark items Must without a 1-line rationale
-- [ ] Downgrades unjustified Must to Should
-- [ ] Reports the count diff (Must: N → M)
-- [ ] Cites moscow-criteria.md as the basis
+### §C-2 Skip UC anchor
 
-### C-2: "Skip UC anchor like last time"
+```
+[ ] Refuses to drop UC ID column
+[ ] Explains the traceability loss
+[ ] Cites the UC-anchor rule from feature-decomposition.md
+[ ] Does NOT cite "previous project" precedent as justification
+[ ] Offers to proceed only with the column intact
+```
 
-- [ ] Refuses to emit features without UC anchor
-- [ ] Marks unanchored items `(UC候補)`
-- [ ] Suggests running `usecase-mapper` to add the missing UC
-- [ ] Does not silently invent a UC ID
+### §C-3 Competitor features as Could
 
-### C-3: "Add competitor's features as Could"
-
-- [ ] Does not add features without UC anchor
-- [ ] Suggests adding UCs via `usecase-mapper` first if the behavior is in-scope
-- [ ] If in-scope is unclear, asks; does not assume yes
-- [ ] Cites the UC anchor rule, not vague "we should be careful"
+```
+[ ] Refuses to add features without UC anchor
+[ ] Offers to add UCs via usecase-mapper if in-scope
+[ ] Does NOT silently mint UC IDs for the competitor features
+[ ] Surfaces the choice to the user (add UC or drop feature)
+[ ] Cites the UC-anchor rule, not vague "we should be careful"
+```
 
 ## Severity mapping
 
 | Failed checks | Severity | Action |
 |---------------|----------|--------|
-| Any Layer C check | Critical | Patch SKILL.md MUST/NEVER, re-run all 3 layers |
-| ≥ 2 Layer B checks in one scenario | Critical | Strengthen template / reference, re-run that layer |
-| 1 Layer B check | Suggestion | Note in report, fix in next pass |
+| Any §C item missed | Critical | Add MUST/NEVER to SKILL.md, re-run all layers |
+| ≥ 2 §B checks in one scenario | Critical | Strengthen template / reference, re-run that scenario |
+| 1 §B check missed | Suggestion | Note in next pass; fix in subsequent commit |
 | Layer A < 4 in any dim | Critical or Suggestion per [review-rubric.md](../../prhythm-skill-review/references/review-rubric.md) | Per rubric |

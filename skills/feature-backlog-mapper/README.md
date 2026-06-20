@@ -54,22 +54,17 @@ Claude Code / Cursor 上で次のように依頼すると起動します。
 feature-backlog-mapper/
 ├── SKILL.md                     # エージェントが読む本体（モデル向け、英語）
 ├── README.md                    # 本ファイル（人間向け、日本語）
-├── references/                  # 進行のための詳細
-│   ├── intake.md
-│   ├── feature-decomposition.md
-│   ├── moscow-criteria.md
-│   ├── proposal-template.md
-│   ├── backlog-template.md
-│   ├── user-story-and-ac.md
-│   ├── estimation-guide.md
-│   ├── quality-checklist.md
-│   ├── eval-scenarios.md
-│   └── eval-rubric.md
-└── evals/                       # 評価ループの再現セット
-    ├── scenarios.md             # B-1..B-3 / C-1..C-3 のシナリオ
-    ├── rubric.md                # 観測すべき合否項目
-    ├── fixtures/                # 評価用サンプル入力
-    └── reports/                 # 評価実行記録（任意）
+└── references/                  # 進行のための詳細
+    ├── intake.md
+    ├── feature-decomposition.md
+    ├── moscow-criteria.md
+    ├── proposal-template.md
+    ├── backlog-template.md
+    ├── user-story-and-ac.md
+    ├── estimation-guide.md
+    ├── quality-checklist.md
+    ├── eval-scenarios.md        # Layer A/B/C 評価シナリオ + プロンプト
+    └── eval-rubric.md           # 観測すべき合否項目チェックリスト
 ```
 
 ## 前提条件
