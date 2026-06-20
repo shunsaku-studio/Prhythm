@@ -17,8 +17,33 @@ Read the **ユースケース一覧** table and the **ドメイン概要一覧**
 | Vision | `docs/product-vision.md` (or `docs/vision.md`) | One-line statement → MoSCoW Must yardstick |
 | Competitive notes | inline chat or `docs/competitive-research/*` | Should / Could candidates with provenance |
 | Hearing notes | `docs/hearing/*.md`, Notion exports | Constraints, deadlines, regulatory limits |
+| **Previous output** | `docs/feature-list.md` (Mode A) or `docs/product-backlog.md` (Mode B) | Existing F IDs / MoSCoW labels to inherit; triggers diff-update mode |
 
 Read optional inputs only when present. Do not block on them.
+
+## Diff-update mode (when previous output exists)
+
+When `docs/feature-list.md` (Mode A) or `docs/product-backlog.md` (Mode B) already exists, treat the run as **incremental update**, not full regeneration.
+
+| Sub-step | Action |
+|----------|--------|
+| 1 | Read the previous output and extract its existing F IDs, MoSCoW labels, and Won't entries |
+| 2 | Compare against the current `docs/usecase-map.md` |
+| 3 | Identify three diff types: **新規** (UC added since), **変更** (priority / 概要 changed), **削除** (UC removed) |
+| 4 | Preserve F IDs from the previous output verbatim — never reuse retired IDs, allocate the next Seq for new features |
+| 5 | Surface a one-line diff summary to the user before re-emitting |
+
+Diff summary format:
+
+```
+📥 前回出力検出: docs/feature-list.md (機能 N 件)
+📊 差分: 新規 +<a> / 変更 <b> / 削除 -<c>
+   - 新規: F-D04-03 (UC-D04-NN 由来)
+   - 変更: F-D01-02 Should → Must (vision 更新による)
+   - 削除: (取下げ) F-D02-XX → 棄却理由を「棄却したアイデアと理由」へ移動
+```
+
+If the user wants a full regeneration instead, they explicitly say "ゼロから作り直して". Otherwise default to diff-update.
 
 ## When `docs/usecase-map.md` is missing
 

@@ -60,6 +60,8 @@ If `docs/usecase-map.md` is missing:
 
 Optional inputs (read when present): `docs/product-vision.md`, competitive notes from [competitive-research](../competitive-research/SKILL.md), hearing notes.
 
+**Diff-update mode**: when `docs/feature-list.md` or `docs/product-backlog.md` already exists, default to incremental update (preserve existing F IDs, surface 新規/変更/削除 diff). Full regeneration only when the user says "ゼロから作り直して". See [references/intake.md](references/intake.md) §Diff-update mode.
+
 ### Step 1 — Pick mode
 
 | Trigger phrase | Mode | Output file |
