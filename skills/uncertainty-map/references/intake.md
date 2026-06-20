@@ -110,6 +110,42 @@ Treat zero hits as "未実装の可能性"; do not jump to ⬜ without checking 
 - When two sources conflict (e.g. DESIGN.md says X, code shows Y), record both and let the user choose; do not silently pick.
 - Use `—` for cells you cannot verify.
 
+## Single-turn interview templates
+
+### When vision + feature-list exist (only confirming scope)
+
+Send **one message** with confirmation prompts:
+
+```
+不確実性マップ作成のため、以下を確認させてください（部分回答 OK・スキップ OK）:
+
+1. 対象プロト範囲: <DESIGN.md から推定: ファイル共有の招待〜閲覧動線> ← この範囲で OK?
+2. 観察ログ: docs/usability-log.md / hearing notes はありますか？ ない場合は全件 🟡/⬜ 初期化
+3. Mode: 「A 内部チーム向け（マップ）」 or 「B ステークホルダー向け（レポート）」
+
+3 つすべて答えてくれれば 1 ターンで確定します。
+```
+
+### When vision + feature-list both missing (Case C, 1-shot interview)
+
+```
+docs/product-vision.md と docs/feature-list.md が無いので、最低限の文脈を 1 メッセージで教えてください
+（推奨は先に /product-vision-and-concept と /feature-backlog-mapper を走らせること）。
+
+1. ビジョン 1 行: <空欄>
+2. 想定ターゲット: <空欄>
+3. リスクが大きいと感じる仮説 3-5 件:
+   -
+   -
+   -
+
+回答に基づき仮説を抽出し、すべて `(コア候補)` ラベルで出力します。1 ループのみで確定します。
+```
+
+### Dialog opener for sub-step 4 (codebase probed, ready to confirm)
+
+Use the verbatim opener in [verification-classifier.md](verification-classifier.md) §Sub-step 4 — Single-turn diff confirmation.
+
 ## Hand-off to Step 1
 
 After reading inputs, output a one-line summary:

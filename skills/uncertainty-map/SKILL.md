@@ -47,6 +47,19 @@ Map prototype assumptions on a 2x2 (Core/Peripheral × Verified/Unverified) grid
 
 Read reference files at the relevant step. Do not load all upfront.
 
+## Mode flow (entry-point shortcuts)
+
+| Situation | Flow |
+|-----------|------|
+| Vision + feature-list + プロト実装 ある（新規）| Step 0 → 1 (Mode A) → 2 → 3 → 4 → 5 |
+| Mode A 既存 + 投資家プレゼン直前 (対外向け) | Step 0 → 1 (Mode B) → 5 |
+| `docs/uncertainty-map.md` 既存（検証スパイク後の更新）| Step 0 (diff-update) → 4 (昇格/降格判定) → 5 |
+| プロト未実装、vision + feature-list のみ | Step 0 → 1 (Mode A) → 2 → 3 → 4 (全件 ⬜) → 5 |
+| 観察ログだけ追加された | Step 0 (diff-update) → 4 sub-step 3 (✅ 昇格判定) → 5 |
+| Vision / feature-list 不在 | Step 0 (suggest upstream) → 拒否なら single-turn interview → `(コア候補)` ラベル |
+
+Announce the chosen flow in one line before Step 1 emit.
+
 ## Workflow
 
 ### Step 0 — Confirm inputs (hybrid intake)
@@ -121,17 +134,35 @@ Cross-check with [references/quality-checklist.md](references/quality-checklist.
 
 Write to the mode's output file. For Mode B, include the standard 6 sections in order: エグゼサマ → スコープ → 検証済成果 → 残課題 → デモ動線 → 次の検証計画.
 
-## Report back
+## Final deliverable
 
-After emitting, tell the user:
+Every session ends with the report block below — even partial / interrupted sessions. **Do not exit without it.**
 
 ```
-docs/uncertainty-map.md (or docs/proto-value-report.md) に出力しました。
+✅ docs/uncertainty-map.md (Mode A) または docs/proto-value-report.md (Mode B) に出力しました
 - 全仮説: <N> 件 / コア: <C> / 周辺: <P>
 - ステータス: ✅<v> / 🟡<p> / ⬜<u>
-- 最優先 (コア × 未検証): <n> 件 / 検証アクション提案済
+- 最優先（コア × 未検証）: <n> 件 / 検証アクション提案済
+- 差分更新: 新規 +<a> / 昇格 <pr> / 降格 <dm> / 削除 -<d>（diff-update mode のとき）
 - 次の一手: 提案済み検証スパイクの実行 → 結果反映で再 mapping
 ```
+
+Output file shape (Mode A — summary; full template in [references/matrix-template.md](references/matrix-template.md)):
+
+- スコープ（vision / 対象プロト / 入力ソース）
+- マトリクス（Mermaid `quadrantChart` + ASCII 図 + 象限別件数表）
+- 4 象限の詳細表（コア × 未検証 / 部分検証 / 検証済 + 周辺）
+- 次の検証アクション表（仮説 / 手段 / 工数 / 期待結果 / 失格条件）
+- カバレッジ・サマリ + 次の一手
+
+Output file shape (Mode B — summary; full template in [references/report-template.md](references/report-template.md)):
+
+- エグゼサマ（最大の価値 + 最大のリスクを 1 文ずつ）
+- スコープ（含む / 含まない）
+- 検証済成果（自然言語、ID は脚注）
+- 残課題（⬜ コアを隠さず併記）
+- デモ動線 + 次の検証計画
+- Appendix A 仮説 ID 対応表（mandatory）
 
 ## NEVER
 
@@ -149,6 +180,33 @@ docs/uncertainty-map.md (or docs/proto-value-report.md) に出力しました。
 - Propose ≥1 validation action for every Core × Unverified row
 - In Mode B, surface Unverified Core in 残課題 and 次の検証計画 — never hide it
 - Use `—` for unverifiable cells; never invent metrics or user counts
+
+## Principles
+
+The stance behind the workflow. When references conflict with these, the principles win.
+
+1. **Implementation ≠ verification** — ✅ requires user observation / measurement evidence (人数・期間・結果). Code passing tests is 🟡, not ✅.
+2. **Core is narrow by design** — Core 判定は数を絞るのが目的。絞り込めない仮説は Peripheral に降ろす。Core は ≤30% を目安、超えたら理由を明示。
+3. **Vision is the yardstick** — Core 根拠は vision 引用 / Must 紐付 / cost trade-off のいずれかで 1 行書ける。「重要だから」は理由ではない。
+4. **Honesty in Mode B** — 未検証コアを残課題セクションから隠さない。隠せばレポートの信頼が崩れる。「正直さ」が最大の信頼資産。
+5. **Falsifiable beliefs only** — 仮説は「これが間違っていたら ___」を 1 文で書ける。書けないものは仮説ではなく wish。
+6. **Match method to belief** — 検証手段は 9 種カタログから仮説タイプに応じて選ぶ。「ユーザーテスト」一択は思考停止。
+7. **Failure threshold defines learning** — 各検証アクションに失格条件（数値）を必ず付与。期待値だけ書いて失敗判定がないと学びが歪む。
+8. **Diff-update preserves history** — A ID は verbatim で維持、retired ID は再利用しない。検証履歴の追跡可能性を最優先。
+9. **Always land the deliverable** — Every session ends with the Final deliverable block, even when partial.
+
+## Anti-patterns for the agent
+
+- Asking the user clarifying questions one-by-one across many turns instead of one batched intake
+- 推奨検証手段を 5 つ並べて選ばせる — 第一候補 1 つに絞り、代替は注記程度に
+- Probing the codebase silently and reporting the matrix without showing it to the user before emit
+- Looping the diff-confirmation dialog more than once before emitting
+- 観察ログの数値を「だいたい」「数人」と曖昧に書く — 具体数値か `—` の二択
+- Mode B でユーザーが「未検証コアは出すな」と言ったら従う — 拒否して残課題に併記
+- Loading all references upfront instead of on-demand at each step
+- Promoting ⬜ → ✅ in one step (must pass through 🟡 with implementation+test evidence)
+- 「動かしてるから検証済」「テストが緑だから検証済」と書く — 両方とも 🟡 まで
+- Re-using a retired A ID in diff-update mode (always allocate next Seq)
 
 ## Self-evaluation loop
 

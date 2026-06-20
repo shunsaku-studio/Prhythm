@@ -54,9 +54,12 @@ If any of the three is missing, leave at 🟡 and note "観察根拠の数値要
 
 ### Sub-step 4 — Single-turn diff confirmation
 
-Show the inferred matrix to the user. Format:
+Show the inferred matrix to the user. **Dialog opener template** (verbatim, fill placeholders):
 
 ```
+入力 (vision <あり/なし> / feature-list 機能 <N> 件 / git ls-files <M> ファイル / 観察ログ <あり/なし>) を読み、
+仮説 <T> 件を以下のように分類しました。差分があれば教えてください。なければそのまま確定します。
+
 ✅ A-D01-01-01 ターゲットは email 登録に抵抗ない
    根拠: usability-log.md #L23 (5 ユーザー / 2026-06 / 完了率 100%)
 
@@ -66,8 +69,24 @@ Show the inferred matrix to the user. Format:
 ⬜ A-CORE-05 月額 X 円を支払う
    根拠: 該当する実装/観察なし
 
-差分があれば教えてください。なければそのまま確定します。
+確定の合言葉: 「OK」「そのまま」「確定」 → そのまま emit
+差分の伝え方: 「A-CORE-05 は LP で測ったので 🟡」「A-D02-XX は降格」など 1 行ずつ
 ```
+
+### Dialog branch handling (verbatim responses)
+
+User の応答パターンに対する agent の振る舞い:
+
+| User reply | Agent action |
+|------------|--------------|
+| 「OK」「そのまま」「確定」「いい」 | そのまま Step 5 emit へ。再質問しない |
+| 「A-XXX を ✅ に変更」+ 観察根拠あり | 当該行を更新、他はそのまま emit |
+| 「A-XXX を ✅ に変更」+ 観察根拠なし | 拒否: "✅ には観察ログ（人数 + 期間 + 結果）が必要です。`docs/usability-log.md` がなければ 🟡 までとなります。" |
+| 「全部 ✅」「動かしてるから検証済」 | 拒否: "実装+テストは 🟡 部分検証どまりです。" → Pressure handling §All Verified へ |
+| 「vision 省略でいい」 | 拒否: "vision 引用を抜くと『なぜコアか』が再構成できなくなります。" → §Skip vision |
+| Partial reply（一部しか答えない） | 答えられた部分のみ反映、残りは inferred のまま emit。再ループしない |
+| 「もう一度確認したい」「もう少し精緻に」 | 1 ラウンドのみ追加質問可。2 ラウンド以降は emit を強制し残課題に「軸2 要確認」マーク |
+| 仮説の追加要望 | 1 件まで受付、A ID は次の Seq で発行。N+1 件目以降は「次の更新サイクルで」と回答 |
 
 Accept user diffs. Do not re-loop the dialog more than once.
 
