@@ -92,4 +92,5 @@ feature-backlog-mapper/
 | [prototype-design-md](../prototype-design-md/) | 下流。Mode A の機能一覧を受けてプロトの DESIGN.md を書く |
 | [ooui-architect](../ooui-architect/) | 下流。Mode B の PBI を受けて common/model/pages を実装する |
 | [ooui-graphql-modeling](../ooui-graphql-modeling/) | 下流。Mode B の PBI を受けて GraphQL SDL を設計する |
+| [uncertainty-map](../uncertainty-map/) | 下流。Must/Should/Could 分類を仮説の「コア/周辺」判定の物差しとして利用する |
 | [prhythm-skill-review](../prhythm-skill-review/) | メタ。本スキルの評価ループ（Layer A/B/C）を回す相方 |

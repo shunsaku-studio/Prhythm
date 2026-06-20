@@ -91,3 +91,4 @@ product-vision-and-concept/
 | ooui-graphql-modeling | 後続 — コンセプト確定後、ドメイン SDL 設計へ |
 | ooui-architect | 後続 — ドメイン確定後、画面・OOUI のたたき台へ |
 | prototype-design-md | 後続 — コンセプトを画面プロトタイプの設計メモへ展開する |
+| uncertainty-map | 後続 — vision の一行ステートメントを「コア/周辺」判定の最上位の物差しとして利用する |

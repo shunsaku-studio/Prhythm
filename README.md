@@ -42,6 +42,7 @@ bash scripts/link-cursor-skills.sh
 | [ooui-architect](skills/ooui-architect/) | OOUI の common/model/ルーティング dir 構成、scaffold、4-file コンポーネント |
 | [usecase-mapper](skills/usecase-mapper/) | コードベースや仕様書から**ユースケース一覧・ユースケース図**を生成し `docs/usecase-map.md` に出力する |
 | [feature-backlog-mapper](skills/feature-backlog-mapper/) | ユースケース一覧から **機能一覧（提案版）** または **プロダクトバックログ（スプリント版）** を生成し `docs/feature-list.md` / `docs/product-backlog.md` に出力する |
+| [uncertainty-map](skills/uncertainty-map/) | プロトの仮説を **コア/周辺 × 検証済/未検証** の 2x2 でマッピングし `docs/uncertainty-map.md`（内部用）または `docs/proto-value-report.md`（対外用）に出力する |
 | [prhythm-skill-pr](skills/prhythm-skill-pr/) | スキル追加・更新の PR 作成（preflight + gh） |
 | [create-html-deck](skills/create-html-deck/) | HTML スライドデッキを deck-stage ビューアで段階的に構築（アウトライン→テーマ→プレビュー） |
 | [shadcn-explorer](skills/shadcn-explorer/) | shadcn/ui エコシステム（200+ registry / 60+ テーマ）からコンポーネント・block・テーマ候補をリアルタイム検索 |
