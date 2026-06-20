@@ -33,8 +33,37 @@ Do not loop the dialog more than once before emit. If the user adds new info mid
 | `docs/usecase-map.md` | When the team wants assumption traceability all the way back to UC IDs |
 | `docs/competitive-research/*` | When axis 1 (Core) needs an external benchmark |
 | `docs/hearing/*.md` | When vision is ambiguous; pull constraints to apply axis 1 |
+| **Previous output** | `docs/uncertainty-map.md` (Mode A) or `docs/prototype-value-report.md` (Mode B) — triggers diff-update mode |
 
 Read optional inputs only when present. Do not block on them.
+
+## Diff-update mode (when previous output exists)
+
+When `docs/uncertainty-map.md` (Mode A) or `docs/prototype-value-report.md` (Mode B) already exists, treat the run as **incremental update**, not full regeneration. This is the natural flow after a validation spike resolves one or more assumptions.
+
+| Sub-step | Action |
+|----------|--------|
+| 1 | Read the previous output and extract its existing A IDs, axis 1 / axis 2 labels |
+| 2 | Compare against current vision / feature-list / observation logs |
+| 3 | Identify four diff types: **新規** (assumption added), **昇格** (⬜ → 🟡 → ✅ verification advanced), **降格** (✅ → 🟡 evidence weakened), **削除** (assumption retired) |
+| 4 | Preserve A IDs from the previous output verbatim — never reuse retired IDs |
+| 5 | Surface a one-line diff summary to the user before re-emitting |
+
+Diff summary format:
+
+```
+📥 前回出力検出: docs/uncertainty-map.md (仮説 N 件)
+📊 差分: 新規 +<a> / 昇格 <b> / 降格 <c> / 削除 -<d>
+   - 新規: A-CORE-07 (vision 更新で追加)
+   - 昇格: A-D01-01-01 ⬜ → ✅ (5 ユーザーテスト n=5 / 完了率 100%)
+          A-CORE-05 ⬜ → 🟡 (LP CTR 4.2% / 有意性は要追加サンプル)
+   - 降格: A-D03-XX-01 ✅ → 🟡 (再観察で離脱率上昇)
+   - 削除: A-D02-XX-01 (機能削除に伴い棄却)
+```
+
+✅ 昇格時は **観察根拠が必須**。コードが追加されただけ（実装済）では昇格させない（[verification-classifier.md](verification-classifier.md) §「実装済 ≠ 検証済」を参照）。
+
+If the user wants a full regeneration instead, they explicitly say "ゼロから作り直して". Otherwise default to diff-update.
 
 ## When inputs are missing
 

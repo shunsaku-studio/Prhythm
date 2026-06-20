@@ -61,6 +61,8 @@ Read [references/intake.md](references/intake.md). Inputs are gathered in this p
 
 If all of (1)(2) are missing, suggest `/product-vision-and-concept` and `/feature-backlog-mapper` first. If the user declines, run a single-turn assumption interview and label every emitted assumption `(コア候補)`.
 
+**Diff-update mode**: when `docs/uncertainty-map.md` or `docs/proto-value-report.md` already exists, default to incremental update. Surface 新規/昇格/降格/削除 diff and preserve existing A IDs. ✅ への昇格は観察根拠が必須（実装済 ≠ 検証済）。Full regeneration only when the user says "ゼロから作り直して". See [references/intake.md](references/intake.md) §Diff-update mode.
+
 ### Step 1 — Pick mode
 
 | Trigger | Mode | Output file |
