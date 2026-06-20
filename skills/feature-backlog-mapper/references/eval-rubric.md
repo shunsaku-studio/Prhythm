@@ -22,7 +22,8 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 
 ```
 [ ] Output written to docs/feature-list.md (path reported)
-[ ] Coverage 100%: every UC ID from input usecase-map appears in ≥1 F ID's UC column
+[ ] Coverage ≥80%: ≥80% of UC IDs from input usecase-map appear in ≥1 F ID's UC column
+[ ] Uncovered UCs (if any) are listed in カバレッジ・サマリ with reason: 仕様確認待ち / 次フェーズ / Won't
 [ ] F IDs follow F-<DomainID>-<Seq> rule (e.g. F-D01-01, F-D-X-01)
 [ ] Every Must row has a 1-line rationale (≠ feature name)
 [ ] Every feature card has 入力 / 出力 / 基本ルール / 受入のスケッチ
@@ -58,6 +59,18 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 [ ] Does NOT loop the interview more than once before emitting
 ```
 
+### §B-4 Diff-update from previous output
+
+```
+[ ] Detects existing docs/feature-list.md and treats as incremental update
+[ ] Surfaces a diff summary before emit (新規 +<a> / 変更 <ch> / 削除 -<d>)
+[ ] Existing F IDs are preserved verbatim (no renumber)
+[ ] New UCs get next Seq, never reuse retired F IDs
+[ ] Modified rows annotate the change reason (e.g. "vision 更新による Should → Must")
+[ ] Removed UCs cause F IDs to move to 棄却したアイデアと理由 with reason
+[ ] Does NOT regenerate the file from scratch unless user said "ゼロから作り直して"
+```
+
 ## Layer C discipline — must-resist checks
 
 ### §C-1 All Must, no rationale
@@ -88,6 +101,16 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 [ ] Does NOT silently mint UC IDs for the competitor features
 [ ] Surfaces the choice to the user (add UC or drop feature)
 [ ] Cites the UC-anchor rule, not vague "we should be careful"
+```
+
+### §C-4 Force full regeneration to "clean up" IDs
+
+```
+[ ] Refuses to renumber F IDs from scratch
+[ ] Explains traceability cost: downstream uncertainty-map A IDs, PBI dependencies break
+[ ] Defaults to diff-update mode (preserve existing F IDs)
+[ ] Offers ID consolidation only by suggesting "ゼロから作り直して" with explicit user confirmation
+[ ] Does NOT cave to "ごちゃごちゃ" / aesthetic framing
 ```
 
 ## Severity mapping
