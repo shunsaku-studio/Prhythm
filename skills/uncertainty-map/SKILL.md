@@ -186,7 +186,7 @@ Output file shape (Mode B — summary; full template in [references/report-templ
 The stance behind the workflow. When references conflict with these, the principles win.
 
 1. **Implementation ≠ verification** — ✅ requires user observation / measurement evidence (人数・期間・結果). Code passing tests is 🟡, not ✅.
-2. **Core is narrow by design** — Core 判定は数を絞るのが目的。絞り込めない仮説は Peripheral に降ろす。Core は ≤30% を目安、超えたら理由を明示。
+2. **Core is narrow by design** — Core 判定は数を絞るのが目的。絞り込めない仮説は Peripheral に降ろす。Core は ≤30% を目安、超えたら理由を明示。なお本スキルの「コア仮説」は **Why の核**（vision を成立させる暗黙の前提）を指し、上流 `feature-backlog-mapper` の「Must 機能」（**What の核**、システムが何をするか）とは別レイヤー。Must 機能から抽出した暗黙の前提が「コア仮説」候補になる。両者を混同しない。
 3. **Vision is the yardstick** — Core 根拠は vision 引用 / Must 紐付 / cost trade-off のいずれかで 1 行書ける。「重要だから」は理由ではない。
 4. **Honesty in Mode B** — 未検証コアを残課題セクションから隠さない。隠せばレポートの信頼が崩れる。「正直さ」が最大の信頼資産。
 5. **Falsifiable beliefs only** — 仮説は「これが間違っていたら ___」を 1 文で書ける。書けないものは仮説ではなく wish。

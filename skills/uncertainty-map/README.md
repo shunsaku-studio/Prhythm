@@ -4,6 +4,10 @@
 
 `feature-backlog-mapper` が出力した `docs/feature-list.md` の F ID を起点に、各機能の暗黙の仮説を抽出し、コア/周辺の判定とプロトでの検証ステータスを付与した状態で `docs/uncertainty-map.md` に書き出します。同じ仮説 ID を引き継ぎ、対外向けの `docs/proto-value-report.md` へ詳細化することもできます（エグゼサマ・検証済成果・残課題・デモ動線・次の検証計画）。
 
+- **入力:** `docs/feature-list.md`（推奨）/ `docs/product-vision.md`（推奨）/ `DESIGN.md` + プロトコード（任意）/ 観察ログ・ヒアリングノート（任意）
+- **出力:** Mode A は `docs/uncertainty-map.md`（4 象限 + 検証アクション）、Mode B は `docs/proto-value-report.md`（ステークホルダー向けレポート）
+- **スコープ外:** ビジョン言語化（→ `product-vision-and-concept`）/ ユースケース抽出（→ `usecase-mapper`）/ 機能分解・PBI 化（→ `feature-backlog-mapper`）/ 検証スパイクの実装そのもの（別エージェントタスク）
+
 ---
 
 ## 概要
@@ -49,6 +53,48 @@ Claude Code / Cursor 上で次のように依頼すると起動します。
 スラッシュ無しでも、不確実性マップ・仮説検証・プロト価値・Riskiest Assumption・validation map などのキーワードを含む依頼で自動起動します。
 
 入力ソース（`docs/product-vision.md` / `docs/feature-list.md` / `DESIGN.md` / プロトのコードベース）が混在する場合、対象を伝えると正確に動きます。
+
+## 出力例（抜粋）
+
+**Mode A — 4 象限マトリクス + 検証アクション (`docs/uncertainty-map.md`)**
+
+````markdown
+```mermaid
+quadrantChart
+    title Uncertainty Map
+    x-axis Unverified --> Verified
+    y-axis Peripheral --> Core
+    A-CORE-05 Pricing intent: [0.1, 0.85]
+    A-D01-01-01 Email signup: [0.85, 0.9]
+```
+
+## コア × 未検証 (最優先)
+| A ID | 仮説 | 紐付 F | 軸1 根拠 | 推奨検証手段 |
+|---|---|---|---|---|
+| A-CORE-05 | ターゲットは月額 X 円を支払う | F-D04-01 | vision「持続可能な事業として」 | LP + Stripe スモークテスト |
+
+## 次の検証アクション
+| A ID | 検証手段 | 必要工数 | 期待結果 | 失格条件 |
+|---|---|---|---|---|
+| A-CORE-05 | スモークテスト | 5 日 | CVR 3% 以上 | CVR 1% 未満 |
+````
+
+**Mode B — ステークホルダー向けレポート (`docs/proto-value-report.md`)**
+
+```markdown
+## エグゼサマ
+本プロトでは、コア仮説 7 件のうち 3 件を実ユーザー検証で確認、2 件は実装レベルで動作確認しました [^1]。
+残る 2 件のコア仮説（特に課金意思）が次サイクルの最優先テーマです。
+
+## 検証済成果
+### 1. メール登録動線が 1 分以内で完了
+5 名のユーザーが平均 47 秒で登録を完了。脱落者は 0 名でした [^2]。
+
+[^1]: 全仮説 12 件 / コア 7 / 周辺 5 / ✅3 / 🟡2 / ⬜2
+[^2]: A-D01-01-01 / F-D01-01 / 観察ログ docs/usability-log.md#L23
+```
+
+詳細テンプレートは [`references/matrix-template.md`](references/matrix-template.md) と [`references/report-template.md`](references/report-template.md) を参照。
 
 ## 構成
 

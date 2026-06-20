@@ -27,6 +27,7 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 出力 | 致命/非致命の二択判定 |
 | 仮説例 | 「ターゲットは新サービスのために他社サービスを乗り換える」 |
 | 実例 | **Buffer** — LP + 価格表で需要と価格意思を実装前に検証（2010） |
+| 関連流派 | **Customer Development** (Steve Blank) — 4 step process の検証ループ。RAT は最初の Customer Discovery フェーズで実行する位置付け |
 
 ### 2. コンシェルジュテスト
 
@@ -71,6 +72,7 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 出力 | 操作躓き箇所 + メンタルモデル |
 | 仮説例 | 「初回登録動線を 2 分以内で完了できる」 |
 | 実例 | **Palm Pilot** — Jeff Hawkins が木片を持ち歩き、PDA を使う動作を 1 週間シミュレートして UX を確認 |
+| 関連流派 | **Pretotyping** (Alberto Savoia) — Pinocchio / Mechanical Turk / Provincial / Fake Door / Pretend など simulate-first 手法群。「製品を作る前にユーザーが本当に欲しいかを最小コストで検証する」流派 |
 
 ### 6. ユーザーインタビュー
 
@@ -82,6 +84,7 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 出力 | テーマ別インサイト + 引用 |
 | 仮説例 | 「現状の代替手段は X が不満」 |
 | 実例 | **Airbnb** — 創業期、ホスト家庭を一軒一軒訪問してニーズを聴取（Brian Chesky / Joe Gebbia） |
+| 関連流派 | **Mom Test** (Rob Fitzpatrick) — 「未来の意図を聞かない、過去の行動を聞く」型。バイアスを避けるための質問設計の作法。**JTBD interview** (Jobs to be Done) — ユーザーが「雇った」プロダクトとその背景を聞き出す半構造化インタビュー |
 
 ### 7. A/B テスト
 

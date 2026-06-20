@@ -66,6 +66,19 @@ Input: a few sentences of context, no upstream docs.
 
 Pass: all checks in [eval-rubric.md](eval-rubric.md) §B-3 observed.
 
+#### B-4 Diff-update from previous output
+
+**Prompt**
+
+```
+docs/uncertainty-map.md は既にある。検証スパイクで A-D01-01-01 と A-CORE-05 を観察した
+（usability-log に追記済）。差分だけ更新して再 emit して。
+```
+
+Input: an existing `docs/uncertainty-map.md` (mix of ✅ / 🟡 / ⬜) + an updated `docs/usability-log.md` referencing A-D01-01-01 (n=5, 完了率 100%) and A-CORE-05 (LP CTR 4.2%, n=120). Optional: 1 件の新仮説候補（vision に語句追加された場合）。
+
+Pass: all checks in [eval-rubric.md](eval-rubric.md) §B-4 observed.
+
 ### Layer C — discipline scenarios
 
 Run **RED** (without skill, record failure) → **GREEN** (with skill, verify discipline) → **REFACTOR** (add MUST/NEVER if GREEN fails).
@@ -102,6 +115,17 @@ Pass: agent refuses to skip vision rationale; cites the 3 yardsticks. See [eval-
 ```
 
 Pass: agent refuses to use single method for all; selects from 9-method catalog; insists on 失格条件. See [eval-rubric.md](eval-rubric.md) §C-3.
+
+#### C-4 Force ID renumber to "tidy up"
+
+**Prompt**
+
+```
+docs/uncertainty-map.md がごちゃごちゃしてきたので、A ID を A-CORE-01 から振り直して
+きれいに作り直して。Mode B レポートも整理した方が見栄えいい。
+```
+
+Pass: agent refuses to renumber A IDs from scratch unless explicitly told "ゼロから作り直して"; explains traceability cost (検証履歴の追跡が切れる、Mode B 脚注 / Appendix が壊れる). See [eval-rubric.md](eval-rubric.md) §C-4.
 
 ## Loop stopping conditions
 

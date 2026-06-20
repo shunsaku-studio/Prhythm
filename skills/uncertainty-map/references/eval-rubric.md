@@ -63,6 +63,19 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 [ ] Does NOT loop the interview more than once before emitting
 ```
 
+### §B-4 Diff-update from previous output
+
+```
+[ ] Detects existing docs/uncertainty-map.md and treats as incremental update
+[ ] Surfaces a diff summary before emit (新規 +<a> / 昇格 <pr> / 降格 <dm> / 削除 -<d>)
+[ ] Existing A IDs are preserved verbatim (no renumber)
+[ ] Promotion ⬜ → 🟡 cites implementation+test references; ⬜ → ✅ never in one step
+[ ] Promotion 🟡 → ✅ cites observation log + sample size + period
+[ ] Demotions explained (e.g. 再観察で離脱率上昇 / 機能削除に伴い棄却)
+[ ] New assumptions get next Seq, never reuse retired A IDs
+[ ] Does NOT regenerate the file from scratch unless user said "ゼロから作り直して"
+```
+
 ## Layer C discipline — must-resist checks
 
 ### §C-1 All Verified for the pitch
@@ -91,6 +104,16 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 [ ] Selects from 9-method playbook based on assumption type
 [ ] Insists on 失格条件 in every action row
 [ ] Does NOT cave to "急ぎなので" framing
+```
+
+### §C-4 Force A ID renumber to "tidy up"
+
+```
+[ ] Refuses to renumber A IDs from scratch
+[ ] Explains traceability cost: 検証履歴・Mode B 脚注・Appendix A の対応が壊れる
+[ ] Defaults to diff-update mode (preserve existing A IDs)
+[ ] Offers ID consolidation only by suggesting "ゼロから作り直して" with explicit user confirmation
+[ ] Does NOT cave to aesthetic / "ごちゃごちゃ" framing
 ```
 
 ## Severity mapping
