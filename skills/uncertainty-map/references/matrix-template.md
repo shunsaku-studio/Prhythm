@@ -18,6 +18,26 @@ Internal-use uncertainty map. Copy the structure verbatim. Fill placeholders. Do
 
 ## マトリクス
 
+```mermaid
+quadrantChart
+    title Uncertainty Map
+    x-axis Unverified --> Verified
+    y-axis Peripheral --> Core
+    quadrant-1 Pitch material
+    quadrant-2 Validate first
+    quadrant-3 Defer or drop
+    quadrant-4 Maintain
+    A-CORE-05 Pricing intent: [0.1, 0.85]
+    A-D01-01-01 Email signup: [0.85, 0.9]
+    A-D01-01-03 PW manager use: [0.2, 0.75]
+    A-D02-XX-01 Dark mode: [0.3, 0.25]
+    A-D03-XX-01 Keyboard SC: [0.7, 0.3]
+```
+
+> Mermaid `quadrantChart` は GitHub・VS Code の Markdown プレビュー（v10+）でレンダリング可能。座標は 0-1 の正規化値で、x=検証進度 / y=価値の階層を表す。
+
+ASCII 並記（プレビュー非対応環境向け）:
+
 ```text
               未検証 ─────────────────► 検証済
             ┌─────────────────┬─────────────────┐

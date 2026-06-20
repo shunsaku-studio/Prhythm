@@ -25,7 +25,8 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 工数 | 1-3 日 |
 | 規模 | n=5-20 |
 | 出力 | 致命/非致命の二択判定 |
-| 例 | 「ターゲットは新サービスのために他社サービスを乗り換える」 |
+| 仮説例 | 「ターゲットは新サービスのために他社サービスを乗り換える」 |
+| 実例 | **Buffer** — LP + 価格表で需要と価格意思を実装前に検証（2010） |
 
 ### 2. コンシェルジュテスト
 
@@ -35,7 +36,8 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 工数 | 3-10 日 |
 | 規模 | n=3-10 |
 | 出力 | 体験の質 + リテンション |
-| 例 | 「ユーザーは AI 要約に対価を支払う」 (人手で要約を作って試す) |
+| 仮説例 | 「ユーザーは AI 要約に対価を支払う」 (人手で要約を作って試す) |
+| 実例 | **Zappos** — 在庫を持たず、注文が入ってから店舗で靴を購入して発送（1999、Nick Swinmurn） |
 
 ### 3. スモークテスト (Fake Door)
 
@@ -45,7 +47,8 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 工数 | 3-5 日 |
 | 規模 | LP 訪問 1000+ |
 | 出力 | CVR / メールアドレス取得率 |
-| 例 | 「月額 X 円で需要がある」 (Stripe ペイウォールでクリック率測定) |
+| 仮説例 | 「月額 X 円で需要がある」 (Stripe ペイウォールでクリック率測定) |
+| 実例 | **Dropbox** — 説明動画 + メール登録 LP で待機リスト 75K 件を計測（2008、Drew Houston） |
 
 ### 4. Wizard of Oz
 
@@ -55,7 +58,8 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 工数 | 5-10 日 |
 | 規模 | n=10-50 |
 | 出力 | UX 満足度 + ニーズの強度 |
-| 例 | 「ユーザーは AI 提案を採用する」 (人手で提案を返してみる) |
+| 仮説例 | 「ユーザーは AI 提案を採用する」 (人手で提案を返してみる) |
+| 実例 | **Aardvark** — 質問への回答を AI ではなく人がマッチングして返答、Q&A サービスの需要を検証（後に Google 買収） |
 
 ### 5. ペーパープロト / ローファイ
 
@@ -65,7 +69,8 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 工数 | 0.5-2 日 |
 | 規模 | n=3-8 |
 | 出力 | 操作躓き箇所 + メンタルモデル |
-| 例 | 「初回登録動線を 2 分以内で完了できる」 |
+| 仮説例 | 「初回登録動線を 2 分以内で完了できる」 |
+| 実例 | **Palm Pilot** — Jeff Hawkins が木片を持ち歩き、PDA を使う動作を 1 週間シミュレートして UX を確認 |
 
 ### 6. ユーザーインタビュー
 
@@ -75,7 +80,8 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 工数 | 2-5 日 (準備 + 実施 + 分析) |
 | 規模 | n=5-12 |
 | 出力 | テーマ別インサイト + 引用 |
-| 例 | 「現状の代替手段は X が不満」 |
+| 仮説例 | 「現状の代替手段は X が不満」 |
+| 実例 | **Airbnb** — 創業期、ホスト家庭を一軒一軒訪問してニーズを聴取（Brian Chesky / Joe Gebbia） |
 
 ### 7. A/B テスト
 
@@ -85,7 +91,8 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 工数 | 実装後 1-3 週 |
 | 規模 | n=数百〜 (有意性次第) |
 | 出力 | コンバージョン差分 + p 値 |
-| 例 | 「価格表示は税込/税抜で CVR が変わる」 |
+| 仮説例 | 「価格表示は税込/税抜で CVR が変わる」 |
+| 実例 | **Booking.com** — 全機能を A/B テストで検証する文化、年間 1000+ テストを並列実行 |
 
 ### 8. 5 ユーザーテスト (Nielsen)
 
@@ -95,7 +102,8 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 工数 | 1-2 日 |
 | 規模 | n=5 |
 | 出力 | 問題リスト + 重大度 |
-| 例 | 「初回ユーザーが登録動線を完了できる」 |
+| 仮説例 | 「初回ユーザーが登録動線を完了できる」 |
+| 実例 | Jakob Nielsen の研究（2000）— 5 人観察で重大ユーザビリティ問題の 85% を検出 |
 
 ### 9. アナログ計測 (紙票・LP・スプレッドシート)
 
@@ -105,7 +113,8 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 工数 | 0.5-2 日 |
 | 規模 | n=10-100+ |
 | 出力 | 数値 (申込数 / 回答数) |
-| 例 | 「ユーザーは紙のチェックリストを 3 日続ける」 |
+| 仮説例 | 「ユーザーは紙のチェックリストを 3 日続ける」 |
+| 実例 | **Food on the Table** — 創業者 Manuel Rosso が最初の 1 ユーザーに対し、メニュー提案を毎週手書きで作成 |
 
 ## Selection guide (仮説タイプ → 推奨手段)
 
