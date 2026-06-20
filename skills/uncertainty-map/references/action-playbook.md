@@ -1,6 +1,11 @@
-# Action playbook — 4 quadrants × 9 validation methods
+# Action playbook — 4 quadrants × 14 validation methods
 
-Per-quadrant action defaults plus a 9-method validation catalog. Use this when proposing the **next検証アクション** for Core × Unverified rows in Mode A and the **次の検証計画** in Mode B.
+Per-quadrant action defaults plus a 14-method validation catalog. Use this when proposing the **next検証アクション** for Core × Unverified rows in Mode A and the **次の検証計画** in Mode B.
+
+カタログは 2 系統:
+
+- **#1-9 (価値 / 市場 / 行動仮説向け)** — Lean Startup / Customer Development 系の伝統的検証手段
+- **#10-14 (技術 / UX 仮説向け)** — 「実装してみないと分からない」型の検証手段（feasibility / performance / non-determinism / rendering behavior）
 
 ## Per-quadrant action defaults
 
@@ -119,6 +124,70 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | 仮説例 | 「ユーザーは紙のチェックリストを 3 日続ける」 |
 | 実例 | **Food on the Table** — 創業者 Manuel Rosso が最初の 1 ユーザーに対し、メニュー提案を毎週手書きで作成 |
 
+## 技術仮説の検証手段 (#10-14)
+
+価値 / 市場仮説とは別の系統。**「実装して挙動を観測する」が検証の本質**。机上の技術調査だけでは検証ではないが、スパイク / PoC / ベンチマーク等で **観察可能な outcome** を出せば立派な検証ループに乗る。
+
+### 10. エンジニアリングスパイク
+
+| 用途 | タイムボックス内に実装し、技術的実現可能性を観察 |
+|------|------|
+| 仮説タイプ | feasibility / integrability |
+| 工数 | 1-3 日 (タイムボックス厳守) |
+| 規模 | 1-3 ケース (代表的シナリオ) |
+| 出力 | できた / できない / 部分的にできた + 制約一覧 |
+| 仮説例 | 「DOM ツリーから純粋な PowerPoint ファイルを出力できる」 |
+| 失格条件 | 1 ケースも完全に出力できない / 制約が ROI を超える |
+| 関連流派 | **Spike Solution** (Extreme Programming, Kent Beck, 1999) — 「答えだけが欲しい捨て実装」、検証後に本実装は別途行う |
+
+### 11. PoC (Proof of Concept)
+
+| 用途 | コア機能のみを最小実装し、end-to-end でフローが成立するか確認 |
+|------|------|
+| 仮説タイプ | feasibility / integrability |
+| 工数 | 3-10 日 |
+| 規模 | 1 シナリオ × end-to-end |
+| 出力 | コア機能の動作映像 / ベンチ結果 / 制約一覧 |
+| 仮説例 | 「Web 上で生成した DOM を Microsoft PowerPoint で開ける形式に変換できる」 |
+| 失格条件 | 主要 PowerPoint ビューワで開けない / レイアウト崩壊 |
+| エンジニアリングスパイクとの違い | スパイクは「できるかどうか」の二択、PoC は「できることを示す動作デモ」を出す |
+
+### 12. 負荷・性能ベンチマーク
+
+| 用途 | レイテンシ / スループット / コストを実測 |
+|------|------|
+| 仮説タイプ | performance / unit economics |
+| 工数 | 1-3 日 |
+| 規模 | 100-10,000 リクエスト / 複数端末 |
+| 出力 | p50 / p95 / p99 + コスト/月 + エラー率 |
+| 仮説例 | 「AI 生成のレスポンスが p95 で 3 秒以内に収まる」 |
+| 失格条件 | p95 > 10 秒 / 月コスト > プラン料金の 30% |
+| 関連流派 | **k6 / Locust / Artillery** などの負荷ツール、**RAIL モデル** (Response/Animation/Idle/Load) |
+
+### 13. 品質変動計測 (Non-Determinism Test)
+
+| 用途 | 非決定的出力の分散 / 失敗率を観測 |
+|------|------|
+| 仮説タイプ | non-determinism stability |
+| 工数 | 1-2 日 |
+| 規模 | 同入力 N=100+ 試行 |
+| 出力 | 出力分散 / 失敗率 / outlier 一覧 |
+| 仮説例 | 「同じプロンプトで AI が一貫して有効な JSON を返す」 |
+| 失格条件 | 有効率 < 90% / outlier が業務影響を持つ |
+| 関連流派 | **LLM evals** (Anthropic / OpenAI evals フレームワーク)、**Property-based testing** の派生 |
+
+### 14. 実装観察 (Implementation Observation)
+
+| 用途 | 実装後の挙動を実機で観測。**触らないと分からない UX** に効く |
+|------|------|
+| 仮説タイプ | rendering behavior / UX (実装依存) |
+| 工数 | 0.5-2 日 |
+| 規模 | 主要端末 × ブラウザ × 計測項目 |
+| 出力 | Web Vitals (LCP / FCP / CLS / TTFB / INP) / レイアウトシフト動画 |
+| 仮説例 | 「Suspense 境界を `/content` 親に置けばユーザーは待機を許容する（CLS < 0.1）」 |
+| 失格条件 | CLS > 0.1 / LCP > 4 秒 / 待機中の離脱が観察される |
+| 関連流派 | **Web Vitals** (Google) — Core Web Vitals 計測の標準。Lighthouse / PageSpeed Insights / Real User Monitoring |
+
 ## Selection guide (仮説タイプ → 推奨手段)
 
 | 仮説のタイプ | 第一候補 | 第二候補 | 補助 |
@@ -130,6 +199,10 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 | AI / 自動化の効果 | Wizard of Oz | コンシェルジュ | A/B |
 | コピー / 文言 | A/B | 5 ユーザーテスト | (なし) |
 | 市場規模 / 需要 | スモークテスト | アナログ計測 | インタビュー |
+| **技術的実現可能性 (build / integrability)** | **エンジニアリングスパイク** | **PoC** | (机上調査) |
+| **性能 / レイテンシ / コスト** | **性能ベンチマーク** | エンジニアリングスパイク | (なし) |
+| **AI 出力の品質ばらつき** | **品質変動計測** | Wizard of Oz | A/B |
+| **実装依存 UX (Suspense / CLS / FCP)** | **実装観察** | 5 ユーザーテスト | A/B |
 
 ## Output format for "次の検証アクション"
 
@@ -147,12 +220,14 @@ Per-quadrant action defaults plus a 9-method validation catalog. Use this when p
 
 | Anti-pattern | Fix |
 |--------------|-----|
-| 全部「ユーザーテスト」 | 仮説タイプを判定して 9 種から選ぶ |
+| 全部「ユーザーテスト」 | 仮説タイプを判定して 14 種から選ぶ |
+| 価値仮説と技術仮説を 1 つにまとめる | 2 仮説に分解 (`-T<n>` / `-V<n>` サフィックス推奨)。refute 時に原因が判別可能になる |
 | 工数なし | 1-5 日 / 1-2 週 など範囲で書く |
-| 期待結果なし | 数値目標 (CVR / 完了率 / n) を入れる |
+| 期待結果なし | 数値目標 (CVR / 完了率 / p95 / 有効率 / CLS) を入れる |
 | 失格条件なし | 「期待を下回ったらどうするか」を 1 行で |
-| 観察しない手段 (技術調査だけ) | 技術調査は仮説の検証ではない。仮説とは別に切り出す |
+| **机上の技術調査だけ** | 図書館調査やドキュメント読解は **検証ではない**。実装して挙動を **観察** すれば技術仮説の検証として正当（手段 #10-14 を使う）。「調査して結論を書く」ではなく「実装して挙動を計測する」が検証の本質 |
 | 同一仮説に 5 つ手段を提案 | 第一候補 1 つに絞る。代替は注記で |
+| 技術仮説に「ユーザーテスト」を割り当てる | 技術的実現可能性は #10-14 で判定する。ユーザーテストはその後の価値検証 |
 
 ## Hand-off
 

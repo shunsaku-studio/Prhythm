@@ -36,9 +36,35 @@ For each feature, walk through these prompts. Pick the ones that produce non-obv
 
 ### Technical / cost assumptions
 
-- Can we **build** this within budget? (feasibility)
-- Will the **dependency** (vendor / API / dataset) hold? (supply)
-- Will the **cost per user** stay within plan price? (unit economics)
+技術仮説は **「実装してみないと分からない」型** が中心。机上の調査では確証できないため、エンジニアリングスパイク / PoC / ベンチマーク等の **実装観察手段** で検証する（[action-playbook.md](action-playbook.md) #10-14 参照）。
+
+- **feasibility (build)**: Can we **build** this at all? — そもそも実装可能か（例: DOM ツリーから純粋な PowerPoint ファイルを出力できる / 動画 / PDF / 画像のサムネイルを統一 API で生成できる）
+- **performance**: Will it run within latency / throughput / cost budgets? — 実用に耐える性能か（例: AI API のレスポンスが p95 で 3 秒以内 / 月間コストがプラン料金の 30% 以内）
+- **integrability**: Will third-party libraries / APIs / dependencies compose without conflict? — 噛み合うか（例: PDF.js + Tesseract が同一 worker で動く / 複数 SaaS の SSO が直列で通る）
+- **non-determinism stability**: Will non-deterministic outputs (AI / network / time) stay within tolerable variance? — 非決定的出力のばらつきが許容範囲か（例: 同プロンプトで AI が一貫して有効な JSON を返す / 100 試行中の有効率 ≥ 90%）
+- **rendering behavior**: Will the implemented UI behave as expected under real conditions? — 触らないと分からない UX 挙動（例: Suspense 境界を `/content` 親に置けば CLS < 0.1 / スケルトン表示が待機を許容範囲にする / レイアウトシフトが離脱を増やさない）
+- **supply**: Will the **dependency** (vendor / API / dataset) hold? — 調達リスク（例: ベンダ X が向こう 2 年サービス継続 / モデル価格が 3 倍にならない）
+- **unit economics**: Will the **cost per user** stay within plan price? — 単位経済（例: 1 ユーザー当たりの月額 API コスト < プラン料金 × 30%）
+
+### 技術仮説 vs 価値仮説 — 1 仮説に混ぜない
+
+「実装したものをユーザーが触ってどう感じたか」は技術仮説と価値仮説の **2 仮説に分解** すること:
+
+```
+✗ 1 仮説に混在 (悪い):
+  「Suspense 境界を /content 親に置けばユーザーは離脱しない」
+
+○ 2 仮説に分解 (良い):
+  A-XXX-T1 (技術): Suspense 境界を /content 親に置けば CLS < 0.1 を維持できる
+                   → 検証手段: #14 実装観察 (Web Vitals 計測)
+  A-XXX-V1 (価値): その実装でユーザーは離脱せず待機する
+                   → 検証手段: #8 5 ユーザーテスト
+```
+
+技術仮説が refute されたら → 実装方法を変える（境界の位置 / preload 化）
+価値仮説が refute されたら → そもそも待機させる UX を諦める
+
+両方を 1 仮説にまとめると refute 時にどちらが原因か分からなくなり、改善の方向性を見失う。
 
 ### Behavioral assumptions
 
@@ -66,6 +92,20 @@ A-CORE-05 ターゲットは月額 X 円の定期支払を受け入れる
 ```
 
 These get a `CORE` or `PERIPH` ID instead of an `F-ID-Seq` ID, and list multiple F IDs in their 紐付 column.
+
+### Technical hypothesis (実装してみないと分からない型)
+
+```
+F-D02-06 サムネイル自動生成
+  → A-D02-06-T1 動画 / PDF / 画像のサムネイルを統一 API で生成できる (feasibility)
+              → 検証: #10 エンジニアリングスパイク (3 形式 × 3 シナリオ)
+  → A-D02-06-T2 サムネイル生成 API の p95 レイテンシが 3 秒以内 (performance)
+              → 検証: #12 性能ベンチマーク (n=10,000 リクエスト)
+  → A-D02-06-V1 ユーザーはサムネイルがあると共有率が上がる (価値)
+              → 検証: #7 A/B テスト
+```
+
+技術仮説は ID に `-T<n>` サフィックス、価値仮説は `-V<n>` を付ける慣例で混在を防ぐ（任意、識別性が必要なときに使う）。
 
 ## A ID rules
 

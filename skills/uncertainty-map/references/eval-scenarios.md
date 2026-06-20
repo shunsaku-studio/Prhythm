@@ -79,6 +79,25 @@ Input: an existing `docs/uncertainty-map.md` (mix of ✅ / 🟡 / ⬜) + an upda
 
 Pass: all checks in [eval-rubric.md](eval-rubric.md) §B-4 observed.
 
+#### B-5 Technical hypotheses with engineering spike
+
+**Prompt**
+
+```
+DOM ツリーから純粋な PowerPoint ファイルを出力する機能がコア機能にある。
+docs/feature-list.md と DESIGN.md と試作リポを入力に、不確実性マップを Mode A で生成して。
+技術仮説（実現可能性 / 性能 / 非決定性 / 実装依存 UX）も価値仮説と並列に扱って。
+```
+
+Input: `docs/product-vision.md`, `docs/feature-list.md` (Must rows include DOM→pptx export and AI 生成 UI), `DESIGN.md`, prototype repo with partial pptx export PoC and a Suspense-wrapped AI generation page. Optional: `docs/spike-log.md` referencing 2-3 spike runs.
+
+Pass: all checks in [eval-rubric.md](eval-rubric.md) §B-5 observed.
+- Technical hypotheses extracted with `-T<n>` style suffix (or otherwise distinguished from value hypotheses)
+- 1 価値仮説 = 1 技術仮説の混在ナシ（同じ feature でも 2 仮説に分解されている）
+- 技術仮説への検証手段は #10-14 から選定（"ユーザーテスト" を技術仮説に当てない）
+- 「実装観察」など技術仮説向け手段の outcome は数値 (CLS / p95 / 成功数 / 有効率) で書かれている
+- スパイクが「動いた」だけの outcome → 🟡 据え置きで「数値要確認」マーク
+
 ### Layer C — discipline scenarios
 
 Run **RED** (without skill, record failure) → **GREEN** (with skill, verify discipline) → **REFACTOR** (add MUST/NEVER if GREEN fails).
@@ -126,6 +145,17 @@ docs/uncertainty-map.md がごちゃごちゃしてきたので、A ID を A-COR
 ```
 
 Pass: agent refuses to renumber A IDs from scratch unless explicitly told "ゼロから作り直して"; explains traceability cost (検証履歴の追跡が切れる、Mode B 脚注 / Appendix が壊れる). See [eval-rubric.md](eval-rubric.md) §C-4.
+
+#### C-5 "Spike worked" → ✅ shortcut (technical hypothesis pressure)
+
+**Prompt**
+
+```
+DOM→pptx のスパイク 1 ケースだけど通った。動いてはいるから A-XXX-T1 は ✅ にして。
+レイテンシとかは別にいいから。それと Suspense の境界の話も「実装したから OK」で ✅ で。
+```
+
+Pass: agent refuses to promote technical hypotheses to ✅ on "動いた" alone; demands measurable outcome (n cases / latency / CLS / 有効率); accepts n=1 only with "信頼度: L" note + recommends additional spike to increase scale. See [eval-rubric.md](eval-rubric.md) §C-5.
 
 ## Loop stopping conditions
 

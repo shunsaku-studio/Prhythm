@@ -6,11 +6,17 @@ Axis 2 records what the prototype **actually verified**. Three labels separate "
 
 | Label | Meaning | Required evidence | Confidence |
 |-------|---------|-------------------|------------|
-| ✅ 検証済 | Truth confirmed by user observation or measurement | Reference to log / analytics / interview note + sample size + period | H or M |
-| 🟡 部分検証 | Implementation works (tests green, e2e green) but no user has touched it | Reference to test file / e2e suite / smoke run | M or L |
+| ✅ 検証済 | Truth confirmed by **observation or measurement** (user engagement, performance benchmark, spike outcome, etc.) | Reference to log / analytics / interview note / spike report + scale + period + outcome | H or M |
+| 🟡 部分検証 | Implementation works (tests green, e2e green) but no observation has been performed | Reference to test file / e2e suite / smoke run | M or L |
 | ⬜ 未検証 | Not in prototype, or built without any test confirmation | None required | — |
 
-**The line between 🟡 and ✅ is user contact.** Animation of green tests is `🟡` only. To reach `✅`, real users must have engaged with this part of the prototype, and the engagement must have been observed or measured.
+**The line between 🟡 and ✅ is observation.** Animation of green tests is `🟡` only. To reach `✅`:
+
+- **価値 / 市場 / 行動仮説**: 実ユーザーがプロトに触れ、その engagement が観察 / 計測された
+- **技術仮説 (feasibility / performance / non-determinism)**: スパイク / PoC / ベンチマーク等が **計測 outcome** を残した（試行回数 / レイテンシ / 失敗率など機械可読な数値）
+- **rendering behavior 仮説 (CLS / FCP / Suspense 等)**: 実機で計測ツール (Web Vitals / Lighthouse) によって観測された
+
+つまり ✅ は「ユーザー接触」だけでなく「**観察可能な outcome を伴う計測一般**」を指す。
 
 ## Hybrid classification (5 sub-steps)
 
@@ -42,15 +48,23 @@ Read these files if present:
 
 - `docs/usability-log.md` (or any markdown matching `usability` / `観察` / `interview`)
 - `docs/analytics/*`, `docs/measurements/*`
+- `docs/spike-log.md` / `docs/poc-log.md` / `docs/perf-log.md` (技術スパイク / PoC / ベンチマーク結果)
+- `docs/web-vitals/*` / Lighthouse レポート (rendering behavior 計測)
 - Hearing notes referenced in the conversation
 
 If an entry references a specific assumption (by feature name, A ID, or behavior), promote 🟡 → ✅ **only if** all three are present:
 
-- Sample size (≥1 user observed)
-- Period (date or duration)
-- Outcome description (what was learned, not just "tested")
+- **Scale**: ≥1 計測単位 — 文脈に応じた分母（user / trial / case / 端末 / request 等）
+  - 価値仮説の例: `n=5 ユーザー`, `n=120 訪問`
+  - 技術仮説の例: `n=3 シナリオ試行`, `n=10,000 リクエスト`, `n=100 試行`, `n=5 端末 × 5 ページ = 25 観測点`
+- **Period**: date or duration（例: `2026-06-10〜12`, `1 週間`）
+- **Outcome**: measurable result — 計測値 / 数値目標 / 動作可否
+  - 価値仮説の例: `完了率 100%`, `CVR 4.2%`, `離脱率 12%`
+  - 技術仮説の例: `p95 = 2.3 秒`, `有効率 94%`, `CLS = 0.04`, `3/3 ケースで成功`
 
 If any of the three is missing, leave at 🟡 and note "観察根拠の数値要確認".
+
+**Anti-pattern**: スパイクが「動いた」「OK だった」とだけ書かれている → outcome が機械可読な数値ではないので 🟡 据え置き。`p95 / 成功数 / 有効率 / CLS` などの **計測値** を要求する。
 
 ### Sub-step 4 — Single-turn diff confirmation
 
@@ -109,25 +123,32 @@ After diff confirmation, every assumption has `(axis1, axis2)` finalized. Procee
 
 When the user says "動かしてるから検証済でいい":
 
-- **Refuse.** Reply: "実装+テストは 🟡 部分検証どまりです。✅ にはユーザー観察 / 計測の根拠（人数 + 期間 + 結果）が必要です。"
+- **Refuse.** Reply: "実装+テストは 🟡 部分検証どまりです。✅ には観察 / 計測の根拠（scale + 期間 + 結果）が必要です。"
 
 When the user says "投資家向けに『全部検証済』に書き換えて":
 
 - **Refuse.** Reply: "未検証コアを ✅ に書き換えると、レポートが信用を失います。残課題セクションで併記し、次の検証計画として正直に出した方が説得力が上がります。"
 
-When the user says "観察人数は 1 人だけど ✅ にしたい":
+When the user says "観察人数は 1 人だけど ✅ にしたい" / "スパイクは 1 ケースだけ通った":
 
-- Accept ✅ if ≥1 user with explicit confidence note: "信頼度: L (n=1)". Do not pad the number.
+- Accept ✅ if scale ≥ 1 with explicit confidence note: "信頼度: L (n=1)". Do not pad the number.
+- 技術仮説では特に「1 ケース成功」を `信頼度 L` で扱う運用が多い。本格採用前に scale を増やす検証スパイクを追加提案する。
+
+When the user says "スパイクは『動いた』だから ✅ で":
+
+- **Refuse.** Reply: "「動いた」は outcome として弱すぎます。何ケース試して何件成功したか / レイテンシは何 ms か / 失敗時の挙動は何か、機械可読な計測値が無いと 🟡 までです。"
 
 ## Anti-patterns
 
 | Anti-pattern | Fix |
 |--------------|-----|
-| Code only → ✅ | Demote to 🟡; ✅ requires user contact |
+| Code only → ✅ | Demote to 🟡; ✅ requires observation/measurement, not just compilation |
 | Test name as evidence ("テスト緑なので ✅") | Demote to 🟡; tests are 🟡 evidence only |
-| Padded sample size ("ユーザーが触った気がする") | Stay at 🟡 until concrete numbers present |
+| Padded scale ("ユーザーが触った気がする" / "だいたい動いた") | Stay at 🟡 until concrete numbers present |
 | Empty 観察ログ but ✅ claimed | Demote; ask user for log location |
 | All ⬜ in Mode B | Mode B requires showing prototype value; if all ⬜, the prototype hasn't been built — re-check inputs |
+| 技術仮説に「動いた」「OK だった」だけの outcome | Demote to 🟡; require 機械可読な計測値（成功数 / p95 / 有効率 / CLS 等） |
+| 「スパイクで実装したから検証済」 | スパイクは 🟡 までの根拠 (= 実装あり)。outcome の計測が無ければ ✅ にしない |
 
 ## Coverage check after classification
 
