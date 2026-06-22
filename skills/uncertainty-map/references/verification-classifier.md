@@ -46,11 +46,14 @@ A feature with implementation **and** at least one test gets 🟡. A feature wit
 
 Read these files if present:
 
-- `docs/usability-log.md` (or any markdown matching `usability` / `観察` / `interview`)
+- `docs/validation-log.md` — **正準の検証ログ**（`validation-log` スキルが産出。V ID 付きエントリで Scale + Period + Outcome を構造化済み）
+- `docs/usability-log.md` (or any markdown matching `usability` / `観察` / `interview`) — レガシー互換
 - `docs/analytics/*`, `docs/measurements/*`
 - `docs/spike-log.md` / `docs/poc-log.md` / `docs/perf-log.md` (技術スパイク / PoC / ベンチマーク結果)
 - `docs/web-vitals/*` / Lighthouse レポート (rendering behavior 計測)
 - Hearing notes referenced in the conversation
+
+`docs/validation-log.md` のエントリは V ID で 1 件 = 1 手段 × 1 仮説に整理されているため、A ID で突き合わせれば Scale/Period/Outcome を機械的に拾える。`要追加計測` タグが付いたエントリは 3 要素が欠けているので 🟡 据え置き。観察ログが未整備のときは `validation-log` スキルでの記録を先に提案する。
 
 If an entry references a specific assumption (by feature name, A ID, or behavior), promote 🟡 → ✅ **only if** all three are present:
 

@@ -29,6 +29,7 @@ Map prototype assumptions on a 2x2 (Core/Peripheral × Verified/Unverified) grid
 - Use case extraction → use [usecase-mapper](../usecase-mapper/SKILL.md)
 - Feature inventory or PBI → use [feature-backlog-mapper](../feature-backlog-mapper/SKILL.md)
 - Prototype design judgment (feel/surface) → use [prototype-design-md](../prototype-design-md/SKILL.md)
+- Recording a validation/observation result (user test, spike, benchmark) → use [validation-log](../validation-log/SKILL.md), then re-run this skill to promote statuses
 
 ## Reference router
 
@@ -70,7 +71,7 @@ Read [references/intake.md](references/intake.md). Inputs are gathered in this p
 1. `docs/product-vision.md` — vision yardstick for axis 1
 2. `docs/feature-list.md` — Must = Core, Should/Could = Peripheral seed
 3. `DESIGN.md` and prototype implementation files (`git ls-files`) — axis 2 evidence
-4. User observation / measurement logs — promote 🟡 → ✅
+4. `docs/validation-log.md` (正準、`validation-log` スキル産出) / `docs/usability-log.md` (レガシー) — observation/measurement logs that promote 🟡 → ✅
 5. Single-turn dialog only when seeds are missing
 
 If all of (1)(2) are missing, suggest `/product-vision-and-concept` and `/feature-backlog-mapper` first. If the user declines, run a single-turn assumption interview and label every emitted assumption `(コア候補)`.

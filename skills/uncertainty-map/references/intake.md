@@ -10,7 +10,7 @@ Confirm what is on the table before extracting assumptions. Hybrid input means: 
 | Feature list | `docs/feature-list.md` | Axis 1 seed (Must = Core, Should/Could = Peripheral). Source of F IDs |
 | Prototype design | `DESIGN.md` (project root) | Prototype scope; what was intentionally in/out |
 | Implementation | `git ls-files` results | Axis 2 evidence (code present? tests present?) |
-| Observation logs | `docs/usability-log.md`, hearing notes, analytics | Axis 2 evidence (✅ requires this) |
+| Observation logs | `docs/validation-log.md` (正準、`validation-log` スキル産出) / `docs/usability-log.md` (レガシー) / hearing notes / analytics | Axis 2 evidence (✅ requires this) |
 
 Read in this order. The first three give 90% of axis 1. The last two drive axis 2.
 
@@ -120,7 +120,7 @@ Send **one message** with confirmation prompts:
 不確実性マップ作成のため、以下を確認させてください（部分回答 OK・スキップ OK）:
 
 1. 対象プロト範囲: <DESIGN.md から推定: ファイル共有の招待〜閲覧動線> ← この範囲で OK?
-2. 観察ログ: docs/usability-log.md / hearing notes はありますか？ ない場合は全件 🟡/⬜ 初期化
+2. 観察ログ: docs/validation-log.md / docs/usability-log.md / hearing notes はありますか？ ない場合は全件 🟡/⬜ 初期化（`validation-log` スキルで先に記録する手もあります）
 3. Mode: 「A 内部チーム向け（マップ）」 or 「B ステークホルダー向け（レポート）」
 
 3 つすべて答えてくれれば 1 ターンで確定します。

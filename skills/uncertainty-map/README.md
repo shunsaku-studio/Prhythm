@@ -4,7 +4,7 @@
 
 `feature-backlog-mapper` が出力した `docs/feature-list.md` の F ID を起点に、各機能の暗黙の仮説を抽出し、コア/周辺の判定とプロトでの検証ステータスを付与した状態で `docs/uncertainty-map.md` に書き出します。同じ仮説 ID を引き継ぎ、対外向けの `docs/proto-value-report.md` へ詳細化することもできます（エグゼサマ・検証済成果・残課題・デモ動線・次の検証計画）。
 
-- **入力:** `docs/feature-list.md`（推奨）/ `docs/product-vision.md`（推奨）/ `DESIGN.md` + プロトコード（任意）/ 観察ログ・ヒアリングノート（任意）
+- **入力:** `docs/feature-list.md`（推奨）/ `docs/product-vision.md`（推奨）/ `DESIGN.md` + プロトコード（任意）/ `docs/validation-log.md`（[validation-log](../validation-log/) 産出）・ヒアリングノート（任意、✅ 昇格の根拠）
 - **出力:** Mode A は `docs/uncertainty-map.md`（4 象限 + 検証アクション）、Mode B は `docs/proto-value-report.md`（ステークホルダー向けレポート）
 - **スコープ外:** ビジョン言語化（→ `product-vision-and-concept`）/ ユースケース抽出（→ `usecase-mapper`）/ 機能分解・PBI 化（→ `feature-backlog-mapper`）/ 検証スパイクの実装そのもの（別エージェントタスク）
 
@@ -139,4 +139,5 @@ uncertainty-map/
 | [feature-backlog-mapper](../feature-backlog-mapper/) | 上流。F ID と Must/Should/Could 分類を提供する |
 | [prototype-design-md](../prototype-design-md/) | 上流。プロト範囲（DESIGN.md）の解釈源 |
 | [usecase-mapper](../usecase-mapper/) | 間接上流。F ID 経由で UC ID にもトレース可能 |
+| [validation-log](../validation-log/) | 連携先。検証結果を `docs/validation-log.md` に記録し、本スキルの ✅ 昇格の根拠を供給する |
 | [prhythm-skill-review](../prhythm-skill-review/) | メタ。本スキルの評価ループ（Layer A/B/C）を回す相方 |
