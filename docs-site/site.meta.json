@@ -22,6 +22,7 @@
         { "skill": "create-html-deck" },
         { "skill": "competitive-research" },
         { "skill": "product-vision-and-concept" },
+        { "skill": "defining-personas-and-segments" },
         { "skill": "prototype-design-md" },
         { "skill": "ooui-architect", "expand": true },
         { "skill": "ooui-graphql-modeling" },
