@@ -18,98 +18,90 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 
 ## Layer B efficacy — must-observe checks
 
-### §B-1 Mode A from usecase-map
+### §B-1 Full 3-artifact run from usecase-map
 
 ```
-[ ] Output written to docs/feature-list.md (path reported)
-[ ] Coverage ≥80%: ≥80% of UC IDs from input usecase-map appear in ≥1 F ID's UC column
-[ ] Uncovered UCs (if any) are listed in カバレッジ・サマリ with reason: 仕様確認待ち / 次フェーズ / Won't
-[ ] F IDs follow F-<DomainID>-<Seq> rule (e.g. F-D01-01, F-D-X-01)
-[ ] Every Must row has a 1-line rationale (≠ feature name)
-[ ] Every feature card has 入力 / 出力 / 基本ルール / 受入のスケッチ
-[ ] Won't items live in 棄却したアイデアと理由 only (not in inventory)
-[ ] カバレッジ・サマリ has numerator / denominator
-[ ] No fabricated API path / screen route (cells use — when unverifiable)
+[ ] All three files written: docs/feature-list.md / docs/product-backlog.md / docs/acceptance-criteria.md (paths reported)
+[ ] Feature list has NO 優先度 / MoSCoW column and NO acceptance field
+[ ] Every feature card has 概要 / 入力 / 出力 / 基本ルール / 制約・前提
+[ ] PBL stories are in 「<主語> は <振る舞い> できる」 form, ordered top = highest priority
+[ ] PBL states 順序＝優先度 and that reordering is human-owned
+[ ] Every PBL story links ≥1 existing F-NN
+[ ] Acceptance has ≥3 AC per story (happy / failure / boundary), Given/When/Then
+[ ] F→S→AC links resolve with no dangling IDs
+[ ] 紐付 UC column present (usecase-map exists) and references real UC IDs
+[ ] No fabricated API path / screen route (— used when unverifiable)
 ```
 
-### §B-2 Mode B from feature-list
+### §B-2 Standalone fallback (no usecase-map)
 
 ```
-[ ] Output written to docs/product-backlog.md (path reported)
-[ ] All F IDs from input feature-list.md appear as PBI headers
-[ ] Every PBI: User Story (As a / I want / so that)
-[ ] Every PBI: ≥3 ACs in Given / When / Then format
-[ ] Every PBI: 見積 (T-Shirt or SP, no blank, no '?')
-[ ] Every PBI: 依存 (F IDs or —)
-[ ] Every PBI: DoD checklist
-[ ] Every PBI: INVEST self-check (6 rows: I/N/V/E/S/T)
-[ ] No PBI is XL / 13 SP without split-or-justify note
-[ ] スプリント切り出し提案 block with cumulative size + dependency chain
+[ ] Mentions /usecase-mapper once but does NOT block on it
+[ ] Runs a single-turn intake (one message), does NOT loop more than once
+[ ] All three artifacts still produced from vision / description
+[ ] 紐付 UC column is OMITTED (not fabricated) since no usecase-map
+[ ] Does NOT depend on any other skill's output to complete
 ```
 
-### §B-3 Fallback when usecase-map is missing
+### §B-3 Single-artifact update
 
 ```
-[ ] Output suggests /usecase-mapper first (one sentence)
-[ ] If user declines, runs single-turn UC interview (one message)
-[ ] Provisional UC IDs use UC-PROV-NN form
-[ ] Every emitted feature labeled (UC候補)
-[ ] Missing-anchor flagged explicitly to user
-[ ] Does NOT fabricate docs/usecase-map.md
-[ ] Does NOT loop the interview more than once before emitting
+[ ] Updates only docs/product-backlog.md; leaves the other two unchanged
+[ ] Preserves existing F / S / AC IDs verbatim
+[ ] Re-orders stories and states the new order = priority
+[ ] Keeps S→F links consistent with the untouched feature list
+[ ] Reports which artifact(s) were and were not modified
 ```
 
 ### §B-4 Diff-update from previous output
 
 ```
-[ ] Detects existing docs/feature-list.md and treats as incremental update
-[ ] Surfaces a diff summary before emit (新規 +<a> / 変更 <ch> / 削除 -<d>)
-[ ] Existing F IDs are preserved verbatim (no renumber)
-[ ] New UCs get next Seq, never reuse retired F IDs
-[ ] Modified rows annotate the change reason (e.g. "vision 更新による Should → Must")
-[ ] Removed UCs cause F IDs to move to 棄却したアイデアと理由 with reason
-[ ] Does NOT regenerate the file from scratch unless user said "ゼロから作り直して"
+[ ] Detects existing artifacts and treats run as incremental update
+[ ] Surfaces a per-artifact diff summary before emit (新規 +<a> / 変更 <ch> / 削除 -<d>)
+[ ] Existing F / S / AC IDs preserved verbatim (no renumber)
+[ ] New goals get next Seq, never reuse retired IDs
+[ ] Modified rows annotate the change reason
+[ ] Does NOT regenerate from scratch unless user said "ゼロから作り直して"
 ```
 
 ## Layer C discipline — must-resist checks
 
-### §C-1 All Must, no rationale
+### §C-1 Put priority on the feature list
 
 ```
-[ ] Refuses to mark items Must without 1-line rationale
-[ ] Downgrades unjustified Must to Should
-[ ] Reports the count diff (e.g. Must: 12 → 5, Should: 0 → 7)
-[ ] Cites moscow-criteria.md yardsticks (vision / 制約 / コスト)
-[ ] Does NOT cave to time pressure or authority framing
+[ ] Refuses to add a 優先度 / MoSCoW column to the feature list
+[ ] Explains priority = PBL row order, human-owned
+[ ] Refuses to flatten everything to one priority; offers a top-N ordering instead
+[ ] Cites prioritization.md yardsticks (vision / 制約 / コスト)
+[ ] Does NOT cave to time pressure
 ```
 
-### §C-2 Skip UC anchor
+### §C-2 Merge acceptance into the feature list
 
 ```
-[ ] Refuses to drop UC ID column
-[ ] Explains the traceability loss
-[ ] Cites the UC-anchor rule from feature-decomposition.md
-[ ] Does NOT cite "previous project" precedent as justification
-[ ] Offers to proceed only with the column intact
+[ ] Refuses to embed acceptance criteria in the feature list or PBL
+[ ] Keeps the three artifacts in separate files
+[ ] Explains the project / product / verification separation
+[ ] Does NOT collapse PBL into the feature list
+[ ] Offers the three linked files as the resolution
 ```
 
-### §C-3 Competitor features as Could
+### §C-3 Ask for old Mode B / external report
 
 ```
-[ ] Refuses to add features without UC anchor
-[ ] Offers to add UCs via usecase-mapper if in-scope
-[ ] Does NOT silently mint UC IDs for the competitor features
-[ ] Surfaces the choice to the user (add UC or drop feature)
-[ ] Cites the UC-anchor rule, not vague "we should be careful"
+[ ] Explains there are no modes; all three artifacts are emitted
+[ ] Produces the PBL in 「〇〇は〇〇できる」 story form
+[ ] Treats 見積 / INVEST as an optional add-on, not the default
+[ ] Does NOT resurrect a separate "Mode B" PBI file with mandatory INVEST/DoD
 ```
 
 ### §C-4 Force full regeneration to "clean up" IDs
 
 ```
-[ ] Refuses to renumber F IDs from scratch
-[ ] Explains traceability cost: downstream uncertainty-map A IDs, PBI dependencies break
-[ ] Defaults to diff-update mode (preserve existing F IDs)
-[ ] Offers ID consolidation only by suggesting "ゼロから作り直して" with explicit user confirmation
+[ ] Refuses to renumber F / S / AC IDs from scratch
+[ ] Explains the linkage cost: internal F→S→AC references break
+[ ] Defaults to diff-update mode (preserve existing IDs)
+[ ] Offers renumber only on explicit "ゼロから作り直して" with confirmation
 [ ] Does NOT cave to "ごちゃごちゃ" / aesthetic framing
 ```
 

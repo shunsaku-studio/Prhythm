@@ -1,8 +1,44 @@
 # User stories and acceptance criteria
 
-User Story is **why this PBI exists**. AC is **how we know it's done**. Both must be in every Mode B PBI.
+User Story is **what a user can do** — it lives in the PBL (`docs/product-backlog.md`). AC is **how we know it's done** — it lives in the acceptance list (`docs/acceptance-criteria.md`). They are in **separate artifacts**; this file covers writing both.
 
-## User Story format
+## User Story — primary form (PBL)
+
+The primary form is a single short sentence:
+
+```
+<主語(具体的なactor)> は <観察可能な振る舞い> できる
+```
+
+Rules:
+
+- **主語** — a concrete actor (`一般ユーザー`, `管理者`, `組織オーナー`...). Never a bare「ユーザー」. Match `docs/usecase-map.md` actor names when it exists.
+- **振る舞い** — what the system lets the actor do. **Not** how it's implemented (no API paths, no routes).
+- One behavior per story. Split "〜でき、かつ〜できる" into two stories.
+
+### Examples
+
+Good:
+
+```
+組織オーナーは、メンバーをメールアドレスで招待できる
+```
+
+Bad (implementation leak):
+
+```
+ユーザーは、POST /invite API を呼び出せる
+```
+
+Bad (bare subject / no real behavior):
+
+```
+ユーザーは、招待できる
+```
+
+## User Story — detailed form (optional)
+
+When a story needs its motivation recorded, expand it in the PBL「ストーリー詳細」section using `As a / I want / so that`:
 
 ```
 As a <actor with role / persona>
@@ -10,41 +46,11 @@ I want <observable system behavior>
 so that <user outcome / benefit>
 ```
 
-Rules:
-
-- **actor** — match the actor name in `docs/usecase-map.md` (`一般ユーザー`, `管理者`, `組織オーナー`...). Never just「ユーザー」.
-- **want** — what the system lets the actor do. **Not** how it's implemented.
-- **so that** — the value to the actor. Not "to satisfy the requirement".
-
-### Examples
-
-Good:
-
-```
-As a 組織オーナー
-I want メンバーをメールアドレスで招待できる
-so that 知っているメンバーを 1 分でチームに追加できる
-```
-
-Bad (implementation leak):
-
-```
-As a ユーザー
-I want POST /invite API を呼び出せる
-so that メンバーを追加できる
-```
-
-Bad (no value):
-
-```
-As a ユーザー
-I want メンバーを招待できる
-so that メンバーが招待される
-```
+Use the detailed form sparingly — the PBL default is the one-line 「〇〇は〇〇できる」 list. See [Job Story 形式](#job-story-形式-代替形式の注記) for the JTBD alternative.
 
 ## Acceptance Criteria — Given / When / Then
 
-3-5 ACs per PBI. Cover at minimum:
+≥3 ACs per story, written into `docs/acceptance-criteria.md`. Cover at minimum:
 
 - **Happy path** — the primary success scenario
 - **At least one failure mode** — wrong input, conflict, or rate limit
@@ -53,11 +59,13 @@ so that メンバーが招待される
 ### Format
 
 ```
-- AC<N> — <one-line label>
+- AC-<NN> — <one-line label> (<happy / failure / boundary>)
   - Given <pre-condition>
   - When <action>
   - Then <observable outcome>
 ```
+
+Each AC carries its `AC-NN` ID and links to the story (`S-NN`) and feature (`F-NN`). See [acceptance-template.md](acceptance-template.md).
 
 ### Examples
 
@@ -96,11 +104,11 @@ so that メンバーが招待される
 
 ## Hand-off
 
-PBIs that fail AC granularity get sent back to Step 4 of [SKILL.md](../SKILL.md) for rewrite. Do not let a PBI ship to backlog with AC < 3 or AC that fail the testability check.
+Stories whose AC fail granularity get rewritten before emit. Do not ship a story to `docs/acceptance-criteria.md` with AC < 3 or AC that fail the testability check.
 
 ## Job Story 形式 (代替形式の注記)
 
-User Story 形式 (`As a / I want / so that`) は本スキルの primary だが、近年は **Job Story** (Alan Klement / Intercom 流) も普及している。**Job Story** は **Job to be Done (JTBD)** の文脈に近く、状況・動機・期待結果を明示する。
+PBL の primary は 「〇〇は〇〇できる」 短文（詳細形は `As a / I want / so that`）だが、近年は **Job Story** (Alan Klement / Intercom 流) も普及している。**Job Story** は **Job to be Done (JTBD)** の文脈に近く、状況・動機・期待結果を明示する。
 
 ### Job Story 形式
 
@@ -139,6 +147,7 @@ so I can 知っているメンバーを 1 分でチームに追加できる
 
 ### 本スキルでの方針
 
-- Mode B PBI は **User Story 形式を primary** とする（Scrum 標準互換、INVEST チェックが回しやすい）
-- ユーザーが Job Story を希望した場合（特に JTBD interview 由来の仮説検証文脈）、**PBI 詳細の補助欄として併記** する形で対応
-- 両形式を混在させない（バックログ全体で統一する）
+- PBL は **「〇〇は〇〇できる」短文を primary** とする（一覧性が高く、優先度順に並べやすい）
+- 動機を残したいストーリーは PBL「ストーリー詳細」で `As a / I want / so that` に展開する
+- ユーザーが Job Story を希望した場合（特に JTBD interview 由来の仮説検証文脈）、**ストーリー詳細の補助欄として併記** する形で対応
+- 形式をバックログ全体で混在させない（一覧の短文形は統一する）
