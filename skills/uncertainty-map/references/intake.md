@@ -1,25 +1,25 @@
 # Intake — input sources and hybrid strategy
 
-Confirm what is on the table before extracting assumptions. Hybrid input means: **seed from documents → probe codebase → confirm only diffs with the user**. Never assume axis values you have not surfaced.
+Confirm what is on the table before extracting assumptions. The skill is **standalone** — no input is mandatory. Hybrid input means: **seed from documents → probe codebase → confirm only diffs with the user**. Never assume axis values you have not surfaced.
 
-## Required / recommended inputs
+## Recommended inputs (all optional)
 
 | Source | Path | Role |
 |--------|------|------|
-| Vision | `docs/product-vision.md` | Axis 1 yardstick (Core if breaking it; Peripheral otherwise) |
-| Feature list | `docs/feature-list.md` | Axis 1 seed (Must = Core, Should/Could = Peripheral). Source of F IDs |
+| Vision | `docs/product-vision.md` (if present) | Axis 1 yardstick (Core if breaking it; Peripheral otherwise) |
+| Feature list / PBL | `docs/feature-list.md` / `docs/product-backlog.md` (if present) | Axis 1 seed (high-priority = Core candidate). Optional 紐付 F |
 | Prototype design | `DESIGN.md` (project root) | Prototype scope; what was intentionally in/out |
 | Implementation | `git ls-files` results | Axis 2 evidence (code present? tests present?) |
-| Observation logs | `docs/usability-log.md`, hearing notes, analytics | Axis 2 evidence (✅ requires this) |
+| Observation logs | `docs/validation-log.md`, `docs/usability-log.md`, hearing notes, analytics | Axis 2 evidence (✅ requires this) |
 
-Read in this order. The first three give 90% of axis 1. The last two drive axis 2.
+Read in this order when present. The relationship with the feature list is **iterative** — you may go back to `/feature-backlog-mapper` and return. None of these blocks the run.
 
 ## Hybrid strategy (5 sub-steps)
 
 | Step | Action | Output |
 |------|--------|--------|
-| 1 | Read vision + feature-list (Must/Should/Could) | Axis 1 seed for every F ID |
-| 2 | Run `git ls-files`; for each F ID grep for: F-ID comments, feature name keywords (Japanese + English), test file names | Code presence map |
+| 1 | Read vision + feature list (priority = PBL order) when present | Axis 1 seed per assumption |
+| 2 | Run `git ls-files`; grep for feature name keywords (Japanese + English) and test file names | Code presence map |
 | 3 | Read DESIGN.md to confirm intended prototype scope; confirm if observation logs exist | Axis 2 inferred labels |
 | 4 | Single-turn dialog: present inferred matrix, ask user only for diffs | User-confirmed labels |
 | 5 | Lock (axis1, axis2) per assumption | Ready for Step 5 emit |
@@ -30,16 +30,16 @@ Do not loop the dialog more than once before emit. If the user adds new info mid
 
 | Source | When useful |
 |--------|-------------|
-| `docs/usecase-map.md` | When the team wants assumption traceability all the way back to UC IDs |
+| `docs/usecase-map.md` | When the team wants assumption traceability back to UC IDs |
 | `docs/competitive-research/*` | When axis 1 (Core) needs an external benchmark |
 | `docs/hearing/*.md` | When vision is ambiguous; pull constraints to apply axis 1 |
-| **Previous output** | `docs/uncertainty-map.md` (Mode A) or `docs/prototype-value-report.md` (Mode B) — triggers diff-update mode |
+| **Previous output** | `docs/uncertainty-map.md` — triggers diff-update mode |
 
 Read optional inputs only when present. Do not block on them.
 
 ## Diff-update mode (when previous output exists)
 
-When `docs/uncertainty-map.md` (Mode A) or `docs/prototype-value-report.md` (Mode B) already exists, treat the run as **incremental update**, not full regeneration. This is the natural flow after a validation spike resolves one or more assumptions.
+When `docs/uncertainty-map.md` already exists, treat the run as **incremental update**, not full regeneration. This is the natural flow after a validation spike resolves one or more assumptions.
 
 | Sub-step | Action |
 |----------|--------|
@@ -54,11 +54,11 @@ Diff summary format:
 ```
 📥 前回出力検出: docs/uncertainty-map.md (仮説 N 件)
 📊 差分: 新規 +<a> / 昇格 <b> / 降格 <c> / 削除 -<d>
-   - 新規: A-CORE-07 (vision 更新で追加)
-   - 昇格: A-D01-01-01 ⬜ → ✅ (5 ユーザーテスト n=5 / 完了率 100%)
-          A-CORE-05 ⬜ → 🟡 (LP CTR 4.2% / 有意性は要追加サンプル)
-   - 降格: A-D03-XX-01 ✅ → 🟡 (再観察で離脱率上昇)
-   - 削除: A-D02-XX-01 (機能削除に伴い棄却)
+   - 新規: A-07 (vision 更新で追加)
+   - 昇格: A-01 ⬜ → ✅ (5 ユーザーテスト n=5 / 完了率 100%)
+          A-05 ⬜ → 🟡 (LP CTR 4.2% / 有意性は要追加サンプル)
+   - 降格: A-03 ✅ → 🟡 (再観察で離脱率上昇)
+   - 削除: A-09 (機能削除に伴い棄却)
 ```
 
 ✅ 昇格時は **観察根拠が必須**。コードが追加されただけ（実装済）では昇格させない（[verification-classifier.md](verification-classifier.md) §「実装済 ≠ 検証済」を参照）。
@@ -69,8 +69,8 @@ If the user wants a full regeneration instead, they explicitly say "ゼロから
 
 ### Case A: vision missing, feature-list present
 
-- Read `feature-list.md`. Use Must as the Core seed.
-- One-line message to user: "ビジョン文書が無いので Must 機能を起点にコア判定します。後で `docs/product-vision.md` を作ると判定が安定します。"
+- Read the feature list / PBL. Use the **high-priority (top-of-PBL)** items as the Core seed.
+- One-line message to user: "ビジョン文書が無いので PBL 上位の機能を起点にコア判定します。後で `docs/product-vision.md` を作ると判定が安定します。"
 
 ### Case B: feature-list missing, vision present
 
@@ -96,8 +96,8 @@ If the user wants a full regeneration instead, they explicitly say "ゼロから
 When step 2 of the hybrid strategy runs, scope the search to:
 
 - All files from `git ls-files` (no node_modules, no build artifacts — git already excludes them)
-- Three grep patterns per F ID:
-  1. F-ID literal: `F-D01-01` (catches comments and docs)
+- Three grep patterns per feature:
+  1. F-ID literal: `F-01` (catches comments and docs, when a feature list exists)
   2. Feature name keyword: Japanese name + English equivalents (e.g. "ログイン" + "login" + "signin")
   3. Test file name: glob `*<feature-key>*.test.*`, `*<feature-key>*.spec.*`
 
@@ -120,10 +120,9 @@ Send **one message** with confirmation prompts:
 不確実性マップ作成のため、以下を確認させてください（部分回答 OK・スキップ OK）:
 
 1. 対象プロト範囲: <DESIGN.md から推定: ファイル共有の招待〜閲覧動線> ← この範囲で OK?
-2. 観察ログ: docs/usability-log.md / hearing notes はありますか？ ない場合は全件 🟡/⬜ 初期化
-3. Mode: 「A 内部チーム向け（マップ）」 or 「B ステークホルダー向け（レポート）」
+2. 観察ログ: docs/validation-log.md / docs/usability-log.md / hearing notes はありますか？ ない場合は全件 🟡/⬜ 初期化
 
-3 つすべて答えてくれれば 1 ターンで確定します。
+2 つとも答えてくれれば 1 ターンで確定します。
 ```
 
 ### When vision + feature-list both missing (Case C, 1-shot interview)
@@ -154,7 +153,6 @@ After reading inputs, output a one-line summary:
 入力: docs/product-vision.md ✓ / docs/feature-list.md ✓ (機能 N 件) /
       DESIGN.md ✓ / 実装 git ls-files = M 件
       観察ログ — なし → 対話で確認
-モード: Mode A として進めます
 ```
 
-Then proceed to Step 1 of [SKILL.md](../SKILL.md).
+Then proceed to Step 1 (assumption extraction) of [SKILL.md](../SKILL.md).

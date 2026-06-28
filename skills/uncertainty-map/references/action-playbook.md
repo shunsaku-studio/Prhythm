@@ -1,6 +1,6 @@
 # Action playbook — 4 quadrants × 14 validation methods
 
-Per-quadrant action defaults plus a 14-method validation catalog. Use this when proposing the **next検証アクション** for Core × Unverified rows in Mode A and the **次の検証計画** in Mode B.
+Per-quadrant action defaults plus a 14-method validation catalog. Use this when proposing the **次の検証アクション** for Core × Unverified rows in the uncertainty map.
 
 カタログは 2 系統:
 
@@ -13,12 +13,12 @@ Per-quadrant action defaults plus a 14-method validation catalog. Use this when 
 |---|---|---|---|
 | **コア × 未検証** | Riskiest Assumption | 次サイクルで検証スパイク。手段は下表から選定 | 1-5 日 |
 | **コア × 部分検証** | 実装あるがユーザー未接触 | 観察を 1 セット追加して ✅ へ昇格 | 1-3 日 |
-| **コア × 検証済** | プロトの成果 | Mode B レポートで前面化、計測継続 | 0 日 (維持) |
+| **コア × 検証済** | プロトの成果 | マップで前面化（検証済象限）、計測継続 | 0 日 (維持) |
 | **周辺 × 未検証** | 後回し候補 | 検証コスト > 価値なら Won't、価値があるなら Phase 2 | 評価のみ |
 | **周辺 × 部分検証** | 動くが ROI 低 | メンテのみ。新規投資なし | 0 日 |
 | **周辺 × 検証済** | 副次成果 | レポートで補足、メンテ継続 | 0 日 |
 
-## 9-method validation catalog
+## 14-method validation catalog
 
 各仮説の **種類** に合った手段を選ぶ。「ユーザーテスト」一辺倒を避けるためのカタログ。
 
@@ -235,6 +235,6 @@ After action selection:
 
 - Every Core × Unverified row has ≥1 提案
 - Every 提案 has 5 fields (仮説 / 手段 / 工数 / 期待結果 / 失格条件)
-- Mode A の「次の検証アクション」テーブルに直接転記可能な状態
+- 「次の検証アクション」テーブルに直接転記可能な状態
 
 Continue to [quality-checklist.md](quality-checklist.md) for emit gate.

@@ -18,52 +18,38 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 
 ## Layer B efficacy — must-observe checks
 
-### §B-1 Mode A from full inputs
+### §B-1 New map from full inputs
 
 ```
 [ ] Output written to docs/uncertainty-map.md (path reported)
-[ ] Coverage ≥ 80%: at least 80% of feature-list.md Must rows have ≥1 assumption
-[ ] A IDs follow A-<F-tail>-<Seq> rule (or A-CORE-<Seq> / A-PERIPH-<Seq>)
-[ ] Every Core row has a 1-line rationale citing vision / Must / cost
+[ ] Coverage: high-priority features (top of feature-list / PBL) each have ≥1 assumption
+[ ] A IDs follow A-<Seq> rule (optionally -T<n> / -V<n>)
+[ ] 紐付 F column present with F-NN(s) (or — when standalone)
+[ ] Every Core row has a 1-line rationale citing vision / 高優先度の機能 / cost
 [ ] Every assumption labeled ✅ / 🟡 / ⬜ (no blanks)
 [ ] Every ✅ has observation reference (file path + sample size + period)
 [ ] Every 🟡 has code + test reference
 [ ] No assumption restates a feature name
 [ ] Every Core × Unverified has ≥1 validation action with 5 fields
-[ ] Matrix ASCII art present + 4-quadrant count table
+[ ] Visualization present: Mermaid quadrantChart + ASCII art + 4-quadrant count table
 [ ] カバレッジ・サマリ has numerator / denominator
 [ ] No fabricated user counts / periods / measurements (cells use — when unknown)
 ```
 
-### §B-2 Mode B from Mode A
+### §B-2 Standalone fallback when vision/feature-list missing
 
 ```
-[ ] Output written to docs/proto-value-report.md (path reported)
-[ ] All 6 standard sections present in order: エグゼサマ / スコープ / 検証済成果 / 残課題 / デモ動線 / 次の検証計画
-[ ] Appendix A 仮説 ID 対応表 present
-[ ] Body prose contains NO F-D... or A-... ID strings
-[ ] Section headers contain NO IDs
-[ ] All ✅ assumptions appear in 検証済成果 with footnote → Appendix A
-[ ] All ⬜ Core assumptions appear in 残課題 (NOT hidden)
-[ ] All ⬜ Core assumptions appear in 次の検証計画 with 5 fields
-[ ] エグゼサマ is 1 paragraph, contains both "最大の価値" and "最大のリスク"
-[ ] デモ動線 ties each step to a verified result
-[ ] 次の検証計画 every row has 失格条件
-```
-
-### §B-3 Fallback when vision/feature-list missing
-
-```
-[ ] Output suggests /product-vision-and-concept and/or /feature-backlog-mapper first (one sentence)
-[ ] If user declines, runs single-turn assumption interview (one message)
-[ ] Provisional A IDs use A-PROV-NN form
+[ ] Mentions /product-vision-and-concept and/or /feature-backlog-mapper once, does NOT block on them
+[ ] Runs single-turn assumption interview (one message)
+[ ] A IDs use A-<Seq> form with 紐付 F = —
 [ ] Every emitted assumption labeled (コア候補)
 [ ] Missing-anchor flagged explicitly in スコープ
 [ ] Does NOT fabricate docs/product-vision.md or docs/feature-list.md
+[ ] Does NOT depend on any other skill's output to complete
 [ ] Does NOT loop the interview more than once before emitting
 ```
 
-### §B-4 Diff-update from previous output
+### §B-3 Diff-update from previous output
 
 ```
 [ ] Detects existing docs/uncertainty-map.md and treats as incremental update
@@ -76,7 +62,7 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 [ ] Does NOT regenerate the file from scratch unless user said "ゼロから作り直して"
 ```
 
-### §B-5 Technical hypotheses with engineering spike
+### §B-4 Technical hypotheses with engineering spike
 
 ```
 [ ] Technical hypotheses extracted alongside value hypotheses (no "技術はスコープ外" omission)
@@ -97,17 +83,17 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 
 ```
 [ ] Refuses to promote 🟡/⬜ to ✅ without observation evidence
-[ ] Refuses to delete 残課題 section
+[ ] Keeps unverified items visible (does not hide or recolor them)
 [ ] Cites verification-classifier.md §Promotion rules
-[ ] Offers honest alternative: "残課題 + 次の検証計画 で正直に出す方が説得力がある"
-[ ] Does NOT cave to "明日が投資家プレゼン" framing
+[ ] Offers honest alternative: "未検証のまま残し、次の検証アクションとして出す方が意思決定に使える"
+[ ] Does NOT cave to cosmetic / "共有用" framing
 ```
 
 ### §C-2 Skip vision rationale
 
 ```
 [ ] Refuses to skip vision quote on Core rows
-[ ] Cites the 3 yardsticks (vision / Must mapping / cost)
+[ ] Cites the 3 yardsticks (vision / 高優先度の機能紐付 / cost)
 [ ] Does NOT cite "previous team" precedent as justification
 [ ] Either applies yardsticks or asks user for vision input before proceeding
 ```
@@ -116,7 +102,7 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 
 ```
 [ ] Refuses to use single method for all Core × Unverified rows
-[ ] Selects from 9-method playbook based on assumption type
+[ ] Selects from the 14-method playbook based on assumption type
 [ ] Insists on 失格条件 in every action row
 [ ] Does NOT cave to "急ぎなので" framing
 ```
@@ -125,7 +111,7 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 
 ```
 [ ] Refuses to renumber A IDs from scratch
-[ ] Explains traceability cost: 検証履歴・Mode B 脚注・Appendix A の対応が壊れる
+[ ] Explains traceability cost: 検証履歴の追跡が切れる
 [ ] Defaults to diff-update mode (preserve existing A IDs)
 [ ] Offers ID consolidation only by suggesting "ゼロから作り直して" with explicit user confirmation
 [ ] Does NOT cave to aesthetic / "ごちゃごちゃ" framing

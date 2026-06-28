@@ -32,11 +32,11 @@ Run:
 git ls-files
 ```
 
-For each assumption with a feature anchor (`A-<F-ID>-<Seq>`), run three greps:
+For each assumption with a 紐付 F (`F-NN`), run three greps:
 
 | Grep | Pattern | Promotes to |
 |------|---------|-------------|
-| F-ID literal | `F-D01-01` (or whatever the F ID is) | 🟡 if found in implementation file |
+| F-ID literal | `F-01` (or whatever the F ID is) | 🟡 if found in implementation file |
 | Feature name keyword | Japanese name + English equivalent (use `feature-list.md` 機能名 + reasonable EN) | 🟡 if matched (multiple files) |
 | Test file existence | glob `*<feature-key>*.test.*`, `*<feature-key>*.spec.*` | 🟡 if a test file exists |
 
@@ -74,17 +74,17 @@ Show the inferred matrix to the user. **Dialog opener template** (verbatim, fill
 入力 (vision <あり/なし> / feature-list 機能 <N> 件 / git ls-files <M> ファイル / 観察ログ <あり/なし>) を読み、
 仮説 <T> 件を以下のように分類しました。差分があれば教えてください。なければそのまま確定します。
 
-✅ A-D01-01-01 ターゲットは email 登録に抵抗ない
-   根拠: usability-log.md #L23 (5 ユーザー / 2026-06 / 完了率 100%)
+✅ A-01 ターゲットは email 登録に抵抗ない
+   根拠: validation-log.md #L23 (5 ユーザー / 2026-06 / 完了率 100%)
 
-🟡 A-D01-01-02 ロックアウト挙動はサポート負荷許容
+🟡 A-02 ロックアウト挙動はサポート負荷許容
    根拠: src/auth/lockout.ts + lockout.test.ts (テスト緑のみ)
 
-⬜ A-CORE-05 月額 X 円を支払う
+⬜ A-05 月額 X 円を支払う
    根拠: 該当する実装/観察なし
 
 確定の合言葉: 「OK」「そのまま」「確定」 → そのまま emit
-差分の伝え方: 「A-CORE-05 は LP で測ったので 🟡」「A-D02-XX は降格」など 1 行ずつ
+差分の伝え方: 「A-05 は LP で測ったので 🟡」「A-03 は降格」など 1 行ずつ
 ```
 
 ### Dialog branch handling (verbatim responses)
@@ -99,7 +99,7 @@ User の応答パターンに対する agent の振る舞い:
 | 「全部 ✅」「動かしてるから検証済」 | 拒否: "実装+テストは 🟡 部分検証どまりです。" → Pressure handling §All Verified へ |
 | 「vision 省略でいい」 | 拒否: "vision 引用を抜くと『なぜコアか』が再構成できなくなります。" → §Skip vision |
 | Partial reply（一部しか答えない） | 答えられた部分のみ反映、残りは inferred のまま emit。再ループしない |
-| 「もう一度確認したい」「もう少し精緻に」 | 1 ラウンドのみ追加質問可。2 ラウンド以降は emit を強制し残課題に「軸2 要確認」マーク |
+| 「もう一度確認したい」「もう少し精緻に」 | 1 ラウンドのみ追加質問可。2 ラウンド以降は emit を強制し、該当行に「軸2 要確認」マーク |
 | 仮説の追加要望 | 1 件まで受付、A ID は次の Seq で発行。N+1 件目以降は「次の更新サイクルで」と回答 |
 
 Accept user diffs. Do not re-loop the dialog more than once.
@@ -125,9 +125,9 @@ When the user says "動かしてるから検証済でいい":
 
 - **Refuse.** Reply: "実装+テストは 🟡 部分検証どまりです。✅ には観察 / 計測の根拠（scale + 期間 + 結果）が必要です。"
 
-When the user says "投資家向けに『全部検証済』に書き換えて":
+When the user says "『全部検証済』に書き換えて":
 
-- **Refuse.** Reply: "未検証コアを ✅ に書き換えると、レポートが信用を失います。残課題セクションで併記し、次の検証計画として正直に出した方が説得力が上がります。"
+- **Refuse.** Reply: "未検証コアを ✅ に書き換えると、マップが信用を失います。未検証のまま残し、次の検証アクションとして正直に出した方が意思決定に使えます。"
 
 When the user says "観察人数は 1 人だけど ✅ にしたい" / "スパイクは 1 ケースだけ通った":
 
@@ -146,7 +146,6 @@ When the user says "スパイクは『動いた』だから ✅ で":
 | Test name as evidence ("テスト緑なので ✅") | Demote to 🟡; tests are 🟡 evidence only |
 | Padded scale ("ユーザーが触った気がする" / "だいたい動いた") | Stay at 🟡 until concrete numbers present |
 | Empty 観察ログ but ✅ claimed | Demote; ask user for log location |
-| All ⬜ in Mode B | Mode B requires showing prototype value; if all ⬜, the prototype hasn't been built — re-check inputs |
 | 技術仮説に「動いた」「OK だった」だけの outcome | Demote to 🟡; require 機械可読な計測値（成功数 / p95 / 有効率 / CLS 等） |
 | 「スパイクで実装したから検証済」 | スパイクは 🟡 までの根拠 (= 実装あり)。outcome の計測が無ければ ✅ にしない |
 
@@ -156,14 +155,14 @@ After all assumptions are labeled:
 
 | Distribution | Reading |
 |--------------|---------|
-| Many ✅, few ⬜ | Mature prototype; Mode B emphasis on success |
+| Many ✅, few ⬜ | Mature prototype; the map highlights proven value |
 | Many 🟡, few ✅ | Engineered prototype, no user contact yet — schedule observation as the top action |
-| Many ⬜, few 🟡 | Early prototype; Mode A emphasis on "what to build for next validation" |
+| Many ⬜, few 🟡 | Early prototype; the map emphasizes "what to build for next validation" |
 | All ⬜ | Re-check inputs (DESIGN.md scope, code presence) before emit |
 
 Report the distribution in the output's カバレッジ・サマリ section.
 
-## Hand-off to Step 5
+## Hand-off to Step 4
 
 After axis 2 classification you should have:
 
@@ -172,4 +171,4 @@ After axis 2 classification you should have:
 - Every 🟡 has a code+test reference (file paths)
 - Every ⬜ for a Core assumption has at least one validation action proposed (see [action-playbook.md](action-playbook.md))
 
-Proceed to emit using [matrix-template.md](matrix-template.md) (Mode A) or [report-template.md](report-template.md) (Mode B).
+Proceed to emit using [matrix-template.md](matrix-template.md).
