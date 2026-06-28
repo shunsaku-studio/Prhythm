@@ -1,78 +1,63 @@
 # Quality checklist — final gate before emit
 
-Run this checklist before writing `docs/feature-list.md` or `docs/product-backlog.md`. If any item fails, fix before emit.
+Run this before writing the three artifacts. If any item fails, fix before emit.
 
-## Coverage
+## Internal linkage (the only required linkage)
 
-- [ ] Every UC ID in `docs/usecase-map.md` ユースケース一覧 appears in **at least one** F ID's UC column
-- [ ] Uncovered UCs are listed in the **カバレッジ・サマリ** with reason: `仕様確認待ち` / `次フェーズ` / `Won't`
-- [ ] Cross-cutting features list **all** UC IDs they serve (not just one)
+- [ ] Every PBL story references **≥1 `F-NN`** that exists in the feature list
+- [ ] Every AC references its `S-NN` and (when applicable) `F-NN`, all of which exist
+- [ ] No dangling IDs across the three files (no story pointing at a deleted feature, no AC orphaned)
+- [ ] `F` / `S` / `AC` IDs are unique and never reuse a retired ID
+- [ ] The skill did **not** require or depend on another skill's output to run
 
-## Traceability
+## Feature list (① project view)
 
-- [ ] Every feature row has a non-empty UC ID column (or `(UC候補)`)
-- [ ] Every PBI in Mode B references its F ID
-- [ ] F IDs are unique and follow `F-<DomainID>-<Seq>` format
-- [ ] PBI dependencies use F IDs, not free-text feature names
-
-## Anti-slop
-
+- [ ] **No 優先度 / MoSCoW column** anywhere in the feature list
+- [ ] **No acceptance / 受入 field** in any feature card
+- [ ] Every card has 概要 / 入力 / 出力 / 基本ルール / 制約・前提
+- [ ] 紐付 UC column present **only** when `docs/usecase-map.md` exists (otherwise omitted, not faked)
 - [ ] No card whose 概要 is only "ユーザーが〜できる" or "システムが〜する"
-- [ ] Every Mode A card has 入力 / 出力 / 基本ルール / 受入のスケッチ
-- [ ] Every Mode B PBI has User Story + AC + 見積 + DoD + INVEST
-- [ ] AC use Given / When / Then, not "正常に動くこと"
 
-## MoSCoW integrity
+## PBL (② product view)
 
-- [ ] Every Must has a 1-line rationale
-- [ ] Every Won't has a 1-line reason
-- [ ] Won't items are **not** in the main inventory table
-- [ ] Won't items **are** in the「棄却したアイデアと理由」section
-- [ ] Must rationale references vision / 制約 / コスト, not the feature name
+- [ ] Stories are in **「<主語> は <振る舞い> できる」** form; subject is a concrete actor, never bare「ユーザー」
+- [ ] Stories are **ordered top = highest priority**, and the file states 「順序＝優先度」
+- [ ] No MoSCoW / priority label column (labels, if requested, are an optional annotation only)
+- [ ] No acceptance criteria embedded in the PBL
+- [ ] No implementation leak (API paths, routes) in story text
 
-## INVEST (Mode B only)
+## Acceptance criteria (③ verification view)
 
-For each PBI, check:
+- [ ] Each story has **≥3 AC**, covering happy / ≥1 failure / ≥1 boundary
+- [ ] AC use Given / When / Then; `Then` is observable (URL / message / state), never "正常に動く"
+- [ ] One observable outcome per AC (no chained When/Then)
 
-| Letter | Check |
-|--------|-------|
-| **I**ndependent | Can be developed without waiting on another PBI in the same sprint |
-| **N**egotiable | Implementation details are not locked into AC |
-| **V**aluable | The "so that" clause is clearly user-valuable |
-| **E**stimable | A concrete size is assigned (not "?") |
-| **S**mall | Fits in one sprint with buffer (no XL / no 13 SP) |
-| **T**estable | Each AC is observable / verifiable |
+## Anti-slop & fabrication
 
-If any letter fails:
+- [ ] Cells use `—` when unverifiable; no invented API paths or screen routes
+- [ ] Guesses are not presented as confirmed facts
 
-- **I** fail → reorder or split
-- **N** fail → soften AC, move impl details to DoD or notes
-- **V** fail → rewrite story or drop the PBI
-- **E** fail → add AC or run a spike
-- **S** fail → split per [estimation-guide.md](estimation-guide.md)
-- **T** fail → rewrite ACs in Given / When / Then
+## Output structure (required sections, in order)
 
-## Output structure
-
-### Mode A required sections (in order)
-
+### ① `docs/feature-list.md`
 1. スコープ
 2. 機能インベントリ
-3. 機能カード (Must → Should → Could)
-4. 棄却したアイデアと理由
-5. カバレッジ・サマリ
-6. 次の一手
+3. 機能カード
+4. カバレッジ・サマリ
 
-### Mode B required sections (in order)
+### ② `docs/product-backlog.md`
+1. スコープ（順序＝優先度の明記を含む）
+2. バックログ（優先度順）
+3. カバレッジ・サマリ
+（ストーリー詳細は任意）
 
-1. スコープ
-2. バックログインデックス
-3. PBI 詳細
-4. スプリント切り出し提案
-5. カバレッジ・サマリ
+### ③ `docs/acceptance-criteria.md`
+1. インデックス
+2. ストーリー／機能ごとの AC
+3. カバレッジ・サマリ
 
 ## Hand-off
 
-If all items pass, write the file and report back per Step 5 of [SKILL.md](../SKILL.md).
+If all items pass, write the files and report back per Step 4 of [SKILL.md](../SKILL.md).
 
-If any item fails, do not emit. Fix and re-run this checklist. Track repeated failures — they signal a systemic issue (e.g. user pressuring all Must) that needs SKILL.md amendment, not just per-call fixing.
+If any item fails, do not emit. Fix and re-run this checklist. Track repeated failures — they signal a systemic issue (e.g. priority leaking into the feature list, or acceptance creeping into the PBL) that needs SKILL.md amendment, not just per-call fixing.
