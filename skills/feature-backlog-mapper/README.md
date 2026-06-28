@@ -142,7 +142,7 @@ feature-backlog-mapper/
 | [usecase-mapper](../usecase-mapper/) | 任意の上流。あれば UC を入力ソースに使う（無くても動く） |
 | [product-vision-and-concept](../product-vision-and-concept/) | 任意の上流。PBL の並び順の物差しになる一行ステートメント |
 | [competitive-research](../competitive-research/) | 任意の上流。機能候補の参考ソース |
-| `uncertainty-map` | 並行。機能一覧/PBL を起点に暗黙の仮説を整理する（行き来する反復関係） |
+| [uncertainty-map](../uncertainty-map/) | 並行。機能一覧/PBL を起点に暗黙の仮説を整理する（行き来する反復関係） |
 | [prototype-design-md](../prototype-design-md/) | 下流。機能一覧を受けてプロトの DESIGN.md を書く |
 | [ooui-architect](../ooui-architect/) | 下流。PBL を受けて common/model/pages を実装する |
 | [ooui-graphql-modeling](../ooui-graphql-modeling/) | 下流。PBL を受けて GraphQL SDL を設計する |

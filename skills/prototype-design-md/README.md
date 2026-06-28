@@ -93,5 +93,6 @@ prototype-design-md/
 | ----------------- | ------ |
 | `ooui-architect`  | 実装（下流） |
 | `shadcn-explorer` | テーマ探索  |
+| `uncertainty-map` | 下流。プロト範囲の解釈源として DESIGN.md を読み、仮説の検証ステータス判定に使う |
 
 
