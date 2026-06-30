@@ -3,7 +3,7 @@ name: usecase-mapper
 description: コードベースを分析してユースケース一覧・ユースケース図（アクターとユースケースの関係）を中心としたマップを docs/usecase-map.md に生成する。API・画面・フロー図も併記。「ユースケース図を生成」「ユースケース一覧が欲しい」「機能一覧が欲しい」「プロジェクトの全体像を把握したい」などのリクエスト時に使用。
 context: fork
 disable-model-invocation: true
-allowed-tools: Bash(node:*), Bash(pnpm:*), Bash(git:*), Bash(which:*), Bash(ls:*), Bash(mkdir:*), Read, Glob, Grep, Agent, Write
+allowed-tools: Bash(node:*), Bash(pnpm:*), Bash(git:*), Bash(which:*), Bash(ls:*), Bash(mkdir:*), Bash(python:*), Read, Glob, Grep, Agent, Write, Artifact, Skill
 ---
 
 # ユースケースマップ生成
@@ -100,15 +100,10 @@ Read / Grep で対象文書を読み込み、以下を抽出する:
 ## 全体ユースケース図
 （アクターとドメイン（ユースケースのまとまり）の関係を俯瞰する1枚。詳細は各ドメインの図に委ねる）
 
-```mermaid
-flowchart LR
-  u1([👤 一般ユーザー])
-  u2([👤 管理者])
-  u1 --> D01[D01 認証]
-  u1 --> D02[D02 クラウド]
-  u2 --> D01
-  %% アクター → 利用するドメイン を線で結ぶ
-```
+[[diagram:overview-usecase]]
+# type: architecture
+# nodes: アクター群（左）→ ドメイン群（右）
+# edges: 各アクター → 利用するドメイン を線で結ぶ
 
 ---
 
@@ -121,20 +116,16 @@ flowchart LR
 ### ユースケース図
 （このドメインの「アクター」と「ユースケース」の関係を図示。下のアクティビティ表の各行が1ユースケースに対応する）
 
-```mermaid
-flowchart LR
-  actor([👤 一般ユーザー])
-  subgraph D01[D01 認証]
-    uc1(ログインする)
-    uc2(パスワードをリセットする)
-  end
-  actor --> uc1
-  actor --> uc2
-  %% include/extend がある場合は uc1 -. include .-> uc3 のように点線で表現
-```
+[[diagram:d01-usecase]]
+# type: architecture
+# nodes: アクター（左）, ユースケース群（右、ドメイン境界で囲む）
+# edges: アクター → 各ユースケース
 
 ### フロー
-（Mermaid flowchart: 主要フローを5-8ノードで簡潔に図示）
+
+[[diagram:d01-flow]]
+# type: flowchart
+# nodes: 主要フローを5-8ノードで簡潔に図示
 
 ### アクティビティ（ユースケース）→ API → 画面
 | # | UC ID | ユースケース | アクター | メソッド | エンドポイント | 画面パス | 画面名 | 状態 |
@@ -162,33 +153,76 @@ flowchart LR
 - ユースケースファイルの機能グループ
 - Web の画面パス構成
 
-### Mermaid フロー図のルール
+### 図のルール（diagram-design 連携）
 
-- 各ドメインにつき **1図、5〜8ノード** に収める（主要フローのみ）
-- 高コントラスト配色: 青 `#1565c0`、緑 `#2e7d32`、赤 `#c62828`、橙 `#e65100`（白文字）
-- フロー図の目的は「このドメインが何をするか」を30秒で把握すること
+- 図は Mermaid を使わない。`[[diagram:slug]]` トークンで配置し、design-doc パイプラインで SVG に変換する
+- 各トークンの直後に `# type:` と `# nodes:` / `# edges:` のコメントを付け、diagram-design に渡す内容を明記する
+- 全体ユースケース図は `overview-usecase`、各ドメインのユースケース図は `d{nn}-usecase`、フロー図は `d{nn}-flow` の slug を使う
 
-### ユースケース図のルール
+### ユースケース図の図面設計
 
-- Mermaid には専用のユースケース図記法がないため `flowchart LR` で表現する
-- **アクター**は `名前([👤 アクター名])` のスタジアム型、**ユースケース**は `id(〇〇する)` の丸型ノードで表す
-- ユースケース群は `subgraph D0x[ドメイン名]` でシステム境界として囲む
-- アクター → ユースケース を実線 `-->` で結ぶ。複数アクターが同一ユースケースを使う場合は両方から線を引く
-- include / extend 関係がある場合のみ点線で `uc1 -. include .-> uc2` のように補足（無理に作らない）
+- **type: architecture** を使い、左にアクター、右にドメイン境界（サブグラフ）内のユースケース群を配置
+- アクター → ユースケース を線で結ぶ。複数アクターが同一ユースケースを使う場合は両方から線を引く
 - 1ドメインあたりのユースケースが多い場合は主要 6〜10 個に絞り、残りは表で網羅する
 - 全体ユースケース図はアクター × ドメイン粒度に留め、ノードが増えすぎないようにする
-- **未実装（文書のみ）のユースケース**は破線ノード `uc1(〇〇する):::planned` で区別する（`classDef planned stroke-dasharray:4` を定義）。実装状態が不明なら通常ノードのままにする
 
-## Step 3: ユーザーへの案内
+### フロー図の図面設計
+
+- **type: flowchart** を使い、主要フローを 5〜8 ノードで簡潔に図示する
+- フロー図の目的は「このドメインが何をするか」を30秒で把握すること
+- 分岐がある場合はノードを分けて表現する
+
+## Step 3: design-doc パイプラインで HTML 化
+
+生成した `docs/usecase-map.md` を design-doc パイプライン（diagram-design → md2html → stitch.py）で HTML に変換する。
+
+### 3-1. diagram-design で SVG 図を生成
+
+`docs/diagrams/` ディレクトリを作成し、マークダウン内の各 `[[diagram:slug]]` トークンについて diagram-design スキル（`~/.claude/skills/diagram-design/SKILL.md`）を使って `docs/diagrams/<slug>.html` を生成する。
+
+- 各トークンの `# type:` / `# nodes:` / `# edges:` コメントを diagram-design に渡す
+- diagram-design のパレットはそのまま使う（スタイルゲートの再実行は不要）
+- 1図あたり 9 ノード以下に収める。超える場合はトークンを分割する
+
+### 3-2. md2html で HTML シェルを生成
+
+md2html スキル（`~/.claude/skills/md2html/SKILL.md`）を使って `docs/usecase-map.md` を `docs/usecase-map.html` に変換する。
+
+- `~/.claude/skills/md2html/template.html` と `~/.claude/skills/md2html/components.md` を必ず先に Read する
+- `[[diagram:slug]]` トークンはそのままテキストとして残す（md2html が `<p>[[diagram:slug]]</p>` として出力する）
+- `<details>` セクション（各ドメイン詳細）は md2html の collapsible コンポーネントでレンダリングする
+- `<html lang="ja">` を設定する
+
+### 3-3. stitch.py で図を埋め込み
+
+```bash
+python ~/.claude/skills/design-doc/scripts/stitch.py \
+  --html docs/usecase-map.html --diagrams docs/diagrams
+```
+
+- `[[diagram:slug]]` トークンが実際の `<svg>` に置換される
+- フォントと CJK グリフ修正が自動注入される
+- 終了コードが 0 でない場合は、不足している図を再生成する
+
+## Step 4: Artifact として公開
+
+stitch 完了後の `docs/usecase-map.html` を Artifact ツールで公開する:
+
+- `file_path`: `docs/usecase-map.html`
+- `favicon`: `📋`（毎回同じ絵文字を使う）
+- `description`: `{プロダクト名} のユースケースマップ — アクター・ユースケース一覧と各ドメインの詳細`
+
+## Step 5: ユーザーへの案内
 
 生成完了後、以下を表示する:
 
 ```
 📄 docs/usecase-map.md にユースケースマップを生成しました。
+📋 Artifact としても公開しました: {Artifact URL}
 
-- 「ユースケース一覧」で全機能を俯瞰 → 「全体ユースケース図」でアクターとの関係を把握できます
-- まず担当ドメインのセクション（D01〜D08）を開いて読むのがおすすめです（各ドメインにユースケース図あり）
-- Mermaid 図（フロー図・ユースケース図）は VS Code の Markdown Preview Enhanced や GitHub で表示できます
+- Artifact リンクからブラウザで見やすく閲覧できます
+- 「ユースケース一覧」で全機能を俯瞰 → 各ドメインのセクションを開いて詳細を確認できます
+- マークダウン版（docs/usecase-map.md）は GitHub や VS Code でも閲覧可能です
 - 詳細な API 仕様は BFF のルートファイルを直接参照してください
-- このファイルは .gitignore 対象です（各自の環境で生成）
+- docs/usecase-map.md は .gitignore 対象です（各自の環境で生成）
 ```
