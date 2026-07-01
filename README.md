@@ -1,6 +1,6 @@
 # Prhythm
 
-提案のリズムを生み出すエージェントスキル集。[Agent Skills](https://agentskills.io) オープンスタンダード準拠。
+提案のリズムを生み出すエージェントスキル集。[Agent Skills](https://agentskills.io) オープンスタンダード準拠で、**Cursor / Claude Code / Codex / Gemini CLI / GitHub Copilot** で共通して利用できる。
 
 ## インストール
 
@@ -15,20 +15,24 @@ Claude Code からプラグインとしてインストール:
 /plugin install prhythm@shunsaku-studio/Prhythm
 ```
 
-### Cursor でこのリポジトリを開発する場合
+### このリポジトリで開発する場合（マルチエージェント対応）
 
-スキルの正本は `skills/`。Cursor が `/` スラッシュコマンド用に読むのは `.cursor/skills/` だけなので、**symlink でつなぐ**（コピーしない）。
+スキルの正本は `skills/`。各 AI エージェントは自分の検出ディレクトリしかスキャンしないため、そこから `skills/` への **symlink でつなぐ**（コピーしない）。1 コマンドで Cursor / Claude Code / Codex / Gemini CLI / GitHub Copilot すべてに配布される。
 
 ```bash
-bash scripts/link-cursor-skills.sh
+bash scripts/link-agent-skills.sh
+# または npm run skills:link
 ```
 
-| パス | 役割 |
-|------|------|
-| `skills/<name>/` | 正本。編集・validate・PR はここ |
-| `.cursor/skills/<name>/` | Cursor 検出用 symlink → `skills/<name>/` |
+| パス | 役割 | 対応エージェント |
+|------|------|------------------|
+| `skills/<name>/` | **正本**。編集・validate・PR はここ | — |
+| `.agents/skills/<name>/` | 検出用 symlink → `skills/<name>/` | Cursor / Codex / Gemini CLI / GitHub Copilot |
+| `.claude/skills/<name>/` | 検出用 symlink → `skills/<name>/` | Claude Code（Copilot も参照） |
 
-ファイルツリー上は両方に同じ内容が見えるが、実体は `skills/` のみ。`/prhythm-skill-review` などメタスキルは `disable-model-invocation: true` のため、スラッシュで明示呼び出しする。
+`.agents/skills/` は [Agent Skills](https://agentskills.io) 標準の共通相互運用パスで、多くのエージェントが横断的に読む。Claude Code のみ `.claude/skills/` を使うため、この 2 ディレクトリで全ツールをカバーする。
+
+ファイルツリー上は複数箇所に同じ内容が見えるが、実体は `skills/` のみ。新スキル追加後や clone 直後は上記コマンドを再実行すること。`/prhythm-skill-review` などメタスキルは `disable-model-invocation: true` のため、スラッシュで明示呼び出しする。
 
 ## スキル一覧
 
@@ -84,13 +88,14 @@ npm run export:pdf             # PDF にエクスポート
 Prhythm/
 ├── .claude-plugin/
 │   └── plugin.json            # プラグインマニフェスト
-├── .cursor/skills/            # Cursor 用 symlink → skills/*（link-cursor-skills.sh）
+├── .agents/skills/            # symlink → skills/*（Cursor / Codex / Gemini / Copilot）
+├── .claude/skills/            # symlink → skills/*（Claude Code）
 ├── .github/workflows/
 │   └── pages.yml              # ドキュメント GitHub Pages デプロイ
 ├── docs-site/                 # VitePress サイト（site.meta.json + pages/）
 ├── skills/                    # Agent Skills 正本 (SKILL.md + README.md)
 ├── scripts/
-│   ├── link-cursor-skills.sh  # .cursor/skills/ symlink 生成
+│   ├── link-agent-skills.sh   # 各エージェント検出 dir へ symlink 生成
 │   └── sync-docs.mjs          # skills/ → docs-site/.generated/ 同期
 ├── slides.md                  # Slidev スライド
 ├── package.json               # Slidev + docs npm scripts
