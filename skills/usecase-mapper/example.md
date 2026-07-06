@@ -10,43 +10,165 @@
 - 対象 Persona:
   - 案件初期フェーズを前に進めるバンドメンバー
 
-## 実際に出した出力
+## 実際に出した Mermaid 出力
 
 一覧は補助です。まず図を見ます。
 
 ### 全体ユースケース図
 
-![Prhythm 全体ユースケース図](examples/overview-usecase.svg)
+```mermaid
+flowchart LR
+  actor1([案件初期フェーズを前に進める<br/>バンドメンバー])
+  actor2([後から参加する<br/>バンドメンバー])
+  actor3([バンドリーダー /<br/>バンドマネージャー])
+
+  subgraph F01["F01 ヒアリング準備を揃える"]
+    uc101(誰が何を聞くかを揃える)
+  end
+  subgraph F02["F02 ヒアリング直後の論点を整理する"]
+    uc201(論点と示唆を切り出す)
+  end
+  subgraph F03["F03 誰に提案するかを絞り込む"]
+    uc301(候補を比較する)
+  end
+  subgraph F04["F04 顧客体験を構造化する"]
+    uc401(現状の詰まりを可視化する)
+  end
+  subgraph F05["F05 提案の核を言語化する"]
+    uc501(Why / Who / What を揃える)
+  end
+  subgraph F06["F06 プロトタイプ前の判断を固める"]
+    uc601(見せる内容の優先順位を決める)
+  end
+  subgraph F07["F07 実装前の構造へ引き渡す"]
+    uc701(概念をそのまま構造設計へ渡す)
+  end
+
+  actor1 --> uc101
+  actor1 --> uc201
+  actor1 --> uc301
+  actor1 --> uc401
+  actor1 --> uc501
+  actor1 --> uc601
+  actor1 --> uc701
+  actor2 --> uc201
+  actor2 --> uc401
+  actor2 --> uc501
+  actor3 --> uc301
+  actor3 --> uc501
+```
 
 ## 機能別ユースケース図
 
 ### F01 ヒアリング準備を揃える
 
-![F01 ヒアリング準備を揃える](examples/f01-usecase.svg)
+```mermaid
+flowchart LR
+  actor([バンドメンバー])
+  subgraph F01["F01 ヒアリング準備を揃える"]
+    uc1(誰が何を聞くかを揃える)
+    uc2(仮説の粒度を揃える)
+    uc3(進行カードを作る)
+  end
+  actor --> uc1
+  actor --> uc2
+  actor --> uc3
+```
 
 ### F02 ヒアリング直後の論点を整理する
 
-![F02 ヒアリング直後の論点を整理する](examples/f02-usecase.svg)
+```mermaid
+flowchart LR
+  actor1([バンドメンバー])
+  actor2([後から参加する<br/>バンドメンバー])
+  subgraph F02["F02 ヒアリング直後の論点を整理する"]
+    uc1(論点と示唆を切り出す)
+    uc2(次回確認事項を残す)
+    uc3(共有可能な整理物にする)
+  end
+  actor1 --> uc1
+  actor1 --> uc2
+  actor1 --> uc3
+  actor2 --> uc3
+```
 
 ### F03 誰に提案するかを絞り込む
 
-![F03 誰に提案するかを絞り込む](examples/f03-usecase.svg)
+```mermaid
+flowchart LR
+  actor1([バンドメンバー])
+  actor2([バンドリーダー /<br/>バンドマネージャー])
+  subgraph F03["F03 誰に提案するかを絞り込む"]
+    uc1(候補を比較する)
+    uc2(Counter-persona を置く)
+    uc3(Primary の判断材料を揃える)
+  end
+  actor1 --> uc1
+  actor1 --> uc2
+  actor2 --> uc2
+  actor2 --> uc3
+```
 
 ### F04 顧客体験を構造化する
 
-![F04 顧客体験を構造化する](examples/f04-usecase.svg)
+```mermaid
+flowchart LR
+  actor([バンドメンバー])
+  subgraph F04["F04 顧客体験を構造化する"]
+    uc1(現状の詰まりを可視化する)
+    uc2(理想の流れを描く)
+    uc3(中心シーンを選ぶ)
+  end
+  actor --> uc1
+  actor --> uc2
+  actor --> uc3
+```
 
 ### F05 提案の核を言語化する
 
-![F05 提案の核を言語化する](examples/f05-usecase.svg)
+```mermaid
+flowchart LR
+  actor1([バンドメンバー])
+  actor2([バンドリーダー /<br/>バンドマネージャー])
+  subgraph F05["F05 提案の核を言語化する"]
+    uc1(Why / Who / What を揃える)
+    uc2(提案の一文を作る)
+    uc3(後続に渡す共通言語を残す)
+  end
+  actor1 --> uc1
+  actor1 --> uc2
+  actor1 --> uc3
+  actor2 --> uc1
+  actor2 --> uc2
+```
 
 ### F06 プロトタイプ前の判断を固める
 
-![F06 プロトタイプ前の判断を固める](examples/f06-usecase.svg)
+```mermaid
+flowchart LR
+  actor([バンドメンバー])
+  subgraph F06["F06 プロトタイプ前の判断を固める"]
+    uc1(見せる内容の優先順位を決める)
+    uc2(禁止事項や避ける表現を揃える)
+  end
+  actor --> uc1
+  actor --> uc2
+```
 
 ### F07 実装前の構造へ引き渡す
 
-![F07 実装前の構造へ引き渡す](examples/f07-usecase.svg)
+```mermaid
+flowchart LR
+  actor1([バンドメンバー])
+  actor2([実装接続を担うメンバー])
+  subgraph F07["F07 実装前の構造へ引き渡す"]
+    uc1(概念をそのまま構造設計へ渡す)
+    uc2(必要な案件だけ後段スキルを追加する)
+  end
+  actor1 --> uc1
+  actor1 --> uc2
+  actor2 --> uc1
+```
 
 ## 補助情報
 
@@ -70,23 +192,8 @@
 | F06 | プロトタイプ前の判断を固める | UI を作る前に、何を見せるか・何を避けるかを決められる | バンドメンバー | 2 |
 | F07 | 実装前の構造へ引き渡す | 上流で決めた言葉を、実装前の構造設計へつなげられる | バンドメンバー、実装接続を担うメンバー | 2 |
 
-### ユースケース一覧の一部
-
-| UC ID | 機能ID | ユースケース | 主アクター | 利用シーン | 期待結果 | 確度 |
-|---|---|---|---|---|---|---|
-| UC-F01-01 | F01 | バンドで誰が何を聞くかを揃えられる | バンドメンバー | ヒアリング前日 | 当日の役割分担が曖昧なまま始まらない | Fact |
-| UC-F02-01 | F02 | 発言ログから論点と示唆を切り出せる | バンドメンバー | ヒアリング直後 | 議事録だけ残って終わらない | Fact |
-| UC-F03-02 | F03 | Counter-persona を含めて設計の境界を確認できる | バンドメンバー、バンドリーダー | 誰を捨てるかも含めて議論したい場面 | 最適化の境界が見える | Assumption |
-| UC-F05-01 | F05 | Why / Who / What を一貫した形で言語化できる | バンドメンバー | 提案の方向性を整理する場面 | 説明する人ごとの差が減る | Fact |
-| UC-F07-01 | F07 | 上流で決めた概念をそのまま構造設計へ渡せる | バンドメンバー | 提案後に実装前整理へ進む場面 | 言葉の再解釈を減らせる | Assumption |
-
 ## このテストで確認できたこと
 
 - Persona から機能一覧へ落とす流れで、コードなしでも出力が成立する
-- `ドメイン` より `機能` を軸にしたほうが、スケッチ段階の議論材料として読みやすい
-- 全体俯瞰図と機能別図を両方出すことで、「まず全体を掴む」「個別機能を詰める」の往復ができる
-
-## 補足
-
-- 実図はローカル生成済みの `overview-usecase` と `f01` から `f07` を SVG 化して同梱した
-- HTML の実出力確認は `docs/usecase-map.html` で行った
+- Mermaid の `flowchart LR` でも、ユースケース図っぽい全体俯瞰と機能別詳細は十分表現できる
+- 一覧表は補助に回して、図を先に置く構成のほうが意図に合う
