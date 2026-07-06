@@ -30,6 +30,21 @@ bash scripts/link-cursor-skills.sh
 
 ファイルツリー上は両方に同じ内容が見えるが、実体は `skills/` のみ。`/prhythm-skill-review` などメタスキルは `disable-model-invocation: true` のため、スラッシュで明示呼び出しする。
 
+### Claude Code でこのリポジトリを開発する場合
+
+Cursor と同様、Claude Code がプロジェクトスコープで読むのは `.claude/skills/` だけなので、**symlink でつなぐ**（コピーしない）。
+
+```bash
+bash scripts/link-claude-skills.sh
+```
+
+| パス | 役割 |
+|------|------|
+| `skills/<name>/` | 正本。編集・validate・PR はここ |
+| `.claude/skills/<name>/` | Claude Code 検出用 symlink → `skills/<name>/` |
+
+clone 直後や `skills/` に新スキルを追加したあとに実行する。反映には Claude Code の再起動が必要。
+
 ## スキル一覧
 
 | スキル | 説明 |
@@ -84,12 +99,14 @@ npm run export:pdf             # PDF にエクスポート
 Prhythm/
 ├── .claude-plugin/
 │   └── plugin.json            # プラグインマニフェスト
+├── .claude/skills/            # Claude Code 用 symlink → skills/*（link-claude-skills.sh）
 ├── .cursor/skills/            # Cursor 用 symlink → skills/*（link-cursor-skills.sh）
 ├── .github/workflows/
 │   └── pages.yml              # ドキュメント GitHub Pages デプロイ
 ├── docs-site/                 # VitePress サイト（site.meta.json + pages/）
 ├── skills/                    # Agent Skills 正本 (SKILL.md + README.md)
 ├── scripts/
+│   ├── link-claude-skills.sh  # .claude/skills/ symlink 生成
 │   ├── link-cursor-skills.sh  # .cursor/skills/ symlink 生成
 │   └── sync-docs.mjs          # skills/ → docs-site/.generated/ 同期
 ├── slides.md                  # Slidev スライド
