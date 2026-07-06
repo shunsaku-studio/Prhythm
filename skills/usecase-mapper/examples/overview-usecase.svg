@@ -1,0 +1,87 @@
+<svg viewBox="0 0 980 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="overview-usecase-title overview-usecase-desc">
+      <title id="overview-usecase-title">Prhythm 全体ユースケース図</title>
+      <desc id="overview-usecase-desc">Persona 起点の機能スケッチ</desc>
+      <defs>
+        <marker id="overview-usecase-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#5f5e5e"/>
+        </marker>
+      </defs>
+      <rect x="0" y="0" width="980" height="760" fill="#ffffff"/>
+      <line x1="235" y1="146" x2="406" y2="104" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="146" x2="666" y2="104" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="146" x2="406" y2="284" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="146" x2="666" y2="284" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="146" x2="406" y2="464" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="146" x2="666" y2="464" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="146" x2="536" y2="644" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="306" x2="666" y2="104" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="306" x2="406" y2="284" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="306" x2="666" y2="284" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="306" x2="406" y2="464" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="466" x2="406" y2="284" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="466" x2="666" y2="284" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+<line x1="235" y1="466" x2="406" y2="464" stroke="#5f5e5e" stroke-width="1.6" marker-end="url(#overview-usecase-arrow)"/>
+      
+    <rect x="90" y="110" width="140" height="72" rx="36" fill="#ffffff" stroke="#8b8b97" stroke-width="1.4"/>
+    <circle cx="114" cy="146" r="10" fill="none" stroke="#8b8b97" stroke-width="1.2"/>
+    <line x1="114" y1="156" x2="114" y2="170" stroke="#8b8b97" stroke-width="1.2"/>
+    <line x1="108" y1="162" x2="120" y2="162" stroke="#8b8b97" stroke-width="1.2"/>
+    <text x="134" y="140" fill="#01010c" font-size="12" font-weight="600" font-family="'Geist',sans-serif"><tspan x="160" dy="0">案件初期フェーズを</tspan><tspan x="160" dy="15">前に進める</tspan><tspan x="160" dy="15">バンドメンバー</tspan></text>
+  
+
+    <rect x="90" y="270" width="140" height="72" rx="36" fill="#ffffff" stroke="#8b8b97" stroke-width="1.4"/>
+    <circle cx="114" cy="306" r="10" fill="none" stroke="#8b8b97" stroke-width="1.2"/>
+    <line x1="114" y1="316" x2="114" y2="330" stroke="#8b8b97" stroke-width="1.2"/>
+    <line x1="108" y1="322" x2="120" y2="322" stroke="#8b8b97" stroke-width="1.2"/>
+    <text x="134" y="300" fill="#01010c" font-size="12" font-weight="600" font-family="'Geist',sans-serif"><tspan x="160" dy="0">後から参加する</tspan><tspan x="160" dy="15">バンドメンバー</tspan></text>
+  
+
+    <rect x="90" y="430" width="140" height="72" rx="36" fill="#ffffff" stroke="#8b8b97" stroke-width="1.4"/>
+    <circle cx="114" cy="466" r="10" fill="none" stroke="#8b8b97" stroke-width="1.2"/>
+    <line x1="114" y1="476" x2="114" y2="490" stroke="#8b8b97" stroke-width="1.2"/>
+    <line x1="108" y1="482" x2="120" y2="482" stroke="#8b8b97" stroke-width="1.2"/>
+    <text x="134" y="460" fill="#01010c" font-size="12" font-weight="600" font-family="'Geist',sans-serif"><tspan x="160" dy="0">バンドリーダー /</tspan><tspan x="160" dy="15">バンドマネージャー</tspan></text>
+  
+
+    <rect x="420" y="70" width="184" height="92" rx="10" fill="rgba(60,130,200,0.08)" stroke="#3c82c8" stroke-width="1.2"/>
+    <rect x="430" y="78" width="40" height="14" rx="3" fill="#ffffff" stroke="#3c82c8" stroke-width="0.8"/>
+    <text x="450" y="88" fill="#3c82c8" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.12em">FUNC</text>
+    <text x="512" y="94" fill="#01010c" font-size="12" font-weight="600" font-family="'Geist',sans-serif" text-anchor="middle"><tspan x="512" dy="0">F01</tspan><tspan x="512" dy="16">ヒアリング準備を</tspan><tspan x="512" dy="16">揃える</tspan></text>
+  
+
+    <rect x="680" y="70" width="184" height="92" rx="10" fill="#ffffff" stroke="#01010c" stroke-width="1.2"/>
+    <rect x="690" y="78" width="40" height="14" rx="3" fill="#ffffff" stroke="#01010c" stroke-width="0.8"/>
+    <text x="710" y="88" fill="#01010c" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.12em">FUNC</text>
+    <text x="772" y="94" fill="#01010c" font-size="12" font-weight="600" font-family="'Geist',sans-serif" text-anchor="middle"><tspan x="772" dy="0">F02</tspan><tspan x="772" dy="16">ヒアリング直後の</tspan><tspan x="772" dy="16">論点を整理する</tspan></text>
+  
+
+    <rect x="420" y="250" width="184" height="92" rx="10" fill="#ffffff" stroke="#01010c" stroke-width="1.2"/>
+    <rect x="430" y="258" width="40" height="14" rx="3" fill="#ffffff" stroke="#01010c" stroke-width="0.8"/>
+    <text x="450" y="268" fill="#01010c" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.12em">FUNC</text>
+    <text x="512" y="274" fill="#01010c" font-size="12" font-weight="600" font-family="'Geist',sans-serif" text-anchor="middle"><tspan x="512" dy="0">F03</tspan><tspan x="512" dy="16">誰に提案するかを</tspan><tspan x="512" dy="16">絞り込む</tspan></text>
+  
+
+    <rect x="680" y="250" width="184" height="92" rx="10" fill="#ffffff" stroke="#01010c" stroke-width="1.2"/>
+    <rect x="690" y="258" width="40" height="14" rx="3" fill="#ffffff" stroke="#01010c" stroke-width="0.8"/>
+    <text x="710" y="268" fill="#01010c" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.12em">FUNC</text>
+    <text x="772" y="274" fill="#01010c" font-size="12" font-weight="600" font-family="'Geist',sans-serif" text-anchor="middle"><tspan x="772" dy="0">F04</tspan><tspan x="772" dy="16">顧客体験を</tspan><tspan x="772" dy="16">構造化する</tspan></text>
+  
+
+    <rect x="420" y="430" width="184" height="92" rx="10" fill="rgba(60,130,200,0.08)" stroke="#3c82c8" stroke-width="1.2"/>
+    <rect x="430" y="438" width="40" height="14" rx="3" fill="#ffffff" stroke="#3c82c8" stroke-width="0.8"/>
+    <text x="450" y="448" fill="#3c82c8" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.12em">FUNC</text>
+    <text x="512" y="454" fill="#01010c" font-size="12" font-weight="600" font-family="'Geist',sans-serif" text-anchor="middle"><tspan x="512" dy="0">F05</tspan><tspan x="512" dy="16">提案の核を</tspan><tspan x="512" dy="16">言語化する</tspan></text>
+  
+
+    <rect x="680" y="430" width="184" height="92" rx="10" fill="#ffffff" stroke="#01010c" stroke-width="1.2"/>
+    <rect x="690" y="438" width="40" height="14" rx="3" fill="#ffffff" stroke="#01010c" stroke-width="0.8"/>
+    <text x="710" y="448" fill="#01010c" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.12em">FUNC</text>
+    <text x="772" y="454" fill="#01010c" font-size="12" font-weight="600" font-family="'Geist',sans-serif" text-anchor="middle"><tspan x="772" dy="0">F06</tspan><tspan x="772" dy="16">プロトタイプ前の</tspan><tspan x="772" dy="16">判断を固める</tspan></text>
+  
+
+    <rect x="550" y="610" width="184" height="92" rx="10" fill="#ffffff" stroke="#01010c" stroke-width="1.2"/>
+    <rect x="560" y="618" width="40" height="14" rx="3" fill="#ffffff" stroke="#01010c" stroke-width="0.8"/>
+    <text x="580" y="628" fill="#01010c" font-size="7" font-family="'Geist Mono',monospace" text-anchor="middle" letter-spacing="0.12em">FUNC</text>
+    <text x="642" y="634" fill="#01010c" font-size="12" font-weight="600" font-family="'Geist',sans-serif" text-anchor="middle"><tspan x="642" dy="0">F07</tspan><tspan x="642" dy="16">実装前の構造へ</tspan><tspan x="642" dy="16">引き渡す</tspan></text>
+  
+    </svg>

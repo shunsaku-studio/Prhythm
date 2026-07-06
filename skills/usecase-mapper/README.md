@@ -111,7 +111,8 @@ docs/prhythm-band-persona-stage2.md をもとに全体俯瞰で出して
 usecase-mapper/
 ├── SKILL.md     # エージェントが読む実行手順
 ├── README.md    # 人間向けの概要
-└── example.md   # Persona 入力を使ったテスト出力例
+├── example.md   # Persona 入力を使った実出力例
+└── examples/    # example.md から参照する実図 SVG
 ```
 
 ## 関連スキル
