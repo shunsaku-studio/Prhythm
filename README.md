@@ -39,6 +39,9 @@ bash scripts/link-cursor-skills.sh
 | [product-vision-and-concept](skills/product-vision-and-concept/) | 対話でプロダクトのビジョン・コンセプト（一行ステートメント + Why/Who/What/差別化）を言語化する |
 | [defining-personas-and-segments](skills/defining-personas-and-segments/) | インタビューメモ等からターゲットユーザー・ペルソナ・セグメントを比較表で整理。Primary は人間が決める設計。Counter-persona で「最適化で失う人」も可視化 |
 | [create-journey-map](skills/create-journey-map/) | ヒアリング情報から台本形式のジャーニーマップを生成。As-Is（課題→インサイト→HMW）と To-Be（対比サマリー→コアシーン候補）の2モード |
+| [hearing](skills/hearing/) | 顧客ヒアリング支援の入口。会議前準備は `hearing-prep`、会議後分析は `hearing-analysis` に振り分ける |
+| [hearing-prep](skills/hearing-prep/) | 顧客ヒアリング前の準備用。SPIN ベースの静的質問集から会議目的に合う質問を選び、進行カードを作る |
+| [hearing-analysis](skills/hearing-analysis/) | 顧客ヒアリング後の整理用。ボトルネック仮説、根拠、解決方向、次回の擦り合わせ質問をまとめる |
 | [prototype-design-md](skills/prototype-design-md/) | プロトタイプ段階の DESIGN.md — UI 生成前の判断ブリーフ（feel・サーフェス・禁止・コンポーネント選び） |
 | [ooui-graphql-modeling](skills/ooui-graphql-modeling/) | プロト段階の GraphQL SDL 設計（ドメイン中心・段階的ゲート） |
 | [ooui-architect](skills/ooui-architect/) | OOUI の common/model/ルーティング dir 構成、scaffold、4-file コンポーネント |
