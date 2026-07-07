@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light" style="--rec-label: '★ 推奨'">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Prhythm ユースケーススケッチ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       TOKENS
+       ============================================================ */
+    :root {
+      --bg: #FAFAF7;
+      --surface: #FFFFFF;
+      --surface-2: #F5F5F0;
+      --surface-3: #EFEEE8;
+      --text: #1A1A1A;
+      --text-muted: #4A4A45;
+      --text-subtle: #6B6B66;
+      --accent: #D97757;
+      --accent-hover: #C56843;
+      --accent-soft: #FBEEE6;
+      --accent-border: #F0D5C4;
+      --accent-strong: #A85533;
+      --border: #E5E4DC;
+      --border-strong: #CDCDC4;
+      --code-bg: #F5F2EC;
+      --code-text: #2A2A2A;
+      --info: #2563EB;
+      --info-soft: #EFF6FF;
+      --info-border: #BFDBFE;
+      --warn: #B45309;
+      --warn-soft: #FFFBEB;
+      --warn-border: #FDE68A;
+      --danger: #B91C1C;
+      --danger-soft: #FEF2F2;
+      --danger-border: #FECACA;
+      --success: #047857;
+      --success-soft: #ECFDF5;
+      --success-border: #A7F3D0;
+      --decision: #6D28D9;
+      --decision-soft: #F5F3FF;
+      --decision-border: #DDD6FE;
+      --shadow-sm: 0 1px 2px rgba(20, 14, 8, 0.04);
+      --shadow: 0 1px 2px rgba(20, 14, 8, 0.04), 0 4px 12px rgba(20, 14, 8, 0.06);
+      --shadow-lg: 0 8px 24px rgba(20, 14, 8, 0.10);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 16px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans CJK JP', 'Noto Sans CJK KR', sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+      --z-progress: 200;
+      --z-topbar: 100;
+      --z-drawer: 300;
+      --z-backdrop: 250;
+    }
+
+    [data-theme="dark"] {
+      --bg: #1A1714;
+      --surface: #221E1A;
+      --surface-2: #2A2520;
+      --surface-3: #322C26;
+      --text: #F5F0E8;
+      --text-muted: #C8C0B6;
+      --text-subtle: #9A938A;
+      --accent: #E89572;
+      --accent-hover: #F2A87F;
+      --accent-soft: #3A2A22;
+      --accent-border: #5A3D2E;
+      --accent-strong: #F5B493;
+      --border: #2E2924;
+      --border-strong: #463F38;
+      --code-bg: #1E1B17;
+      --code-text: #E8E2D8;
+      --info: #93C5FD;
+      --info-soft: #1E2A3D;
+      --info-border: #2A4365;
+      --warn: #FBBF24;
+      --warn-soft: #332817;
+      --warn-border: #5C4520;
+      --danger: #FCA5A5;
+      --danger-soft: #3A1F1F;
+      --danger-border: #5C2A2A;
+      --success: #6EE7B7;
+      --success-soft: #1A3329;
+      --success-border: #1F5C45;
+      --decision: #C4B5FD;
+      --decision-soft: #2A1F40;
+      --decision-border: #4A3870;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    /* ============================================================
+       BASE
+       ============================================================ */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    ::selection { background: var(--accent-soft); color: var(--accent-strong); }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      top: -100px; left: 8px;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      z-index: 1000;
+      transition: top 0.15s;
+    }
+    .skip-link:focus { top: 8px; }
+
+    /* SVG sprite container (hidden) */
+    .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    .icon { display: inline-block; flex-shrink: 0; vertical-align: middle; stroke: currentColor; fill: none; }
+
+    /* Scroll progress bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--accent);
+      z-index: var(--z-progress);
+      transition: width 0.05s linear;
+    }
+
+    /* ============================================================
+       TOPBAR
+       ============================================================ */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: var(--z-topbar);
+      background: rgba(250, 250, 247, 0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    [data-theme="dark"] .topbar { background: rgba(26, 23, 20, 0.85); }
+    .topbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 14px;
+    }
+    .brand-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+      animation: brand-pulse 2.8s ease-in-out infinite;
+    }
+    @keyframes brand-pulse {
+      0%, 100% { box-shadow: 0 0 0 4px var(--accent-soft); }
+      50%      { box-shadow: 0 0 0 7px transparent; }
+    }
+    .topbar-actions { display: flex; gap: 6px; align-items: center; }
+    .icon-btn {
+      width: 40px; height: 40px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+      padding: 0;
+    }
+    .icon-btn .icon { width: 18px; height: 18px; stroke-width: 2; }
+    .icon-btn[hidden] { display: none; }
+
+    /* ============================================================
+       LAYOUT
+       ============================================================ */
+    .layout {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 48px;
+      padding: 32px 24px 96px;
+    }
+    .content { min-width: 0; }
+
+    /* ============================================================
+       TOC (desktop + mobile drawer)
+       ============================================================ */
+    .toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+    .toc::-webkit-scrollbar { width: 6px; }
+    .toc::-webkit-scrollbar-track { background: transparent; }
+    .toc::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+    .toc-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 12px 12px;
+    }
+    .toc-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-subtle);
+      margin: 0;
+    }
+    .toc-close { display: none; }
+    .toc-nav { display: flex; flex-direction: column; gap: 2px; }
+    .toc-nav a {
+      display: flex; align-items: center;
+      min-height: 36px;
+      padding: 8px 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+      line-height: 1.4;
+    }
+    .toc-nav a.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: var(--accent-soft);
+      font-weight: 500;
+    }
+    .toc-nav a.lvl-3 { padding-left: 26px; font-size: 12.5px; }
+    .toc-backdrop {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: var(--z-backdrop);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    /* ============================================================
+       DOC HEADER
+       ============================================================ */
+    .doc-header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-eyebrow {
+      display: inline-flex; align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid var(--accent-border);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+    .doc-title {
+      font-size: clamp(28px, 3vw + 16px, 40px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0 0 12px;
+      color: var(--text);
+      text-wrap: balance;
+    }
+    .doc-subtitle {
+      font-size: clamp(15px, 0.6vw + 13px, 18px);
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0 0 20px;
+      max-width: 75ch;
+      text-wrap: pretty;
+    }
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-subtle);
+    }
+    .doc-meta-item { display: inline-flex; align-items: center; gap: 6px; }
+    .doc-meta .icon { width: 14px; height: 14px; stroke-width: 2; }
+
+    /* ============================================================
+       CONTENT (typography)
+       ============================================================ */
+    .content h1, .content h2, .content h3, .content h4 {
+      color: var(--text);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      scroll-margin-top: 80px;
+      text-wrap: balance;
+    }
+    .content h2 {
+      font-size: 26px;
+      font-weight: 600;
+      margin: 56px 0 16px;
+      padding-top: 8px;
+      position: relative;
+    }
+    .content h3 {
+      font-size: 19px;
+      font-weight: 600;
+      margin: 36px 0 12px;
+      position: relative;
+    }
+    .content h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 24px 0 8px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .content > p,
+    .content > ul,
+    .content > ol,
+    .content > blockquote { max-width: 75ch; }
+    .content p { margin: 0 0 16px; text-wrap: pretty; overflow-wrap: anywhere; }
+    .content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-border); }
+    .content ul, .content ol { padding-left: 24px; margin: 0 0 16px; }
+    .content li { margin: 4px 0; }
+    .content strong { color: var(--text); font-weight: 600; }
+    .content em { color: var(--text-muted); }
+    .content hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+    /* Anchor links injected by JS on h2/h3 with id */
+    .anchor {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px;
+      margin-left: 6px;
+      color: var(--text-subtle);
+      opacity: 0;
+      transform: translateY(-1px);
+      transition: opacity 0.15s, color 0.15s;
+      border-bottom: none !important;
+      border-radius: var(--radius-sm);
+    }
+    .anchor .icon { width: 14px; height: 14px; stroke-width: 2; }
+
+    /* Images */
+    .content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin: 20px 0;
+      display: block;
+    }
+    .content figure { margin: 20px 0; }
+    .content figure img { margin: 0; }
+    .content figcaption {
+      font-size: 13px;
+      color: var(--text-subtle);
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    /* Task lists (- [ ] / - [x]) */
+    .content .task-list-item { list-style: none; margin-left: -22px; }
+    .content .task-list-item-checkbox {
+      margin-right: 8px;
+      vertical-align: -2px;
+      accent-color: var(--accent);
+    }
+
+    /* Footnotes */
+    .content .footnote-ref a,
+    .content sup a {
+      font-size: 0.75em;
+      vertical-align: super;
+      border-bottom: none;
+      padding: 0 2px;
+    }
+    .content .footnotes {
+      margin-top: 56px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       CODE
+       ============================================================ */
+    .content code {
+      font-family: var(--font-mono);
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.88em;
+      color: var(--code-text);
+      border: 1px solid var(--border);
+      overflow-wrap: anywhere;
+    }
+    .content pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      overflow-x: auto;
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin: 16px 0;
+      position: relative;
+    }
+    .content pre code {
+      background: none; padding: 0; border: none;
+      color: var(--code-text);
+      font-size: inherit;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 32px; height: 32px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      color: var(--text-subtle);
+      opacity: 0;
+      transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+      padding: 0;
+    }
+    .copy-btn .icon { width: 14px; height: 14px; stroke-width: 2; }
+    .copy-btn.copied { color: var(--success); border-color: var(--success-border); opacity: 1; }
+
+    /* ============================================================
+       TIMELINE / STEPS
+       ============================================================ */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 24px 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 19px;
+      top: 20px;
+      bottom: 20px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent-border), var(--border));
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 16px 4px;
+      position: relative;
+      border-radius: var(--radius);
+      transition: background-color 0.15s;
+    }
+    .step-num {
+      width: 40px; height: 40px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--surface);
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      border-radius: 50%;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      z-index: 1;
+      transition: background-color 0.15s, color 0.15s, transform 0.15s;
+    }
+    .step.done .step-num { background: var(--accent); color: #fff; }
+    .step-body { padding-top: 6px; min-width: 0; }
+    .step-body h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .step-body p { margin: 0 0 8px; color: var(--text-muted); font-size: 14.5px; max-width: 75ch; }
+    .step-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* ============================================================
+       CALLOUTS
+       ============================================================ */
+    .callout {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      border: 1px solid;
+      margin: 20px 0;
+      font-size: 14.5px;
+      line-height: 1.6;
+      max-width: 75ch;
+    }
+    .callout-icon { width: 20px; height: 20px; margin-top: 2px; stroke-width: 2; }
+    .callout-body { min-width: 0; }
+    .callout-title { font-weight: 600; margin: 0 0 4px; font-size: 14px; }
+    .callout-body p:last-child { margin-bottom: 0; }
+    .callout-body code { background: rgba(0,0,0,0.04); }
+    [data-theme="dark"] .callout-body code { background: rgba(255,255,255,0.06); }
+
+    .callout-info     { background: var(--info-soft);     border-color: var(--info-border);     color: var(--text); }
+    .callout-info     .callout-title, .callout-info     .callout-icon { color: var(--info); }
+    .callout-warn     { background: var(--warn-soft);     border-color: var(--warn-border);     color: var(--text); }
+    .callout-warn     .callout-title, .callout-warn     .callout-icon { color: var(--warn); }
+    .callout-danger   { background: var(--danger-soft);   border-color: var(--danger-border);   color: var(--text); }
+    .callout-danger   .callout-title, .callout-danger   .callout-icon { color: var(--danger); }
+    .callout-success  { background: var(--success-soft);  border-color: var(--success-border);  color: var(--text); }
+    .callout-success  .callout-title, .callout-success  .callout-icon { color: var(--success); }
+    .callout-decision { background: var(--decision-soft); border-color: var(--decision-border); color: var(--text); }
+    .callout-decision .callout-title, .callout-decision .callout-icon { color: var(--decision); }
+    .callout-tip      { background: var(--accent-soft);   border-color: var(--accent-border);   color: var(--text); }
+    .callout-tip      .callout-title, .callout-tip      .callout-icon { color: var(--accent-strong); }
+
+    /* ============================================================
+       KEY-POINT HIGHLIGHT
+       ============================================================ */
+    .highlight {
+      background: linear-gradient(135deg, var(--accent-soft), var(--surface-2));
+      border-left: 4px solid var(--accent);
+      padding: 18px 22px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 24px 0;
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 75ch;
+    }
+    .highlight-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-strong);
+      margin-bottom: 6px;
+    }
+
+    /* ============================================================
+       MERMAID
+       ============================================================ */
+    .diagram {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 24px 0;
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+    }
+    .diagram-caption {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+      font-size: 13px;
+      color: var(--text-subtle);
+      text-align: center;
+    }
+    .mermaid { text-align: center; min-height: 80px; }
+    .mermaid svg { max-width: 100%; height: auto; }
+    .mermaid:not([data-processed]) {
+      opacity: 0.4;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-subtle);
+      white-space: pre-wrap;
+      text-align: left;
+    }
+
+    /* ============================================================
+       PROS / CONS
+       ============================================================ */
+    .proscons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .proscons-col {
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      border: 1px solid;
+    }
+    .proscons-col h4 {
+      margin: 0 0 12px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .proscons-col ul { margin: 0; padding-left: 18px; }
+    .proscons-col li { margin: 6px 0; }
+    .pros { background: var(--success-soft); border-color: var(--success-border); }
+    .pros h4 { color: var(--success); }
+    .cons { background: var(--danger-soft); border-color: var(--danger-border); }
+    .cons h4 { color: var(--danger); }
+
+    /* ============================================================
+       COMPARISON CARDS
+       ============================================================ */
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .compare-card {
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color 0.18s, box-shadow 0.18s;
+      position: relative;
+    }
+    .compare-card.recommended { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .compare-card.recommended::before {
+      content: var(--rec-label, "★ Recommended");
+      position: absolute; top: -10px; right: 14px;
+      background: var(--accent); color: #fff;
+      padding: 2px 10px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .compare-card h4 { margin: 0 0 8px; font-size: 15px; color: var(--text); text-transform: none; letter-spacing: normal; }
+    .compare-card p { margin: 0; color: var(--text-muted); font-size: 14px; }
+
+    /* ============================================================
+       COLLAPSIBLE
+       ============================================================ */
+    details.collapsible {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin: 16px 0;
+      background: var(--surface);
+      overflow: hidden;
+    }
+    details.collapsible[open] { box-shadow: var(--shadow-sm); }
+    details.collapsible > summary {
+      cursor: pointer;
+      padding: 14px 18px;
+      font-weight: 500;
+      color: var(--text);
+      list-style: none;
+      display: flex; align-items: center; gap: 10px;
+      user-select: none;
+      transition: background 0.15s;
+      min-height: 44px;
+    }
+    details.collapsible > summary::-webkit-details-marker { display: none; }
+    details.collapsible > summary::before {
+      content: "›";
+      display: inline-block;
+      transition: transform 0.18s;
+      color: var(--accent);
+      font-size: 18px;
+      font-weight: 700;
+    }
+    details.collapsible[open] > summary::before { transform: rotate(90deg); }
+    .collapsible-body { padding: 4px 18px 18px; border-top: 1px solid var(--border); }
+    .collapsible-body > *:first-child { margin-top: 12px; }
+
+    /* ============================================================
+       TABLES (wrapped via .table-wrap or naturally responsive)
+       ============================================================ */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      max-width: 100%;
+    }
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      background: var(--surface);
+      margin: 0;
+    }
+    /* Standalone tables (not inside .table-wrap) keep visual border */
+    .content > table {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 20px 0;
+      display: block;
+      overflow-x: auto;
+    }
+    .content th {
+      background: var(--surface-2);
+      color: var(--text);
+      font-weight: 600;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .content td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+    .content tr:last-child td { border-bottom: none; }
+
+    /* ============================================================
+       BLOCKQUOTE
+       ============================================================ */
+    .content blockquote {
+      margin: 20px 0;
+      padding: 4px 20px;
+      border-left: 3px solid var(--accent-border);
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .doc-footer {
+      margin-top: 80px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-subtle);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .doc-footer a { color: var(--accent); text-decoration: none; }
+
+    /* ============================================================
+       FOCUS-VISIBLE (a11y)
+       ============================================================ */
+    *:focus { outline: none; }
+    *:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+    .toc-nav a:focus-visible { outline-offset: -2px; }
+    .icon-btn:focus-visible { outline-offset: 2px; }
+    .anchor:focus-visible { opacity: 1; outline-offset: 2px; }
+    details.collapsible > summary:focus-visible { outline-offset: -2px; }
+
+    /* ============================================================
+       HOVER (only on hover-capable devices to avoid sticky-tap on mobile)
+       ============================================================ */
+    @media (hover: hover) {
+      .icon-btn:hover { color: var(--accent); border-color: var(--accent-border); background: var(--accent-soft); }
+      .toc-nav a:hover { color: var(--accent); background: var(--accent-soft); }
+      .content a:hover { color: var(--accent-hover); border-bottom-color: var(--accent); }
+      .compare-card:hover { border-color: var(--accent-border); box-shadow: var(--shadow); }
+      .compare-card.recommended:hover { border-color: var(--accent); }
+      .content tr:hover td { background: var(--surface-2); }
+      details.collapsible > summary:hover { background: var(--surface-2); }
+      .step:hover { background: var(--surface-2); }
+      .step:hover .step-num { transform: scale(1.05); }
+      .anchor:hover { color: var(--accent); }
+      .content h2:hover .anchor,
+      .content h3:hover .anchor { opacity: 1; }
+      .copy-btn:hover { color: var(--accent); border-color: var(--accent-border); }
+      .content pre:hover .copy-btn { opacity: 1; }
+    }
+    /* On touch devices, copy-btn is always visible at low opacity */
+    @media (hover: none) {
+      .copy-btn { opacity: 0.6; }
+      .anchor { opacity: 0.4; }
+    }
+
+    /* ============================================================
+       MOBILE (≤900px) — TOC becomes off-canvas drawer
+       ============================================================ */
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 20px 16px 80px;
+      }
+      .topbar-inner { padding: 8px 12px; }
+      .doc-header { margin-bottom: 28px; padding-bottom: 20px; }
+
+      .toc-mobile-trigger { display: inline-flex !important; }
+
+      .toc {
+        position: fixed;
+        top: 0; left: 0;
+        width: min(300px, 82vw);
+        height: 100dvh;
+        max-height: 100dvh;
+        background: var(--surface);
+        z-index: var(--z-drawer);
+        padding: 16px 8px 24px 16px;
+        box-shadow: var(--shadow-lg);
+        transform: translateX(-105%);
+        transition: transform 0.25s ease;
+      }
+      .toc-head { padding: 4px 4px 12px 8px; }
+      .toc-close {
+        display: inline-flex !important;
+        width: 36px; height: 36px;
+        align-items: center; justify-content: center;
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: var(--radius-sm);
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 0;
+      }
+      .toc-close .icon { width: 18px; height: 18px; stroke-width: 2; }
+      body.toc-open .toc { transform: translateX(0); }
+      body.toc-open .toc-backdrop {
+        display: block;
+        opacity: 1;
+      }
+      .toc-backdrop {
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+      }
+      body.toc-open .toc-backdrop { pointer-events: auto; }
+      body.toc-open { overflow: hidden; }
+    }
+    @media (min-width: 901px) {
+      .toc-mobile-trigger { display: none !important; }
+    }
+
+    /* ============================================================
+       REDUCED MOTION (a11y)
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      html { scroll-behavior: auto; }
+      .brand-dot { animation: none; box-shadow: 0 0 0 4px var(--accent-soft); }
+    }
+
+    /* ============================================================
+       PRINT
+       ============================================================ */
+    @media print {
+      .topbar, .toc, .toc-backdrop, .icon-btn, .copy-btn, .anchor, .scroll-progress { display: none !important; }
+      .layout { grid-template-columns: 1fr; padding: 0; max-width: 100%; }
+      body { background: #fff; color: #000; }
+      a { color: #000; }
+      .content pre, .callout, .compare-card, .step, .diagram { break-inside: avoid; }
+      .doc-footer { break-before: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip link for keyboard users -->
+  <a href="#main" class="skip-link">本文へ移動</a>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- SVG icon sprite (Lucide-style) -->
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+    <symbol id="i-danger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></symbol>
+    <symbol id="i-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="i-decision" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-tip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14a5 5 0 1 0-6.18 0 4 4 0 0 1 1.59 2h2.99a4 4 0 0 1 1.6-2Z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  </svg>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <button class="icon-btn toc-mobile-trigger" id="toc-toggle" onclick="openToc()" aria-label="目次" title="目次">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-menu"/></svg>
+        </button>
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>メモ</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" onclick="window.print()" title="印刷 / PDF 保存" aria-label="印刷 / PDF 保存">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-printer"/></svg>
+        </button>
+        <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()" title="テーマ切替" aria-label="テーマ切替">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use id="theme-icon-use" href="#i-moon"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- TOC drawer backdrop (mobile) -->
+  <div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
+
+  <div class="layout">
+    <aside class="toc" id="toc" aria-label="目次">
+      <div class="toc-head">
+        <p class="toc-title">目次</p>
+        <button class="toc-close" onclick="closeToc()" aria-label="閉じる">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </div>
+      <nav class="toc-nav" id="toc-nav">
+        <a href="#前提" class="lvl-2">前提</a>
+        <a href="#actor-persona-一覧" class="lvl-2">Actor / Persona 一覧</a>
+        <a href="#機能一覧" class="lvl-2">機能一覧</a>
+        <a href="#全体ユースケース図" class="lvl-2">全体ユースケース図</a>
+        <a href="#ユースケース一覧" class="lvl-2">ユースケース一覧</a>
+        <a href="#機能の要約" class="lvl-3">機能の要約</a>
+        <a href="#ユースケース図" class="lvl-3">ユースケース図</a>
+        <a href="#ユースケース一覧-2" class="lvl-3">ユースケース一覧</a>
+        <a href="#前提-未確定事項" class="lvl-3">前提 / 未確定事項</a>
+        <a href="#機能の要約-2" class="lvl-3">機能の要約</a>
+        <a href="#ユースケース図-2" class="lvl-3">ユースケース図</a>
+        <a href="#ユースケース一覧-3" class="lvl-3">ユースケース一覧</a>
+        <a href="#前提-未確定事項-2" class="lvl-3">前提 / 未確定事項</a>
+        <a href="#機能の要約-3" class="lvl-3">機能の要約</a>
+        <a href="#ユースケース図-3" class="lvl-3">ユースケース図</a>
+        <a href="#ユースケース一覧-4" class="lvl-3">ユースケース一覧</a>
+        <a href="#前提-未確定事項-3" class="lvl-3">前提 / 未確定事項</a>
+        <a href="#機能の要約-4" class="lvl-3">機能の要約</a>
+        <a href="#ユースケース図-4" class="lvl-3">ユースケース図</a>
+        <a href="#ユースケース一覧-5" class="lvl-3">ユースケース一覧</a>
+        <a href="#前提-未確定事項-4" class="lvl-3">前提 / 未確定事項</a>
+        <a href="#機能の要約-5" class="lvl-3">機能の要約</a>
+        <a href="#ユースケース図-5" class="lvl-3">ユースケース図</a>
+        <a href="#ユースケース一覧-6" class="lvl-3">ユースケース一覧</a>
+        <a href="#前提-未確定事項-5" class="lvl-3">前提 / 未確定事項</a>
+        <a href="#機能の要約-6" class="lvl-3">機能の要約</a>
+        <a href="#ユースケース図-6" class="lvl-3">ユースケース図</a>
+        <a href="#ユースケース一覧-7" class="lvl-3">ユースケース一覧</a>
+        <a href="#前提-未確定事項-6" class="lvl-3">前提 / 未確定事項</a>
+        <a href="#機能の要約-7" class="lvl-3">機能の要約</a>
+        <a href="#ユースケース図-7" class="lvl-3">ユースケース図</a>
+        <a href="#ユースケース一覧-8" class="lvl-3">ユースケース一覧</a>
+        <a href="#前提-未確定事項-7" class="lvl-3">前提 / 未確定事項</a>
+      </nav>
+    </aside>
+
+    <main class="content" id="main">
+      <header class="doc-header">
+        <span class="doc-eyebrow">NOTES</span>
+        <h1 class="doc-title">Prhythm ユースケーススケッチ</h1>
+        <p class="doc-subtitle">Persona 文書から、機能一覧とユースケース図の実図を含むスケッチを生成したサンプル。</p>
+        <div class="doc-meta">
+          <span class="doc-meta-item">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-file"/></svg>
+            usecase-map.md
+          </span>
+          <span class="doc-meta-item">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-calendar"/></svg>
+            2026-07-07
+          </span>
+          <span class="doc-meta-item">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock"/></svg>
+            ~4 分で読了
+          </span>
+        </div>
+      </header>
+
+      <!-- CONTENT_START -->
+<h2 id="前提">前提</h2>
+<ul>
+<li>参照した入力ソース:
+<ul>
+<li><code>docs/prhythm-band-persona-stage2.md</code></li>
+<li><code>docs/prhythm-band-persona-stage1.md</code></li>
+</ul>
+</li>
+<li>今回のモード: 全体俯瞰</li>
+<li>対象 Persona:
+<ul>
+<li>Primary candidate (hypothesis): 案件初期の情報をバンド資産に変えたい現場メンバー</li>
+</ul>
+</li>
+<li>メモ:
+<ul>
+<li>この出力はコードベース分析ではなく、Persona 文書からのスケッチ</li>
+<li><code>Fact</code> より <code>Assumption</code> が多く、仮説段階の利用シーンを含む</li>
+</ul>
+</li>
+</ul>
+<h2 id="actor-persona-一覧">Actor / Persona 一覧</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Actor</th>
+<th>概要</th>
+<th>主な状況</th>
+<th>主な目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>案件初期の情報をバンド資産に変えたい現場メンバー</td>
+<td>既存または事後形成バンドで、ヒアリングや提案準備の断片を再利用可能な材料に変えたい主役</td>
+<td>ヒアリング前後、提案整理、必要時の体験整理・プロトタイプ前判断</td>
+<td>案件初期の情報を、後から入る人も使える判断材料へ変える</td>
+</tr>
+<tr>
+<td>後から参加するバンドメンバー</td>
+<td>途中から案件に入る読み手・共同作業者</td>
+<td>既存の整理物を読んで文脈を追う場面</td>
+<td>いま何が決まっていて、次に何をすべきかを追える</td>
+</tr>
+<tr>
+<td>バンドリーダー / バンドマネージャー</td>
+<td>推進責任を持ち、成果物の整合性を気にする周辺 Actor</td>
+<td>提案品質や進め方を均したい場面</td>
+<td>バンド全体で筋の通った進め方を維持する</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="機能一覧">機能一覧</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>機能ID</th>
+<th>機能名</th>
+<th>何を可能にするか</th>
+<th>主な対象 Actor</th>
+<th>代表ユースケース数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F01</td>
+<td>ヒアリング準備を揃える</td>
+<td>バンドで何を聞き、どこまで仮説を持って入るかを揃えられる</td>
+<td>バンドメンバー</td>
+<td>3</td>
+</tr>
+<tr>
+<td>F02</td>
+<td>ヒアリング直後の論点を整理する</td>
+<td>発言ログを次の判断につながる論点へ変換できる</td>
+<td>バンドメンバー</td>
+<td>3</td>
+</tr>
+<tr>
+<td>F03</td>
+<td>誰に提案するかを絞り込む</td>
+<td>主対象の利用者や役割を比較し、提案先を狭められる</td>
+<td>バンドメンバー、バンドリーダー</td>
+<td>3</td>
+</tr>
+<tr>
+<td>F04</td>
+<td>顧客体験を構造化する</td>
+<td>現状の詰まりと理想の流れを、チームで同じ絵として持てる</td>
+<td>バンドメンバー</td>
+<td>3</td>
+</tr>
+<tr>
+<td>F05</td>
+<td>提案の核を言語化する</td>
+<td>Why / Who / What を揃え、説明する人ごとの差を減らせる</td>
+<td>バンドメンバー、バンドリーダー</td>
+<td>3</td>
+</tr>
+<tr>
+<td>F06</td>
+<td>プロトタイプ前の判断を固める</td>
+<td>必要な案件だけ、UI を作る前に何を見せるか・何を避けるかを決められる</td>
+<td>バンドメンバー</td>
+<td>2</td>
+</tr>
+<tr>
+<td>F07</td>
+<td>実装前の構造へ引き渡す</td>
+<td>必要な案件だけ、上流で決めた言葉を実装前の構造設計へつなげられる</td>
+<td>バンドメンバー、実装接続を担うメンバー</td>
+<td>2</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="全体ユースケース図">全体ユースケース図</h2>
+<p>[[diagram:overview-usecase]]</p>
+<h2 id="ユースケース一覧">ユースケース一覧</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>UC ID</th>
+<th>機能ID</th>
+<th>機能名</th>
+<th>ユースケース</th>
+<th>主アクター</th>
+<th>利用シーン</th>
+<th>期待結果</th>
+<th>確度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UC-F01-01</td>
+<td>F01</td>
+<td>ヒアリング準備を揃える</td>
+<td>バンドで誰が何を聞くかを揃えられる</td>
+<td>バンドメンバー</td>
+<td>ヒアリング前日</td>
+<td>当日の役割分担が曖昧なまま始まらない</td>
+<td>Fact</td>
+</tr>
+<tr>
+<td>UC-F01-02</td>
+<td>F01</td>
+<td>ヒアリング準備を揃える</td>
+<td>会話前に仮説の粒度を揃えられる</td>
+<td>バンドメンバー</td>
+<td>仮説を持って顧客に入る直前</td>
+<td>個人戦ではなくチームで入れる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F01-03</td>
+<td>F01</td>
+<td>ヒアリング準備を揃える</td>
+<td>抜け漏れの少ない進行カードを作れる</td>
+<td>バンドメンバー</td>
+<td>会議前の短時間準備</td>
+<td>その場で聞き忘れを減らせる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F02-01</td>
+<td>F02</td>
+<td>ヒアリング直後の論点を整理する</td>
+<td>発言ログから論点と示唆を切り出せる</td>
+<td>バンドメンバー</td>
+<td>ヒアリング直後</td>
+<td>議事録だけ残って終わらない</td>
+<td>Fact</td>
+</tr>
+<tr>
+<td>UC-F02-02</td>
+<td>F02</td>
+<td>ヒアリング直後の論点を整理する</td>
+<td>次回確認事項を明確にできる</td>
+<td>バンドメンバー</td>
+<td>次回アクションを決める場面</td>
+<td>次に何を聞くかが残る</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F02-03</td>
+<td>F02</td>
+<td>ヒアリング直後の論点を整理する</td>
+<td>後から入るメンバーにも追える形で整理を残せる</td>
+<td>バンドメンバー</td>
+<td>共有用の整理物を残す場面</td>
+<td>文脈の引き継ぎがしやすい</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F03-01</td>
+<td>F03</td>
+<td>誰に提案するかを絞り込む</td>
+<td>主対象の利用者候補を比較できる</td>
+<td>バンドメンバー</td>
+<td>提案対象を検討する場面</td>
+<td>全員向けの薄い提案を避けられる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F03-02</td>
+<td>F03</td>
+<td>誰に提案するかを絞り込む</td>
+<td>Counter-persona を含めて設計の境界を確認できる</td>
+<td>バンドメンバー、バンドリーダー</td>
+<td>誰を捨てるかも含めて議論したい場面</td>
+<td>最適化の境界が見える</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F03-03</td>
+<td>F03</td>
+<td>誰に提案するかを絞り込む</td>
+<td>Primary persona を人間が判断しやすい材料を揃えられる</td>
+<td>バンドリーダー / バンドマネージャー</td>
+<td>意思決定前の比較場面</td>
+<td>判断を急がずに済む</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F04-01</td>
+<td>F04</td>
+<td>顧客体験を構造化する</td>
+<td>現状体験の詰まりを可視化できる</td>
+<td>バンドメンバー</td>
+<td>課題を体験として捉え直す場面</td>
+<td>抽象論だけの議論を減らせる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F04-02</td>
+<td>F04</td>
+<td>顧客体験を構造化する</td>
+<td>理想の流れをチームで共有できる</td>
+<td>バンドメンバー</td>
+<td>To-Be を揃えたい場面</td>
+<td>同じ絵を見ながら議論できる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F04-03</td>
+<td>F04</td>
+<td>顧客体験を構造化する</td>
+<td>提案の核につながるシーンを選び出せる</td>
+<td>バンドメンバー</td>
+<td>どこを提案の中心に置くか決める場面</td>
+<td>提案範囲を絞れる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F05-01</td>
+<td>F05</td>
+<td>提案の核を言語化する</td>
+<td>Why / Who / What を一貫した形で言語化できる</td>
+<td>バンドメンバー</td>
+<td>提案の方向性を整理する場面</td>
+<td>説明する人ごとの差が減る</td>
+<td>Fact</td>
+</tr>
+<tr>
+<td>UC-F05-02</td>
+<td>F05</td>
+<td>提案の核を言語化する</td>
+<td>提案の筋を一文で共有できる</td>
+<td>バンドメンバー、バンドリーダー</td>
+<td>社内共有や顧客共有の前</td>
+<td>認識ズレを抑えられる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F05-03</td>
+<td>F05</td>
+<td>提案の核を言語化する</td>
+<td>後続スキルに渡すための共通言語を残せる</td>
+<td>バンドメンバー</td>
+<td>次の整理や設計に渡す場面</td>
+<td>再翻訳の手間を減らせる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F06-01</td>
+<td>F06</td>
+<td>プロトタイプ前の判断を固める</td>
+<td>UI を作る前に見せる内容の優先順位を決められる</td>
+<td>バンドメンバー</td>
+<td>プロトタイプ作成前</td>
+<td>作り始めてからの揺り戻しを減らせる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F06-02</td>
+<td>F06</td>
+<td>プロトタイプ前の判断を固める</td>
+<td>禁止事項や避けるべき表現を先に揃えられる</td>
+<td>バンドメンバー</td>
+<td>表現方針を決める場面</td>
+<td>デザインの迷走を防げる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F07-01</td>
+<td>F07</td>
+<td>実装前の構造へ引き渡す</td>
+<td>上流で決めた概念をそのまま構造設計へ渡せる</td>
+<td>バンドメンバー</td>
+<td>提案後に実装前整理へ進む場面</td>
+<td>言葉の再解釈を減らせる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F07-02</td>
+<td>F07</td>
+<td>実装前の構造へ引き渡す</td>
+<td>実装接続が必要な案件だけ後段スキルを追加できる</td>
+<td>バンドメンバー</td>
+<td>案件ごとの差分を吸収したい場面</td>
+<td>全スキル連続利用を前提にせず、必要なときだけ深掘りできる</td>
+<td>Unknown</td>
+</tr>
+</tbody>
+</table></div>
+<details>
+<summary>F01 ヒアリング準備を揃える</summary>
+<h3 id="機能の要約">機能の要約</h3>
+<p>ヒアリング前に、バンドとして何を聞き、どこまで仮説を持って入るかを揃えるための機能。<br>
+個人ごとの準備差を減らし、会議当日の抜け漏れを抑える。</p>
+<h3 id="ユースケース図">ユースケース図</h3>
+<p>[[diagram:f01-usecase]]</p>
+<h3 id="ユースケース一覧-2">ユースケース一覧</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>UC ID</th>
+<th>ユースケース</th>
+<th>主アクター</th>
+<th>利用シーン</th>
+<th>期待結果</th>
+<th>確度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UC-F01-01</td>
+<td>バンドで誰が何を聞くかを揃えられる</td>
+<td>バンドメンバー</td>
+<td>ヒアリング前日</td>
+<td>役割分担が曖昧なまま始まらない</td>
+<td>Fact</td>
+</tr>
+<tr>
+<td>UC-F01-02</td>
+<td>会話前に仮説の粒度を揃えられる</td>
+<td>バンドメンバー</td>
+<td>顧客に入る直前</td>
+<td>個人戦ではなくチームで入れる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F01-03</td>
+<td>抜け漏れの少ない進行カードを作れる</td>
+<td>バンドメンバー</td>
+<td>会議前の短時間準備</td>
+<td>聞き忘れを減らせる</td>
+<td>Assumption</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="前提-未確定事項">前提 / 未確定事項</h3>
+<ul>
+<li>どこまで事前に仮説を固定するかは案件ごとに変わる</li>
+<li>個人の初動速度を優先する場面では重く見える可能性がある</li>
+</ul>
+</details>
+<details>
+<summary>F02 ヒアリング直後の論点を整理する</summary>
+<h3 id="機能の要約-2">機能の要約</h3>
+<p>ヒアリング直後に、発言ログをそのまま保存するのではなく、論点・示唆・次回確認事項へ変換する機能。<br>
+会議の熱が残っているうちに、次の提案判断へつながる形へ整理する。</p>
+<h3 id="ユースケース図-2">ユースケース図</h3>
+<p>[[diagram:f02-usecase]]</p>
+<h3 id="ユースケース一覧-3">ユースケース一覧</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>UC ID</th>
+<th>ユースケース</th>
+<th>主アクター</th>
+<th>利用シーン</th>
+<th>期待結果</th>
+<th>確度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UC-F02-01</td>
+<td>発言ログから論点と示唆を切り出せる</td>
+<td>バンドメンバー</td>
+<td>ヒアリング直後</td>
+<td>議事録だけ残って終わらない</td>
+<td>Fact</td>
+</tr>
+<tr>
+<td>UC-F02-02</td>
+<td>次回確認事項を明確にできる</td>
+<td>バンドメンバー</td>
+<td>次回アクションを決める場面</td>
+<td>次に何を聞くかが残る</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F02-03</td>
+<td>後から入るメンバーにも追える形で整理を残せる</td>
+<td>バンドメンバー</td>
+<td>共有用の整理物を残す場面</td>
+<td>文脈の引き継ぎがしやすい</td>
+<td>Assumption</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="前提-未確定事項-2">前提 / 未確定事項</h3>
+<ul>
+<li>どこまで詳細な議事録が必要かは別論点</li>
+<li>「即時整理」と「後で丁寧に整理」のどちらを優先するかは未確定</li>
+</ul>
+</details>
+<details>
+<summary>F03 誰に提案するかを絞り込む</summary>
+<h3 id="機能の要約-3">機能の要約</h3>
+<p>顧客企業の中でも誰を主対象に置くかを比較し、Primary persona を定めるための機能。<br>
+「全員向け」の提案に流れず、設計の境界も含めて判断材料を揃える。</p>
+<h3 id="ユースケース図-3">ユースケース図</h3>
+<p>[[diagram:f03-usecase]]</p>
+<h3 id="ユースケース一覧-4">ユースケース一覧</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>UC ID</th>
+<th>ユースケース</th>
+<th>主アクター</th>
+<th>利用シーン</th>
+<th>期待結果</th>
+<th>確度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UC-F03-01</td>
+<td>主対象の利用者候補を比較できる</td>
+<td>バンドメンバー</td>
+<td>提案対象を検討する場面</td>
+<td>全員向けの薄い提案を避けられる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F03-02</td>
+<td>Counter-persona を含めて設計の境界を確認できる</td>
+<td>バンドメンバー、バンドリーダー / バンドマネージャー</td>
+<td>誰を捨てるかも含めて議論したい場面</td>
+<td>最適化の境界が見える</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F03-03</td>
+<td>Primary persona を人間が判断しやすい材料を揃えられる</td>
+<td>バンドリーダー / バンドマネージャー</td>
+<td>意思決定前の比較場面</td>
+<td>判断を急がずに済む</td>
+<td>Assumption</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="前提-未確定事項-3">前提 / 未確定事項</h3>
+<ul>
+<li>Agent が Primary を決めない前提は維持する</li>
+<li>個人先行案件では、この比較工程自体が重い可能性がある</li>
+</ul>
+</details>
+<details>
+<summary>F04 顧客体験を構造化する</summary>
+<h3 id="機能の要約-4">機能の要約</h3>
+<p>現状の体験の詰まりと理想の流れを、バンド内で共通の絵として扱うための機能。<br>
+論点が抽象論に流れる前に、具体的な体験シーンへ固定する。</p>
+<h3 id="ユースケース図-4">ユースケース図</h3>
+<p>[[diagram:f04-usecase]]</p>
+<h3 id="ユースケース一覧-5">ユースケース一覧</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>UC ID</th>
+<th>ユースケース</th>
+<th>主アクター</th>
+<th>利用シーン</th>
+<th>期待結果</th>
+<th>確度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UC-F04-01</td>
+<td>現状体験の詰まりを可視化できる</td>
+<td>バンドメンバー</td>
+<td>課題を体験として捉え直す場面</td>
+<td>抽象論だけの議論を減らせる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F04-02</td>
+<td>理想の流れをチームで共有できる</td>
+<td>バンドメンバー</td>
+<td>To-Be を揃えたい場面</td>
+<td>同じ絵を見ながら議論できる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F04-03</td>
+<td>提案の核につながるシーンを選び出せる</td>
+<td>バンドメンバー</td>
+<td>提案範囲を決める場面</td>
+<td>提案範囲を絞れる</td>
+<td>Assumption</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="前提-未確定事項-4">前提 / 未確定事項</h3>
+<ul>
+<li>すべての案件で体験整理が必要とは限らない</li>
+<li>シーン粒度をどこまで細かく切るかは案件依存</li>
+</ul>
+</details>
+<details>
+<summary>F05 提案の核を言語化する</summary>
+<h3 id="機能の要約-5">機能の要約</h3>
+<p>Why / Who / What を一貫した形で言語化し、提案の筋を揃える機能。<br>
+説明者ごとに言い方がぶれる状態を避け、後続スキルにも渡せる共通言語を残す。</p>
+<h3 id="ユースケース図-5">ユースケース図</h3>
+<p>[[diagram:f05-usecase]]</p>
+<h3 id="ユースケース一覧-6">ユースケース一覧</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>UC ID</th>
+<th>ユースケース</th>
+<th>主アクター</th>
+<th>利用シーン</th>
+<th>期待結果</th>
+<th>確度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UC-F05-01</td>
+<td>Why / Who / What を一貫した形で言語化できる</td>
+<td>バンドメンバー</td>
+<td>提案の方向性を整理する場面</td>
+<td>説明する人ごとの差が減る</td>
+<td>Fact</td>
+</tr>
+<tr>
+<td>UC-F05-02</td>
+<td>提案の筋を一文で共有できる</td>
+<td>バンドメンバー、バンドリーダー / バンドマネージャー</td>
+<td>社内共有や顧客共有の前</td>
+<td>認識ズレを抑えられる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F05-03</td>
+<td>後続スキルに渡すための共通言語を残せる</td>
+<td>バンドメンバー</td>
+<td>次の整理や設計に渡す場面</td>
+<td>再翻訳の手間を減らせる</td>
+<td>Assumption</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="前提-未確定事項-5">前提 / 未確定事項</h3>
+<ul>
+<li>一文ステートメントの長さや硬さは利用先によって変わる</li>
+<li>ここでの言語化が本当に後段設計で再利用されるかは未検証</li>
+</ul>
+</details>
+<details>
+<summary>F06 プロトタイプ前の判断を固める</summary>
+<h3 id="機能の要約-6">機能の要約</h3>
+<p>UI を作り始める前に、何を見せるか、何を禁止するか、どの surface を選ぶかを整理する機能。<br>
+実装やデザイン着手後の揺り戻しを減らす。</p>
+<h3 id="ユースケース図-6">ユースケース図</h3>
+<p>[[diagram:f06-usecase]]</p>
+<h3 id="ユースケース一覧-7">ユースケース一覧</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>UC ID</th>
+<th>ユースケース</th>
+<th>主アクター</th>
+<th>利用シーン</th>
+<th>期待結果</th>
+<th>確度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UC-F06-01</td>
+<td>UI を作る前に見せる内容の優先順位を決められる</td>
+<td>バンドメンバー</td>
+<td>プロトタイプ作成前</td>
+<td>作り始めてからの揺り戻しを減らせる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F06-02</td>
+<td>禁止事項や避けるべき表現を先に揃えられる</td>
+<td>バンドメンバー</td>
+<td>表現方針を決める場面</td>
+<td>デザインの迷走を防げる</td>
+<td>Assumption</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="前提-未確定事項-6">前提 / 未確定事項</h3>
+<ul>
+<li>プロトタイプを作らない案件では不要</li>
+<li>surface 選択まで同一スキルで扱うかは今後の検証余地がある</li>
+</ul>
+</details>
+<details>
+<summary>F07 実装前の構造へ引き渡す</summary>
+<h3 id="機能の要約-7">機能の要約</h3>
+<p>上流で決めた概念や用語を、必要な案件だけ実装前の構造設計へ引き渡すための機能。<br>
+提案と構造設計の間で、言葉が切れて再整理になることを避ける。</p>
+<h3 id="ユースケース図-7">ユースケース図</h3>
+<p>[[diagram:f07-usecase]]</p>
+<h3 id="ユースケース一覧-8">ユースケース一覧</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>UC ID</th>
+<th>ユースケース</th>
+<th>主アクター</th>
+<th>利用シーン</th>
+<th>期待結果</th>
+<th>確度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UC-F07-01</td>
+<td>上流で決めた概念をそのまま構造設計へ渡せる</td>
+<td>バンドメンバー</td>
+<td>提案後に実装前整理へ進む場面</td>
+<td>言葉の再解釈を減らせる</td>
+<td>Assumption</td>
+</tr>
+<tr>
+<td>UC-F07-02</td>
+<td>実装接続が必要な案件だけ後段スキルを追加できる</td>
+<td>バンドメンバー</td>
+<td>案件ごとの差分を吸収したい場面</td>
+<td>必要なときだけ深掘りできる</td>
+<td>Unknown</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="前提-未確定事項-7">前提 / 未確定事項</h3>
+<ul>
+<li>ここまでを同一導線で見せるべきかは未確定</li>
+<li>上流価値より後段スキル単体で比較されるリスクがある</li>
+</ul>
+</details>
+
+
+      <!-- CONTENT_END -->
+
+      <footer class="doc-footer">
+        <span>Generated by <a href="#">md2html</a></span>
+        <span>ソース: usecase-map.md</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    // ---------- Theme ----------
+    const STORAGE_KEY = "md2html-theme";
+    function currentTheme() { return document.documentElement.dataset.theme || "light"; }
+    function applyThemeIcon() {
+      const use = document.getElementById("theme-icon-use");
+      if (use) use.setAttribute("href", currentTheme() === "dark" ? "#i-sun" : "#i-moon");
+    }
+    (function restoreTheme() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) document.documentElement.dataset.theme = saved;
+    })();
+
+    // ---------- Mermaid ----------
+    const diagramSources = new Map();
+    function initMermaid() {
+      const isDark = currentTheme() === "dark";
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: isDark ? "dark" : "default",
+        themeVariables: {
+          primaryColor: isDark ? "#3A2A22" : "#FBEEE6",
+          primaryTextColor: isDark ? "#F5F0E8" : "#1A1A1A",
+          primaryBorderColor: isDark ? "#E89572" : "#D97757",
+          lineColor: isDark ? "#9A938A" : "#6B6B66",
+          secondaryColor: isDark ? "#2A2520" : "#F5F5F0",
+          tertiaryColor: isDark ? "#221E1A" : "#FFFFFF",
+          fontFamily: "Inter, system-ui, sans-serif",
+        },
+      });
+    }
+    async function renderMermaid() {
+      initMermaid();
+      const els = document.querySelectorAll(".mermaid");
+      els.forEach(el => {
+        if (!diagramSources.has(el)) diagramSources.set(el, el.textContent.trim());
+        el.textContent = diagramSources.get(el);
+        el.removeAttribute("data-processed");
+      });
+      try { await mermaid.run({ nodes: els }); } catch (e) { console.error(e); }
+    }
+    function toggleTheme() {
+      const next = currentTheme() === "light" ? "dark" : "light";
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem(STORAGE_KEY, next);
+      applyThemeIcon();
+      renderMermaid();
+    }
+
+    // ---------- TOC drawer (mobile) ----------
+    function openToc()  { document.body.classList.add("toc-open"); }
+    function closeToc() { document.body.classList.remove("toc-open"); }
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && document.body.classList.contains("toc-open")) closeToc();
+    });
+
+    // ---------- TOC scrollspy ----------
+    function setupTocSpy() {
+      const links = document.querySelectorAll("#toc-nav a[href^='#']");
+      if (!links.length) {
+        const toc = document.getElementById("toc");
+        if (toc) toc.style.display = "none";
+        return;
+      }
+      const map = new Map();
+      links.forEach(a => {
+        const id = a.getAttribute("href").slice(1);
+        const el = document.getElementById(id);
+        if (el) map.set(el, a);
+        a.addEventListener("click", () => {
+          if (window.matchMedia("(max-width: 900px)").matches) closeToc();
+        });
+      });
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          const link = map.get(en.target);
+          if (!link) return;
+          if (en.isIntersecting) {
+            links.forEach(l => l.classList.remove("active"));
+            link.classList.add("active");
+          }
+        });
+      }, { rootMargin: "-80px 0px -70% 0px", threshold: 0 });
+      map.forEach((_, el) => obs.observe(el));
+    }
+
+    // ---------- Anchor links on h2/h3 ----------
+    function injectAnchors() {
+      document.querySelectorAll(".content h2[id], .content h3[id]").forEach(h => {
+        if (h.querySelector(".anchor")) return;
+        const a = document.createElement("a");
+        a.className = "anchor";
+        a.href = "#" + h.id;
+        a.setAttribute("aria-label", "Permalink");
+        a.innerHTML = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-link"/></svg>';
+        h.appendChild(a);
+      });
+    }
+
+    // ---------- Copy-to-clipboard on <pre> ----------
+    function injectCopyButtons() {
+      document.querySelectorAll(".content pre").forEach(pre => {
+        if (pre.classList.contains("mermaid")) return;
+        if (pre.querySelector(".copy-btn")) return;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "copy-btn";
+        btn.setAttribute("aria-label", "Copy code");
+        btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-copy"/></svg>';
+        btn.addEventListener("click", async () => {
+          const code = pre.querySelector("code")?.textContent ?? pre.textContent;
+          try {
+            await navigator.clipboard.writeText(code);
+            btn.classList.add("copied");
+            btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>';
+            setTimeout(() => {
+              btn.classList.remove("copied");
+              btn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-copy"/></svg>';
+            }, 1500);
+          } catch (e) { console.error(e); }
+        });
+        pre.appendChild(btn);
+      });
+    }
+
+    // ---------- Scroll progress ----------
+    function setupScrollProgress() {
+      const bar = document.getElementById("scroll-progress");
+      if (!bar) return;
+      const onScroll = () => {
+        const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const p = h > 0 ? (document.documentElement.scrollTop / h * 100) : 0;
+        bar.style.width = p + "%";
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    }
+
+    // ---------- Boot ----------
+    document.addEventListener("DOMContentLoaded", () => {
+      applyThemeIcon();
+      injectAnchors();
+      injectCopyButtons();
+      renderMermaid();
+      setupTocSpy();
+      setupScrollProgress();
+    });
+  </script>
+</body>
+</html>
