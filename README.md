@@ -45,7 +45,7 @@ bash scripts/link-cursor-skills.sh
 | [prototype-design-md](skills/prototype-design-md/) | プロトタイプ段階の DESIGN.md — UI 生成前の判断ブリーフ（feel・サーフェス・禁止・コンポーネント選び） |
 | [ooui-graphql-modeling](skills/ooui-graphql-modeling/) | プロト段階の GraphQL SDL 設計（ドメイン中心・段階的ゲート） |
 | [ooui-architect](skills/ooui-architect/) | OOUI の common/model/ルーティング dir 構成、scaffold、4-file コンポーネント |
-| [usecase-mapper](skills/usecase-mapper/) | コードベースや仕様書から**ユースケース一覧・ユースケース図**を生成し `docs/usecase-map.md` に出力する |
+| [usecase-mapper](skills/usecase-mapper/) | Persona・要件メモから**機能一覧・ユースケース図**のスケッチを生成し `docs/usecase-map.md` に出力する |
 | [prhythm-skill-pr](skills/prhythm-skill-pr/) | スキル追加・更新の PR 作成（preflight + gh） |
 | [create-html-deck](skills/create-html-deck/) | HTML スライドデッキを deck-stage ビューアで段階的に構築（アウトライン→テーマ→プレビュー） |
 | [shadcn-explorer](skills/shadcn-explorer/) | shadcn/ui エコシステム（200+ registry / 60+ テーマ）からコンポーネント・block・テーマ候補をリアルタイム検索 |
