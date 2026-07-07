@@ -18,7 +18,7 @@
 | `defining-personas-and-segments` | Persona / Segment Stage 1, Stage 2 | `docs/prhythm-band-persona-stage1.md`, `docs/prhythm-band-persona-stage2.md` |
 | `create-journey-map` | As-Is Journey Map と HMW | `docs/prhythm-band-journey-map-asis.md` |
 | `product-vision-and-concept` | 一行ステートメントと Concept | `docs/prhythm-band-vision-concept.md` |
-| `usecase-mapper` | ユースケーススケッチと図 | `docs/usecase-map.md`, `docs/usecase-map.html` |
+| `usecase-mapper` | ユースケーススケッチと Mermaid 図 | `docs/usecase-map.md` |
 | `prototype-design-md` | プロトタイプ前の DESIGN.md ドラフト | `docs/prhythm-band-prototype-design.md` |
 
 ## 未生成 / 後続扱い
