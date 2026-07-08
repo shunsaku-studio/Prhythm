@@ -16,7 +16,7 @@
 | `hearing-prep` | バンドメンバー検証インタビューの準備カード | `docs/prhythm-band-hearing-prep.md` |
 | `hearing-analysis` | 検証インタビュー後に見るべき分析フレーム | `docs/prhythm-band-hearing-analysis.md` |
 | `defining-personas-and-segments` | Persona / Segment Stage 1, Stage 2 | `docs/prhythm-band-persona-stage1.md`, `docs/prhythm-band-persona-stage2.md` |
-| `create-journey-map` | As-Is Journey Map と HMW | `docs/prhythm-band-journey-map-asis.md` |
+| `create-journey-map` | As-Is / To-Be Journey Map と HMW | `docs/prhythm-band-journey-map-asis.md`, `docs/prhythm-band-journey-map-tobe.md` |
 | `product-vision-and-concept` | 一行ステートメントと Concept | `docs/prhythm-band-vision-concept.md` |
 | `usecase-mapper` | ユースケーススケッチと Mermaid 図 | `docs/usecase-map.md` |
 | `prototype-design-md` | プロトタイプ前の DESIGN.md ドラフト | `docs/prhythm-band-prototype-design.md` |
