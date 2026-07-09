@@ -69,7 +69,7 @@ clone 直後や `skills/` に新スキルを追加したあとに実行する。
 
 ## ドキュメントサイト
 
-[VitePress](https://vitepress.dev/) でスキルカタログを公開する（公開 URL: https://shunsaku-studio.github.io/Prhythm/）。正本は `skills/` の README のみ — ビルド時に `scripts/sync-docs.mjs` が `docs-site/.generated/` を生成する（git 管理外）。
+[VitePress](https://vitepress.dev/) でスキルカタログを公開する（公開 URL: https://shunsaku-studio.github.io/Prhythm/ ）。正本は `skills/` の README のみ — ビルド時に `scripts/sync-docs.mjs` が `docs-site/.generated/` を生成する（git 管理外）。
 
 ```bash
 cd docs-site && npm install   # 初回のみ
