@@ -101,7 +101,9 @@ const rewriteSkillLinks = (content, skillSlug) =>
     .replace(/\]\((SKILL\.md)\)/g, `](${repoPath(skillSlug, 'SKILL.md')})`)
     .replace(/\]\(\.\.\/(templates\/[^)]+)\)/g, (_, target) => `](${repoPath(skillSlug, target)})`)
     .replace(/\]\((references\/[^)]*)\)/g, (_, target) => `](${repoPath(skillSlug, target)})`)
-    .replace(/\]\((templates\/[^)]+)\)/g, (_, target) => `](${repoPath(skillSlug, target)})`);
+    .replace(/\]\((templates\/[^)]+)\)/g, (_, target) => `](${repoPath(skillSlug, target)})`)
+    // 同階層の補助ファイル（example.md, questions.md 等）はページ化していないため GitHub 直リンクにする
+    .replace(/\]\(([a-zA-Z0-9_-]+\.md)\)/g, (_, target) => `](${repoPath(skillSlug, target)})`);
 
 const writeFile = (outPath, content) => {
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
