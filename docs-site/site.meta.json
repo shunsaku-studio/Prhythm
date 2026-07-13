@@ -30,6 +30,7 @@
         { "skill": "prhythm-skill-pr" },
         { "skill": "prhythm-skill-review" },
         { "skill": "shadcn-explorer" },
+        { "skill": "uncertainty-map" },
         { "skill": "usecase-mapper" }
       ]
     }
