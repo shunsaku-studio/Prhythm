@@ -30,6 +30,21 @@ bash scripts/link-cursor-skills.sh
 
 ファイルツリー上は両方に同じ内容が見えるが、実体は `skills/` のみ。`/prhythm-skill-review` などメタスキルは `disable-model-invocation: true` のため、スラッシュで明示呼び出しする。
 
+### Claude Code でこのリポジトリを開発する場合
+
+Cursor と同様、Claude Code がプロジェクトスコープで読むのは `.claude/skills/` だけなので、**symlink でつなぐ**（コピーしない）。
+
+```bash
+bash scripts/link-claude-skills.sh
+```
+
+| パス | 役割 |
+|------|------|
+| `skills/<name>/` | 正本。編集・validate・PR はここ |
+| `.claude/skills/<name>/` | Claude Code 検出用 symlink → `skills/<name>/` |
+
+clone 直後や `skills/` に新スキルを追加したあとに実行する。反映には Claude Code の再起動が必要。
+
 ## スキル一覧
 
 | スキル | 説明 |
@@ -37,10 +52,15 @@ bash scripts/link-cursor-skills.sh
 | [prhythm-skill-review](skills/prhythm-skill-review/) | スキルの README 整備と品質レビュー |
 | [competitive-research](skills/competitive-research/) | 新規プロダクト・機能向けに競合・参考サービスを調査し、設計判断に使えるインサイトを出す |
 | [product-vision-and-concept](skills/product-vision-and-concept/) | 対話でプロダクトのビジョン・コンセプト（一行ステートメント + Why/Who/What/差別化）を言語化する |
+| [defining-personas-and-segments](skills/defining-personas-and-segments/) | インタビューメモ等からターゲットユーザー・ペルソナ・セグメントを比較表で整理。Primary は人間が決める設計。Counter-persona で「最適化で失う人」も可視化 |
+| [create-journey-map](skills/create-journey-map/) | ヒアリング情報から台本形式のジャーニーマップを生成。As-Is（課題→インサイト→HMW）と To-Be（対比サマリー→コアシーン候補）の2モード |
+| [hearing](skills/hearing/) | 顧客ヒアリング支援の入口。会議前準備は `hearing-prep`、会議後分析は `hearing-analysis` に振り分ける |
+| [hearing-prep](skills/hearing-prep/) | 顧客ヒアリング前の準備用。SPIN ベースの静的質問集から会議目的に合う質問を選び、進行カードを作る |
+| [hearing-analysis](skills/hearing-analysis/) | 顧客ヒアリング後の整理用。ボトルネック仮説、根拠、解決方向、次回の擦り合わせ質問をまとめる |
 | [prototype-design-md](skills/prototype-design-md/) | プロトタイプ段階の DESIGN.md — UI 生成前の判断ブリーフ（feel・サーフェス・禁止・コンポーネント選び） |
 | [ooui-graphql-modeling](skills/ooui-graphql-modeling/) | プロト段階の GraphQL SDL 設計（ドメイン中心・段階的ゲート） |
 | [ooui-architect](skills/ooui-architect/) | OOUI の common/model/ルーティング dir 構成、scaffold、4-file コンポーネント |
-| [usecase-mapper](skills/usecase-mapper/) | コードベースや仕様書から**ユースケース一覧・ユースケース図**を生成し `docs/usecase-map.md` に出力する |
+| [usecase-mapper](skills/usecase-mapper/) | Persona・要件メモから**機能一覧・ユースケース図**のスケッチを生成し `docs/usecase-map.md` に出力する |
 | [feature-backlog-mapper](skills/feature-backlog-mapper/) | ユースケース一覧から **機能一覧（提案版）** または **プロダクトバックログ（スプリント版）** を生成し `docs/feature-list.md` / `docs/product-backlog.md` に出力する |
 | [prhythm-skill-pr](skills/prhythm-skill-pr/) | スキル追加・更新の PR 作成（preflight + gh） |
 | [create-html-deck](skills/create-html-deck/) | HTML スライドデッキを deck-stage ビューアで段階的に構築（アウトライン→テーマ→プレビュー） |
@@ -50,7 +70,7 @@ bash scripts/link-cursor-skills.sh
 
 ## ドキュメントサイト
 
-[VitePress](https://vitepress.dev/) でスキルカタログを公開する（公開 URL: https://shunsaku-studio.github.io/Prhythm/）。正本は `skills/` の README のみ — ビルド時に `scripts/sync-docs.mjs` が `docs-site/.generated/` を生成する（git 管理外）。
+[VitePress](https://vitepress.dev/) でスキルカタログを公開する（公開 URL: https://shunsaku-studio.github.io/Prhythm/ ）。正本は `skills/` の README のみ — ビルド時に `scripts/sync-docs.mjs` が `docs-site/.generated/` を生成する（git 管理外）。
 
 ```bash
 cd docs-site && npm install   # 初回のみ
@@ -83,12 +103,14 @@ npm run export:pdf             # PDF にエクスポート
 Prhythm/
 ├── .claude-plugin/
 │   └── plugin.json            # プラグインマニフェスト
+├── .claude/skills/            # Claude Code 用 symlink → skills/*（link-claude-skills.sh）
 ├── .cursor/skills/            # Cursor 用 symlink → skills/*（link-cursor-skills.sh）
 ├── .github/workflows/
 │   └── pages.yml              # ドキュメント GitHub Pages デプロイ
 ├── docs-site/                 # VitePress サイト（site.meta.json + pages/）
 ├── skills/                    # Agent Skills 正本 (SKILL.md + README.md)
 ├── scripts/
+│   ├── link-claude-skills.sh  # .claude/skills/ symlink 生成
 │   ├── link-cursor-skills.sh  # .cursor/skills/ symlink 生成
 │   └── sync-docs.mjs          # skills/ → docs-site/.generated/ 同期
 ├── slides.md                  # Slidev スライド
