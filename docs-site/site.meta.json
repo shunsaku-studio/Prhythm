@@ -21,6 +21,9 @@
       "items": [
         { "skill": "create-html-deck" },
         { "skill": "competitive-research" },
+        { "skill": "hearing" },
+        { "skill": "hearing-prep" },
+        { "skill": "hearing-analysis" },
         { "skill": "feature-backlog-mapper" },
         { "skill": "product-vision-and-concept" },
         { "skill": "defining-personas-and-segments" },
