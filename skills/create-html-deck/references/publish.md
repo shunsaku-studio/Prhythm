@@ -20,7 +20,7 @@ bash skills/create-html-deck/scripts/assemble.sh slides/{deck}
 bash skills/create-html-deck/scripts/preview.sh slides/{deck}
 ```
 
-`preview.sh` uses `npx serve` (default port **3456**) and opens the browser.
+`preview.sh` starts a detached `python3 -m http.server` (default port **3456**) and opens the browser.
 
 ### Re-assemble after edits
 
