@@ -20,6 +20,14 @@ Run mentally before sending each phase. All items should pass.
 - [ ] Gaps & suggested next steps at end
 - [ ] Japanese + English search when applicable
 
+## Phase 1.5 (Verb-Axis)
+
+- [ ] **3–5 verbs** extracted from product brief, **no domain nouns** in verb phrases
+- [ ] 1–2 searches per verb, domain nouns excluded from search terms
+- [ ] Each cross-domain reference has: Service, Domain, What it does, **design implication for user's product**
+- [ ] **Design implications summary table** present (verb → reference → pattern to steal)
+- [ ] At least 2 references come from domains completely unrelated to the target industry
+
 ## Phase 2
 
 - [ ] **Selection Rationale** table at top (especially after frame change)

@@ -13,7 +13,7 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SKILL_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-REPO_ROOT="$(cd "$SKILL_DIR/../../.." && pwd)"
+REPO_ROOT="$(cd "$SKILL_DIR/../.." && pwd)"
 TARGET="$(cd "$REPO_ROOT" && cd "$(dirname "$OUT")" 2>/dev/null && pwd)/$(basename "$OUT")"
 
 if [[ ! -f "$TARGET/index.html" ]]; then
@@ -21,17 +21,43 @@ if [[ ! -f "$TARGET/index.html" ]]; then
   exit 1
 fi
 
+LOG="$TARGET/.preview-server.log"
+PIDFILE="$TARGET/.preview-server.pid"
+
+wait_for_port() {
+  local i
+  for i in {1..25}; do
+    if lsof -i ":$PORT" -sTCP:LISTEN -t >/dev/null 2>&1; then
+      return 0
+    fi
+    sleep 0.2
+  done
+  return 1
+}
+
+start_server() {
+  echo "Starting server on port $PORT ..."
+  nohup sh -c "cd '$TARGET' && exec python3 -m http.server '$PORT'" >>"$LOG" 2>&1 </dev/null &
+  SERVE_PID=$!
+  echo "$SERVE_PID" >"$PIDFILE"
+  disown "$SERVE_PID" 2>/dev/null || disown
+
+  if ! wait_for_port; then
+    echo "Failed to start server — see $LOG" >&2
+    exit 1
+  fi
+
+  echo "Server PID: $SERVE_PID"
+  echo "Log: $LOG"
+}
+
 if lsof -i ":$PORT" -sTCP:LISTEN -t >/dev/null 2>&1; then
   echo "Port $PORT in use — opening existing server"
-  URL="http://localhost:$PORT"
 else
-  echo "Starting server on port $PORT ..."
-  npx --yes serve -l "$PORT" "$TARGET" >/dev/null 2>&1 &
-  SERVE_PID=$!
-  sleep 1.5
-  URL="http://localhost:$PORT"
-  echo "Server PID: $SERVE_PID"
+  start_server
 fi
+
+URL="http://localhost:$PORT"
 
 if [[ "$(uname)" == "Darwin" ]]; then
   open "$URL"

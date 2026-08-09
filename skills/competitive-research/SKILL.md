@@ -20,6 +20,7 @@ Deliver all output as inline Markdown in chat so the user can discuss and iterat
 |------|-----|
 | [phase0-template.md](references/phase0-template.md) | Research frame table + category-only input rule |
 | [phase1-template.md](references/phase1-template.md) | Broad scan catalog + Recommended section |
+| [verb-axis-template.md](references/verb-axis-template.md) | Verb extraction + cross-domain reference search |
 | [phase2-template.md](references/phase2-template.md) | Profiles, cross-comparison, insights |
 | [shortlist-selection.md](references/shortlist-selection.md) | Picking 5–8 services; frame-change re-selection |
 | [sentiment-sources.md](references/sentiment-sources.md) | Review source priority + 3 praised / 3 complaints |
@@ -71,11 +72,12 @@ Full output structure: [phase1-template.md](references/phase1-template.md)
 
 ### Search strategy
 
-Search across three axes. Run 5–10 web searches varying keywords:
+Search across four axes. Run 5–10 web searches varying keywords:
 
 - **Function axis** — Services doing the same thing. Search: "[problem] tool", "[problem] app", "[problem] SaaS". Also search adjacent domains where the same verb applies (e.g., "booking" exists in restaurants, healthcare, facilities).
 - **UX axis** — Services using similar interaction patterns regardless of domain. Search: "[interaction pattern] UI examples", "[pattern] app".
 - **User context axis** — What the target user currently uses as workaround. Search: "[target user role] [problem] workflow", "[problem] spreadsheet alternative", "[problem] slack bot".
+- **Verb axis** — Extract 3–5 verbs from the product brief (strip all domain nouns), then search for products that solve each verb best in **any** domain. See [verb-axis-template.md](references/verb-axis-template.md). This axis is what surfaces cross-domain analogies ("Cursor for X", "Figma for Y") that same-industry search will never find. Run 1–2 searches per verb, explicitly excluding the target domain from search terms.
 
 Also check at least **two** of: Product Hunt, G2/Capterra, Crunchbase, Y Combinator directory, App Store categories, STARTUP DB (Japan), INITIAL (Japan).
 
@@ -88,6 +90,30 @@ After the full list, add **Recommended for Deep Dive** (see phase1-template.md).
 ### Phase 1 anti-patterns
 
 See Phase 1 and **Anti-patterns (fail if true)** in [references/output-checklist.md](references/output-checklist.md). Search and entry rules: [phase1-template.md](references/phase1-template.md).
+
+---
+
+## Phase 1.5: Verb-Axis Research
+
+**Goal:** Find cross-domain references that same-industry search misses. Surfaces "X for Y" analogies and design patterns from other domains.
+
+Full output structure: [verb-axis-template.md](references/verb-axis-template.md)
+
+### When to run
+
+Run after Phase 1 catalog is complete. This phase is **not optional** — it consistently produces the highest-value design insights because it escapes the bubble of same-industry competitors.
+
+### Procedure
+
+1. **Extract verbs** — Take the product brief / RFC and rewrite each capability as a **verb phrase**, stripping all domain nouns. If the brief says "AI generates slides from past presentations", the verb is "AI generates artifacts from past artifacts". See examples in [verb-axis-template.md](references/verb-axis-template.md).
+
+2. **Search per verb** — For each verb, search: "best product that [verb phrase] 2025 2026". **Do not include any domain nouns** in the search query. This is the critical rule — domain nouns pull results back into the same industry.
+
+3. **Map to design implications** — For each cross-domain product found, extract the specific design pattern that transfers to the user's product.
+
+### Output
+
+Deliver the verb-axis table and **Design implications summary** per [verb-axis-template.md](references/verb-axis-template.md). The summary table ("verb → best reference → pattern to steal") is the most important output.
 
 ---
 

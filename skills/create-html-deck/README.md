@@ -112,7 +112,7 @@ slides/{deck}/
 
 - **bash** — init / assemble / preview / export
 - **bun** — テーマ検出、コンテンツ validate、standalone バンドル
-- **npx serve** — `preview.sh` がローカルサーバー（既定 port 3456）を起動
+- **python3 http.server** — `preview.sh` がデタッチ済みローカルサーバー（既定 port 3456）を起動
 - デッキ出力先 `slides/{deck}/` はアプリのフロントエンドビルド対象外（[reference.md](reference.md) 参照）。`preview.sh` で確認し、プロダクトに載せる場合はリンクや埋め込みで別途配線する
 - スキル配置: Prhythm の `skills/` または `~/.cursor/skills/`（`scripts/link-cursor-skills.sh` で symlink 可）
 

@@ -65,16 +65,16 @@ if [[ -f "$CONTENT_DIR/tokens.css" ]]; then
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
-  sed -i '' "s/{{DECK_TITLE}}/$DECK_TITLE/g" "$TARGET/index.html"
+  sed -i '' "s|{{DECK_TITLE}}|$DECK_TITLE|g" "$TARGET/index.html"
 else
-  sed -i "s/{{DECK_TITLE}}/$DECK_TITLE/g" "$TARGET/index.html"
+  sed -i "s|{{DECK_TITLE}}|$DECK_TITLE|g" "$TARGET/index.html"
 fi
 
 if $HAS_CONTENT; then
   SLIDES_TMP="$(mktemp)"
   for f in "$CONTENT_DIR/sections"/*.html; do
     [[ -f "$f" ]] || continue
-    sed "s/{{DECK_TITLE}}/$DECK_TITLE/g" "$f" >> "$SLIDES_TMP"
+    sed "s|{{DECK_TITLE}}|$DECK_TITLE|g" "$f" >> "$SLIDES_TMP"
     printf '\n\n' >> "$SLIDES_TMP"
   done
   if [[ "$(uname)" == "Darwin" ]]; then
@@ -91,12 +91,13 @@ if $HAS_CONTENT; then
   rm -f "$SLIDES_TMP"
 
   if [[ -f "$CONTENT_DIR/speaker-notes.json" ]]; then
-    NOTES="$(cat "$CONTENT_DIR/speaker-notes.json")"
-    if [[ "$(uname)" == "Darwin" ]]; then
-      sed -i '' "s|<script type=\"application/json\" id=\"speaker-notes\">\\[\\]</script>|<script type=\"application/json\" id=\"speaker-notes\">$NOTES</script>|" "$TARGET/index.html"
-    else
-      sed -i "s|<script type=\"application/json\" id=\"speaker-notes\">\\[\\]</script>|<script type=\"application/json\" id=\"speaker-notes\">$NOTES</script>|" "$TARGET/index.html"
-    fi
+    NOTES="$(python3 -c "import json,sys; print(json.dumps(json.load(open(sys.argv[1])),ensure_ascii=False))" "$CONTENT_DIR/speaker-notes.json")"
+    python3 -c "
+import sys
+f=sys.argv[1]; old='<script type=\"application/json\" id=\"speaker-notes\">[]</script>'
+new='<script type=\"application/json\" id=\"speaker-notes\">'+sys.argv[2]+'</script>'
+t=open(f).read().replace(old,new); open(f,'w').write(t)
+" "$TARGET/index.html" "$NOTES"
   fi
   echo "Assembled from: $CONTENT_DIR"
 elif $MINIMAL; then
@@ -106,13 +107,13 @@ elif $MINIMAL; then
       /<!-- SLIDES/r $SLIDES_FILE
       /<!-- SLIDES/d
     }" "$TARGET/index.html"
-    sed -i '' "s/{{DECK_TITLE}}/$DECK_TITLE/g" "$TARGET/index.html"
+    sed -i '' "s|{{DECK_TITLE}}|$DECK_TITLE|g" "$TARGET/index.html"
   else
     sed -i "/<deck-stage/,/<\/deck-stage>/{
       /<!-- SLIDES/r $SLIDES_FILE
       /<!-- SLIDES/d
     }" "$TARGET/index.html"
-    sed -i "s/{{DECK_TITLE}}/$DECK_TITLE/g" "$TARGET/index.html"
+    sed -i "s|{{DECK_TITLE}}|$DECK_TITLE|g" "$TARGET/index.html"
   fi
   NOTES='["Welcome to the demo deck.","Edit content/sections/ and re-assemble."]'
   if [[ "$(uname)" == "Darwin" ]]; then
