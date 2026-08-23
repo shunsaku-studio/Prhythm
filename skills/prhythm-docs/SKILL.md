@@ -88,10 +88,6 @@ To add a skill: copy the shared Markdown skeleton, replace Frame and Evidence on
 
 Skills may already write detailed artifacts (`docs/uncertainty-map.md`, `docs/usecase-map.md`, `docs/feature-list.md`, …). Those stay as-is. `docs/prhythm/` is a **briefing** layer: the skill's question, observation conditions, one Evidence structure, gates, next steps — not a dump of catalogs.
 
-## Example (filled output)
-
-Fictional end-to-end sample (Northline × Slot): [examples/slot-northline/](examples/slot-northline/) — all 10 skills run on one product idea, each with a filled `sections.html`, the built `index.html`, and `index.md`.
-
 ## Out of scope
 
 - Re-running research or inventing conclusions

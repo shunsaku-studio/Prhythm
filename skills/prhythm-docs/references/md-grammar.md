@@ -103,5 +103,3 @@ Frame の列名と Evidence の構造物は、スキル側テンプレが決め�
 | proto-storyboard | 5 分で何を見せるか | 3 カット表と、山場の画面 1 つ | To-Be 全フェーズ、DESIGN.md |
 | delivery-team-plan | 誰が Go を握るか | 層（Owner / Exec / Support）と決め事 RACI | 矢羽、KPI |
 | delivery-phase-plan | 何で Go を切るか | 主指標（現状 → 目標）とフェーズの背骨 | 全レーン全セル |
-
-埋めた見本: [../examples/slot-northline/](../examples/slot-northline/)。

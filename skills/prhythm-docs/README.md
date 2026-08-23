@@ -57,8 +57,6 @@ prhythm-docs/
 ├── templates/
 │   └── docs/
 │       └── index.md          # 新スキル用の共通骨格。出力には使わない
-├── examples/
-│   └── slot-northline/       # 架空提案の埋済サンプル（10 スキル分）
 └── references/
     ├── shared-rules.md
     ├── md-grammar.md         # マークダウンのブロックと情報量

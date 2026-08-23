@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress';
+import { withMermaid } from 'vitepress-plugin-mermaid';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -24,19 +25,23 @@ const loadResolvedMeta = (): { nav: { text: string; link: string }[]; sidebar: S
 
 const meta = loadResolvedMeta();
 
-export default defineConfig({
-  title: 'Prhythm',
-  description: 'Agent Skills カタログ',
-  lang: 'ja-JP',
-  base: process.env.VITEPRESS_BASE ?? '/Prhythm/',
-  srcDir: '.generated',
-  cleanUrls: true,
-  lastUpdated: true,
+export default withMermaid(
+  defineConfig({
+    title: 'Prhythm',
+    description: 'Agent Skills カタログ',
+    lang: 'ja-JP',
+    base: process.env.VITEPRESS_BASE ?? '/Prhythm/',
+    srcDir: '.generated',
+    cleanUrls: true,
+    lastUpdated: true,
 
-  themeConfig: {
-    nav: meta.nav,
-    sidebar: meta.sidebar,
-    socialLinks: [{ icon: 'github', link: 'https://github.com/shunsaku-studio/Prhythm' }],
-    search: { provider: 'local' },
-  },
-});
+    themeConfig: {
+      nav: meta.nav,
+      sidebar: meta.sidebar,
+      socialLinks: [{ icon: 'github', link: 'https://github.com/shunsaku-studio/Prhythm' }],
+      search: { provider: 'local' },
+    },
+
+    mermaid: {},
+  }),
+);
