@@ -1,0 +1,184 @@
+<!-- prhythm-docs deck sections — market-landscape
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/market-landscape/templates/docs/sections.html \
+              docs/prhythm/market-landscape/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">market-landscape<span class="sep"></span>Prhythm</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{THEME}}の<br />市場地図</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{SOURCE}}</span>
+      <span>空白の右上を議論するための地図</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Frame">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Frame<span class="sep"></span>見た範囲</div>
+      <h2 class="msg anim">{{MSG_FRAME}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">解こうとしている痛み</div><div class="rv">{{PROBLEM}}</div></div>
+        <div class="row"><div class="rk">対象セグメント</div><div class="rv">{{TARGET}}</div></div>
+        <div class="row"><div class="rk">調査スコープ</div><div class="rv">{{SCOPE}}</div></div>
+        <div class="row"><div class="rk">見ていないもの</div><div class="rv">{{OUT_OF_SCOPE}}</div></div>
+        <div class="row"><div class="rk">未確認の前提</div><div class="rv">{{ASSUMPTIONS}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>market-landscape</span><span>{{THEME}}</span></footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Answer">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">結論</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{ANSWER_STATEMENT}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>market-landscape</span><span>{{THEME}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Map">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>4象限マップ</div>
+      <h2 class="msg anim">{{MSG_MAP}}</h2>
+    </header>
+    <div class="body">
+      <div class="quadrant anim d1">
+        <div class="qy">
+          <span>{{Y_HIGH}}</span>
+          <span class="ax">{{Y_AXIS}}</span>
+          <span>{{Y_LOW}}</span>
+        </div>
+        <div class="qgrid">
+          <div class="qcell">
+            <div class="qlabel">{{TL_LABEL}}</div>
+            <div class="qitems">
+              <span class="qitem">{{TL_1}}</span>
+              <span class="qitem">{{TL_2}}</span>
+            </div>
+            <p class="qnote">{{TL_NOTE}}</p>
+          </div>
+          <div class="qcell is-target">
+            <div class="qlabel">{{TR_LABEL}} — 取りにいく方向</div>
+            <div class="qitems">
+              <span class="qitem own">★ {{OWN_POSITION}}</span>
+              <span class="qitem">{{TR_1}}</span>
+            </div>
+            <p class="qnote">{{TR_NOTE}}</p>
+          </div>
+          <div class="qcell">
+            <div class="qlabel">{{BL_LABEL}}</div>
+            <div class="qitems">
+              <span class="qitem">{{BL_1}}</span>
+              <span class="qitem">{{BL_2}}</span>
+            </div>
+            <p class="qnote">{{BL_NOTE}}</p>
+          </div>
+          <div class="qcell">
+            <div class="qlabel">{{BR_LABEL}}</div>
+            <div class="qitems">
+              <span class="qitem">{{BR_1}}</span>
+              <span class="qitem">{{BR_2}}</span>
+            </div>
+            <p class="qnote">{{BR_NOTE}}</p>
+          </div>
+        </div>
+        <div class="qx">
+          <span>{{X_LOW}}</span>
+          <span class="ax">{{X_AXIS}}</span>
+          <span>{{X_HIGH}}</span>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>★ = 自案の想定ポジション</span><span>{{THEME}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Blank">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>空白の右上</div>
+      <h2 class="msg anim">{{MSG_BLANK}}</h2>
+    </header>
+    <div class="body">
+      <div class="split anim d1">
+        <div>
+          <div class="col-label">なぜ空いているのか</div>
+          <ul class="bullets">
+            <li>{{WHY_EMPTY_1}}</li>
+            <li>{{WHY_EMPTY_2}}</li>
+          </ul>
+          <div class="callout warn" style="margin-top:36px">
+            <span class="lbl">偽空白リスク</span>
+            {{FALSE_BLANK}}
+          </div>
+        </div>
+        <div>
+          <div class="col-label">取りにいく条件</div>
+          <ul class="bullets numbered">
+            <li>{{CONDITION_1}}</li>
+            <li>{{CONDITION_2}}</li>
+            <li>{{CONDITION_3}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>market-landscape</span><span>{{THEME}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">人間が決める</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{GATE_1}}</li>
+        <li>{{GATE_2}}</li>
+        <li>{{GATE_3}}</li>
+      </ul>
+    </div>
+    <footer class="foot"><span>この3つが決まるまで実装に進まない</span><span>{{THEME}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>カタログ全量はチャット / 元 docs を参照</span><span>{{THEME}}</span></footer>
+  </div>
+</section>

@@ -12,7 +12,7 @@ Score each dimension 1–5. Use observable evidence from SKILL.md and README.md.
 | 4 | Minor gaps in trigger terms or description clarity |
 | 3 | Description vague or missing WHEN; trigger terms generic |
 | 2 | Wrong person (I/you), or name mismatch |
-| 1 | Missing frontmatter or description under 20 chars |
+| 1 | Missing frontmatter or description under 20 chars; or missing/invalid `rank` / `categories` |
 
 ### Conciseness (weight: 25%)
 
@@ -62,25 +62,41 @@ Skip or mark N/A for reference-only skills with no workflow.
 
 | Score | Criteria |
 |-------|----------|
-| 5 | Outcomes for user/team; no implementation detail; each bullet answers "what becomes better?" |
-| 4 | Mostly outcome-focused; one bullet drifts into HOW |
-| 3 | Mix of value and implementation (phases, scripts, naming rules) |
-| 2 | Mostly trigger terms, commands, or SKILL.md mechanics |
+| 5 | Outcomes vs doing it by hand or a plain LLM; no implementation detail; unique vs 概要 |
+| 4 | Mostly outcome-focused; one bullet drifts into HOW or restates 概要 |
+| 3 | Mix of value and implementation (phases, scripts, naming rules, responsibility split) |
+| 2 | Mostly trigger terms, commands, slogans, or SKILL.md mechanics |
 | 1 | Missing, generic, or unreadable to humans |
 
-Flag as **Suggestion** when README 利用メリット scores ≤ 3. Reference: [readme-template.md](readme-template.md).
+Flag as **Suggestion** when README 利用メリット scores ≤ 3. Reference: [readme-principles.md](readme-principles.md).
 
 ## README 利用シーン（review / standardize）
 
 | Score | Criteria |
 |-------|----------|
-| 5 | User situations/problems; aligned with 利用メリット; no commands or technical ops |
-| 4 | Mostly situation-focused; one bullet drifts into HOW or misaligned with メリット |
-| 3 | Mix of situations and technical operations (add type, re-validate, run phase) |
+| 5 | Concrete user situations; 1–2 example prompts; unique vs 概要 / メリット |
+| 4 | Mostly situation-focused; one bullet drifts into HOW or paraphrases メリット |
+| 3 | Mix of situations and technical operations, or scenes inferred from mode structure |
 | 2 | Mostly commands, trigger terms, or SKILL.md mechanics |
-| 1 | Missing, generic, or disconnected from メリット |
+| 1 | Missing, generic, or disconnected from real use |
 
-Flag as **Suggestion** when README 利用シーン scores ≤ 3. Reference: [readme-template.md](readme-template.md).
+Flag as **Suggestion** when README 利用シーン scores ≤ 3. Reference: [readme-principles.md](readme-principles.md).
+
+## README prose (review / standardize)
+
+Score against [readme-principles.md](readme-principles.md) §4. Flag each fail as **Suggestion**, or **Critical** when the README is unusable as a first-read catalog (telegram style throughout, no input→output in 概要, or 関連スキル with no links).
+
+| Check | Fail when |
+|-------|-----------|
+| Design-brag | Responsibility split, mode architecture, or "same structure as X" written for the author |
+| Duplication | 概要 / メリット / シーン can be deleted with no information loss |
+| Coined term | Term used before definition, or slogan-repeated across sections (aim 2–3 uses) |
+| Sentence | Bold-dash fragments or arrow notation as the main style; items not readable aloud |
+| Subject | Numbered steps do not distinguish what the user does vs what the skill does |
+| Excerpt | 注意事項 lines are meaningless out of context, or the section only repeats others |
+| Prerequisite | Mid-process conditions, optional-permission, or repo-wide runtime (Claude Code / Cursor) |
+| Example | No request-text + returned-artifact pair in 使い方 |
+| Link | 関連スキル row lacks a relative README link or "when to move there" |
 
 ## Verdict
 

@@ -1,6 +1,10 @@
 ---
 name: defining-personas-and-segments
 description: プロダクト・機能・プロトタイプのターゲットユーザー、ペルソナ、セグメントを整理したいときに使う。ユーザーがインタビューメモ・ディスカバリーの記録・プロダクトブリーフを共有してきたり、「誰向けに作るべきか」「ターゲットを整理したい」「ペルソナを作って」「セグメントを切って」と依頼したときに発動する。出力は俯瞰用の比較表 + 人間が決めるべき論点。Primary が決まったら、そのセグメント/ペルソナの深掘りに移る2段階フロー。意図的に「Primary（主要ターゲット）」は確定させない — 人間が決めるための材料を揃えるSkill。
+disable-model-invocation: false
+rank: core
+categories:
+  - design
 ---
 
 # Persona & Segment Definition Skill
@@ -252,3 +256,15 @@ Before finalizing output, cross-check against `references/anti-patterns.md`. Com
 - Going too deep in Stage 1 (push prose to Stage 2 if it doesn't fit the table)
 - **Omitting Counter-persona, or writing a watered-down version of the Primary as the "Counter"**
 - Stage 2 Validation Plan without a falsification condition (that's confirmation, not validation)
+
+## Documenting with prhythm-docs
+
+After the skill run, when the user asks to save or present results（まとめて / ドキュメントにして / スライドにして）:
+
+1. Use `/prhythm-docs` (or follow that meta-skill)
+2. Fill `templates/docs/index.md` and `templates/docs/sections.html` in this skill
+3. Build the deck: `node skills/prhythm-docs/scripts/build-deck.mjs skills/defining-personas-and-segments/templates/docs/sections.html docs/prhythm/defining-personas-and-segments/index.html --title "…"`
+4. Write `docs/prhythm/defining-personas-and-segments/index.md`
+
+Do not dump full catalogs into those files. Markdown is a briefing (Answer / Frame / Evidence / Gates / Next) — see `skills/prhythm-docs/references/md-grammar.md`.
+

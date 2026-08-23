@@ -6,6 +6,10 @@ description: >-
   forbidden patterns, component selection. Use when feel is vague (getdesign.md).
   Design tokens own values; DESIGN.md owns judgment.
 disable-model-invocation: true
+rank: utility
+categories:
+  - design
+  - tech
 ---
 
 # Prototype DESIGN.md

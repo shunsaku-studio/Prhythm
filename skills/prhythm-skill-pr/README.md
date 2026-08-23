@@ -2,42 +2,41 @@
 
 ## 概要
 
-Prhythm リポジトリで **スキル追加・更新の PR を作る** メタスキル。  
-preflight（validate・README カタログ確認）→ PR 本文ドラフト → `gh pr create` までを型通りに進める。
+Prhythm リポジトリでスキル追加・更新の Pull Request を作る。形式チェックと README カタログ確認のあと、日本語の PR 本文を揃え、`gh pr create` まで進める。
 
 ## 利用メリット
 
-- **PR 前の抜け漏れを減らせる** — validate や README カタログ更新を PR 作成前にチェックできる
-- **PR 本文が毎回同じ型になる** — 概要 / スキルチェックリスト / テスト計画が揃い、レビューが楽になる（本文は日本語）
-- **スキル追加の手順が再利用できる** — ブランチごとに gh コマンドを毎回考え直さなくていい
+- スキル品質チェックとカタログ追記を出す前に揃えられるので、PR 前の抜け漏れが減る。
+- 概要、スキルチェックリスト、テスト計画が入った本文の型が最初から揃うので、レビューが楽になる。
 
 ## 利用シーン
 
-- **新スキルをブランチに載せて PR を出したいとき** — 品質ゲートを通してから GitHub に出したい
-- **複数スキルやメタスキル変更が同一ブランチにあるとき** — 本文を整理して1本の PR にまとめたい
-- **README カタログ更新を忘れがちなとき** — ルート README への追記を preflight で確認したい
+- 新スキルをブランチに載せて PR を出したいとき
+- 複数スキルやメタスキル変更が同一ブランチにあり、本文を 1 本にまとめたいとき
+- ルートのスキル一覧更新を忘れがちなとき
 
 依頼の例: 「このブランチで skill の PR を作って」「feat/modeling-skill を PR して」
 
 ## 使い方
 
-**PR 作成（通常）:**
+**いつ使うか:** スキルの追加・更新を GitHub の PR にしたいときに入る。`prhythm-skill-review` で品質と README 型を揃えたあと。形式チェックとカタログ追記を済ませてから PR を出す。
 
-```
-/prhythm-skill-pr このブランチで PR を作って
-```
+1. スキルが形式チェックとルートのスキル一覧を確認する。失敗したら先に直す。
+2. スキルが概要、スキルチェックリスト、テスト計画を日本語で書く。
+3. スキルが push して PR を作る。下書きなら draft。未コミットがあれば先に確認する。
 
-**下書き PR:**
+## 具体例
 
-```
-/prhythm-skill-pr draft PR を作って
-```
+依頼: 「このブランチで skill の PR を作って。」
 
-**手動 preflight のみ:**
+::: info 出力される PR 本文の抜粋:
 
-```bash
-bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/<skill-name>
-```
+**概要**
+
+- 社内公募アプリ案件向けに `hearing` の進行カード出力を明確化した
+- README の具体例を独立セクションにし、中身の抜粋を置いた
+
+:::
 
 ## 構成
 
@@ -46,29 +45,25 @@ prhythm-skill-pr/
 ├── README.md
 ├── SKILL.md
 └── references/
-    ├── preflight-checklist.md   # PR 前チェックリスト
-    └── pr-body-template.md      # gh pr create 用本文テンプレ
+    ├── preflight-checklist.md
+    └── pr-body-template.md
 ```
 
 GitHub UI 用テンプレ: [.github/PULL_REQUEST_TEMPLATE/skill_addition.md](../../.github/PULL_REQUEST_TEMPLATE/skill_addition.md)
 
 ## 前提条件
 
-- `gh` CLI がインストール済みで GitHub にログイン済み
-- 対象ブランチが `origin` に push 可能
-- ベースブランチ: `main`（変更時は依頼で指定）
+- `gh` CLI がインストール済みで GitHub にログイン済みであること。
+- 対象ブランチが `origin` に push 可能なこと。ベースブランチは `main`（変更時は依頼で指定）。
 
 ## 注意事項
 
-- PR **本文は日本語**（タイトルは `feat: add ...` など英語で可）
-- validate 失敗時は PR を作らず、先に修正する
-- 新スキルはルート [README.md](../../README.md) のスキル一覧への追記が必須
-- コミット・push は依頼内容に含まれる場合のみ実行（未コミット変更があるときは確認）
-- `main` への force-push はしない
+- PR 本文は日本語。タイトルは `feat: add ...` など英語でよい。
+- 新スキルはルート [README.md](../../README.md) のスキル一覧への追記が必須。
+- コミットと push は依頼内容に含まれる場合のみ実行する。未コミット変更があるときは確認する。`main` への force-push はしない。
 
 ## 関連スキル
 
 | スキル | 関係 |
 |--------|------|
-| [prhythm-skill-review](../prhythm-skill-review/) | PR 前の Layer A レビュー・validate |
-| [ooui-graphql-modeling](../ooui-graphql-modeling/) | 例: スキル追加 PR の対象 |
+| [prhythm-skill-review](../prhythm-skill-review/README.md) | PR の前に、README と手順の品質を点検したいときに使う |

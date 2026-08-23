@@ -1,0 +1,152 @@
+<!-- prhythm-docs deck sections — proto-storyboard
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/proto-storyboard/templates/docs/sections.html \
+              docs/prhythm/proto-storyboard/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md
+     画面の全描写は載せない。山場1カット + 3文の台本 -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">proto-storyboard<span class="sep"></span>デモプレイ絵コンテ</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{PRODUCT}}<br />5分の見せ方</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{SOURCES}}</span>
+      <span>提案にまとめる</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Frame">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Frame<span class="sep"></span>何をデモするか</div>
+      <h2 class="msg anim">{{MSG_FRAME}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">主人公</div><div class="rv">{{PERSONA}}</div></div>
+        <div class="row"><div class="rk">コアシーン</div><div class="rv">{{CORE_SCENE}}</div></div>
+        <div class="row"><div class="rk">コンセプト</div><div class="rv">{{CONCEPT}}</div></div>
+        <div class="row"><div class="rk">山場</div><div class="rv">CUT {{CLIMAX_N}} {{CLIMAX_NAME}} · {{RUNTIME}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>proto-storyboard</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Answer">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">結論</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{ANSWER_STATEMENT}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>proto-storyboard</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Cuts">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>3カット</div>
+      <h2 class="msg anim">{{MSG_CUTS}}</h2>
+    </header>
+    <div class="body">
+      <div class="tracks n3 anim d1">
+        <div class="track">
+          <div class="tnum">CUT 1 {{CUT_1_CLOCK}}</div>
+          <div class="tlabel">{{CUT_1_NAME}}</div>
+          <p class="tbody">{{CUT_1_CLAIM}}</p>
+        </div>
+        <div class="track is-key">
+          <div class="tnum">CUT 2 {{CUT_2_CLOCK}}</div>
+          <div class="tlabel">{{CUT_2_NAME}}</div>
+          <p class="tbody">{{CUT_2_CLAIM}}</p>
+        </div>
+        <div class="track">
+          <div class="tnum">CUT 3 {{CUT_3_CLOCK}}</div>
+          <div class="tlabel">{{CUT_3_NAME}}</div>
+          <p class="tbody">{{CUT_3_CLAIM}}</p>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>is-key が山場。4本目を足さない</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Climax">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>山場の画面</div>
+      <h2 class="msg anim">{{MSG_CLIMAX}}</h2>
+    </header>
+    <div class="body">
+      <div class="split anim d1">
+        <div>
+          <div class="col-label">何が見えるか</div>
+          <ul class="bullets">
+            <li>{{CLIMAX_SCREEN_1}}</li>
+            <li>{{CLIMAX_SCREEN_2}}</li>
+            <li>{{CLIMAX_SCREEN_3}}</li>
+          </ul>
+        </div>
+        <div>
+          <div class="col-label">台本</div>
+          <ul class="bullets">
+            <li>{{CUT_1_SCRIPT}}</li>
+            <li>{{CUT_2_SCRIPT}}</li>
+            <li>{{CUT_3_SCRIPT}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>画面詳細は docs/proto-storyboard.md</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">チームで合意する</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{GATE_1}}</li>
+        <li>{{GATE_2}}</li>
+        <li>{{GATE_3}}</li>
+      </ul>
+    </div>
+    <footer class="foot"><span>カット構成は人間が決める</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>proto-storyboard</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>

@@ -1,0 +1,165 @@
+<!-- prhythm-docs deck sections — delivery-phase-plan
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/delivery-phase-plan/templates/docs/sections.html \
+              docs/prhythm/delivery-phase-plan/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md
+     矢羽は Evidence 1枚。仮説カタログは載せない -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">delivery-phase-plan<span class="sep"></span>検証計画</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{PRODUCT}}<br />いつ、何で Go するか</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{SOURCES}}</span>
+      <span>提案にまとめる</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Frame">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Frame<span class="sep"></span>何を検証するか</div>
+      <h2 class="msg anim">{{MSG_FRAME}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">主指標</div><div class="rv">{{METRIC_NOW}} → {{METRIC_TARGET}}</div></div>
+        <div class="row"><div class="rk">パイロット</div><div class="rv">{{PILOT_SCALE}}</div></div>
+        <div class="row"><div class="rk">レーン</div><div class="rv">{{LANES}}</div></div>
+        <div class="row"><div class="rk">最終ゲート</div><div class="rv">{{LAST_GATE}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>delivery-phase-plan</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Answer">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">結論</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{ANSWER_STATEMENT}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>delivery-phase-plan</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Yahane">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>役割別 矢羽</div>
+      <h2 class="msg anim">{{MSG_YAHANE}}</h2>
+    </header>
+    <div class="body top">
+      <div class="anim d1" style="display:grid;grid-template-columns:140px repeat(4,1fr);grid-template-rows:auto repeat(4,1fr);gap:8px;height:100%;font-size:15px;">
+        <div style="grid-column:1;grid-row:1;"></div>
+        <div style="grid-column:2;grid-row:1;text-align:center;font-weight:800;">{{P0_NAME}}<br><span style="font-weight:600;font-size:13px;opacity:.7;">{{P0_DUR}}</span></div>
+        <div style="grid-column:3;grid-row:1;text-align:center;font-weight:800;">{{P1_NAME}}<br><span style="font-weight:600;font-size:13px;opacity:.7;">{{P1_DUR}}</span></div>
+        <div style="grid-column:4;grid-row:1;text-align:center;font-weight:800;">{{P2_NAME}}<br><span style="font-weight:600;font-size:13px;opacity:.7;">{{P2_DUR}}</span></div>
+        <div style="grid-column:5;grid-row:1;text-align:center;font-weight:800;">{{P3_NAME}}<br><span style="font-weight:600;font-size:13px;opacity:.7;">{{P3_DUR}}</span></div>
+
+        <div style="grid-column:1;grid-row:2;display:flex;align-items:center;font-weight:800;">{{LANE_1}}</div>
+        <div style="grid-column:2;grid-row:2;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%,12px 50%);">{{A1_P0}}</div>
+        <div style="grid-column:3;grid-row:2;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%,12px 50%);">{{A1_P1}}</div>
+        <div style="grid-column:4/6;grid-row:2;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%,12px 50%);">{{A1_P23}}</div>
+
+        <div style="grid-column:1;grid-row:3;display:flex;align-items:center;font-weight:800;">{{LANE_2}}</div>
+        <div style="grid-column:3;grid-row:3;background:var(--line-strong);color:var(--ink);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%,12px 50%);">{{A2_P1}}</div>
+        <div style="grid-column:4/6;grid-row:3;background:var(--line-strong);color:var(--ink);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%,12px 50%);">{{A2_P23}}</div>
+
+        <div style="grid-column:1;grid-row:4;display:flex;align-items:center;font-weight:800;">{{LANE_3}}</div>
+        <div style="grid-column:3;grid-row:4;background:var(--subtle);color:var(--ink);border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 12px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%,12px 50%);">{{A3_P1}}</div>
+        <div style="grid-column:4;grid-row:4;background:var(--subtle);color:var(--ink);border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 12px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%,12px 50%);">{{A3_P2}}</div>
+        <div style="grid-column:5;grid-row:4;background:var(--subtle);color:var(--ink);border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 12px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%,12px 50%);">{{A3_P3}}</div>
+
+        <div style="grid-column:1;grid-row:5;display:flex;align-items:center;font-weight:800;">瞬作</div>
+        <div style="grid-column:2;grid-row:5;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 12px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%,12px 50%);">{{AS_P0}}</div>
+        <div style="grid-column:3/5;grid-row:5;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 12px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%,12px 50%);">{{AS_P12}}</div>
+        <div style="grid-column:5;grid-row:5;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 12px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%,12px 50%);">{{AS_P3}}</div>
+      </div>
+    </div>
+    <footer class="foot"><span>空白レーンは正常</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Judgment">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>ゲートと判定</div>
+      <h2 class="msg anim">{{MSG_JUDGE}}</h2>
+    </header>
+    <div class="body">
+      <div class="tracks n4 anim d1">
+        <div class="track">
+          <div class="tnum">{{P0_GATE}}</div>
+          <div class="tlabel">{{P0_NAME}}</div>
+          <p class="tbody">{{P0_JUDGE}}</p>
+        </div>
+        <div class="track">
+          <div class="tnum">{{P1_GATE}}</div>
+          <div class="tlabel">{{P1_NAME}}</div>
+          <p class="tbody">{{P1_JUDGE}}</p>
+        </div>
+        <div class="track">
+          <div class="tnum">{{P2_GATE}}</div>
+          <div class="tlabel">{{P2_NAME}}</div>
+          <p class="tbody">{{P2_JUDGE}}</p>
+        </div>
+        <div class="track is-key">
+          <div class="tnum">Go / No-Go</div>
+          <div class="tlabel">{{P3_NAME}}</div>
+          <p class="tbody">{{P3_JUDGE}}</p>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>is-key が最終判定。未達の一手を残す</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">チームで合意する</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{GATE_1}}</li>
+        <li>{{GATE_2}}</li>
+        <li>{{GATE_3}}</li>
+      </ul>
+    </div>
+    <footer class="foot"><span>主指標は人間が決める</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>delivery-phase-plan</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>

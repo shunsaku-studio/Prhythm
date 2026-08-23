@@ -8,6 +8,9 @@ description: >-
   validation map, assumption map, or wants to turn a vision / prototype /
   docs/feature-list.md into a prioritized validation backlog.
 disable-model-invocation: false
+rank: core
+categories:
+  - business
 ---
 
 # Uncertainty Map
@@ -29,10 +32,12 @@ There is one mode — a single map with its visualization. The map itself is wha
 ## When NOT to use
 
 - Vision / one-line statement → use [product-vision-and-concept](../product-vision-and-concept/SKILL.md)
-- Use case extraction → use [usecase-mapper](../usecase-mapper/SKILL.md)
-- Feature list / product backlog → use [feature-backlog-mapper](../feature-backlog-mapper/SKILL.md) (iterative neighbor, not a hard prerequisite)
+- Use case extraction → use [function-usecase-map](../function-usecase-map/SKILL.md)
+- Feature list / product backlog → use [feature-backlog-map](../feature-backlog-map/SKILL.md) (iterative neighbor, not a hard prerequisite)
 - Prototype design judgment (feel/surface) → use [prototype-design-md](../prototype-design-md/SKILL.md)
 - Recording validation results / observation evidence → use the `validation-log` skill
+- Customer-facing 矢羽 / Go/No-Go dates → use [delivery-phase-plan](../delivery-phase-plan/SKILL.md)
+- Owner / RACI / staffing → use [delivery-team-plan](../delivery-team-plan/SKILL.md)
 
 ## Reference router
 
@@ -75,7 +80,7 @@ Read [references/intake.md](references/intake.md). The skill is **standalone** �
 4. Observation / measurement logs — promote 🟡 → ✅
 5. Single-turn dialog when seeds are missing
 
-If vision and feature-list are both missing, mention `/product-vision-and-concept` and `/feature-backlog-mapper` once, then proceed with a single-turn assumption interview (label each assumption `(コア候補)`). Never block on upstream skills.
+If vision and feature-list are both missing, mention `/product-vision-and-concept` and `/feature-backlog-map` once, then proceed with a single-turn assumption interview (label each assumption `(コア候補)`). Never block on upstream skills.
 
 **Diff-update mode**: when `docs/uncertainty-map.md` already exists, default to incremental update — surface 新規/昇格/降格/削除 diff and preserve existing A IDs. ✅ への昇格は観察根拠が必須（実装済 ≠ 検証済）. Full regeneration only when the user says "ゼロから作り直して". See [references/intake.md](references/intake.md) §Diff-update mode.
 
@@ -174,7 +179,7 @@ Output file shape (summary; full template in [references/matrix-template.md](ref
 The stance behind the workflow. When references conflict with these, the principles win.
 
 1. **Implementation ≠ verification** — ✅ requires user observation / measurement evidence (人数・期間・結果). Code passing tests is 🟡, not ✅.
-2. **Core is narrow by design** — Core 判定は数を絞るのが目的。絞り込めない仮説は Peripheral に降ろす。Core は ≤30% を目安、超えたら理由を明示。本スキルの「コア仮説」は **Why の核**（vision を成立させる暗黙の前提）を指し、`feature-backlog-mapper` の機能（**What の核**）とは別レイヤー。高優先度の機能から抽出した暗黙の前提が「コア仮説」候補になる。
+2. **Core is narrow by design** — Core 判定は数を絞るのが目的。絞り込めない仮説は Peripheral に降ろす。Core は ≤30% を目安、超えたら理由を明示。本スキルの「コア仮説」は **Why の核**（vision を成立させる暗黙の前提）を指し、`feature-backlog-map` の機能（**What の核**）とは別レイヤー。高優先度の機能から抽出した暗黙の前提が「コア仮説」候補になる。
 3. **Vision is the yardstick** — Core 根拠は vision 引用 / 高優先度の機能紐付 / cost trade-off のいずれかで 1 行書ける。「重要だから」は理由ではない。
 4. **The map is the artifact** — 可視化された不確実性マップ自体が共有物。別途の対外レポートは作らない。マップを見れば「何が確かで、次に何を検証するか」が分かる状態を目指す。
 5. **Falsifiable beliefs only** — 仮説は「これが間違っていたら ___」を 1 文で書ける。書けないものは仮説ではなく wish。
@@ -206,3 +211,15 @@ Run all three layers before declaring the skill ready or after edits. Full scena
 3. **Layer C discipline**: pressure scenarios — RED → GREEN → REFACTOR
 
 If any layer fails, fix SKILL.md / references and re-run from Layer A. Stop after 3 cycles and revisit § Workflow or § Reference router.
+
+## Documenting with prhythm-docs
+
+After the skill run, when the user asks to save or present results（まとめて / ドキュメントにして / スライドにして）:
+
+1. Use `/prhythm-docs` (or follow that meta-skill)
+2. Fill `templates/docs/index.md` and `templates/docs/sections.html` in this skill
+3. Build the deck: `node skills/prhythm-docs/scripts/build-deck.mjs skills/uncertainty-map/templates/docs/sections.html docs/prhythm/uncertainty-map/index.html --title "…"`
+4. Write `docs/prhythm/uncertainty-map/index.md`
+
+Do not dump full catalogs into those files. Markdown is a briefing (Answer / Frame / Evidence / Gates / Next) — see `skills/prhythm-docs/references/md-grammar.md`.
+

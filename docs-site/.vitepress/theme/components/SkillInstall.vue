@@ -12,12 +12,34 @@ const agents: { id: AgentId; label: string }[] = [
   { id: 'copilot', label: 'Copilot' },
 ];
 
+const RANK_LABELS: Record<string, string> = {
+  core: 'コア',
+  utility: 'ユーティリティ',
+  meta: 'メタ',
+};
+
+const CATEGORY_LABELS: Record<string, string> = {
+  business: 'ビジネス',
+  design: 'デザイン',
+  tech: 'テック',
+  delivery: '実行計画',
+};
+
 const { frontmatter } = useData();
 const activeAgent = ref<AgentId>('claude-code');
 const copied = ref(false);
 
 const skill = computed(() => frontmatter.value.skill as string | undefined);
 const title = computed(() => (frontmatter.value.title as string | undefined) ?? skill.value ?? '');
+const rank = computed(() => frontmatter.value.rank as string | undefined);
+const categories = computed(() => {
+  const raw = frontmatter.value.categories;
+  if (Array.isArray(raw)) return raw as string[];
+  if (typeof raw === 'string' && raw) return [raw];
+  return [];
+});
+
+const rankLabel = computed(() => (rank.value ? (RANK_LABELS[rank.value] ?? rank.value) : ''));
 
 const command = computed(() => {
   const name = skill.value;
@@ -47,6 +69,20 @@ const copy = async () => {
 <template>
   <header v-if="skill" class="skill-page">
     <h1 class="skill-page-title">{{ title }}</h1>
+
+    <div v-if="rank || categories.length" class="skill-badges" aria-label="分類">
+      <span
+        v-if="rank"
+        class="skill-badge skill-badge--rank"
+        :class="`skill-badge--${rank}`"
+      >{{ rankLabel }}</span>
+      <span
+        v-for="cat in categories"
+        :key="cat"
+        class="skill-badge skill-badge--cat"
+        :class="`skill-badge--${cat}`"
+      >{{ CATEGORY_LABELS[cat] ?? cat }}</span>
+    </div>
 
     <div class="skill-install" aria-label="インストール">
       <p class="skill-install-label">インストール</p>

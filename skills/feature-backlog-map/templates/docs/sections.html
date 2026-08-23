@@ -1,0 +1,138 @@
+<!-- prhythm-docs deck sections — feature-backlog-map
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/feature-backlog-map/templates/docs/sections.html \
+              docs/prhythm/feature-backlog-map/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md
+     AC 全件は載せない。優先ストーリーと境界だけ -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">feature backlog<span class="sep"></span>Prhythm</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{PRODUCT}}の<br />バックログ要約</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{SOURCES}}</span>
+      <span>何から作るかを決めるための一覧</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Frame">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Frame<span class="sep"></span>スコープ</div>
+      <h2 class="msg anim">{{MSG_FRAME}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">機能 / ストーリー / AC</div><div class="rv">{{F_COUNT}} 機能・{{S_COUNT}} ストーリー・{{AC_COUNT}} 受入基準</div></div>
+        <div class="row"><div class="rk">入力にした成果物</div><div class="rv">{{SOURCES_DETAIL}}</div></div>
+        <div class="row"><div class="rk">優先度の付け方</div><div class="rv">{{PRIORITIZATION}}</div></div>
+        <div class="row"><div class="rk">今回スコープ外</div><div class="rv">{{OUT_OF_SCOPE}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>feature-backlog-map</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Answer">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">結論</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{ANSWER_STATEMENT}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>feature-backlog-map</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Top">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>優先ストーリー</div>
+      <h2 class="msg anim">{{MSG_TOP}}</h2>
+    </header>
+    <div class="body">
+      <table class="t anim d1">
+        <thead>
+          <tr><th style="width:100px">ID</th><th>ストーリー</th><th style="width:140px">機能</th><th style="width:440px">境界となる受入基準</th></tr>
+        </thead>
+        <tbody>
+          <tr class="is-key"><td class="num">{{S1_ID}}</td><td>{{S1}}</td><td class="num">{{S1_F}}</td><td>{{S1_AC}}</td></tr>
+          <tr><td class="num">{{S2_ID}}</td><td>{{S2}}</td><td class="num">{{S2_F}}</td><td>{{S2_AC}}</td></tr>
+          <tr><td class="num">{{S3_ID}}</td><td>{{S3}}</td><td class="num">{{S3_F}}</td><td>{{S3_AC}}</td></tr>
+          <tr><td class="num">{{S4_ID}}</td><td>{{S4}}</td><td class="num">{{S4_F}}</td><td>{{S4_AC}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="foot"><span>全 AC は docs/acceptance-criteria.md</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Coverage">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>機能 → ストーリー</div>
+      <h2 class="msg anim">{{MSG_COVERAGE}}</h2>
+    </header>
+    <div class="body">
+      <table class="t anim d1">
+        <thead>
+          <tr><th style="width:100px">ID</th><th>機能</th><th style="width:300px">ストーリー数</th><th style="width:420px">埋まっていない穴</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="num">{{F1_ID}}</td><td>{{F1}}</td><td class="num">{{F1_COUNT}}</td><td>{{F1_GAP}}</td></tr>
+          <tr><td class="num">{{F2_ID}}</td><td>{{F2}}</td><td class="num">{{F2_COUNT}}</td><td>{{F2_GAP}}</td></tr>
+          <tr class="is-key"><td class="num">{{F3_ID}}</td><td>{{F3}}</td><td class="num">{{F3_COUNT}}</td><td>{{F3_GAP}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="foot"><span>穴のある機能から議論する</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">人間が並べ替える</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{GATE_1}}</li>
+        <li>{{GATE_2}}</li>
+        <li>{{GATE_3}}</li>
+      </ul>
+    </div>
+    <footer class="foot"><span>この優先度は提案であって決定ではない</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>詳細: docs/feature-list.md / product-backlog.md</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>

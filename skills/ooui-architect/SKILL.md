@@ -6,6 +6,9 @@ description: >-
   Use for OOUI, directory layout, new entity, init-entity, component review,
   MODELS.ts, tests/TDD, or import organize.
 disable-model-invocation: false
+rank: utility
+categories:
+  - tech
 ---
 
 # OOUI Architect
@@ -16,7 +19,7 @@ Entry skill for common / model / pages. Read task docs before working.
 
 - Layers: `common` → `model/common` → `model/{model}` → **framework routing dir**
 - Page files in the routing dir only assemble `<EntityList />` etc. — no business logic
-- **Detect the routing dir from the project** — Waku: `src/pages/`, Next: `src/app/`, Remix: `app/routes/` ([reference.md](reference.md))
+- **Detect the routing dir from the project** — script auto-fills Waku `src/pages/` and Next `src/app/`. Other frameworks: copy page templates into the detected routing dir ([docs/scaffold.md](docs/scaffold.md))
 - **Never add an OOUI-only routing dir**
 - New entity → follow [docs/scaffold.md](docs/scaffold.md): scaffold `model/` + page files in the detected routing dir
 - Model components take **object props** — `<ArticleCard article={article} />`

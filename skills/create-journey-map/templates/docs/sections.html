@@ -1,0 +1,185 @@
+<!-- prhythm-docs deck sections — create-journey-map
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/create-journey-map/templates/docs/sections.html \
+              docs/prhythm/create-journey-map/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md
+     台本の全セリフは載せない。As-Is / To-Be は該当モードの section だけ残す -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">journey map<span class="sep"></span>{{MODE}}</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{PERSONA}}の<br />{{SCENARIO}}</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{SOURCES}}</span>
+      <span>体験からイシューを特定する</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Frame">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Frame<span class="sep"></span>前提</div>
+      <h2 class="msg anim">{{MSG_FRAME}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">誰の体験か</div><div class="rv">{{PERSONA_DETAIL}}</div></div>
+        <div class="row"><div class="rk">いつ・どこで</div><div class="rv">{{SCENARIO_DETAIL}}</div></div>
+        <div class="row"><div class="rk">材料</div><div class="rv">{{SOURCES_DETAIL}}</div></div>
+        <div class="row"><div class="rk">創作した部分</div><div class="rv">{{FICTION_FLAG}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>journey map / {{MODE}}</span><span>{{PERSONA}}</span></footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Answer">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">結論</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{ANSWER_STATEMENT}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>journey map / {{MODE}}</span><span>{{PERSONA}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Phases">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>フェーズ俯瞰</div>
+      <h2 class="msg anim">{{MSG_PHASES}}</h2>
+    </header>
+    <div class="body">
+      <div class="tracks n4 anim d1">
+        <div class="track">
+          <div class="tnum">01 {{PHASE_1_TIME}}</div>
+          <div class="tlabel">{{PHASE_1}}</div>
+          <p class="tbody">{{PHASE_1_BODY}}</p>
+        </div>
+        <div class="track">
+          <div class="tnum">02 {{PHASE_2_TIME}}</div>
+          <div class="tlabel">{{PHASE_2}}</div>
+          <p class="tbody">{{PHASE_2_BODY}}</p>
+        </div>
+        <div class="track is-key">
+          <div class="tnum">03 {{PHASE_3_TIME}}</div>
+          <div class="tlabel">{{PHASE_3}}</div>
+          <p class="tbody">{{PHASE_3_BODY}}</p>
+        </div>
+        <div class="track">
+          <div class="tnum">04 {{PHASE_4_TIME}}</div>
+          <div class="tlabel">{{PHASE_4}}</div>
+          <p class="tbody">{{PHASE_4_BODY}}</p>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>強調したフェーズが今回のイシュー</span><span>{{PERSONA}}</span></footer>
+  </div>
+</section>
+
+<!-- mode:asis のときだけ残す -->
+<section class="slide" data-label="Insights">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>as-is</div>
+      <h2 class="msg anim">{{MSG_INSIGHTS}}</h2>
+    </header>
+    <div class="body">
+      <div class="split anim d1">
+        <div>
+          <div class="col-label">インサイト</div>
+          <ul class="bullets">
+            <li>{{INSIGHT_1}}</li>
+            <li>{{INSIGHT_2}}</li>
+            <li>{{INSIGHT_3}}</li>
+          </ul>
+        </div>
+        <div>
+          <div class="col-label">HMW への変換</div>
+          <ul class="bullets numbered">
+            <li>{{HMW_1}}</li>
+            <li>{{HMW_2}}</li>
+            <li>{{HMW_3}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>台本の全セリフはチャット / 元 docs へ</span><span>{{PERSONA}}</span></footer>
+  </div>
+</section>
+
+<!-- mode:tobe のときだけ残す -->
+<section class="slide" data-label="ToBe">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>to-be</div>
+      <h2 class="msg anim">{{MSG_TOBE}}</h2>
+    </header>
+    <div class="body">
+      <table class="t anim d1">
+        <thead>
+          <tr><th style="width:280px">観点</th><th>As-Is</th><th>To-Be</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>{{ASPECT_1}}</td><td>{{ASIS_1}}</td><td>{{TOBE_1}}</td></tr>
+          <tr><td>{{ASPECT_2}}</td><td>{{ASIS_2}}</td><td>{{TOBE_2}}</td></tr>
+          <tr class="is-key"><td>{{ASPECT_3}}</td><td>{{ASIS_3}}</td><td>{{TOBE_3}}</td></tr>
+        </tbody>
+      </table>
+      <div class="callout anim d2" style="margin-top:32px">
+        <span class="lbl">コアシーン候補</span>
+        {{CORE_SCENES}}
+      </div>
+    </div>
+    <footer class="foot"><span>journey map / to-be</span><span>{{PERSONA}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">チームで合意する</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{GATE_1}}</li>
+        <li>{{GATE_2}}</li>
+        <li>{{GATE_3}}</li>
+      </ul>
+    </div>
+    <footer class="foot"><span>HMW の優先順位が決まるまで To-Be に進まない</span><span>{{PERSONA}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>journey map / {{MODE}}</span><span>{{PERSONA}}</span></footer>
+  </div>
+</section>

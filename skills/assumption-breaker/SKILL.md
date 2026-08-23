@@ -10,6 +10,9 @@ description: >-
   "what are we taking for granted", "flip the assumptions",
   "devil's advocate on this".
 disable-model-invocation: false
+rank: utility
+categories:
+  - business
 ---
 
 # Assumption Breaker
@@ -37,7 +40,7 @@ Goal: 提案者が見えていない解の空間を可視化する。説得術�
 ## When NOT to use
 
 - 提案の実行計画やスケジュールのレビュー → 通常のレビュー
-- 競合・市場リサーチ → competitive-research skill
+- 競合・市場リサーチ → market-landscape skill
 - ビジョン・コンセプト策定 → product-vision-and-concept skill
 
 ---
@@ -177,3 +180,15 @@ Phase 2 で出た全代替解を一覧にし、以下の軸で並べる：
 - 代替解が抽象的すぎる（「別のアプローチを取る」はNG。何がどう変わるか書く）
 - 元RFCを全否定する（→ 提案者が防衛に回って議論にならない）
 - トレードオフを書かない（→ バラ色の妄想）
+
+## Documenting with prhythm-docs
+
+After the skill run, when the user asks to save or present results（まとめて / ドキュメントにして / スライドにして）:
+
+1. Use `/prhythm-docs` (or follow that meta-skill)
+2. Fill `templates/docs/index.md` and `templates/docs/sections.html` in this skill
+3. Build the deck: `node skills/prhythm-docs/scripts/build-deck.mjs skills/assumption-breaker/templates/docs/sections.html docs/prhythm/assumption-breaker/index.html --title "…"`
+4. Write `docs/prhythm/assumption-breaker/index.md`
+
+Do not dump full catalogs into those files. Markdown is a briefing (Answer / Frame / Evidence / Gates / Next) — see `skills/prhythm-docs/references/md-grammar.md`.
+

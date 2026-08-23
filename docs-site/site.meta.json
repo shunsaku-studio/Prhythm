@@ -2,10 +2,12 @@
   "home": {
     "title": "Prhythm Skills",
     "description": "Agent Skills カタログ — 正本は skills/ の README",
-    "intro": "提案のリズムを生み出す [Agent Skills](https://agentskills.io) 集。各スキルページは `skills/<name>/README.md` からビルド時に生成される。"
+    "intro": "提案のリズムを生み出す [Agent Skills](https://agentskills.io) 集。各スキルは `rank`（コア / ユーティリティ / メタ）と `categories`（ビジネス / デザイン / テック / 実行計画）で分類され、ページは `skills/<name>/README.md` からビルド時に生成される。"
   },
   "nav": [
     { "text": "ホーム", "link": "/" },
+    { "text": "シーン別", "link": "/guide/scenes/" },
+    { "text": "インストール", "link": "/guide/installation/" },
     { "text": "GitHub", "link": "https://github.com/shunsaku-studio/Prhythm" }
   ],
   "sidebar": [
@@ -13,32 +15,21 @@
       "text": "General",
       "items": [
         { "link": "/", "text": "スキル一覧" },
+        { "page": "scenes" },
         { "page": "installation" }
       ]
     },
     {
-      "text": "Skills",
-      "items": [
-        { "skill": "create-html-deck" },
-        { "skill": "competitive-research" },
-        { "skill": "hearing" },
-        { "skill": "hearing-prep" },
-        { "skill": "hearing-analysis" },
-        { "skill": "feature-backlog-mapper" },
-        { "skill": "product-vision-and-concept" },
-        { "skill": "defining-personas-and-segments" },
-        { "skill": "prototype-design-md" },
-        { "skill": "ooui-architect", "expand": true },
-        { "skill": "ooui-graphql-modeling" },
-        { "skill": "prhythm-skill-pr" },
-        { "skill": "prhythm-skill-review" },
-        { "skill": "shadcn-explorer" },
-        { "skill": "uncertainty-map" },
-        { "skill": "usecase-mapper" }
-      ]
+      "groupSkillsBy": "rank"
     }
   ],
   "pages": {
+    "scenes": {
+      "source": "pages/scenes.md",
+      "route": "guide/scenes",
+      "title": "シーン別スキル集",
+      "keepTitle": true
+    },
     "installation": {
       "source": "pages/installation.md",
       "route": "guide/installation",

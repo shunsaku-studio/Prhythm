@@ -1,0 +1,131 @@
+<!-- prhythm-docs deck sections — product-vision-and-concept
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/product-vision-and-concept/templates/docs/sections.html \
+              docs/prhythm/product-vision-and-concept/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md
+     一行コンセプトが Answer。Why / Who / What / 差別化 はその根拠 -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">vision &amp; concept<span class="sep"></span>{{STATUS}}</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{PRODUCT}}</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{SOURCES}}</span>
+      <span>これは何で、なぜ勝てるか</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Concept">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">一行コンセプト</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{ONE_LINER}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>{{STATUS}}</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="WhyWho">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>Why / Who / What / 差別化</div>
+      <h2 class="msg anim">{{MSG_CONCEPT}}</h2>
+    </header>
+    <div class="body">
+      <div class="tracks n4 anim d1">
+        <div class="track">
+          <div class="tnum">01 WHY</div>
+          <div class="tlabel">なぜやるのか</div>
+          <p class="tbody">{{WHY}}</p>
+        </div>
+        <div class="track">
+          <div class="tnum">02 WHO</div>
+          <div class="tlabel">誰のためか</div>
+          <p class="tbody">{{WHO}}</p>
+        </div>
+        <div class="track">
+          <div class="tnum">03 WHAT</div>
+          <div class="tlabel">何を提供するか</div>
+          <p class="tbody">{{WHAT}}</p>
+        </div>
+        <div class="track is-key">
+          <div class="tnum">04 EDGE</div>
+          <div class="tlabel">なぜ勝てるか</div>
+          <p class="tbody">{{HOW_DIFFERENT}}</p>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>vision &amp; concept</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Assumptions">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>置いた前提</div>
+      <h2 class="msg anim">{{MSG_ASSUMPTIONS}}</h2>
+    </header>
+    <div class="body">
+      <table class="t anim d1">
+        <thead>
+          <tr><th style="width:100px">#</th><th>置いた前提</th><th style="width:520px">外れたときに何が壊れるか</th></tr>
+        </thead>
+        <tbody>
+          <tr class="is-key"><td class="num">01</td><td>{{ASSUMPTION_1}}</td><td>{{RISK_1}}</td></tr>
+          <tr><td class="num">02</td><td>{{ASSUMPTION_2}}</td><td>{{RISK_2}}</td></tr>
+          <tr><td class="num">03</td><td>{{ASSUMPTION_3}}</td><td>{{RISK_3}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="foot"><span>検証順は uncertainty-map で決める</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">合意したい</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{GATE_1}}</li>
+        <li>{{GATE_2}}</li>
+        <li>{{GATE_3}}</li>
+      </ul>
+    </div>
+    <footer class="foot"><span>この3つが揃うと PRD 冒頭が書ける</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>vision &amp; concept</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>

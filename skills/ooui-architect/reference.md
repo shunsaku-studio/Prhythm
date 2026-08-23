@@ -37,11 +37,11 @@ Related types in `type.ts`. Navigation via `path.ts` and links in model componen
 
 OOUI keeps `common` + `model` fixed. **Page components live in the framework's routing dir** — never invent an OOUI-only dir.
 
-| Framework | Routing dir |
-|-----------|-------------|
-| Waku | `src/pages/` |
-| Next.js | `src/app/` |
-| Remix | `app/routes/` |
+| Framework | Routing dir | Who writes pages |
+|-----------|-------------|------------------|
+| Waku | `src/pages/` | `init-entity.sh` |
+| Next.js | `src/app/` | `init-entity.sh` |
+| Other | project's routing dir | copy `templates/pages/` or `templates/app/` per [scaffold.md](docs/scaffold.md) |
 
 Inspect the repo to find the actual routing dir. If unsure, check framework docs or existing route files.
 
@@ -57,7 +57,7 @@ src/
 │   ├── article/     singular
 │   ├── book/
 │   └── user/
-└── pages/           ← example: Waku (Next: app/, Remix: app/routes/)
+└── pages/           ← example: Waku (Next: `src/app/`)
     ├── articles/    plural route
     ├── books/
     └── users/

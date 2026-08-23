@@ -2,51 +2,43 @@
 
 ## 概要
 
-v0 や Cursor で UI を生成する **前** に、AI が読む **1枚の判断ブリーフ** `DESIGN.md` を一緒に作るスキル。hex や padding の値は CSS トークンに任せ、ここでは **性格・サーフェス・禁止パターン・コンポーネント選び** だけを固定する。
-
-**流れ（承認は調整の「OK」で 1 回）**
-
-1. **参考を探す** — 製品名・用途・空気感を伝えると、[getdesign.md](https://getdesign.md/) ベースの **参考テーマ 5 件**（各 slug に **プレビュー URL** + Match / Borrow / Avoid）と、既存 CSS の検出結果・トークン方針 A/B/C が返る。feel が明確、guardrails だけ、トークン済みなどはスキップ可。
-2. **調整する** — slug と方針を選んだあと **Intent Summary**（feel・サーフェス・禁止のプレビュー）がチャットに出る。足りない点はヒアリング。「OK」で確定。
-3. **作成する** — プロジェクトルートに `DESIGN.md` を書き lint 通過。以降の v0 / Cursor はこのファイルをコンテキストに読む。
+製品名、用途、空気感を渡すと、v0 や Cursor で UI を生成する前に AI が読む 1 枚の判断ブリーフ `DESIGN.md` を一緒に作る。hex や padding の値は CSS トークンに任せ、ここでは性格、サーフェス、禁止パターン、コンポーネント選びだけを固定する。
 
 ## 利用メリット
 
-- **AI 生成 UI のトーンがブレにくい** — feel・禁止パターン・コンポーネント選びを先に 1 枚に固定できる
-- **デザイントークンと判断の更新が独立する** — hex や radius はトークン側、性格やサーフェスは DESIGN.md と役割分担できる
-- **generic slop を事前に防げる** — hero 乱立、Inter デフォルト、業務画面なのにマーケ風レイアウトなどを意図的に排除できる
-- **着手前にチームで合意できる** — 生成前に意図を要約して確認してから書き起こせる
+- feel、禁止パターン、コンポーネント選びを先に 1 枚に固定できるので、生成 UI のトーンがブレにくい。
+- 色の値は CSS、性格は DESIGN.md に分かれるので、トークンと判断基準を混ぜなくてよい。
+- hero 乱立や Inter デフォルト、業務画面なのにマーケ風レイアウトなどを、生成前に意図的に排除できる。
+- 生成前に意図を要約して確認してから書き起こせるので、着手前にチームで合意できる。
 
 ## 利用シーン
 
-- **v0 や Cursor で UI 生成を始める直前** — 生成 AI が読むトーン契約を先に置きたい
-- **「モダンでクリーン」だけでは具体性が足りない** — 空気感と「〜ではない」を言語化したい
-- **業務ツールなのにランディングページ風 UI が出やすい** — サーフェスと禁止パターンで方向を絞りたい
-- **デザイントークンはあるが判断基準がない** — 値は CSS 変数、feel と layout ルールは DESIGN.md で補いたい
+- v0 や Cursor で UI 生成を始める直前
+- 「モダンでクリーン」だけでは具体性が足りないとき
+- 業務ツールなのにランディングページ風 UI が出やすいとき
+- デザイントークンはあるが、feel と layout の判断基準がないとき
 
 依頼の例: 「社内感謝ツール feedit の DESIGN.md を一緒に書いて。イエローでハッピーだが誠実、Bonusly 寄り」
 
 ## 使い方
 
-```
-/prototype-design-md 社内感謝ツール feedit。イエローでハッピーだが誠実。Bonusly 寄り
-```
+**いつ使うか:** 見せる順は決まったが、トーン、禁止パターン、コンポーネント選びが無いときに入る。`proto-storyboard` のあと、v0 / Cursor で UI を生成する前。テーマ探索だけなら `shadcn-explorer`、画面ひな形は `ooui-architect`。
 
-```
-/prototype-design-md 管理画面の guardrails だけ先に DESIGN.md に書いて
-```
+1. ユーザーが製品名、用途、空気感を伝える。スキルが [getdesign.md](https://getdesign.md/) から参考テーマ 5 件（各候補のプレビュー URL と Match / Borrow / Avoid）と、既存 CSS の検出結果、トークン方針 A/B/C を返す。方向がはっきりしていれば飛ばせる。
+2. ユーザーが slug と方針を選ぶ。スキルが Intent Summary（feel、サーフェス、禁止のプレビュー）をチャットに出す。足りない点を直して「OK」する。承認はここ 1 回。
+3. スキルがプロジェクトルートに `DESIGN.md` を書き、lint を通す。以降の v0 / Cursor はこのファイルを読む。
 
-```
-/prototype-design-md デザイントークン適用済み。DESIGN.md を detect から作って
-```
+## 具体例
 
-Phase 0 で [getdesign.md](https://getdesign.md/) から参考テーマ **5件** + トークン方針（A/B/C）→ Phase 1 で Intent Summary → 「OK」で Phase 2（`DESIGN.md` 作成 + lint）。承認ゲートは Phase 1 の 1 回。
+依頼: 「社内公募アプリの DESIGN.md を一緒に書いて。匿名で近づけるが、人事の管理画面っぽくしない。」
 
-```bash
-bash skills/prototype-design-md/scripts/init-design-md.sh
-bash skills/prototype-design-md/scripts/lint-design-md.sh DESIGN.md
-node skills/prototype-design-md/scripts/detect-project-tokens.mjs
-```
+::: info 出力される `DESIGN.md` の抜粋:
+
+**Product Feel**
+社内公募。ミッションが向こうから届くカード。匿名の一歩は軽いが、合意のあとは誠実。
+**近くないもの:** タレントマネジメントの管理画面、全面コーポレートカラー、ランキング。
+
+:::
 
 ## 構成
 
@@ -55,15 +47,15 @@ prototype-design-md/
 ├── README.md
 ├── SKILL.md
 ├── references/
-│   ├── theme-discovery.md     # Phase 0: getdesign.md 5件 + token strategy
-│   ├── intake.md              # Phase 1 前のヒアリング
-│   ├── prototype-brief.md     # 5 pillars とセクション対応
-│   ├── workflow.md            # Phase 0–2 とゲート
-│   ├── surface-types.md       # operational tool / dashboard 等
+│   ├── theme-discovery.md
+│   ├── intake.md
+│   ├── prototype-brief.md
+│   ├── workflow.md
+│   ├── surface-types.md
 │   ├── anti-slop.md           # 禁止パターン
-│   ├── prose-guide.md         # Product Feel の書き方
-│   ├── quality-checklist.md   # Phase 2 セルフレビュー
-│   └── google-spec-summary.md # §1–8 と lint 要件
+│   ├── prose-guide.md
+│   ├── quality-checklist.md
+│   └── google-spec-summary.md
 ├── scripts/
 │   ├── init-design-md.sh
 │   ├── lint-design-md.sh
@@ -74,25 +66,20 @@ prototype-design-md/
 
 ## 前提条件
 
-- Node.js（`detect-project-tokens.mjs`、`npx @google/design.md lint`、`npx @webdesignhot/design-md`（Phase 0 テーマ探索）用）
-- bash
-- スキル配置: Prhythm `skills/` または `~/.cursor/skills/`
-- 明示呼び出し専用（`disable-model-invocation: true`）
+- Node.js（トークン検出、`npx @google/design.md lint`、テーマ探索用）。
+- bash。
 
 ## 注意事項
 
-- **非対応:** トークン hex / YAML token blocks、全コンポーネント詳細 spec、モーション詳細、ガバナンス文書
-- **プロトタイプ後の詳細化**はこのスキルの範囲外 — `DESIGN.md` を編集するか spec を別ファイルに分離する
-- 「一覧は常に Table」「Desktop 最優先」は鵜呑みにしない — サーフェスと intake（モバイル critical 等）で決める
-- Product Feel は「modern and clean」だけにしない — 否定制約（「〜ではない」）が必要
+- トークンの hex や YAML token blocks、全コンポーネント詳細 spec、モーション詳細、ガバナンス文書は扱わない。
+- 「一覧は常に Table」「Desktop 最優先」は鵜呑みにしない。サーフェスと intake（モバイル critical など）で決める。
+- Product Feel は「modern and clean」だけにせず、否定制約（「〜ではない」）を書く。
 
 ## 関連スキル
 
-
-| スキル               | 関係     |
-| ----------------- | ------ |
-| `ooui-architect`  | 実装（下流） |
-| `shadcn-explorer` | テーマ探索  |
-| `uncertainty-map` | 下流。プロト範囲の解釈源として DESIGN.md を読み、仮説の検証ステータス判定に使う |
-
-
+| スキル | 関係 |
+|--------|------|
+| [proto-storyboard](../proto-storyboard/README.md) | 見せ方（どの画面を、どの順で）。こちらは見た目・トーンの DESIGN.md |
+| [ooui-architect](../ooui-architect/README.md) | DESIGN.md のあと、画面ひな形を実装するとき |
+| [shadcn-explorer](../shadcn-explorer/README.md) | テーマやコンポーネント候補だけ先に探したいときに使う |
+| [uncertainty-map](../uncertainty-map/README.md) | DESIGN.md をプロト範囲の解釈源にして、仮説の検証ステータスを判定するとき |

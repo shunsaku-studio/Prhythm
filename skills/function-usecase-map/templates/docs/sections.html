@@ -1,0 +1,131 @@
+<!-- prhythm-docs deck sections — function-usecase-map
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/function-usecase-map/templates/docs/sections.html \
+              docs/prhythm/function-usecase-map/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md
+     図は要約のみ。全ユースケースは docs/usecase-map.md へ -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">function-usecase-map<span class="sep"></span>mode {{MODE}}</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{PRODUCT}}の<br />ユースケース俯瞰</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{SOURCES}}</span>
+      <span>誰が何を達成するか</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Frame">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Frame<span class="sep"></span>前提</div>
+      <h2 class="msg anim">{{MSG_FRAME}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">アクター</div><div class="rv">{{ACTORS}}</div></div>
+        <div class="row"><div class="rk">システム境界</div><div class="rv">{{BOUNDARY}}</div></div>
+        <div class="row"><div class="rk">材料</div><div class="rv">{{SOURCES_DETAIL}}</div></div>
+        <div class="row"><div class="rk">今回描かないもの</div><div class="rv">{{OUT_OF_SCOPE}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>function-usecase-map</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Answer">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">結論</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{ANSWER_STATEMENT}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>function-usecase-map</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Diagram">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>ユースケース図</div>
+      <h2 class="msg anim">{{MSG_DIAGRAM}}</h2>
+    </header>
+    <div class="body">
+      <div class="diagram anim d1">
+        <pre class="mermaid">{{MERMAID_UC}}</pre>
+      </div>
+    </div>
+    <footer class="foot"><span>要約図。全体は docs/usecase-map.md</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="List">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>主要ユースケース</div>
+      <h2 class="msg anim">{{MSG_LIST}}</h2>
+    </header>
+    <div class="body">
+      <table class="t anim d1">
+        <thead>
+          <tr><th style="width:110px">ID</th><th style="width:260px">アクター</th><th>達成したいこと</th><th style="width:300px">未確定</th></tr>
+        </thead>
+        <tbody>
+          <tr class="is-key"><td class="num">{{UC_1_ID}}</td><td>{{UC_1_ACTOR}}</td><td>{{UC_1_GOAL}}</td><td>{{UC_1_OPEN}}</td></tr>
+          <tr><td class="num">{{UC_2_ID}}</td><td>{{UC_2_ACTOR}}</td><td>{{UC_2_GOAL}}</td><td>{{UC_2_OPEN}}</td></tr>
+          <tr><td class="num">{{UC_3_ID}}</td><td>{{UC_3_ACTOR}}</td><td>{{UC_3_GOAL}}</td><td>{{UC_3_OPEN}}</td></tr>
+          <tr><td class="num">{{UC_4_ID}}</td><td>{{UC_4_ACTOR}}</td><td>{{UC_4_GOAL}}</td><td>{{UC_4_OPEN}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="foot"><span>全 UC は docs/usecase-map.md</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">人間が決める</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{GATE_1}}</li>
+        <li>{{GATE_2}}</li>
+        <li>{{GATE_3}}</li>
+      </ul>
+    </div>
+    <footer class="foot"><span>境界が決まるまでスキーマ設計に進まない</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>詳細: docs/usecase-map.md</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>

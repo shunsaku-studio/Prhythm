@@ -18,8 +18,102 @@ const OUT_DIR = path.join(DOCS_SITE, '.generated');
 const RESOLVED_META_PATH = path.join(OUT_DIR, '.vitepress-meta.json');
 const REPO_BASE = 'https://github.com/shunsaku-studio/Prhythm/blob/main';
 
+const RANK_ORDER = ['core', 'utility', 'meta'];
+const RANK_LABELS = {
+  core: 'コア',
+  utility: 'ユーティリティ',
+  meta: 'メタ',
+};
+const CATEGORY_ORDER = ['business', 'design', 'tech', 'delivery'];
+const CATEGORY_LABELS = {
+  business: 'ビジネス',
+  design: 'デザイン',
+  tech: 'テック',
+  delivery: '実行計画',
+};
+
+/** README「How — 5 つのシーン」の初出順。サイドバー用（束ラベルは出さない） */
+const SKILL_SIDEBAR_ORDER = [
+  'hearing',
+  'market-landscape',
+  'defining-personas-and-segments',
+  'create-journey-map',
+  'function-usecase-map',
+  'product-vision-and-concept',
+  'assumption-breaker',
+  'feature-backlog-map',
+  'ooui-graphql-modeling',
+  'ooui-architect',
+  'prototype-design-md',
+  'shadcn-explorer',
+  'uncertainty-map',
+  'proto-storyboard',
+  'create-html-deck',
+  'delivery-team-plan',
+  'delivery-phase-plan',
+  'prhythm-skill-review',
+  'prhythm-skill-pr',
+  'prhythm-docs',
+];
+
 const readText = (filePath) => fs.readFileSync(filePath, 'utf8');
 const readJson = (filePath) => JSON.parse(readText(filePath));
+
+const parseSkillFrontmatter = (skillSlug) => {
+  const skillMdPath = path.join(SKILLS_DIR, skillSlug, 'SKILL.md');
+  if (!fs.existsSync(skillMdPath)) return { rank: null, categories: [] };
+
+  const text = readText(skillMdPath);
+  if (!text.startsWith('---\n')) return { rank: null, categories: [] };
+
+  const end = text.indexOf('\n---\n', 4);
+  if (end < 0) return { rank: null, categories: [] };
+
+  const fm = text.slice(4, end);
+  const rankMatch = fm.match(/^rank:\s*(\S+)/m);
+  const rank = rankMatch?.[1] ?? null;
+
+  const categories = [];
+  const lines = fm.split('\n');
+  let inCategories = false;
+  for (const line of lines) {
+    if (/^categories:\s*$/.test(line)) {
+      inCategories = true;
+      continue;
+    }
+    if (inCategories) {
+      const item = line.match(/^\s+-\s+(\S+)/);
+      if (item) {
+        categories.push(item[1]);
+        continue;
+      }
+      if (/^[a-zA-Z_]/.test(line)) break;
+    }
+  }
+
+  return { rank, categories };
+};
+
+const categoryBadgeHtml = (categories) =>
+  (categories ?? [])
+    .map(
+      (cat) =>
+        `<span class="skill-badge skill-badge--cat skill-badge--${cat}">${CATEGORY_LABELS[cat] ?? cat}</span>`,
+    )
+    .join(' ');
+
+const sortSkillsByTaxonomy = (skills) =>
+  [...skills].sort((a, b) => {
+    const ra = RANK_ORDER.indexOf(a.rank ?? '');
+    const rb = RANK_ORDER.indexOf(b.rank ?? '');
+    if (ra !== rb) return (ra === -1 ? 99 : ra) - (rb === -1 ? 99 : rb);
+
+    const ca = CATEGORY_ORDER.indexOf(a.categories?.[0] ?? '');
+    const cb = CATEGORY_ORDER.indexOf(b.categories?.[0] ?? '');
+    if (ca !== cb) return (ca === -1 ? 99 : ca) - (cb === -1 ? 99 : cb);
+
+    return a.title.localeCompare(b.title, 'ja');
+  });
 
 const loadMeta = () => {
   if (!fs.existsSync(META_PATH)) {
@@ -114,6 +208,7 @@ const buildSkillRegistry = (skillSlugs) =>
   Object.fromEntries(
     skillSlugs.map((slug) => {
       const content = readText(path.join(SKILLS_DIR, slug, 'README.md'));
+      const { rank, categories } = parseSkillFrontmatter(slug);
       return [
         slug,
         {
@@ -121,6 +216,8 @@ const buildSkillRegistry = (skillSlugs) =>
           title: extractTitle(content),
           summary: extractSummary(content),
           link: `/skills/${slug}/`,
+          rank,
+          categories,
           hasReference: fs.existsSync(path.join(SKILLS_DIR, slug, 'reference.md')),
           docs: fs.existsSync(path.join(SKILLS_DIR, slug, 'docs'))
             ? fs
@@ -134,12 +231,18 @@ const buildSkillRegistry = (skillSlugs) =>
     }),
   );
 
-const syncReadme = (skillSlug) => {
+const syncReadme = (skillSlug, skillMeta) => {
   const content = readText(path.join(SKILLS_DIR, skillSlug, 'README.md'));
   const title = extractTitle(content);
   const description = extractSummary(content);
   const body = content.replace(/^#\s+.+\n+/, '');
-  const frontmatter = toFrontmatter({ title, skill: skillSlug, description });
+  const frontmatter = toFrontmatter({
+    title,
+    skill: skillSlug,
+    description,
+    ...(skillMeta?.rank ? { rank: skillMeta.rank } : {}),
+    ...(skillMeta?.categories?.length ? { categories: skillMeta.categories } : {}),
+  });
   writeFile(
     path.join(OUT_DIR, 'skills', skillSlug, 'index.md'),
     `${frontmatter}<SkillInstall />\n\n${rewriteSkillLinks(body, skillSlug)}`,
@@ -162,8 +265,8 @@ const syncSkillMarkdown = (skillSlug, relativePath, skillsConfig) => {
   writeFile(path.join(OUT_DIR, outRel), `${frontmatter}${rewriteSkillLinks(body, skillSlug)}`);
 };
 
-const syncSkill = (skillSlug, skillsConfig) => {
-  syncReadme(skillSlug);
+const syncSkill = (skillSlug, skillsConfig, skillMeta) => {
+  syncReadme(skillSlug, skillMeta);
   if (skillsConfig.syncReference !== false) {
     syncSkillMarkdown(skillSlug, 'reference.md', skillsConfig);
   }
@@ -205,16 +308,60 @@ const syncCustomPage = (pageId, pageConfig) => {
   };
 };
 
-const generateHome = (meta, skillRegistry, sidebarSkillOrder) => {
-  const skills =
-    sidebarSkillOrder.length > 0
-      ? sidebarSkillOrder.filter((slug) => skillRegistry[slug])
-      : Object.keys(skillRegistry).sort();
+const generateHome = (meta, skillRegistry) => {
+  const allSkills = sortSkillsByTaxonomy(Object.values(skillRegistry));
 
-  const rows = skills.map((slug) => {
-    const skill = skillRegistry[slug];
-    return `| [${skill.title}](${skill.link}) | ${skill.summary.replace(/\|/g, '\\|')} |`;
-  });
+  const legend = [
+    '## 分類',
+    '',
+    '- **ランク** — `コア` は他スキルの入力になる成果物を出す / `ユーティリティ` は端末成果物や横断ツール / `メタ` はスキル自体の整備',
+    '- **カテゴリ** — 誰が使うかではなく、注入する視点（`ビジネス` / `デザイン` / `テック` / `実行計画`）。2つ持つスキルは職能横断の対話誘発装置',
+    '',
+  ];
+
+  const sections = [];
+  for (const rank of RANK_ORDER) {
+    const skills = allSkills.filter((s) => s.rank === rank);
+    if (skills.length === 0) continue;
+
+    const isMeta = rank === 'meta';
+    sections.push(`## ${RANK_LABELS[rank]}`);
+    sections.push('');
+    if (isMeta) {
+      sections.push('| スキル | 概要 |');
+      sections.push('|--------|------|');
+      for (const skill of skills) {
+        sections.push(
+          `| [${skill.title}](${skill.link}) | ${skill.summary.replace(/\|/g, '\\|')} |`,
+        );
+      }
+    } else {
+      sections.push('| スキル | カテゴリ | 概要 |');
+      sections.push('|--------|----------|------|');
+      for (const skill of skills) {
+        const cats = categoryBadgeHtml(skill.categories) || '—';
+        sections.push(
+          `| [${skill.title}](${skill.link}) | ${cats} | ${skill.summary.replace(/\|/g, '\\|')} |`,
+        );
+      }
+    }
+    sections.push('');
+  }
+
+  // skills without rank (should not happen after taxonomy rollout)
+  const unranked = allSkills.filter((s) => !s.rank);
+  if (unranked.length > 0) {
+    sections.push('## 未分類');
+    sections.push('');
+    sections.push('| スキル | 概要 |');
+    sections.push('|--------|------|');
+    for (const skill of unranked) {
+      sections.push(
+        `| [${skill.title}](${skill.link}) | ${skill.summary.replace(/\|/g, '\\|')} |`,
+      );
+    }
+    sections.push('');
+  }
 
   return [
     toFrontmatter({
@@ -225,19 +372,38 @@ const generateHome = (meta, skillRegistry, sidebarSkillOrder) => {
     '',
     meta.home?.intro ?? '',
     '',
-    '| スキル | 概要 |',
-    '|--------|------|',
-    ...rows,
-    '',
+    ...legend,
+    ...sections,
   ].join('\n');
 };
 
-const collectSidebarSkillOrder = (items, acc = []) => {
-  for (const item of items ?? []) {
-    if (item.skill) acc.push(item.skill);
-    if (item.items) collectSidebarSkillOrder(item.items, acc);
+const sortSkillsBySidebarOrder = (skills) => {
+  const index = new Map(SKILL_SIDEBAR_ORDER.map((slug, i) => [slug, i]));
+  return [...skills].sort((a, b) => {
+    const ia = index.has(a.slug) ? index.get(a.slug) : SKILL_SIDEBAR_ORDER.length;
+    const ib = index.has(b.slug) ? index.get(b.slug) : SKILL_SIDEBAR_ORDER.length;
+    if (ia !== ib) return ia - ib;
+    return a.slug.localeCompare(b.slug);
+  });
+};
+
+const buildRankGroupedSidebar = (skillRegistry, expandMap = {}) => {
+  const groups = [];
+  for (const rank of RANK_ORDER) {
+    const skills = sortSkillsBySidebarOrder(
+      Object.values(skillRegistry).filter((s) => s.rank === rank),
+    );
+    if (skills.length === 0) continue;
+
+    groups.push({
+      text: RANK_LABELS[rank],
+      collapsed: rank === 'meta',
+      items: skills.map((skill) =>
+        buildSkillSidebarItems(skill.slug, skill, expandMap[skill.slug] ?? false),
+      ),
+    });
   }
-  return acc;
+  return groups;
 };
 
 const buildSkillSidebarItems = (slug, skill, expand) => {
@@ -254,11 +420,17 @@ const buildSkillSidebarItems = (slug, skill, expand) => {
     }
   }
 
-  return expand ? { text: skill.title, collapsed: false, items } : { text: skill.title, link: skill.link };
+  return expand
+    ? { text: skill.title, collapsed: false, items }
+    : { text: skill.title, link: skill.link };
 };
 
 const resolveSidebarItems = (items, ctx) =>
   (items ?? []).flatMap((item) => {
+    if (item.groupSkillsBy === 'rank') {
+      return buildRankGroupedSidebar(ctx.skills, item.expand ?? ctx.sidebarExpand ?? {});
+    }
+
     if (item.items) {
       return [
         {
@@ -305,24 +477,28 @@ const main = () => {
   cleanOutDir();
 
   const skillRegistry = buildSkillRegistry(skillSlugs);
-  for (const slug of skillSlugs) syncSkill(slug, skillsConfig);
+  for (const slug of skillSlugs) syncSkill(slug, skillsConfig, skillRegistry[slug]);
 
   const pageRegistry = {};
   for (const [pageId, pageConfig] of Object.entries(meta.pages ?? {})) {
     pageRegistry[pageId] = syncCustomPage(pageId, pageConfig);
   }
 
-  const sidebarSkillOrder = collectSidebarSkillOrder(meta.sidebar ?? []);
-  writeFile(path.join(OUT_DIR, 'index.md'), generateHome(meta, skillRegistry, sidebarSkillOrder));
+  writeFile(path.join(OUT_DIR, 'index.md'), generateHome(meta, skillRegistry));
 
   const resolved = {
     nav: meta.nav ?? [],
     sidebar: resolveSidebarItems(meta.sidebar ?? [], {
       pages: pageRegistry,
       skills: skillRegistry,
+      sidebarExpand: skillsConfig.sidebarExpand ?? {},
     }),
     skills: skillSlugs,
     pages: pageRegistry,
+    taxonomy: {
+      ranks: RANK_LABELS,
+      categories: CATEGORY_LABELS,
+    },
   };
 
   writeFile(RESOLVED_META_PATH, `${JSON.stringify(resolved, null, 2)}\n`);

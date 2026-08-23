@@ -1,0 +1,489 @@
+/* prhythm-docs slide design system — editorial.
+   Authored at a fixed 1920x1080 canvas, so every size is a plain px value;
+   deck-stage scales the whole canvas to the viewport. Do not reintroduce
+   clamp()/vw units — they break the overflow lint. */
+
+:root {
+  --paper: #ffffff;
+  --ink: #0a0a0a;
+  --ink-2: #4a4a4a;
+  --ink-3: #8f8f8f;
+  --line: #e6e4e0;
+  --line-2: #f2f0ec;
+  --rule: #0a0a0a;
+  --accent: #0f5c4c;
+  --accent-tint: rgba(15, 92, 76, 0.07);
+  --warn: #a33a1f;
+
+  --head: "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --sans: "Noto Sans JP", "Hiragino Sans", system-ui, sans-serif;
+  /* Plex Mono has no CJK glyphs, so Japanese in a mono run falls through to
+     Noto Sans JP instead of an arbitrary system face. Latin stays monospaced. */
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, "Noto Sans JP", monospace;
+
+  --t-display: 104px;
+  --t-statement: 72px;
+  --t-message: 52px;
+  --t-h: 34px;
+  --t-body: 26px;
+  --t-small: 22px;
+  --t-eyebrow: 20px;
+
+  --pad-x: 112px;
+  --pad-y: 84px;
+}
+
+* { box-sizing: border-box; }
+/* The font on <body> is not for the slides (those set their own) — mermaid
+   measures label widths in a detached container appended to <body>, and with
+   the default serif there it sizes CJK nodes about one character too narrow. */
+html, body { margin: 0; padding: 0; height: 100%; background: #0a0a0a; font-family: var(--sans); }
+deck-stage:not(:defined) { visibility: hidden; }
+
+.slide {
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  color: var(--ink);
+  background: var(--paper);
+  overflow: hidden;
+  /* Japanese wraps at phrase boundaries rather than mid-word, and the strict
+     kinsoku set keeps punctuation off line starts. */
+  word-break: auto-phrase;
+  line-break: strict;
+}
+
+/* ── frame ──────────────────────────────────────────────────────────── */
+
+.frame {
+  position: absolute;
+  inset: 0;
+  padding: var(--pad-y) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: var(--t-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.eyebrow .sep { width: 28px; height: 1px; background: var(--ink-3); }
+.eyebrow .on { color: var(--accent); }
+
+/* The message line. One sentence, the claim of the slide — never a noun
+   phrase like "Research Frame". */
+.msg {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: var(--t-message);
+  line-height: 1.28;
+  letter-spacing: 0.005em;
+  margin: 20px 0 0;
+  max-width: 1580px;
+  /* Without this a 40-character message line strands its last two characters
+     on a second line. */
+  text-wrap: balance;
+}
+.msg .em { color: var(--accent); }
+.msg .mark {
+  background: linear-gradient(transparent 62%, var(--accent-tint) 62%);
+  padding: 0 2px;
+}
+
+.head { border-bottom: 3px solid var(--rule); padding-bottom: 28px; }
+
+.body {
+  flex: 1;
+  min-height: 0;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.body.top { justify-content: flex-start; }
+/* The head already draws a rule; a component's own top rule right under it
+   reads as an accidental double line. */
+.body > :is(.rows, .tracks, .bullets, .split, table):first-child { border-top: none; }
+
+.foot {
+  margin-top: auto;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 40px;
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+/* ── cover ──────────────────────────────────────────────────────────── */
+
+.s-cover .frame { justify-content: space-between; }
+.s-cover .topbar { display: flex; justify-content: space-between; align-items: flex-start; }
+.s-cover h1 {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: var(--t-display);
+  line-height: 1.06;
+  letter-spacing: -0.005em;
+  margin: 0;
+  max-width: 1500px;
+}
+.s-cover .sub {
+  margin: 34px 0 0;
+  font-size: 32px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 1280px;
+}
+.s-cover .ink-rule { width: 200px; height: 10px; background: var(--ink); margin: 44px 0 0; }
+.s-cover .foot { margin-top: 0; }
+
+/* ── statement (the Answer slide) ───────────────────────────────────── */
+
+/* The Answer slide's hero sentence IS its message line — a .msg above it
+   would just say the same thing twice. */
+.s-statement .head { padding-bottom: 20px; }
+.statement {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: var(--t-statement);
+  line-height: 1.32;
+  letter-spacing: 0.005em;
+  margin: 0;
+  max-width: 1620px;
+  text-wrap: balance;
+}
+.statement .em { color: var(--accent); }
+.because {
+  margin: 44px 0 0;
+  padding-left: 26px;
+  border-left: 5px solid var(--accent);
+  font-size: 28px;
+  line-height: 1.62;
+  color: var(--ink-2);
+  max-width: 1400px;
+}
+
+/* ── tracks: rule-separated columns (no boxes) ──────────────────────── */
+
+.tracks {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  gap: 0;
+  border-top: 2px solid var(--rule);
+}
+.tracks.n2 { grid-template-columns: repeat(2, 1fr); }
+.tracks.n3 { grid-template-columns: repeat(3, 1fr); }
+.tracks.n4 { grid-template-columns: repeat(4, 1fr); }
+.track { padding: 30px 42px 0 0; }
+.track + .track { padding-left: 42px; border-left: 1px solid var(--line); }
+.track:last-child { padding-right: 0; }
+.tnum {
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.tlabel {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.3;
+  margin: 12px 0 14px;
+}
+.tbody { font-size: var(--t-body); line-height: 1.62; color: var(--ink-2); }
+.track.is-key .tnum, .track.is-key .tlabel { color: var(--accent); }
+
+/* Same idea stacked vertically. Rows share the body's height evenly so a
+   3-row and a 5-row slide both fill the frame instead of leaving the rule
+   floating over dead space. */
+.rows {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 2px solid var(--rule);
+}
+.row {
+  /* Grow to share the body, but cap it — three rows stretched over the full
+     frame reads as a mistake rather than as breathing room. */
+  flex: 1 1 auto;
+  max-height: 148px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 48px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+.row .rk { font-family: var(--head); font-weight: 700; font-size: 28px; }
+.row .rv { font-size: var(--t-body); line-height: 1.6; color: var(--ink-2); }
+
+/* ── table ──────────────────────────────────────────────────────────── */
+
+table.t { width: 100%; border-collapse: collapse; }
+table.t thead th {
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: left;
+  padding: 0 24px 16px 0;
+  border-bottom: 2px solid var(--rule);
+}
+table.t tbody td {
+  font-size: var(--t-body);
+  line-height: 1.5;
+  color: var(--ink-2);
+  text-align: left;
+  vertical-align: top;
+  padding: 22px 24px 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+table.t tbody td:first-child { font-weight: 700; color: var(--ink); }
+table.t td.num { font-family: var(--mono); white-space: nowrap; }
+table.t tr.is-key td { color: var(--ink); }
+table.t tr.is-key td:first-child { color: var(--accent); }
+
+/* ── split: claim on the left, evidence on the right ────────────────── */
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; flex: 1; min-height: 0; }
+.split.wide-l { grid-template-columns: 1.35fr 1fr; }
+.split.wide-r { grid-template-columns: 1fr 1.35fr; }
+.split > * { padding-right: 64px; min-width: 0; }
+.split > * + * { padding-right: 0; padding-left: 64px; border-left: 1px solid var(--line); }
+.col-label {
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--rule);
+  margin-bottom: 26px;
+}
+
+/* ── bullets / callout / tags ───────────────────────────────────────── */
+
+.bullets { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.bullets li {
+  position: relative;
+  padding-left: 40px;
+  font-size: var(--t-body);
+  line-height: 1.58;
+  color: var(--ink-2);
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15px;
+  width: 22px;
+  height: 3px;
+  background: var(--ink);
+}
+.bullets.numbered { counter-reset: b; }
+.bullets.numbered li { padding-left: 56px; }
+.bullets.numbered li::before {
+  counter-increment: b;
+  content: counter(b, decimal-leading-zero);
+  background: none;
+  top: 0;
+  width: auto;
+  height: auto;
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+}
+.bullets li b, .bullets li strong { color: var(--ink); font-weight: 700; }
+
+/* Decision-gate weight: three items that carry the slide, not a side list. */
+.bullets.lg {
+  flex: 1;
+  min-height: 0;
+  gap: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 2px solid var(--rule);
+}
+.bullets.lg li {
+  flex: 1 1 auto;
+  max-height: 168px;
+  display: flex;
+  align-items: center;
+  font-size: 32px;
+  line-height: 1.5;
+  color: var(--ink);
+  padding: 22px 0 22px 96px;
+  border-bottom: 1px solid var(--line);
+}
+.bullets.lg li::before { top: 50%; transform: translateY(-50%); }
+.bullets.numbered.lg li::before { font-size: 26px; color: var(--accent); }
+
+.callout {
+  border-left: 5px solid var(--accent);
+  background: var(--accent-tint);
+  padding: 24px 30px;
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--ink);
+}
+.callout .lbl {
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 8px;
+}
+.callout.warn { border-left-color: var(--warn); background: rgba(163, 58, 31, 0.06); }
+.callout.warn .lbl { color: var(--warn); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 12px; }
+.tag {
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.06em;
+  padding: 8px 16px;
+  border: 1.5px solid var(--line);
+  color: var(--ink-2);
+}
+.tag.fill { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.tag.on { border-color: var(--accent); color: var(--accent); }
+
+/* ── quadrant: hand-built 2x2, replaces mermaid quadrantChart ───────── */
+
+.quadrant {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  grid-template-rows: 1fr 54px;
+  gap: 18px;
+}
+/* vertical-rl with no rotate: Latin turns 90deg but Japanese stays upright and
+   readable. Author the spans high → axis → low; vertical flow puts the first
+   at the top. */
+.qy {
+  grid-area: 1 / 1;
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.qx {
+  grid-area: 2 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.qy span, .qx span { white-space: nowrap; flex: none; }
+.qy .ax, .qx .ax { color: var(--ink); font-weight: 600; }
+.qgrid {
+  grid-area: 1 / 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  border: 2px solid var(--rule);
+  min-height: 0;
+}
+.qcell {
+  padding: 22px 26px;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.qcell:nth-child(1), .qcell:nth-child(2) { border-bottom: 1px solid var(--line); }
+.qcell:nth-child(1), .qcell:nth-child(3) { border-right: 1px solid var(--line); }
+.qcell .qlabel {
+  font-family: var(--mono);
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.qcell.is-target { background: var(--accent-tint); }
+.qcell.is-target .qlabel { color: var(--accent); }
+.qitems { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+.qitem {
+  font-size: 22px;
+  line-height: 1.3;
+  padding: 8px 14px;
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-2);
+}
+.qitem.own { border-color: var(--ink); background: var(--ink); color: var(--paper); font-weight: 700; }
+.qnote { margin: 4px 0 0; font-size: 21px; line-height: 1.5; color: var(--ink-2); }
+.qcell.is-target .qnote { color: var(--ink); }
+
+/* ── mermaid diagram ────────────────────────────────────────────────── */
+
+.diagram {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--line);
+  padding: 24px;
+  overflow: hidden;
+}
+.diagram > .mermaid {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Never set font-size here. mermaid measures each node from the label's
+   rendered size, so overriding it desyncs the box from the text and clips CJK
+   labels. Legibility comes from scaling the whole SVG: it carries a viewBox,
+   so filling the box enlarges the diagram while preserveAspectRatio holds its
+   proportions. */
+.diagram > .mermaid { font-size: 16px; }
+.diagram svg { width: 100%; height: 100%; max-width: 100%; }
+
+/* ── entrance ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-deck-active] .anim { animation: deck-fadeup 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  [data-deck-active] .anim.d1 { animation-delay: 0.05s; }
+  [data-deck-active] .anim.d2 { animation-delay: 0.11s; }
+  [data-deck-active] .anim.d3 { animation-delay: 0.17s; }
+  [data-deck-active] .anim.d4 { animation-delay: 0.23s; }
+  @keyframes deck-fadeup {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+}
