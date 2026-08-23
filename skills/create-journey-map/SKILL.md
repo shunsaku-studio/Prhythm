@@ -2,6 +2,9 @@
 name: create-journey-map
 description: "ヒアリング情報・ペルソナ情報をもとにジャーニーマップ（JM）を生成するskill。「As-Is JMを作って」「ジャーニーマップを作って」「現状の体験を可視化して」「To-Be JMを作って」「理想の体験を描いて」などのリクエストで発動する。2つのモードを持つ。mode:asis — As-Is JM（台本形式）を生成し、インサイト抽出・HMW問いへの変換まで行う。mode:tobe — チームが合意したHMW優先度をもとにTo-Be JMを生成し、コアシーン候補を提示する。モードが指定されていない場合は mode:asis として実行する。"
 disable-model-invocation: false
+rank: core
+categories:
+  - design
 ---
 
 # ジャーニーマップ生成ガイド
@@ -106,3 +109,15 @@ mode:asisでは上記に `課題：` を、mode:tobeでは `As-Isからの変化
 4. **各モードのチェックリストで自己検証してから完了する**
 
 mode:asisはHMW提示後に必ず停止する。mode:tobeはコアシーン候補提示後に次のステップを案内する。
+
+## Documenting with prhythm-docs
+
+After the skill run, when the user asks to save or present results（まとめて / ドキュメントにして / スライドにして）:
+
+1. Use `/prhythm-docs` (or follow that meta-skill)
+2. Fill `templates/docs/index.md` and `templates/docs/sections.html` in this skill
+3. Build the deck: `node skills/prhythm-docs/scripts/build-deck.mjs skills/create-journey-map/templates/docs/sections.html docs/prhythm/create-journey-map/index.html --title "…"`
+4. Write `docs/prhythm/create-journey-map/index.md`
+
+Do not dump full catalogs into those files. Markdown is a briefing (Answer / Frame / Evidence / Gates / Next) — see `skills/prhythm-docs/references/md-grammar.md`.
+

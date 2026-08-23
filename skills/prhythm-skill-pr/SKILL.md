@@ -5,6 +5,7 @@ description: >-
   opening a PR for skills/, skill addition PR, gh pr create, or publishing a new
   Agent Skill to the Prhythm repo.
 disable-model-invocation: true
+rank: meta
 ---
 
 # Prhythm Skill PR

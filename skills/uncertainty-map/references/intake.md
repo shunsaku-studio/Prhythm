@@ -12,7 +12,7 @@ Confirm what is on the table before extracting assumptions. The skill is **stand
 | Implementation | `git ls-files` results | Axis 2 evidence (code present? tests present?) |
 | Observation logs | `docs/validation-log.md`, `docs/usability-log.md`, hearing notes, analytics | Axis 2 evidence (✅ requires this) |
 
-Read in this order when present. The relationship with the feature list is **iterative** — you may go back to `/feature-backlog-mapper` and return. None of these blocks the run.
+Read in this order when present. The relationship with the feature list is **iterative** — you may go back to `/feature-backlog-map` and return. None of these blocks the run.
 
 ## Hybrid strategy (5 sub-steps)
 
@@ -31,7 +31,7 @@ Do not loop the dialog more than once before emit. If the user adds new info mid
 | Source | When useful |
 |--------|-------------|
 | `docs/usecase-map.md` | When the team wants assumption traceability back to UC IDs |
-| `docs/competitive-research/*` | When axis 1 (Core) needs an external benchmark |
+| `docs/market-landscape/*` | When axis 1 (Core) needs an external benchmark |
 | `docs/hearing/*.md` | When vision is ambiguous; pull constraints to apply axis 1 |
 | **Previous output** | `docs/uncertainty-map.md` — triggers diff-update mode |
 
@@ -75,11 +75,11 @@ If the user wants a full regeneration instead, they explicitly say "ゼロから
 ### Case B: feature-list missing, vision present
 
 - Read `product-vision.md`. Run a single-turn assumption interview based on vision.
-- Recommend running `/feature-backlog-mapper` after this run.
+- Recommend running `/feature-backlog-map` after this run.
 
 ### Case C: both missing
 
-- Suggest the upstream skills first (one sentence): "先に `product-vision-and-concept` と `feature-backlog-mapper` を走らせると、不確実性マップの精度が大きく上がります。先に走らせますか？"
+- Suggest the upstream skills first (one sentence): "先に `product-vision-and-concept` と `feature-backlog-map` を走らせると、不確実性マップの精度が大きく上がります。先に走らせますか？"
 - If accepted → stop here and let the upstream skills run; resume after.
 - If declined → run a single-turn assumption interview:
   - Ask for one-line vision + 3-5 risky beliefs about the prototype in one message
@@ -129,7 +129,7 @@ Send **one message** with confirmation prompts:
 
 ```
 docs/product-vision.md と docs/feature-list.md が無いので、最低限の文脈を 1 メッセージで教えてください
-（推奨は先に /product-vision-and-concept と /feature-backlog-mapper を走らせること）。
+（推奨は先に /product-vision-and-concept と /feature-backlog-map を走らせること）。
 
 1. ビジョン 1 行: <空欄>
 2. 想定ターゲット: <空欄>

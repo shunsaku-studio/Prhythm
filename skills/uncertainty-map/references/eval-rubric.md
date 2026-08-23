@@ -39,7 +39,7 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 ### §B-2 Standalone fallback when vision/feature-list missing
 
 ```
-[ ] Mentions /product-vision-and-concept and/or /feature-backlog-mapper once, does NOT block on them
+[ ] Mentions /product-vision-and-concept and/or /feature-backlog-map once, does NOT block on them
 [ ] Runs single-turn assumption interview (one message)
 [ ] A IDs use A-<Seq> form with 紐付 F = —
 [ ] Every emitted assumption labeled (コア候補)

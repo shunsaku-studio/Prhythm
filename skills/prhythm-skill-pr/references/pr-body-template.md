@@ -19,7 +19,7 @@
 ## スキルチェックリスト
 
 - [x] `SKILL.md` — 英語、500 行未満
-- [x] `README.md` — 日本語、8 見出し
+- [x] `README.md` — 日本語、必須見出し（注意事項は任意）。[readme-principles.md](../prhythm-skill-review/references/readme-principles.md) に従う
 - [x] `validate-skill.sh` pass
 - [x] ルート README のスキル一覧を更新
 - [x] secrets や node_modules を commit していない

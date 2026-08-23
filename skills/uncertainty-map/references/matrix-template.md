@@ -128,7 +128,7 @@ ASCII 並記（プレビュー非対応環境向け）:
 ## 次の一手
 
 - 検証スパイク実行 → 結果でマップを再生成（diff-update）
-- 検証で構造変化があれば → `/feature-backlog-mapper` と行き来して機能・優先度を見直す
+- 検証で構造変化があれば → `/feature-backlog-map` と行き来して機能・優先度を見直す
 ````
 
 ## Required sections

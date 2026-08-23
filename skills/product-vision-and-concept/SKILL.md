@@ -10,6 +10,9 @@ description: >-
   include ビジョンステートメント, コンセプトステートメント, プロダクトの方向性, 一行コンセプト,
   ミッションステートメント, PRD冒頭.
 disable-model-invocation: false
+rank: core
+categories:
+  - business
 ---
 
 # Product Vision & Concept
@@ -50,7 +53,7 @@ Read reference files at the relevant phase. Do not load all upfront.
 
 ## When NOT to use
 
-- Full competitive analysis → use competitive-research skill
+- Full market landscape / positioning map → use market-landscape skill
 - GraphQL / domain schema design → use ooui-graphql-modeling skill
 - General product strategy without language output (roadmap, OKR, etc.)
 - Standalone elevator pitch / Moore positioning only → out of scope for this skill
@@ -285,3 +288,15 @@ If the user asks to save to a file (e.g. 「ファイルにまとめて」), wri
 - Exposing A/B/C or Moore terminology to the user
 - Presenting one-liner-only variations without concept paragraphs (or vice versa)
 - Using generic vision clichés ("revolutionize", "empower", "seamless") without user-specific meaning
+
+## Documenting with prhythm-docs
+
+After the skill run, when the user asks to save or present results（まとめて / ドキュメントにして / スライドにして）:
+
+1. Use `/prhythm-docs` (or follow that meta-skill)
+2. Fill `templates/docs/index.md` and `templates/docs/sections.html` in this skill
+3. Build the deck: `node skills/prhythm-docs/scripts/build-deck.mjs skills/product-vision-and-concept/templates/docs/sections.html docs/prhythm/product-vision-and-concept/index.html --title "…"`
+4. Write `docs/prhythm/product-vision-and-concept/index.md`
+
+Do not dump full catalogs into those files. Markdown is a briefing (Answer / Frame / Evidence / Gates / Next) — see `skills/prhythm-docs/references/md-grammar.md`.
+

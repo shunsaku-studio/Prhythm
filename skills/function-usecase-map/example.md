@@ -1,4 +1,4 @@
-# usecase-mapper 実出力例
+# function-usecase-map 実出力例
 
 ## テスト入力
 

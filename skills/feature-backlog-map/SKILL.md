@@ -1,5 +1,5 @@
 ---
-name: feature-backlog-mapper
+name: feature-backlog-map
 description: >-
   Generate three linked artifacts in one pass — a project-facing feature list,
   a product backlog of user stories, and an acceptance-criteria list. Use when
@@ -7,11 +7,15 @@ description: >-
   受入基準 / 受け入れ条件一覧, or wants to turn a vision / description / docs/usecase-map.md
   into features. Triggers on "機能一覧を作って", "要件定義書を作って", "プロダクトバックログを作って",
   "ユーザーストーリーにして", "受け入れ条件を出して", "feature list", "product backlog", "user
-  story", "acceptance criteria".
+  story", "acceptance criteria", "feature-backlog-map", "feature-backlog-mapper".
 disable-model-invocation: false
+rank: utility
+categories:
+  - business
+  - delivery
 ---
 
-# Feature Backlog Mapper
+# Feature Backlog Map
 
 Generate three linked artifacts in one pass, then let the reader use whichever they need:
 
@@ -36,7 +40,7 @@ The three artifacts are linked **internally** by ID (`F-NN` → `S-NN` → `AC-N
 
 ## When NOT to use
 
-- Use case extraction itself → run [usecase-mapper](../usecase-mapper/SKILL.md) (任意の上流; 無くても本スキルは動く)
+- Use case extraction itself → run [function-usecase-map](../function-usecase-map/SKILL.md) (任意の上流; 無くても本スキルは動く)
 - Vision / one-line statement → use [product-vision-and-concept](../product-vision-and-concept/SKILL.md)
 - Prototype assumptions / risk map → use the `uncertainty-map` skill
 - Implementation scaffolding → use [ooui-architect](../ooui-architect/SKILL.md)
@@ -81,7 +85,7 @@ Read [references/intake.md](references/intake.md). The skill is **standalone** �
 3. A pasted description / requirements doc
 4. A **single-turn intake** (1-3 actors, 3-6 goals) when nothing else exists
 
-Optional inputs (read when present): competitive notes from [competitive-research](../competitive-research/SKILL.md), hearing notes.
+Optional inputs (read when present): competitive notes from [market-landscape](../market-landscape/SKILL.md), hearing notes.
 
 **Diff-update mode**: when any of the three output files already exists, default to incremental update — preserve existing `F`/`S`/`AC` IDs verbatim, surface 新規/変更/削除 diff per artifact. Full regeneration only when the user says "ゼロから作り直して". See [references/intake.md](references/intake.md) §Diff-update mode.
 
@@ -179,8 +183,20 @@ The stance behind the workflow. When references conflict with these, the princip
 
 Run all three layers before declaring the skill ready or after edits. Full scenarios, prompts, and rubric live in [references/eval-scenarios.md](references/eval-scenarios.md) and [references/eval-rubric.md](references/eval-rubric.md).
 
-1. **Layer A static**: `bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/feature-backlog-mapper`
+1. **Layer A static**: `bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/feature-backlog-map`
 2. **Layer B efficacy**: scenarios (full 3-artifact run / standalone fallback / single-artifact / diff-update) — pass when all rubric items observed
 3. **Layer C discipline**: pressure scenarios — RED → GREEN → REFACTOR
 
 If any layer fails, fix SKILL.md / references and re-run from Layer A. Stop after 3 cycles and revisit the design (§ Workflow or § Reference router first).
+
+## Documenting with prhythm-docs
+
+After the skill run, when the user asks to save or present results（まとめて / ドキュメントにして / スライドにして）:
+
+1. Use `/prhythm-docs` (or follow that meta-skill)
+2. Fill `templates/docs/index.md` and `templates/docs/sections.html` in this skill
+3. Build the deck: `node skills/prhythm-docs/scripts/build-deck.mjs skills/feature-backlog-map/templates/docs/sections.html docs/prhythm/feature-backlog-map/index.html --title "…"`
+4. Write `docs/prhythm/feature-backlog-map/index.md`
+
+Do not dump full catalogs into those files. Markdown is a briefing (Answer / Frame / Evidence / Gates / Next) — see `skills/prhythm-docs/references/md-grammar.md`.
+

@@ -1,9 +1,15 @@
 ---
-name: usecase-mapper
-description: Persona・ビジョン・要件メモなどから、コード不要のユースケース図スケッチを生成する。Mermaid で全体俯瞰図と機能別ユースケース図を `docs/usecase-map.md` へ出力し、一覧は補助情報として添える。
+name: function-usecase-map
+description: >-
+  Persona・ビジョン・要件メモから、Actor がユーザーに見える機能を通じて達成するユースケースを
+  Mermaid 図にする。全体俯瞰と機能別図を `docs/usecase-map.md` へ出す。Triggers on
+  ユースケース図, 利用関係, function-usecase-map, usecase-mapper, usecase map.
 context: fork
 disable-model-invocation: true
 allowed-tools: Bash(node:*), Bash(pnpm:*), Bash(git:*), Bash(which:*), Bash(ls:*), Bash(mkdir:*), Bash(python:*), Read, Glob, Grep, Agent, Write, Artifact, Skill
+rank: core
+categories:
+  - design
 ---
 
 # ユースケーススケッチ生成
@@ -279,3 +285,15 @@ docs/usecase-map.md にユースケーススケッチを生成しました。
 - 実装仕様ではなく、何を誰のために作るかの確認用です
 - 全体俯瞰と機能別詳細の両方に対応しています
 ```
+
+## Documenting with prhythm-docs
+
+After the skill run, when the user asks to save or present results（まとめて / ドキュメントにして / スライドにして）:
+
+1. Use `/prhythm-docs` (or follow that meta-skill)
+2. Fill `templates/docs/index.md` and `templates/docs/sections.html` in this skill
+3. Build the deck: `node skills/prhythm-docs/scripts/build-deck.mjs skills/function-usecase-map/templates/docs/sections.html docs/prhythm/function-usecase-map/index.html --title "…"`
+4. Write `docs/prhythm/function-usecase-map/index.md`
+
+Do not dump full catalogs into those files. Markdown is a briefing (Answer / Frame / Evidence / Gates / Next) — see `skills/prhythm-docs/references/md-grammar.md`.
+

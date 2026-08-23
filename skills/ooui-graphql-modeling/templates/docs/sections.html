@@ -1,0 +1,131 @@
+<!-- prhythm-docs deck sections — ooui-graphql-modeling
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/ooui-graphql-modeling/templates/docs/sections.html \
+              docs/prhythm/ooui-graphql-modeling/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md
+     SDL 全文は schema.graphql へ。ここは型関係と能力の要約だけ -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">domain model<span class="sep"></span>{{PHASE}}</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{PRODUCT}}の<br />ドメイン要約</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{SCHEMA_PATH}}</span>
+      <span>能力から型へ — 作る前に構造を固める</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Frame">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Frame<span class="sep"></span>モデリング枠</div>
+      <h2 class="msg anim">{{MSG_FRAME}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">フェーズ / ゲート</div><div class="rv">{{PHASE_DETAIL}}</div></div>
+        <div class="row"><div class="rk">入力にした成果物</div><div class="rv">{{INPUTS}}</div></div>
+        <div class="row"><div class="rk">スキーマの置き場</div><div class="rv">{{SCHEMA_PATH}}</div></div>
+        <div class="row"><div class="rk">今回モデル化しないもの</div><div class="rv">{{OUT_OF_SCOPE}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>ooui-graphql-modeling</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Answer">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">結論</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{ANSWER_STATEMENT}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>ooui-graphql-modeling</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Types">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>型関係</div>
+      <h2 class="msg anim">{{MSG_TYPES}}</h2>
+    </header>
+    <div class="body">
+      <div class="diagram anim d1">
+        <pre class="mermaid">{{MERMAID_ER}}</pre>
+      </div>
+    </div>
+    <footer class="foot"><span>SDL 全文は {{SCHEMA_PATH}}</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Capabilities">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>能力 → Mutation</div>
+      <h2 class="msg anim">{{MSG_MUTATIONS}}</h2>
+    </header>
+    <div class="body">
+      <table class="t anim d1">
+        <thead>
+          <tr><th style="width:340px">能力（ユーザーがやりたいこと）</th><th style="width:360px">Mutation</th><th>設計上の判断</th></tr>
+        </thead>
+        <tbody>
+          <tr class="is-key"><td>{{CAP_1}}</td><td class="num">{{MUT_1}}</td><td>{{NOTE_1}}</td></tr>
+          <tr><td>{{CAP_2}}</td><td class="num">{{MUT_2}}</td><td>{{NOTE_2}}</td></tr>
+          <tr><td>{{CAP_3}}</td><td class="num">{{MUT_3}}</td><td>{{NOTE_3}}</td></tr>
+          <tr><td>{{CAP_4}}</td><td class="num">{{MUT_4}}</td><td>{{NOTE_4}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="foot"><span>CRUD ではなく能力で切る</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">未決ゲート</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{GATE_1}}</li>
+        <li>{{GATE_2}}</li>
+        <li>{{GATE_3}}</li>
+      </ul>
+    </div>
+    <footer class="foot"><span>ここが決まるまで実装に落とさない</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>詳細: {{SCHEMA_PATH}}</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>

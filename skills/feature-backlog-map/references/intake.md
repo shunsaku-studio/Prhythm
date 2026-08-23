@@ -13,7 +13,7 @@ Use the first available source. None is mandatory.
 | 3 | Description | pasted requirements / chat description | Direct decomposition source |
 | 4 | Single-turn intake | the interview below | Last resort when nothing else exists |
 
-Optional extras (read when present, never block on them): competitive notes (`docs/competitive-research/*`), hearing notes (`docs/hearing/*.md`, Notion exports).
+Optional extras (read when present, never block on them): competitive notes (`docs/market-landscape/*`), hearing notes (`docs/hearing/*.md`, Notion exports).
 
 > `docs/usecase-map.md` is **optional**, not required. If it exists, use its use cases and add a 紐付 UC column. If it does not, drop the column and work from vision / description — the skill still produces all three artifacts.
 
@@ -47,7 +47,7 @@ When only one artifact is requested ("PBL だけ更新して"), update that file
 
 Run the fallback in this order. Do **not** silently invent a usecase-map.
 
-1. If `docs/usecase-map.md` could help, mention it once: "先に `/usecase-mapper` を走らせると機能の根拠が揃いますが、無くても進められます。"
+1. If `docs/usecase-map.md` could help, mention it once: "先に `/function-usecase-map` を走らせると機能の根拠が揃いますが、無くても進められます。"
 2. If the user wants to proceed without it → run the **single-turn intake** below.
 
 ### Single-turn intake template (verbatim)
@@ -55,7 +55,7 @@ Run the fallback in this order. Do **not** silently invent a usecase-map.
 Send **one message** with the prompts below. Accept partial answers; do not loop more than once.
 
 ```
-最低限の文脈を 1 メッセージで教えてください（先に /usecase-mapper を走らせるのも有効です）。
+最低限の文脈を 1 メッセージで教えてください（先に /function-usecase-map を走らせるのも有効です）。
 
 1. プロダクト名 / 一行ビジョン: <空欄>
 2. アクター 1-3 種類: <例: 一般ユーザー / 管理者 / 組織オーナー>

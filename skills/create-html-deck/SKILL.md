@@ -7,6 +7,10 @@ description: >-
   user approval. Detects project CSS tokens or offers preset themes. After
   assemble, run preview.sh.
 disable-model-invocation: false
+rank: utility
+categories:
+  - delivery
+  - design
 ---
 
 # HTML Deck

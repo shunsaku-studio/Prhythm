@@ -15,14 +15,14 @@ Three-layer evaluation for this skill. Use during initial development and after 
 ### Layer A
 
 ```bash
-bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/feature-backlog-mapper
+bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/feature-backlog-map
 ```
 
 Then run a self-review using the rubric in [../../prhythm-skill-review/references/review-rubric.md](../../prhythm-skill-review/references/review-rubric.md).
 
 ### Layer B — efficacy scenarios
 
-Each scenario is a one-shot agent run. Run via subagent or `/prhythm-skill-review layer-b skills/feature-backlog-mapper` and score against [eval-rubric.md](eval-rubric.md) §B.
+Each scenario is a one-shot agent run. Run via subagent or `/prhythm-skill-review layer-b skills/feature-backlog-map` and score against [eval-rubric.md](eval-rubric.md) §B.
 
 #### B-1 Full 3-artifact run from usecase-map
 
@@ -33,7 +33,7 @@ docs/usecase-map.md と docs/product-vision.md を入力に、
 機能一覧・プロダクトバックログ・受け入れ条件の 3 点セットを作って。
 ```
 
-Input: an existing `docs/usecase-map.md` (or generate a small one with `/usecase-mapper` first). Optional: `docs/product-vision.md`.
+Input: an existing `docs/usecase-map.md` (or generate a small one with `/function-usecase-map` first). Optional: `docs/product-vision.md`.
 
 Pass: all checks in [eval-rubric.md](eval-rubric.md) §B-1 observed.
 

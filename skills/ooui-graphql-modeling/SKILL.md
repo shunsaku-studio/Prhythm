@@ -4,6 +4,10 @@ description: >-
   Proto-stage GraphQL SDL design: capability→type, verbs→mutation, domain-first.
   Use when designing domain schema, GraphQL SDL, schema.graphql, or domain modeling.
 disable-model-invocation: false
+rank: core
+categories:
+  - tech
+  - business
 ---
 
 # OOUI GraphQL Modeling
@@ -96,3 +100,15 @@ bash skills/ooui-graphql-modeling/scripts/validate-schema.sh src/model/schema.gr
 ## After Phase 3
 
 Schema design is done. The object model connects to per-type OOUI scaffolding (list, detail, action screens) in a separate task.
+
+## Documenting with prhythm-docs
+
+After the skill run, when the user asks to save or present results（まとめて / ドキュメントにして / スライドにして）:
+
+1. Use `/prhythm-docs` (or follow that meta-skill)
+2. Fill `templates/docs/index.md` and `templates/docs/sections.html` in this skill
+3. Build the deck: `node skills/prhythm-docs/scripts/build-deck.mjs skills/ooui-graphql-modeling/templates/docs/sections.html docs/prhythm/ooui-graphql-modeling/index.html --title "…"`
+4. Write `docs/prhythm/ooui-graphql-modeling/index.md`
+
+Do not dump full catalogs into those files. Markdown is a briefing (Answer / Frame / Evidence / Gates / Next) — see `skills/prhythm-docs/references/md-grammar.md`.
+

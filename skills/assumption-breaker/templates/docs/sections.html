@@ -1,0 +1,145 @@
+<!-- prhythm-docs deck sections — assumption-breaker
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/assumption-breaker/templates/docs/sections.html \
+              docs/prhythm/assumption-breaker/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md
+     前提の百科事典にしない。推奨 3 picks を先に出す -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">assumption-breaker<span class="sep"></span>Prhythm</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{TOPIC}}の<br />前提を崩す</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{SOURCE}}</span>
+      <span>推奨 3 picks が先。前提の一覧ではない</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Frame">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Frame<span class="sep"></span>元提案</div>
+      <h2 class="msg anim">{{MSG_FRAME}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">解こうとしている課題</div><div class="rv">{{PROBLEM}}</div></div>
+        <div class="row"><div class="rk">提案されている解</div><div class="rv">{{PROPOSED}}</div></div>
+        <div class="row"><div class="rk">明示された制約</div><div class="rv">{{CONSTRAINTS}}</div></div>
+        <div class="row"><div class="rk">暗黙の前提（最大のもの）</div><div class="rv">{{BIGGEST_ASSUMPTION}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>assumption-breaker</span><span>{{TOPIC}}</span></footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Answer">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">崩すべき前提</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{ANSWER_STATEMENT}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>assumption-breaker</span><span>{{TOPIC}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Picks">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>推奨 3 picks</div>
+      <h2 class="msg anim">{{MSG_PICKS}}</h2>
+    </header>
+    <div class="body">
+      <div class="tracks n3 anim d1">
+        <div class="track is-key">
+          <div class="tnum">01 IMPACT</div>
+          <div class="tlabel">{{PICK_IMPACT_TITLE}}</div>
+          <p class="tbody">{{PICK_IMPACT}}</p>
+        </div>
+        <div class="track">
+          <div class="tnum">02 RADICAL</div>
+          <div class="tlabel">{{PICK_RADICAL_TITLE}}</div>
+          <p class="tbody">{{PICK_RADICAL}}</p>
+        </div>
+        <div class="track">
+          <div class="tnum">03 MODEST</div>
+          <div class="tlabel">{{PICK_MODEST_TITLE}}</div>
+          <p class="tbody">{{PICK_MODEST}}</p>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>採否は人間が決める</span><span>{{TOPIC}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Alternatives">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>代替解マップ</div>
+      <h2 class="msg anim">{{MSG_ALTERNATIVES}}</h2>
+    </header>
+    <div class="body">
+      <table class="t anim d1">
+        <thead>
+          <tr><th style="width:90px">#</th><th>代替解</th><th style="width:460px">崩した前提</th><th style="width:240px">効き / 難易度</th></tr>
+        </thead>
+        <tbody>
+          <tr class="is-key"><td class="num">01</td><td>{{ALT_1}}</td><td>{{ALT_1_BROKE}}</td><td class="num">{{ALT_1_IMPACT}} / {{ALT_1_COST}}</td></tr>
+          <tr><td class="num">02</td><td>{{ALT_2}}</td><td>{{ALT_2_BROKE}}</td><td class="num">{{ALT_2_IMPACT}} / {{ALT_2_COST}}</td></tr>
+          <tr><td class="num">03</td><td>{{ALT_3}}</td><td>{{ALT_3_BROKE}}</td><td class="num">{{ALT_3_IMPACT}} / {{ALT_3_COST}}</td></tr>
+          <tr><td class="num">04</td><td>{{ALT_4}}</td><td>{{ALT_4_BROKE}}</td><td class="num">{{ALT_4_IMPACT}} / {{ALT_4_COST}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="foot"><span>全候補はチャット参照</span><span>{{TOPIC}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">元提案への問い返し</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{CHALLENGE_1}}</li>
+        <li>{{CHALLENGE_2}}</li>
+        <li>{{CHALLENGE_3}}</li>
+      </ul>
+    </div>
+    <footer class="foot"><span>答えられない問いが残るなら、まだ提案は固まっていない</span><span>{{TOPIC}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>assumption-breaker</span><span>{{TOPIC}}</span></footer>
+  </div>
+</section>

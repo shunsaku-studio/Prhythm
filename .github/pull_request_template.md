@@ -17,7 +17,7 @@
 
 <!-- `skills/` を触らない PR ならこのセクションごと削除 -->
 
-- [ ] 新規/更新スキルに `SKILL.md`（英語）と `README.md`（日本語・8 見出し）がある
+- [ ] 新規/更新スキルに `SKILL.md`（英語）と `README.md`（日本語。必須見出しあり、注意事項は任意。[readme-principles.md](../skills/prhythm-skill-review/references/readme-principles.md) に従う）がある
 - [ ] `bash skills/prhythm-skill-review/scripts/validate-skill.sh skills/<name>` が pass
 - [ ] ルート [README.md](README.md) のスキル一覧を更新した（新規スキルのみ）
 - [ ] secrets、`.env`、認証情報、`node_modules/` を commit していない

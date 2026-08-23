@@ -39,9 +39,10 @@
 | Check | Status |
 |-------|--------|
 | README.md exists | yes / no |
-| Required headings (8) | pass / fail |
-| 利用メリット (user outcomes) | pass / revise / n/a |
-| 利用シーン (aligned situations) | pass / revise / n/a |
+| Required headings (注意事項 optional) | pass / fail |
+| 利用メリット (vs hand / plain LLM) | pass / revise / n/a |
+| 利用シーン (concrete situations) | pass / revise / n/a |
+| README prose (readme-principles §4) | pass / revise / n/a |
 | Terminology aligned with SKILL.md | yes / partial / no |
 
 ## Suggested edits (optional)

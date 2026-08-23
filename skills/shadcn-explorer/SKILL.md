@@ -2,6 +2,10 @@
 name: shadcn-explorer
 description: Search the shadcn/ui ecosystem — 200+ community registries and 60+ themes — in real time. Use whenever the user wants to find shadcn components, blocks, themes, or UI libraries. Trigger on keywords like shadcn, shadcn/ui, registry, theme, component search, block search, or "find me a UI for X".
 disable-model-invocation: false
+rank: utility
+categories:
+  - design
+  - tech
 ---
 
 # shadcn-explorer

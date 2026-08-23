@@ -1,0 +1,120 @@
+<!-- prhythm-docs deck sections — defining-personas-and-segments
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/defining-personas-and-segments/templates/docs/sections.html \
+              docs/prhythm/defining-personas-and-segments/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md
+     Primary は確定させない。Answer は「どう見えるか」であって「これに決めた」ではない -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">personas &amp; segments<span class="sep"></span>Stage {{STAGE}}</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{PRODUCT}}の<br />ターゲット整理</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{SOURCES}}</span>
+      <span>Primary は人間が決める</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Frame">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Frame<span class="sep"></span>材料の質</div>
+      <h2 class="msg anim">{{MSG_FRAME}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">段階</div><div class="rv">{{STAGE_DETAIL}}</div></div>
+        <div class="row"><div class="rk">根拠の強さ</div><div class="rv">{{EVIDENCE_LEVEL}}</div></div>
+        <div class="row"><div class="rk">切った軸</div><div class="rv">{{SEGMENTATION_AXES}}</div></div>
+        <div class="row"><div class="rk">切らなかった軸</div><div class="rv">{{REJECTED_AXES}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>personas &amp; segments</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Answer">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">見えていること</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{ANSWER_STATEMENT}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>これは仮説であり確定ではない</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Compare">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>候補の比較</div>
+      <h2 class="msg anim">{{MSG_COMPARE}}</h2>
+    </header>
+    <div class="body">
+      <table class="t anim d1">
+        <thead>
+          <tr><th style="width:240px">観点</th><th>{{CANDIDATE_A}}</th><th>{{CANDIDATE_B}}</th><th>{{CANDIDATE_C}}</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>{{AXIS_1}}</td><td>{{A_1}}</td><td>{{B_1}}</td><td>{{C_1}}</td></tr>
+          <tr><td>{{AXIS_2}}</td><td>{{A_2}}</td><td>{{B_2}}</td><td>{{C_2}}</td></tr>
+          <tr><td>{{AXIS_3}}</td><td>{{A_3}}</td><td>{{B_3}}</td><td>{{C_3}}</td></tr>
+          <tr class="is-key"><td>選ぶと何を捨てるか</td><td>{{A_COST}}</td><td>{{B_COST}}</td><td>{{C_COST}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="foot"><span>ペルソナ詳細はチャット / 元 docs を参照</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">人間が決める</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{GATE_1}}</li>
+        <li>{{GATE_2}}</li>
+        <li>{{GATE_3}}</li>
+      </ul>
+      <div class="callout anim d2" style="margin-top:32px">
+        <span class="lbl">Primary 候補（仮説）</span>
+        {{PRIMARY_HYPOTHESIS}} — 確定ではない
+      </div>
+    </div>
+    <footer class="foot"><span>Primary が決まるまで Stage 2 に進まない</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>personas &amp; segments</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>

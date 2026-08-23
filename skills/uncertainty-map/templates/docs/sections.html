@@ -1,0 +1,173 @@
+<!-- prhythm-docs deck sections — uncertainty-map
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/uncertainty-map/templates/docs/sections.html \
+              docs/prhythm/uncertainty-map/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md
+     コア × 未検証（右上）が最優先。全仮説は docs/uncertainty-map.md へ -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">uncertainty-map<span class="sep"></span>Prhythm</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{PRODUCT}}の<br />不確実性マップ</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{SOURCES}}</span>
+      <span>次に何を検証するかを決めるための地図</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Frame">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Frame<span class="sep"></span>スコープ</div>
+      <h2 class="msg anim">{{MSG_FRAME}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">前提にしたビジョン</div><div class="rv">{{VISION}}</div></div>
+        <div class="row"><div class="rk">プロトで触れた範囲</div><div class="rv">{{PROTO_SCOPE}}</div></div>
+        <div class="row"><div class="rk">仮説の総数</div><div class="rv">{{ASSUMPTION_COUNT}}</div></div>
+        <div class="row"><div class="rk">材料</div><div class="rv">{{SOURCES_DETAIL}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>uncertainty-map</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Answer">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">最も危ない仮説</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{RISKIEST_ASSUMPTION}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>これが外れると構想全体が崩れる</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Matrix">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>2x2 マトリクス</div>
+      <h2 class="msg anim">{{MSG_MATRIX}}</h2>
+    </header>
+    <div class="body">
+      <div class="quadrant anim d1">
+        <div class="qy">
+          <span>コア</span>
+          <span class="ax">構想への効き</span>
+          <span>周辺</span>
+        </div>
+        <div class="qgrid">
+          <div class="qcell">
+            <div class="qlabel">コア × 検証済</div>
+            <div class="qitems">
+              <span class="qitem">{{CV_1}}</span>
+              <span class="qitem">{{CV_2}}</span>
+            </div>
+            <p class="qnote">{{CV_NOTE}}</p>
+          </div>
+          <div class="qcell is-target">
+            <div class="qlabel">コア × 未検証 — 最優先</div>
+            <div class="qitems">
+              <span class="qitem own">{{CU_1}}</span>
+              <span class="qitem">{{CU_2}}</span>
+            </div>
+            <p class="qnote">{{CU_NOTE}}</p>
+          </div>
+          <div class="qcell">
+            <div class="qlabel">周辺 × 検証済</div>
+            <div class="qitems">
+              <span class="qitem">{{PV_1}}</span>
+              <span class="qitem">{{PV_2}}</span>
+            </div>
+            <p class="qnote">{{PV_NOTE}}</p>
+          </div>
+          <div class="qcell">
+            <div class="qlabel">周辺 × 未検証 — 後回し</div>
+            <div class="qitems">
+              <span class="qitem">{{PU_1}}</span>
+              <span class="qitem">{{PU_2}}</span>
+            </div>
+            <p class="qnote">{{PU_NOTE}}</p>
+          </div>
+        </div>
+        <div class="qx">
+          <span>検証済</span>
+          <span class="ax">検証の状態</span>
+          <span>未検証</span>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>右上から順に潰す</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Validate">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>検証計画</div>
+      <h2 class="msg anim">{{MSG_VALIDATE}}</h2>
+    </header>
+    <div class="body">
+      <table class="t anim d1">
+        <thead>
+          <tr><th style="width:100px">ID</th><th>仮説</th><th style="width:400px">検証手段</th><th style="width:360px">失格条件</th></tr>
+        </thead>
+        <tbody>
+          <tr class="is-key"><td class="num">{{A1_ID}}</td><td>{{A1}}</td><td>{{A1_METHOD}}</td><td>{{A1_KILL}}</td></tr>
+          <tr><td class="num">{{A2_ID}}</td><td>{{A2}}</td><td>{{A2_METHOD}}</td><td>{{A2_KILL}}</td></tr>
+          <tr><td class="num">{{A3_ID}}</td><td>{{A3}}</td><td>{{A3_METHOD}}</td><td>{{A3_KILL}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="foot"><span>失格条件を先に書く。書けない仮説は検証できない</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">人間が決める</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{GATE_1}}</li>
+        <li>{{GATE_2}}</li>
+        <li>{{GATE_3}}</li>
+      </ul>
+    </div>
+    <footer class="foot"><span>優先順位は AI が決めるものではない</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>詳細: docs/uncertainty-map.md</span><span>{{PRODUCT}}</span></footer>
+  </div>
+</section>

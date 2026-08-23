@@ -4,8 +4,8 @@ Run before `git push` and `gh pr create`.
 
 ## Per changed skill (`skills/<name>/`)
 
-- [ ] `SKILL.md` exists with valid frontmatter (`name`, `description`, `disable-model-invocation`)
-- [ ] `README.md` exists with 8 required headings
+- [ ] `SKILL.md` exists with valid frontmatter (`name`, `description`, `disable-model-invocation`, `rank`, and `categories` unless `rank: meta`)
+- [ ] `README.md` exists with required headings (概要, 利用メリット, 利用シーン, 使い方, 具体例, 構成, 前提条件, 関連スキル; 注意事項 optional) and follows [readme-principles.md](../../prhythm-skill-review/references/readme-principles.md)
 - [ ] Validate passes:
 
 ```bash

@@ -83,6 +83,64 @@ else
   pass "Frontmatter has disable-model-invocation: $DISABLE_INVOCATION"
 fi
 
+# --- rank (meta | core | utility) ---
+RANK=$(echo "$FRONTMATTER" | grep -E '^rank:' | head -1 | sed 's/^rank:[[:space:]]*//' | tr -d '\r')
+if [[ -z "$RANK" ]]; then
+  fail "Frontmatter missing 'rank' (meta | core | utility)"
+elif [[ "$RANK" != "meta" && "$RANK" != "core" && "$RANK" != "utility" ]]; then
+  fail "rank '$RANK' must be meta | core | utility"
+else
+  pass "Frontmatter has rank: $RANK"
+fi
+
+# --- categories (1–2 of business|design|tech|delivery; omit for meta) ---
+HAS_CATEGORIES_KEY=0
+if echo "$FRONTMATTER" | grep -qE '^categories:'; then
+  HAS_CATEGORIES_KEY=1
+fi
+CATEGORIES=$(echo "$FRONTMATTER" | awk '
+/^categories:/ { in_cat=1; next }
+in_cat && /^[[:space:]]*-[[:space:]]*/ {
+  sub(/^[[:space:]]*-[[:space:]]*/, "")
+  print
+  next
+}
+in_cat && /^[a-zA-Z_]/ { exit }
+')
+CAT_COUNT=0
+if [[ -n "$CATEGORIES" ]]; then
+  CAT_COUNT=$(echo "$CATEGORIES" | grep -c . || true)
+fi
+
+if [[ "$RANK" == "meta" ]]; then
+  if [[ "$HAS_CATEGORIES_KEY" -eq 1 ]]; then
+    fail "rank: meta must omit categories (no product-perspective injection)"
+  else
+    pass "meta skill omits categories"
+  fi
+else
+  if [[ "$HAS_CATEGORIES_KEY" -eq 0 ]]; then
+    fail "Frontmatter missing 'categories' (required for core/utility)"
+  elif [[ "$CAT_COUNT" -lt 1 || "$CAT_COUNT" -gt 2 ]]; then
+    fail "categories must have 1–2 entries (got $CAT_COUNT)"
+  else
+    BAD_CAT=0
+    while IFS= read -r cat; do
+      [[ -z "$cat" ]] && continue
+      case "$cat" in
+        business|design|tech|delivery) ;;
+        *)
+          fail "invalid category '$cat' (business|design|tech|delivery)"
+          BAD_CAT=1
+          ;;
+      esac
+    done <<< "$CATEGORIES"
+    if [[ "$BAD_CAT" -eq 0 ]]; then
+      pass "Frontmatter has categories ($CAT_COUNT)"
+    fi
+  fi
+fi
+
 # --- name matches directory ---
 if [[ -n "$NAME" && "$NAME" != "$DIR_NAME" ]]; then
   fail "name '$NAME' does not match directory '$DIR_NAME'"
@@ -138,15 +196,15 @@ else
   pass "No Windows-style paths"
 fi
 
-# --- README required headings ---
+# --- README required headings (注意事項 is optional per readme-principles.md) ---
 REQUIRED_HEADINGS=(
   "概要"
   "利用メリット"
   "利用シーン"
   "使い方"
+  "具体例"
   "構成"
   "前提条件"
-  "注意事項"
   "関連スキル"
 )
 
@@ -162,7 +220,7 @@ else
     fi
   done
   if [[ "$MISSING" -eq 0 ]]; then
-    pass "README has all 8 required headings"
+    pass "README has required headings (注意事項 optional)"
   fi
 fi
 

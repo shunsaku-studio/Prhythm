@@ -36,7 +36,7 @@ Layer A weights and verdict rules: see [../../prhythm-skill-review/references/re
 ### §B-2 Standalone fallback (no usecase-map)
 
 ```
-[ ] Mentions /usecase-mapper once but does NOT block on it
+[ ] Mentions /function-usecase-map once but does NOT block on it
 [ ] Runs a single-turn intake (one message), does NOT loop more than once
 [ ] All three artifacts still produced from vision / description
 [ ] 紐付 UC column is OMITTED (not fabricated) since no usecase-map
