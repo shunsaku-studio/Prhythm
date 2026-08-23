@@ -1,0 +1,152 @@
+<!-- prhythm-docs deck sections — hearing
+     Build: node skills/prhythm-docs/scripts/build-deck.mjs \
+              skills/hearing/templates/docs/sections.html \
+              docs/prhythm/hearing/index.html --title "…"
+     Rules: skills/prhythm-docs/references/slide-grammar.md
+     mode:prep と mode:analysis のスライドは片方だけ残して、もう片方は section ごと削除する -->
+
+<section class="slide s-cover" data-label="Cover">
+  <div class="frame">
+    <div class="topbar">
+      <div class="eyebrow">hearing<span class="sep"></span>{{MODE}}</div>
+      <div class="eyebrow">{{DATE}}</div>
+    </div>
+    <div>
+      <h1 class="anim">{{PRODUCT_OR_MEETING}}</h1>
+      <p class="sub anim d1">{{ONE_LINE_CONTEXT}}</p>
+      <div class="ink-rule anim d2"></div>
+    </div>
+    <footer class="foot">
+      <span>{{COUNTERPARTY}}</span>
+      <span>エンジニア ↔ コンサルのヒアリング整理</span>
+    </footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Frame">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Frame<span class="sep"></span>会議の枠</div>
+      <h2 class="msg anim">{{MSG_FRAME}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">この会議の目的</div><div class="rv">{{PURPOSE}}</div></div>
+        <div class="row"><div class="rk">相手</div><div class="rv">{{COUNTERPARTY_DETAIL}}</div></div>
+        <div class="row"><div class="rk">分かっていること</div><div class="rv">{{KNOWN}}</div></div>
+        <div class="row"><div class="rk">分かっていないこと</div><div class="rv">{{UNKNOWN}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>hearing / {{MODE}}</span><span>{{PRODUCT_OR_MEETING}}</span></footer>
+  </div>
+</section>
+
+<section class="slide s-statement" data-label="Answer">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Answer<span class="sep"></span><span class="on">結論</span></div>
+    </header>
+    <div class="body">
+      <p class="statement anim d1">{{ANSWER_STATEMENT}}</p>
+      <div class="because anim d2">
+        {{BECAUSE_1}}<br />
+        {{BECAUSE_2}}<br />
+        {{BECAUSE_3}}
+      </div>
+    </div>
+    <footer class="foot"><span>hearing / {{MODE}}</span><span>{{PRODUCT_OR_MEETING}}</span></footer>
+  </div>
+</section>
+
+<!-- mode:prep のときだけ残す -->
+<section class="slide" data-label="Prep">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>prep</div>
+      <h2 class="msg anim">{{MSG_PREP}}</h2>
+    </header>
+    <div class="body">
+      <div class="split anim d1">
+        <div>
+          <div class="col-label">当日の進行</div>
+          <ul class="bullets numbered">
+            <li>{{AGENDA_1}}</li>
+            <li>{{AGENDA_2}}</li>
+            <li>{{AGENDA_3}}</li>
+            <li>{{AGENDA_4}}</li>
+          </ul>
+        </div>
+        <div>
+          <div class="col-label">絶対に聞く質問</div>
+          <ul class="bullets">
+            <li>{{QUESTION_1}}</li>
+            <li>{{QUESTION_2}}</li>
+            <li>{{QUESTION_3}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>質問プール全量は SKILL の questions.md へ</span><span>{{PRODUCT_OR_MEETING}}</span></footer>
+  </div>
+</section>
+
+<!-- mode:analysis のときだけ残す -->
+<section class="slide" data-label="Analysis">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Evidence<span class="sep"></span>analysis</div>
+      <h2 class="msg anim">{{MSG_ANALYSIS}}</h2>
+    </header>
+    <div class="body">
+      <table class="t anim d1">
+        <thead>
+          <tr><th style="width:180px">区分</th><th>内容</th><th style="width:340px">確からしさ</th></tr>
+        </thead>
+        <tbody>
+          <tr class="is-key"><td>発言（事実）</td><td>{{FACT_1}}</td><td>{{FACT_1_CONF}}</td></tr>
+          <tr><td>観測</td><td>{{OBSERVATION_1}}</td><td>{{OBSERVATION_1_CONF}}</td></tr>
+          <tr><td>推測</td><td>{{INFERENCE_1}}</td><td>{{INFERENCE_1_CONF}}</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn anim d2" style="margin-top:36px">
+        <span class="lbl">聞かない / 約束しない</span>
+        {{DO_NOT}}
+      </div>
+    </div>
+    <footer class="foot"><span>hearing / analysis</span><span>{{PRODUCT_OR_MEETING}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Gates">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Gates<span class="sep"></span><span class="on">擦り合わせたい</span></div>
+      <h2 class="msg anim">{{MSG_GATES}}</h2>
+    </header>
+    <div class="body">
+      <ul class="bullets numbered lg anim d1">
+        <li>{{GATE_1}}</li>
+        <li>{{GATE_2}}</li>
+        <li>{{GATE_3}}</li>
+      </ul>
+    </div>
+    <footer class="foot"><span>この3つが決まるまで要件を固定しない</span><span>{{PRODUCT_OR_MEETING}}</span></footer>
+  </div>
+</section>
+
+<section class="slide" data-label="Next">
+  <div class="frame">
+    <header class="head">
+      <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+      <h2 class="msg anim">{{MSG_NEXT}}</h2>
+    </header>
+    <div class="body">
+      <div class="rows anim d1">
+        <div class="row"><div class="rk">{{NEXT_1_WHO}}</div><div class="rv">{{NEXT_1}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_2_WHO}}</div><div class="rv">{{NEXT_2}}</div></div>
+        <div class="row"><div class="rk">{{NEXT_3_WHO}}</div><div class="rv">{{NEXT_3}}</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>逐語録はチャット / 元メモを参照</span><span>{{PRODUCT_OR_MEETING}}</span></footer>
+  </div>
+</section>
