@@ -1,6 +1,8 @@
 # Sentiment Sources
 
-Phase 2 **User sentiment** must not rely on marketing copy alone. Run at least one sentiment search per service.
+Optional for `market-landscape`. Use when a Catalog entry's **Friction** or map placement needs review-backed evidence — not for full Phase-2-style profiles.
+
+Prefer primary reviews over marketing copy. Run at least one sentiment search when citing user pain as placement rationale.
 
 ---
 
