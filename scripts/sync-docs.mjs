@@ -188,7 +188,8 @@ const repoPath = (skillSlug, ...segments) =>
 
 const rewriteSkillLinks = (content, skillSlug) =>
   content
-    .replace(/\]\(\.\.\/([a-z0-9-]+)\/?\)/g, '](/skills/$1/)')
+    // 関連スキル: ../foo / ../foo/ / ../foo/README / ../foo/README.md → /skills/foo/
+    .replace(/\]\(\.\.\/([a-z0-9-]+)(?:\/README(?:\.md)?)?\/?\)/g, '](/skills/$1/)')
     .replace(/\]\(docs\/([^)#]+?)\.md\)/g, `](/skills/${skillSlug}/docs/$1)`)
     .replace(/\]\((reference\.md)\)/g, `](/skills/${skillSlug}/reference)`)
     .replace(/\]\(\.\.\/\.\.\/([^)]+)\)/g, (_, target) => `](${REPO_BASE}/${target})`)
@@ -214,7 +215,7 @@ const buildSkillRegistry = (skillSlugs) =>
         {
           slug,
           title: extractTitle(content),
-          summary: extractSummary(content),
+          summary: rewriteSkillLinks(extractSummary(content), slug),
           link: `/skills/${slug}/`,
           rank,
           categories,
