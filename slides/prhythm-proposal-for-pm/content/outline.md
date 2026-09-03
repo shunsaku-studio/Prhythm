@@ -5,7 +5,7 @@ Fill this table **before** writing section HTML. One row per slide.
 | # | file | type | data-label | layout | message (1 line) |
 |---|------|------|------------|--------|------------------|
 | 1 | 01-title.html | s-title | 表紙 | — | 瞬作スタジオ / Prhythm — ビジョンを多面的に形にし、繰り返し現実に近づける |
-| 2 | 02-summary.html | s-content | サマリー | tracks.stack | 瞬作スタジオと Prhythm スキルセットの位置づけを2点で整理 |
+| 2 | 02-summary.html | s-content | サマリー | tracks.stack | Prhythmが支えることと、PMにとっての価値を2点で整理 |
 | 3 | 03-challenge.html | s-content | 課題意識 | stack+duo | 表層（単価2倍で開発取れない）→本質（志向性ミスマッチ×心理的ハードル） |
 | 3-1 | 03z-pm-moments.html | s-content | PMに効く2つの瞬間 | two-entry value flow | ACN提案と既存案件拡大という2つの入口を、Prhythmが「次の提案」へ変える |
 | 4 | 04-prhythm-concept.html | s-content | Prhythmとは | stack+tracks.n3 | 提案瞬作に踏み出せる土壌。スキルセット＋ワークフローでプロダクト視点が身につく |
@@ -19,11 +19,9 @@ Fill this table **before** writing section HTML. One row per slide.
 | 6-6 | 06-demo-06-proto-storyboard.html | s-content | プロト紹介の絵コンテ | image+notes | 主担当：デザイン — デモプレイ絵コンテと台本 |
 | 6-7 | 06-demo-07-team-plan.html | s-content | 体制立案 | image+notes | 主担当：実行計画 — パイロット〜展開の体制・RACI |
 | 6-8 | 06-demo-08-validation-plan.html | s-content | 検証計画 | image+notes | 主担当：実行計画 — KPI・仮説・Go/No-Go |
-| 7 | 07-vision.html | s-content | ビジョン | tracks.n3 | プロダクト力底上げ・スタジオのお手本・バンドを増やすの3本柱 |
-| 8 | 08-roadmap.html | s-content | ロードマップ | cmp | 点火→実戦→定着の3フェーズと状態ゴール・指標 |
-| 9 | 09-next-action.html | s-content | Next Action | toc | 提案瞬作ワークショップ（1Day 80分）の形式とタイムテーブル |
-| A | 10-appendix.html | s-divider | Appendix | — | 補足資料（組織モデルの背景説明） |
-| A1 | 11-band-studio-model.html | s-content | バンドスタジオモデル | flow | 1バンド=実質PdM、横断スタジオがスキル・仕組みを供給する組織構造 |
+| 7 | 07-vision.html | s-content | ビジョン | PM journey | 提案作成→提案時→受注後→その先をつなぎ、手戻りを減らして次の契約へ進むPMの時間軸 |
+| A | 10-appendix.html | s-divider | Appendix | — | 補足資料（Prhythmの展開計画） |
+| A1 | 10z-roadmap.html | s-content | ロードマップ | cmp | 点火→実戦→定着の3フェーズと状態ゴール・指標 |
 
 ## Layout codes
 
