@@ -12,7 +12,7 @@ const GZIP_THRESHOLD = 2048;
 
 const scriptDir = dirname(new URL(import.meta.url).pathname);
 const skillDir = resolve(scriptDir, '..');
-const repoRoot = resolve(skillDir, '../../..');
+const repoRoot = resolve(skillDir, '../..');
 
 const deckPath = process.argv[2];
 if (!deckPath) {
@@ -91,10 +91,23 @@ if (cssLink) {
 
 html = html.replace(
   /<script([^>]*)\ssrc=["']([^"']+)["']([^>]*)><\/script>/gi,
-  (_, pre, src, post) => {
-    const id = addAsset(src);
-    if (!id) return `<script${pre}${post}></script>`;
-    return `<script${pre} src="${id}"${post}></script>`;
+  (tag, pre, src, post) => {
+    if (/^(?:https?:|data:|blob:)/i.test(src)) return tag;
+
+    const scriptPath = resolve(deckDir, src);
+    if (!existsSync(scriptPath)) {
+      console.warn(`Keep missing script reference: ${src}`);
+      return tag;
+    }
+
+    // Text scripts can be embedded directly. This avoids blob: script URLs and
+    // runtime decompression, both of which are restricted by some browsers
+    // when a downloaded deck is opened from file://.
+    const script = readFileSync(scriptPath, 'utf8').replace(
+      /<\/script/gi,
+      '<\\/script',
+    );
+    return `<script${pre}${post}>\n${script}\n</script>`;
   },
 );
 
@@ -110,6 +123,15 @@ shell = shell.replace('{{DECK_TITLE}}', deckTitle);
 const outDir = join(deckDir, 'dist');
 mkdirSync(outDir, { recursive: true });
 const outPath = join(outDir, 'standalone.html');
+
+// If every dependency is textual, the processed deck is already a complete
+// standalone document. Write it as-is instead of wrapping it in the runtime
+// unpacker. This is the most compatible form for a downloaded file:// deck.
+if (Object.keys(manifest).length === 0) {
+  writeFileSync(outPath, html, 'utf8');
+  console.log(`Bundled directly → ${outPath}`);
+  process.exit(0);
+}
 
 /** Prevent </script> in embedded JSON from terminating the host <script> tag. */
 const safeJsonForScript = (value) =>
