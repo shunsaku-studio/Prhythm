@@ -18,7 +18,8 @@ Fill this table **before** writing section HTML. One row per slide.
 | 6-6 | 06-demo-06-proto-storyboard.html | s-content | プロト絵コンテ | image+notes | 主担当：デザイン — プロト制作前に検証場面・必要画面・台本を揃える |
 | 6-7 | 06-demo-07-team-plan.html | s-content | 体制立案 | image+notes | 主担当：実行計画 — パイロット〜展開の体制・RACI |
 | 6-8 | 06-demo-08-validation-plan.html | s-content | 検証計画 | image+notes | 主担当：実行計画 — KPI・仮説・Go/No-Go |
-| 7 | 07-vision.html | s-content | PMの未来 | takeaway overview | 2つの入口、協働の役割、8スキル、成果物、価値を一枚で示し、PMが次の一手を仕掛ける未来へつなぐ |
+| 15 | 07-vision.html | s-content | PMの未来 | role cycle | 次の一手、協働、意思決定、継続提案という4つの役割が循環するPMの未来を示す |
+| 16 | 07z-summary.html | s-content | まとめ | takeaway overview | 2つの入口、協働の役割、8スキル、成果物、価値を一枚で振り返る |
 | A | 10-appendix.html | s-divider | Appendix | — | 補足資料（Prhythmの展開計画） |
 | A1 | 10z-roadmap.html | s-content | ロードマップ | cmp | 点火→実戦→定着の3フェーズと状態ゴール・指標 |
 
