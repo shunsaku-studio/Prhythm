@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ウチナカ公募 — proto-storyboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* prhythm-docs slide design system — editorial.
+   Authored at a fixed 1920x1080 canvas, so every size is a plain px value;
+   deck-stage scales the whole canvas to the viewport. Do not reintroduce
+   clamp()/vw units — they break the overflow lint. */
+
+:root {
+  --paper: #ffffff;
+  --ink: #0a0a0a;
+  --ink-2: #4a4a4a;
+  --ink-3: #8f8f8f;
+  --line: #e6e4e0;
+  --line-2: #f2f0ec;
+  --rule: #0a0a0a;
+  --accent: #0f5c4c;
+  --accent-tint: rgba(15, 92, 76, 0.07);
+  --warn: #a33a1f;
+
+  --head: "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --sans: "Noto Sans JP", "Hiragino Sans", system-ui, sans-serif;
+  /* Plex Mono has no CJK glyphs, so Japanese in a mono run falls through to
+     Noto Sans JP instead of an arbitrary system face. Latin stays monospaced. */
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, "Noto Sans JP", monospace;
+
+  --t-display: 104px;
+  --t-statement: 72px;
+  --t-message: 52px;
+  --t-h: 34px;
+  --t-body: 26px;
+  --t-small: 22px;
+  --t-eyebrow: 20px;
+
+  --pad-x: 112px;
+  --pad-y: 84px;
+}
+
+* { box-sizing: border-box; }
+/* The font on <body> is not for the slides (those set their own) — mermaid
+   measures label widths in a detached container appended to <body>, and with
+   the default serif there it sizes CJK nodes about one character too narrow. */
+html, body { margin: 0; padding: 0; height: 100%; background: #0a0a0a; font-family: var(--sans); }
+deck-stage:not(:defined) { visibility: hidden; }
+
+.slide {
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  color: var(--ink);
+  background: var(--paper);
+  overflow: hidden;
+  /* Japanese wraps at phrase boundaries rather than mid-word, and the strict
+     kinsoku set keeps punctuation off line starts. */
+  word-break: auto-phrase;
+  line-break: strict;
+}
+
+/* ── frame ──────────────────────────────────────────────────────────── */
+
+.frame {
+  position: absolute;
+  inset: 0;
+  padding: var(--pad-y) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: var(--t-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.eyebrow .sep { width: 28px; height: 1px; background: var(--ink-3); }
+.eyebrow .on { color: var(--accent); }
+
+/* The message line. One sentence, the claim of the slide — never a noun
+   phrase like "Research Frame". */
+.msg {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: var(--t-message);
+  line-height: 1.28;
+  letter-spacing: 0.005em;
+  margin: 20px 0 0;
+  max-width: 1580px;
+  /* Without this a 40-character message line strands its last two characters
+     on a second line. */
+  text-wrap: balance;
+}
+.msg .em { color: var(--accent); }
+.msg .mark {
+  background: linear-gradient(transparent 62%, var(--accent-tint) 62%);
+  padding: 0 2px;
+}
+
+.head { border-bottom: 3px solid var(--rule); padding-bottom: 28px; }
+
+.body {
+  flex: 1;
+  min-height: 0;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.body.top { justify-content: flex-start; }
+/* The head already draws a rule; a component's own top rule right under it
+   reads as an accidental double line. */
+.body > :is(.rows, .tracks, .bullets, .split, table):first-child { border-top: none; }
+
+.foot {
+  margin-top: auto;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 40px;
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+/* ── cover ──────────────────────────────────────────────────────────── */
+
+.s-cover .frame { justify-content: space-between; }
+.s-cover .topbar { display: flex; justify-content: space-between; align-items: flex-start; }
+.s-cover h1 {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: var(--t-display);
+  line-height: 1.06;
+  letter-spacing: -0.005em;
+  margin: 0;
+  max-width: 1500px;
+}
+.s-cover .sub {
+  margin: 34px 0 0;
+  font-size: 32px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 1280px;
+}
+.s-cover .ink-rule { width: 200px; height: 10px; background: var(--ink); margin: 44px 0 0; }
+.s-cover .foot { margin-top: 0; }
+
+/* ── statement (the Answer slide) ───────────────────────────────────── */
+
+/* The Answer slide's hero sentence IS its message line — a .msg above it
+   would just say the same thing twice. */
+.s-statement .head { padding-bottom: 20px; }
+.statement {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: var(--t-statement);
+  line-height: 1.32;
+  letter-spacing: 0.005em;
+  margin: 0;
+  max-width: 1620px;
+  text-wrap: balance;
+}
+.statement .em { color: var(--accent); }
+.because {
+  margin: 44px 0 0;
+  padding-left: 26px;
+  border-left: 5px solid var(--accent);
+  font-size: 28px;
+  line-height: 1.62;
+  color: var(--ink-2);
+  max-width: 1400px;
+}
+
+/* ── tracks: rule-separated columns (no boxes) ──────────────────────── */
+
+.tracks {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  gap: 0;
+  border-top: 2px solid var(--rule);
+}
+.tracks.n2 { grid-template-columns: repeat(2, 1fr); }
+.tracks.n3 { grid-template-columns: repeat(3, 1fr); }
+.tracks.n4 { grid-template-columns: repeat(4, 1fr); }
+.track { padding: 30px 42px 0 0; }
+.track + .track { padding-left: 42px; border-left: 1px solid var(--line); }
+.track:last-child { padding-right: 0; }
+.tnum {
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.tlabel {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.3;
+  margin: 12px 0 14px;
+}
+.tbody { font-size: var(--t-body); line-height: 1.62; color: var(--ink-2); }
+.track.is-key .tnum, .track.is-key .tlabel { color: var(--accent); }
+
+/* Same idea stacked vertically. Rows share the body's height evenly so a
+   3-row and a 5-row slide both fill the frame instead of leaving the rule
+   floating over dead space. */
+.rows {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 2px solid var(--rule);
+}
+.row {
+  /* Grow to share the body, but cap it — three rows stretched over the full
+     frame reads as a mistake rather than as breathing room. */
+  flex: 1 1 auto;
+  max-height: 148px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 48px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+.row .rk { font-family: var(--head); font-weight: 700; font-size: 28px; }
+.row .rv { font-size: var(--t-body); line-height: 1.6; color: var(--ink-2); }
+
+/* ── table ──────────────────────────────────────────────────────────── */
+
+table.t { width: 100%; border-collapse: collapse; }
+table.t thead th {
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: left;
+  padding: 0 24px 16px 0;
+  border-bottom: 2px solid var(--rule);
+}
+table.t tbody td {
+  font-size: var(--t-body);
+  line-height: 1.5;
+  color: var(--ink-2);
+  text-align: left;
+  vertical-align: top;
+  padding: 22px 24px 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+table.t tbody td:first-child { font-weight: 700; color: var(--ink); }
+table.t td.num { font-family: var(--mono); white-space: nowrap; }
+table.t tr.is-key td { color: var(--ink); }
+table.t tr.is-key td:first-child { color: var(--accent); }
+
+/* ── split: claim on the left, evidence on the right ────────────────── */
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; flex: 1; min-height: 0; }
+.split.wide-l { grid-template-columns: 1.35fr 1fr; }
+.split.wide-r { grid-template-columns: 1fr 1.35fr; }
+.split > * { padding-right: 64px; min-width: 0; }
+.split > * + * { padding-right: 0; padding-left: 64px; border-left: 1px solid var(--line); }
+.col-label {
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--rule);
+  margin-bottom: 26px;
+}
+
+/* ── bullets / callout / tags ───────────────────────────────────────── */
+
+.bullets { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.bullets li {
+  position: relative;
+  padding-left: 40px;
+  font-size: var(--t-body);
+  line-height: 1.58;
+  color: var(--ink-2);
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15px;
+  width: 22px;
+  height: 3px;
+  background: var(--ink);
+}
+.bullets.numbered { counter-reset: b; }
+.bullets.numbered li { padding-left: 56px; }
+.bullets.numbered li::before {
+  counter-increment: b;
+  content: counter(b, decimal-leading-zero);
+  background: none;
+  top: 0;
+  width: auto;
+  height: auto;
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+}
+.bullets li b, .bullets li strong { color: var(--ink); font-weight: 700; }
+
+/* Decision-gate weight: three items that carry the slide, not a side list. */
+.bullets.lg {
+  flex: 1;
+  min-height: 0;
+  gap: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 2px solid var(--rule);
+}
+.bullets.lg li {
+  flex: 1 1 auto;
+  max-height: 168px;
+  display: flex;
+  align-items: center;
+  font-size: 32px;
+  line-height: 1.5;
+  color: var(--ink);
+  padding: 22px 0 22px 96px;
+  border-bottom: 1px solid var(--line);
+}
+.bullets.lg li::before { top: 50%; transform: translateY(-50%); }
+.bullets.numbered.lg li::before { font-size: 26px; color: var(--accent); }
+
+.callout {
+  border-left: 5px solid var(--accent);
+  background: var(--accent-tint);
+  padding: 24px 30px;
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--ink);
+}
+.callout .lbl {
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 8px;
+}
+.callout.warn { border-left-color: var(--warn); background: rgba(163, 58, 31, 0.06); }
+.callout.warn .lbl { color: var(--warn); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 12px; }
+.tag {
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.06em;
+  padding: 8px 16px;
+  border: 1.5px solid var(--line);
+  color: var(--ink-2);
+}
+.tag.fill { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.tag.on { border-color: var(--accent); color: var(--accent); }
+
+/* ── quadrant: hand-built 2x2, replaces mermaid quadrantChart ───────── */
+
+.quadrant {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  grid-template-rows: 1fr 54px;
+  gap: 18px;
+}
+/* vertical-rl with no rotate: Latin turns 90deg but Japanese stays upright and
+   readable. Author the spans high → axis → low; vertical flow puts the first
+   at the top. */
+.qy {
+  grid-area: 1 / 1;
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.qx {
+  grid-area: 2 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.qy span, .qx span { white-space: nowrap; flex: none; }
+.qy .ax, .qx .ax { color: var(--ink); font-weight: 600; }
+.qgrid {
+  grid-area: 1 / 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  border: 2px solid var(--rule);
+  min-height: 0;
+}
+.qcell {
+  padding: 22px 26px;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.qcell:nth-child(1), .qcell:nth-child(2) { border-bottom: 1px solid var(--line); }
+.qcell:nth-child(1), .qcell:nth-child(3) { border-right: 1px solid var(--line); }
+.qcell .qlabel {
+  font-family: var(--mono);
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.qcell.is-target { background: var(--accent-tint); }
+.qcell.is-target .qlabel { color: var(--accent); }
+.qitems { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+.qitem {
+  font-size: 22px;
+  line-height: 1.3;
+  padding: 8px 14px;
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-2);
+}
+.qitem.own { border-color: var(--ink); background: var(--ink); color: var(--paper); font-weight: 700; }
+.qnote { margin: 4px 0 0; font-size: 21px; line-height: 1.5; color: var(--ink-2); }
+.qcell.is-target .qnote { color: var(--ink); }
+
+/* ── mermaid diagram ────────────────────────────────────────────────── */
+
+.diagram {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--line);
+  padding: 24px;
+  overflow: hidden;
+}
+.diagram > .mermaid {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Never set font-size here. mermaid measures each node from the label's
+   rendered size, so overriding it desyncs the box from the text and clips CJK
+   labels. Legibility comes from scaling the whole SVG: it carries a viewBox,
+   so filling the box enlarges the diagram while preserveAspectRatio holds its
+   proportions. */
+.diagram > .mermaid { font-size: 16px; }
+.diagram svg { width: 100%; height: 100%; max-width: 100%; }
+
+/* ── entrance ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-deck-active] .anim { animation: deck-fadeup 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  [data-deck-active] .anim.d1 { animation-delay: 0.05s; }
+  [data-deck-active] .anim.d2 { animation-delay: 0.11s; }
+  [data-deck-active] .anim.d3 { animation-delay: 0.17s; }
+  [data-deck-active] .anim.d4 { animation-delay: 0.23s; }
+  @keyframes deck-fadeup {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+  <!-- filled from ウチナカ公募 demo -->
+  <section class="slide s-cover" data-label="Cover">
+    <div class="frame">
+      <div class="topbar">
+        <div class="eyebrow">proto-storyboard<span class="sep"></span>デモプレイ絵コンテ</div>
+        <div class="eyebrow">2026.09.14</div>
+      </div>
+      <div>
+        <h1 class="anim">ウチナカ公募<br />5分の見せ方</h1>
+        <p class="sub anim d1">佐藤さん（営業企画・入社5年）が、匿名の一歩で谷を越える</p>
+        <div class="ink-rule anim d2"></div>
+      </div>
+      <footer class="foot">
+        <span>ジャーニー核心 / ドメイン制約 / 一行コンセプト</span>
+        <span>提案にまとめる</span>
+      </footer>
+    </div>
+  </section>
+
+  <section class="slide" data-label="Frame">
+    <div class="frame">
+      <header class="head">
+        <div class="eyebrow">Frame<span class="sep"></span>何をデモするか</div>
+        <h2 class="msg anim">デモは応募者の5分だけ。ミッション登録や人事画面は当日見せない。</h2>
+      </header>
+      <div class="body">
+        <div class="rows anim d1">
+          <div class="row"><div class="rk">主人公</div><div class="rv">佐藤さん（営業企画・入社5年）。部署外に興味がある社員</div></div>
+          <div class="row"><div class="rk">コアシーン</div><div class="rv">スキルに合う越境ミッションへ、匿名で「気になる」</div></div>
+          <div class="row"><div class="rk">コンセプト</div><div class="rv">異動じゃなく、まず越境から</div></div>
+          <div class="row"><div class="rk">山場</div><div class="rv">CUT 2 匿名で近づく · 約5分</div></div>
+        </div>
+      </div>
+      <footer class="foot"><span>proto-storyboard</span><span>ウチナカ公募</span></footer>
+    </div>
+  </section>
+
+  <section class="slide s-statement" data-label="Answer">
+    <div class="frame">
+      <header class="head">
+        <div class="eyebrow">Answer<span class="sep"></span><span class="on">結論</span></div>
+      </header>
+      <div class="body">
+        <p class="statement anim d1">山場は CUT 2。匿名の「気になる」で、8割が離脱していた谷を越えて見せる。</p>
+        <div class="because anim d2">
+          CUT 1 でミッションが向こうから届き、探しに行かせない<br />
+          CUT 2 で上司非公開を画面上の約束として見せる<br />
+          CUT 3 で上司に届くのは双方合意のあとだと締める
+        </div>
+      </div>
+      <footer class="foot"><span>proto-storyboard</span><span>ウチナカ公募</span></footer>
+    </div>
+  </section>
+
+  <section class="slide" data-label="Cuts">
+    <div class="frame">
+      <header class="head">
+        <div class="eyebrow">Evidence<span class="sep"></span>3カット</div>
+        <h2 class="msg anim">3カットは出会う・匿名で近づく・越境が成立。4本目は足さない。</h2>
+      </header>
+      <div class="body">
+        <div class="tracks n3 anim d1">
+          <div class="track">
+            <div class="tnum">CUT 1 0:00–1:30</div>
+            <div class="tlabel">出会う</div>
+            <p class="tbody">スキルタグに合うミッションが向こうから届く</p>
+          </div>
+          <div class="track is-key">
+            <div class="tnum">CUT 2 1:30–3:20</div>
+            <div class="tlabel">匿名で近づく</div>
+            <p class="tbody">8割離脱の谷を、匿名の一歩で越える。デモの山場</p>
+          </div>
+          <div class="track">
+            <div class="tnum">CUT 3 3:20–5:00</div>
+            <div class="tlabel">越境が成立</div>
+            <p class="tbody">上司に伝わるのは合意した後。気まずさの構造を替える</p>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>is-key が山場。4本目を足さない</span><span>ウチナカ公募</span></footer>
+    </div>
+  </section>
+
+  <section class="slide" data-label="Climax">
+    <div class="frame">
+      <header class="head">
+        <div class="eyebrow">Evidence<span class="sep"></span>山場の画面</div>
+        <h2 class="msg anim">山場で見せるのは氏名を隠した詳細と、上司に届かないという約束だけ。</h2>
+      </header>
+      <div class="body">
+        <div class="split anim d1">
+          <div>
+            <div class="col-label">何が見えるか</div>
+            <ul class="bullets">
+              <li>「匿名のあなた」— 氏名・部署は非表示</li>
+              <li>マーケ部・週1日×3ヶ月の仕事内容</li>
+              <li>「上司には通知されません」と気になる</li>
+            </ul>
+          </div>
+          <div>
+            <div class="col-label">台本</div>
+            <ul class="bullets">
+              <li>CUT1: 探しに行かなくていい、と置く</li>
+              <li>CUT2: ここが谷。匿名の一歩で越える</li>
+              <li>CUT3: 上司に届くのは合意したあと</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>画面詳細は docs/proto-storyboard.md</span><span>ウチナカ公募</span></footer>
+    </div>
+  </section>
+
+  <section class="slide" data-label="Gates">
+    <div class="frame">
+      <header class="head">
+        <div class="eyebrow">Gates<span class="sep"></span><span class="on">チームで合意する</span></div>
+        <h2 class="msg anim">山場を CUT 2 に固定するか。当日の5分で何を捨てるかが決まる。</h2>
+      </header>
+      <div class="body">
+        <ul class="bullets numbered lg anim d1">
+          <li>主人公は佐藤さん（営業企画）でよいか？</li>
+          <li>ミッション題材は販促データの可視化でよいか？</li>
+          <li>人事画面と登録フローはデモから外すか？</li>
+        </ul>
+      </div>
+      <footer class="foot"><span>カット構成は人間が決める</span><span>ウチナカ公募</span></footer>
+    </div>
+  </section>
+
+  <section class="slide" data-label="Next">
+    <div class="frame">
+      <header class="head">
+        <div class="eyebrow">Next<span class="sep"></span>次の一手</div>
+        <h2 class="msg anim">次は受注後に誰が動くかを置く。デモだけで終わらせない提案にする。</h2>
+      </header>
+      <div class="body">
+        <div class="rows anim d1">
+          <div class="row"><div class="rk">瞬作デザイン</div><div class="rv">3カットに必要な画面だけをプロトに残す</div></div>
+          <div class="row"><div class="rk">瞬作実行計画</div><div class="rv">パイロットの体制と RACI を1枚に落とす</div></div>
+          <div class="row"><div class="rk">提案リード</div><div class="rv">顧客が社内再現できるよう台本を資料に付ける</div></div>
+        </div>
+      </div>
+      <footer class="foot"><span>proto-storyboard</span><span>ウチナカ公募</span></footer>
+    </div>
+  </section>
+</deck-stage>
+<script>
+/**
+ * <deck-stage> — prhythm-docs slide viewer (lightweight).
+ *
+ * Slides are the direct element children of <deck-stage>. They render into a
+ * fixed design-size canvas (default 1920x1080) that is scaled with
+ * `transform: scale()` to fit the viewport and letterboxed. Because every
+ * slide is authored at a known pixel size, "does this content overflow?" has
+ * a deterministic answer — see the ?debug mode below and lint-deck.mjs.
+ *
+ *   <deck-stage width="1920" height="1080">
+ *     <section class="slide s-cover">…</section>
+ *   </deck-stage>
+ *
+ * Navigation: ← → Space PageUp PageDown Home End, digits 1-9 (0 = slide 10),
+ * and clicking the left/right half of the stage.
+ *
+ * Print: `@page` is sized to the design size and each slide becomes its own
+ * page, so Print → Save as PDF gives one slide per page with no setup.
+ *
+ * ?debug in the URL outlines any slide whose content exceeds the canvas and
+ * writes the measured overflow into the slide's `data-overflow` attribute.
+ */
+(() => {
+  const DESIGN_W = 1920;
+  const DESIGN_H = 1080;
+  const OVERLAY_HIDE_MS = 1800;
+  const DEBUG = /[?&]debug\b/.test(location.search);
+
+  const stylesheet = `
+    :host {
+      position: fixed;
+      inset: 0;
+      display: block;
+      background: #0a0a0a;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    /* Held until webfonts settle so the first paint has the real typography;
+       the deck is heading-weight-dependent and a FOUT is very visible. */
+    :host([data-fonts-pending]) .stage { opacity: 0; }
+
+    .stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .canvas { position: relative; transform-origin: center center; flex-shrink: 0; background: #fff; will-change: transform; }
+
+    /* Slides stay in light DOM via <slot> so the deck's authored CSS applies.
+       Each slotted child is absolutely positioned so they stack. */
+    ::slotted(*) {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      box-sizing: border-box !important;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    ::slotted([data-deck-active]) { opacity: 1; visibility: visible; pointer-events: auto; }
+    ::slotted([data-overflow]) { outline: 6px solid #d92d20; outline-offset: -6px; }
+
+    .overlay {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translate(-50%, 6px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 14px;
+      background: #0a0a0a;
+      color: #fff;
+      border-radius: 999px;
+      font: 500 12px/1 ui-monospace, "SF Mono", Menlo, monospace;
+      letter-spacing: 0.06em;
+      font-variant-numeric: tabular-nums;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 240ms ease, transform 240ms cubic-bezier(.2,.8,.2,1);
+      z-index: 10;
+      user-select: none;
+    }
+    .overlay[data-visible] { opacity: 1; transform: translate(-50%, 0); }
+    .overlay .total { color: rgba(255,255,255,.5); }
+    .overlay .hint { color: rgba(255,255,255,.5); }
+
+    @media print {
+      :host { position: static; inset: auto; background: none; overflow: visible; }
+      .stage { position: static; display: block; }
+      .canvas { transform: none !important; width: auto !important; height: auto !important; background: none; }
+      ::slotted(*) {
+        position: relative !important;
+        inset: auto !important;
+        width: var(--deck-w) !important;
+        height: var(--deck-h) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        break-after: page;
+        break-inside: avoid;
+      }
+      ::slotted(*:last-child) { break-after: auto; }
+      .overlay { display: none !important; }
+    }
+  `;
+
+  class DeckStage extends HTMLElement {
+    static get observedAttributes() {
+      return ['width', 'height'];
+    }
+
+    constructor() {
+      super();
+      this._root = this.attachShadow({ mode: 'open' });
+      this._index = 0;
+      this._slides = [];
+      this._hideTimer = null;
+      this._onKey = this._onKey.bind(this);
+      this._onResize = this._onResize.bind(this);
+      this._onSlotChange = this._onSlotChange.bind(this);
+      this._onPointerMove = this._onPointerMove.bind(this);
+      this._onClick = this._onClick.bind(this);
+    }
+
+    get designWidth() {
+      return parseInt(this.getAttribute('width'), 10) || DESIGN_W;
+    }
+    get designHeight() {
+      return parseInt(this.getAttribute('height'), 10) || DESIGN_H;
+    }
+
+    connectedCallback() {
+      this._render();
+      this._syncPrintPageRule();
+      window.addEventListener('keydown', this._onKey);
+      window.addEventListener('resize', this._onResize);
+      window.addEventListener('pointermove', this._onPointerMove, { passive: true });
+      this.addEventListener('click', this._onClick);
+      // Print lays every slide out as its own page, so entrance styles gated
+      // on [data-deck-active] need the attribute everywhere or they print at
+      // their hidden base state.
+      this._onBeforePrint = () => this._slides.forEach((s) => s.setAttribute('data-deck-active', ''));
+      this._onAfterPrint = () => this._apply(false);
+      window.addEventListener('beforeprint', this._onBeforePrint);
+      window.addEventListener('afterprint', this._onAfterPrint);
+
+      this.setAttribute('data-fonts-pending', '');
+      const reveal = () => {
+        this.removeAttribute('data-fonts-pending');
+        this._checkOverflow();
+      };
+      // rAF first: document.fonts.ready is already resolved until layout has
+      // pushed the slotted text's FontFaces into 'loading'.
+      requestAnimationFrame(() => {
+        Promise.race([
+          document.fonts ? document.fonts.ready : Promise.resolve(),
+          new Promise((r) => setTimeout(r, 2000)),
+        ]).then(reveal, reveal);
+      });
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('keydown', this._onKey);
+      window.removeEventListener('resize', this._onResize);
+      window.removeEventListener('pointermove', this._onPointerMove);
+      window.removeEventListener('beforeprint', this._onBeforePrint);
+      window.removeEventListener('afterprint', this._onAfterPrint);
+      this.removeEventListener('click', this._onClick);
+      if (this._hideTimer) clearTimeout(this._hideTimer);
+    }
+
+    attributeChangedCallback() {
+      if (!this._canvas) return;
+      this._sizeCanvas();
+      this._fit();
+      this._syncPrintPageRule();
+    }
+
+    _render() {
+      const style = document.createElement('style');
+      style.textContent = stylesheet;
+
+      const stage = document.createElement('div');
+      stage.className = 'stage';
+      const canvas = document.createElement('div');
+      canvas.className = 'canvas';
+      const slot = document.createElement('slot');
+      slot.addEventListener('slotchange', this._onSlotChange);
+      canvas.appendChild(slot);
+      stage.appendChild(canvas);
+
+      const overlay = document.createElement('div');
+      overlay.className = 'overlay';
+      overlay.innerHTML =
+        '<span><span class="current">1</span> / <span class="total">1</span></span>' +
+        '<span class="hint">\u2190 \u2192</span>';
+
+      this._root.append(style, stage, overlay);
+      this._canvas = canvas;
+      this._stage = stage;
+      this._slot = slot;
+      this._overlay = overlay;
+      this._currentEl = overlay.querySelector('.current');
+      this._totalEl = overlay.querySelector('.total');
+      this._sizeCanvas();
+    }
+
+    _sizeCanvas() {
+      const w = this.designWidth;
+      const h = this.designHeight;
+      this._canvas.style.width = w + 'px';
+      this._canvas.style.height = h + 'px';
+      this._canvas.style.setProperty('--deck-w', w + 'px');
+      this._canvas.style.setProperty('--deck-h', h + 'px');
+    }
+
+    /** @page is a no-op inside shadow DOM, so it lives in a <head> tag. */
+    _syncPrintPageRule() {
+      const id = 'deck-stage-print-page';
+      let tag = document.getElementById(id);
+      if (!tag) {
+        tag = document.createElement('style');
+        tag.id = id;
+        document.head.appendChild(tag);
+      }
+      tag.textContent =
+        `@page { size: ${this.designWidth}px ${this.designHeight}px; margin: 0; }` +
+        '@media print {' +
+        'html, body { margin: 0 !important; padding: 0 !important; background: none !important; height: auto !important; overflow: visible !important; }' +
+        '* { -webkit-print-color-adjust: exact; print-color-adjust: exact; }' +
+        '*, *::before, *::after { transition-duration: 0s !important; animation-duration: .001s !important; animation-delay: -99s !important; animation-fill-mode: both !important; }' +
+        '}';
+    }
+
+    _onSlotChange() {
+      this._slides = this._slot
+        .assignedElements({ flatten: true })
+        .filter((el) => !/^(TEMPLATE|SCRIPT|STYLE)$/.test(el.tagName));
+      this._slides.forEach((s, i) => {
+        s.setAttribute('data-deck-slide', String(i));
+        if (!s.hasAttribute('data-label')) {
+          const h = s.querySelector('h1, h2');
+          if (h) s.setAttribute('data-label', (h.textContent || '').trim().slice(0, 40));
+        }
+      });
+      this._totalEl.textContent = String(this._slides.length || 1);
+      if (this._index >= this._slides.length) this._index = Math.max(0, this._slides.length - 1);
+      this._restoreIndex();
+      this._apply(false);
+      this._fit();
+      this._checkOverflow();
+    }
+
+    _restoreIndex() {
+      const m = (location.hash || '').match(/^#(\d+)$/);
+      if (!m) return;
+      const n = parseInt(m[1], 10) - 1;
+      if (n >= 0 && n < this._slides.length) this._index = n;
+    }
+
+    _apply(flash = true) {
+      if (!this._slides.length) return;
+      this._slides.forEach((s, i) => {
+        if (i === this._index) s.setAttribute('data-deck-active', '');
+        else s.removeAttribute('data-deck-active');
+      });
+      this._currentEl.textContent = String(this._index + 1);
+      try {
+        history.replaceState(null, '', '#' + (this._index + 1));
+      } catch (e) {}
+      this.dispatchEvent(
+        new CustomEvent('slidechange', {
+          detail: { index: this._index, total: this._slides.length, slide: this._slides[this._index] },
+          bubbles: true,
+          composed: true,
+        }),
+      );
+      if (flash) this._flash();
+    }
+
+    _flash() {
+      this._overlay.setAttribute('data-visible', '');
+      if (this._hideTimer) clearTimeout(this._hideTimer);
+      this._hideTimer = setTimeout(() => this._overlay.removeAttribute('data-visible'), OVERLAY_HIDE_MS);
+    }
+
+    _fit() {
+      if (!this._canvas) return;
+      const s = Math.min(window.innerWidth / this.designWidth, window.innerHeight / this.designHeight);
+      this._canvas.style.transform = `scale(${s})`;
+    }
+
+    _onResize() {
+      this._fit();
+    }
+
+    _onPointerMove() {
+      this._flash();
+    }
+
+    _onClick(e) {
+      if (e.target.closest && e.target.closest('a[href], button, input, select, textarea, [contenteditable]')) return;
+      this._go(this._index + (e.clientX > window.innerWidth / 2 ? 1 : -1));
+    }
+
+    _onKey(e) {
+      const t = e.target;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const k = e.key;
+      let handled = true;
+      if (k === 'ArrowRight' || k === 'PageDown' || k === ' ') this._go(this._index + 1);
+      else if (k === 'ArrowLeft' || k === 'PageUp') this._go(this._index - 1);
+      else if (k === 'Home') this._go(0);
+      else if (k === 'End') this._go(this._slides.length - 1);
+      else if (/^[0-9]$/.test(k)) this._go(k === '0' ? 9 : parseInt(k, 10) - 1);
+      else handled = false;
+      if (handled) {
+        e.preventDefault();
+        this._flash();
+      }
+    }
+
+    _go(i) {
+      if (!this._slides.length) return;
+      const n = Math.max(0, Math.min(this._slides.length - 1, i));
+      if (n === this._index) {
+        this._flash();
+        return;
+      }
+      this._index = n;
+      this._apply();
+    }
+
+    /** Slides are overflow:hidden at a fixed size, so scrollHeight/Width past
+     *  the canvas means content is being silently clipped. Measuring needs
+     *  every slide laid out, so this temporarily un-hides them. */
+    _checkOverflow() {
+      if (!DEBUG || !this._slides.length) return;
+      const w = this.designWidth;
+      const h = this.designHeight;
+      const report = [];
+      this._slides.forEach((s, i) => {
+        const prev = s.style.visibility;
+        s.style.visibility = 'visible';
+        const dy = s.scrollHeight - h;
+        const dx = s.scrollWidth - w;
+        s.style.visibility = prev;
+        if (dy > 1 || dx > 1) {
+          s.setAttribute('data-overflow', `${Math.max(0, dx)}x${Math.max(0, dy)}`);
+          report.push(`  #${i + 1} ${s.getAttribute('data-label') || ''} — +${Math.max(0, dx)}px w / +${Math.max(0, dy)}px h`);
+        } else {
+          s.removeAttribute('data-overflow');
+        }
+      });
+      if (report.length) console.warn('[deck-stage] overflowing slides:\n' + report.join('\n'));
+    }
+
+    get index() {
+      return this._index;
+    }
+    get length() {
+      return this._slides.length;
+    }
+    goTo(i) {
+      this._go(i);
+    }
+    next() {
+      this._go(this._index + 1);
+    }
+    prev() {
+      this._go(this._index - 1);
+    }
+  }
+
+  if (!customElements.get('deck-stage')) customElements.define('deck-stage', DeckStage);
+})();
+</script>
+
+</body>
+</html>

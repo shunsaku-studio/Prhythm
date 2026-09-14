@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>prhythm-docs — ウチナカ公募</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #ffffff;
+    --ink: #0a0a0a;
+    --ink-2: #4a4a4a;
+    --ink-3: #8f8f8f;
+    --line: #e6e4e0;
+    --accent: #0f5c4c;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: "Noto Sans JP", "Hiragino Sans", system-ui, sans-serif;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 64px 32px 96px;
+  }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow .sep { width: 28px; height: 1px; background: var(--ink-3); }
+  h1 {
+    font-family: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 1.25;
+    margin: 16px 0 12px;
+  }
+  .sub { color: var(--ink-2); font-size: 15px; line-height: 1.7; margin: 0 0 40px; }
+  ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  li { border-bottom: 1px solid var(--line); }
+  a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 4px;
+    text-decoration: none;
+    color: inherit;
+  }
+  a:hover .name { color: var(--accent); }
+  .ord {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--ink-3);
+    width: 2.5em;
+    flex-shrink: 0;
+  }
+  .name {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 16px;
+    font-weight: 500;
+    flex: 1;
+  }
+  .label { font-size: 14px; color: var(--ink-2); }
+  .meta {
+    font-size: 13px;
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <p class="eyebrow">prhythm-docs<span class="sep"></span>ミライト社 × ウチナカ公募</p>
+  <h1>提案デモ 8スキルのスライド</h1>
+  <p class="sub">Horizon紹介スライドの架空案件（応募率1.2%、部署を超えた協力）で埋めたデッキ。紹介順。</p>
+  <ol>
+    <li><a href="market-landscape/index.html"><span class="ord">01</span><span class="name">market-landscape</span><span class="label">参考サービス調査</span><span class="meta">7 slides</span></a></li>
+    <li><a href="hearing/index.html"><span class="ord">02</span><span class="name">hearing</span><span class="label">ヒアリング</span><span class="meta">6 slides</span></a></li>
+    <li><a href="create-journey-map/index.html"><span class="ord">03</span><span class="name">create-journey-map</span><span class="label">ジャーニーマップ</span><span class="meta">7 slides</span></a></li>
+    <li><a href="product-vision-and-concept/index.html"><span class="ord">04</span><span class="name">product-vision-and-concept</span><span class="label">ビジョン・コンセプト</span><span class="meta">6 slides</span></a></li>
+    <li><a href="ooui-graphql-modeling/index.html"><span class="ord">05</span><span class="name">ooui-graphql-modeling</span><span class="label">モデリング</span><span class="meta">7 slides</span></a></li>
+    <li><a href="proto-storyboard/index.html"><span class="ord">06</span><span class="name">proto-storyboard</span><span class="label">プロト絵コンテ</span><span class="meta">7 slides</span></a></li>
+    <li><a href="delivery-team-plan/index.html"><span class="ord">07</span><span class="name">delivery-team-plan</span><span class="label">体制立案</span><span class="meta">7 slides</span></a></li>
+    <li><a href="delivery-phase-plan/index.html"><span class="ord">08</span><span class="name">delivery-phase-plan</span><span class="label">検証計画</span><span class="meta">7 slides</span></a></li>
+  </ol>
+</body>
+</html>
