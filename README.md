@@ -1,7 +1,7 @@
 # Prhythm
 
 **プロダクトの構想・提案・立ち上げを、反復的・多角的に検討するためのエージェントスキル集。**
-[Agent Skills](https://agentskills.io) オープンスタンダード準拠。
+[Agent Skills](https://agentskills.io) および [Agent Plugins](https://agent-plugins.org) 1.0.0 オープンスタンダード準拠。
 
 ```bash
 gh skill install shunsaku-studio/Prhythm
@@ -110,15 +110,29 @@ flowchart TD
 
 ## Install
 
+バンドル全体は Agent Plugin、個別スキルは `gh skill`。
+
+### Agent Plugins（Cursor / Copilot / VS Code / Kiro）
+
+リポジトリをプラグインとして読み込む。Cursor でのローカル確認:
+
 ```bash
-gh skill install shunsaku-studio/Prhythm
+ln -s /path/to/Prhythm ~/.cursor/plugins/local/prhythm
 ```
 
-Claude Code のプラグインとして:
+ウィンドウを再読み込みしたあと、Customize で `prhythm` のスキルが出ることを確認する。Copilot CLI では `copilot plugin install /path/to/Prhythm`。
+
+### Claude Code
+
+```text
+/plugin marketplace add shunsaku-studio/Prhythm
+/plugin install prhythm@prhythm
+```
+
+### スキル単位（gh skill）
 
 ```bash
-/plugin marketplace add shunsaku-studio/Prhythm
-/plugin install prhythm@shunsaku-studio/Prhythm
+gh skill install shunsaku-studio/Prhythm
 ```
 
 ## License

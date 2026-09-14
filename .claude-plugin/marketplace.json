@@ -1,0 +1,15 @@
+{
+  "name": "prhythm",
+  "description": "Prhythm — 提案のリズムを生み出すエージェントスキル集",
+  "owner": {
+    "name": "shunsaku-studio"
+  },
+  "plugins": [
+    {
+      "name": "prhythm",
+      "source": "./",
+      "description": "Prhythm — 提案のリズムを生み出すエージェントスキル集",
+      "version": "0.1.0"
+    }
+  ]
+}
