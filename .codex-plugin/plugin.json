@@ -1,6 +1,1 @@
-{
-  "name": "prhythm",
-  "version": "0.1.0",
-  "description": "Prhythm — 提案のリズムを生み出すエージェントスキル集",
-  "skills": "./skills/"
-}
+../plugin.json
