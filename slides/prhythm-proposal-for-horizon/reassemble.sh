@@ -20,7 +20,12 @@ index = re.sub(
     lambda m: m.group(1) + "\n" + slides_html + "\n  " + m.group(3),
     index, count=1, flags=re.DOTALL,
 )
-notes = json.dumps(json.loads((content / "speaker-notes.json").read_text()), ensure_ascii=False)
+# Speaker notes are authored in Notion, not here; ship an empty array if absent.
+notes_path = content / "speaker-notes.json"
+notes = json.dumps(
+    json.loads(notes_path.read_text()) if notes_path.exists() else [],
+    ensure_ascii=False,
+)
 index = re.sub(
     r'(<script type="application/json" id="speaker-notes">)(.*?)(</script>)',
     r'\1' + notes + r'\3',
