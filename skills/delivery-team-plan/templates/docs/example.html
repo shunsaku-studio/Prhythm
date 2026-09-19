@@ -1,0 +1,90 @@
+<!-- ウチナカ公募の埋め済みスライド見本。
+     prhythm-docs が sections.html を埋めるときの Evidence 構造・密度の参照。
+     事実・固有名詞・数値は案件に差し替える。CSS/JS はここにコピーしない
+     （skills/prhythm-docs/references/deck-shell.md）。 -->
+
+<section class="slide" id="delivery-team-plan" data-skill="delivery-team-plan">
+  <span class="samplebadge">SAMPLE DATA</span>
+  <div class="frame">
+    <div class="head">
+      <div class="eyebrow internal">04 動かす<span class="sep"></span><span class="skill">delivery-team-plan</span><span class="sep"></span>1/3 体制</div>
+      <h2 class="msg">推進体制</h2>
+      <div class="lead">決定・推進・実行の3層。Owner は人事企画の鈴木さん、実行は3レーン。<span class="em">解けない対立は人事企画経由で Owner へ</span>上げる。</div>
+    </div>
+    <div class="body">
+      <div class="tgrid">
+        <div class="org">
+          <div class="tier-lab"><div class="tl"><b>決定</b>月次 / ゲート時</div><div class="tier"><div class="obox dec" style="flex:1"><div class="on">OWNER</div><div class="ov" data-sample>ミライト社 人事企画 · 鈴木さん</div><div class="od">スコープ・予算・Go / No-Go の決裁。パイロット成否に単独責任</div></div></div></div>
+          <div class="vline"><i></i></div>
+          <div class="tier-lab" style="margin-top:0"><div class="tl"><b>推進</b>週次</div><div class="tier"><div class="obox pmo"><div class="on">PMO / 事務局</div><div class="ov">人事企画チーム ×2</div><div class="od">説明会・運用ルール・週次モニタリング・ゲート資料</div></div></div></div>
+          <div class="vline"><i></i></div>
+          <div class="tier-lab" style="margin-top:0"><div class="tl"><b>実行</b>日次〜週次</div><div class="tier"><div class="obox"><div class="on">LANE 1</div><div class="ov">情シス · IT</div><div class="od" data-sample>1名（兼務）SSO・権限・HR連携</div></div><div class="obox"><div class="on">LANE 2</div><div class="ov">現場チャンピオン</div><div class="od" data-sample>対象2部署 × 各1名　ミッション登録・呼びかけ</div></div><div class="obox"><div class="on">LANE 3</div><div class="ov">瞬作チーム</div><div class="od" data-sample>Eng × Design　プロト改修・計測・分析</div></div></div></div>
+          <div class="esc" style="right:-40px;"><span>ESCALATION — 実行で解けない対立は人事企画経由で週次→Ownerへ</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span class="internal">Prhythm story deck / ウチナカ公募</span><span></span><span class="pageno"></span></div>
+  </div>
+</section>
+
+<section class="slide" id="delivery-team-plan-meetings" data-skill="delivery-team-plan">
+  <span class="samplebadge">SAMPLE DATA</span>
+  <div class="frame">
+    <div class="head">
+      <div class="eyebrow internal">04 動かす<span class="sep"></span><span class="skill">delivery-team-plan</span><span class="sep"></span>2/3 会議体</div>
+      <h2 class="msg">会議体</h2>
+      <div class="lead">4つの会議体で運営する。Owner判定はゲートを兼ね、<span class="em">決めるためだけに開く</span>。報告・共有は非同期に回す。</div>
+    </div>
+    <div class="body">
+      <table class="mtg full">
+        <tr><th style="width:280px;">会議体</th><th style="width:170px;">頻度</th><th>決めること</th><th style="width:400px;">インプット / アウトプット</th><th style="width:300px;">出席</th></tr>
+        <tr class="gate"><td class="mn">Owner判定会<small>ゲート判定を兼ねる</small></td><td class="fq">各ゲート</td><td>提案承認、開始判定、Go/No-Go、展開範囲、匿名規程の承認</td><td class="io"><b>IN</b>人事企画作成の判定資料（1枚）・指標ダッシュボード<b>OUT</b>決定事項・次フェーズの予算と範囲</td><td>鈴木さん・人事企画・瞬作責任者</td></tr>
+        <tr><td class="mn">推進定例<small>人事企画主催</small></td><td class="fq">週次 60分</td><td>「気になる」件数・越境開始数の確認、レーン間の依存・課題の解消、次週アクション</td><td class="io"><b>IN</b>各レーンの週報（非同期で事前共有）<b>OUT</b>課題一覧の更新・アクション担当と期限</td><td>人事企画・各レーン長・瞬作</td></tr>
+        <tr><td class="mn">現場フィードバック会<small>チャンピオン主催</small></td><td class="fq">隔週 30分</td><td>パイロット2部署の利用状況と声の吸い上げ、プロダクト改善要望の優先順位</td><td class="io"><b>IN</b>利用ログ・現場ヒアリングメモ<b>OUT</b>改善バックログへの追加・削除</td><td>現場チャンピオン・受入側・瞬作</td></tr>
+        <tr><td class="mn">対象部署説明会<small>人事企画主催</small></td><td class="fq" data-sample>準備フェーズに各1回</td><td>匿名運用の趣旨共有と、送り出し側の懸念の収集</td><td class="io"><b>IN</b>Counter-persona の懸念リスト<b>OUT</b>規程への反映事項・Ownerへの報告</td><td>鈴木さん・対象部署長・人事企画</td></tr>
+      </table>
+      <div class="hlab" style="margin-top:22px;">パイロット開始 8週のカデンス</div>
+      <div class="cadence">
+        <div></div><div class="wk">W1</div><div class="wk">W2</div><div class="wk">W3</div><div class="wk">W4</div><div class="wk">W5</div><div class="wk">W6</div><div class="wk">W7</div><div class="wk">W8</div>
+        <div class="row-l">Owner判定</div>
+        <div class="cell on"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        <div class="row-l">推進定例</div>
+        <div class="cell on"></div><div class="cell on"></div><div class="cell on"></div><div class="cell on"></div><div class="cell on"></div><div class="cell on"></div><div class="cell on"></div><div class="cell on"></div>
+        <div class="row-l">現場FB会 / 説明会</div>
+        <div class="cell on"></div><div class="cell"></div><div class="cell on"></div><div class="cell"></div><div class="cell on"></div><div class="cell"></div><div class="cell on"></div><div class="cell"></div>
+      </div>
+    </div>
+    <div class="foot"><span class="internal">Prhythm story deck / ウチナカ公募</span><span>■ 開催　■ ゲート判定</span><span class="pageno"></span></div>
+  </div>
+</section>
+
+<section class="slide" id="delivery-team-plan-raci" data-skill="delivery-team-plan">
+  <span class="samplebadge">SAMPLE DATA</span>
+  <div class="frame">
+    <div class="head">
+      <div class="eyebrow internal">04 動かす<span class="sep"></span><span class="skill">delivery-team-plan</span><span class="sep"></span>3/3 RACI</div>
+      <h2 class="msg">RACI</h2>
+      <div class="lead">「決めごと」をフェーズで束ね、列に人を置く。A は1決めごとに1つだけ。</div>
+    </div>
+    <div class="body">
+      <div class="dgrid">
+        <div>
+          <table class="dm">
+            <tr><th>決めごと・活動</th><th>Owner<br /><span class="fq">鈴木さん</span></th><th>人事企画<br /><span class="fq">推進</span></th><th>情シス · IT<br /><span class="fq">権限</span></th><th>現場<br /><span class="fq">チャンピオン</span></th><th>瞬作<br /><span class="fq">Eng × Design</span></th></tr>
+            <tr class="grp"><td colspan="6">立ち上げ（準備フェーズ）</td></tr>
+            <tr><td>対象部署・スコープ<small>Primary セグメントの確定と連動</small></td><td class="A">A</td><td class="R">R</td><td class="C">C</td><td class="C">C</td><td class="I">I</td></tr>
+            <tr><td>匿名性の運用ルール<small>Interest は上司非公開。合意後に実名</small></td><td class="A">A</td><td class="C">C</td><td class="C">C</td><td class="C">C</td><td class="R">R</td></tr>
+            <tr><td>権限設計・HR 連携</td><td class="C">C</td><td class="C">C</td><td class="A">A</td><td class="I">I</td><td class="R">R</td></tr>
+            <tr class="grp"><td colspan="6">運用（パイロット中）</td></tr>
+            <tr><td>週次の指標確認と改善アクション</td><td class="I">I</td><td class="A">A</td><td class="C">C</td><td class="R">R</td><td class="R">R</td></tr>
+            <tr><td>ミッション登録・呼びかけ</td><td class="C">C</td><td class="C">C</td><td class="I">I</td><td class="A">A</td><td class="C">C</td></tr>
+            <tr class="grp"><td colspan="6">判定（ゲート）</td></tr>
+            <tr><td>Go / No-Go 判定<small data-sample>気になる月40件・越境開始30件</small></td><td class="A">A</td><td class="R">R</td><td class="C">C</td><td class="C">C</td><td class="R">R</td></tr>
+          </table>
+          <div class="racileg">R = 実行責任　A = 最終責任（1決めごとに1人）　C = 事前協議　I = 報告</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span class="internal">Prhythm story deck / ウチナカ公募</span><span></span><span class="pageno"></span></div>
+  </div>
+</section>

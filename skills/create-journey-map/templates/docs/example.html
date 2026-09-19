@@ -1,0 +1,93 @@
+<!-- ウチナカ公募の埋め済みスライド見本。
+     prhythm-docs が sections.html を埋めるときの Evidence 構造・密度の参照。
+     事実・固有名詞・数値は案件に差し替える。CSS/JS はここにコピーしない
+     （skills/prhythm-docs/references/deck-shell.md）。 -->
+
+<section class="slide" id="create-journey-map" data-skill="create-journey-map">
+  <span class="samplebadge">SAMPLE DATA</span>
+  <div class="frame">
+    <div class="head">
+      <div class="eyebrow internal">02 定める<span class="sep"></span><span class="skill">create-journey-map</span></div>
+      <h2 class="msg">体験ジャーニー（As-Is / To-Be）</h2>
+      <div class="lead">“読み流して、離脱する”現在を、<span class="em">“届いて、匿名で近づく”</span>へ反転させる。</div>
+    </div>
+    <div class="body">
+      <div class="jphases">
+        <div></div>
+        <div class="jpr">
+          <div class="jphase"><div class="pn2">PHASE 1</div><div class="pt2">気づく</div></div>
+          <div class="jphase"><div class="pn2">PHASE 2</div><div class="pt2">探す・相談する</div></div>
+          <div class="jphase"><div class="pn2">PHASE 3</div><div class="pt2">応募する</div></div>
+        </div>
+      </div>
+      <div class="jlane">
+        <div class="jlab"><div class="jt">As-Is</div><div class="jd" data-sample>佐藤さんの現在<br />応募率 1.2%</div></div>
+        <div class="jsteps">
+          <div class="jstep"><div class="emo">▼ 無関心</div><div class="jx">公募メールを<b>読み流す</b>。自分ごとになる前に終わる。</div></div>
+          <div class="jstep"><div class="emo">▼ 重い</div><div class="jx">求人票が異動前提。<b>8割がここで離脱</b>。残った人は上司承認を知り断念する。</div></div>
+          <div class="jstep"><div class="emo">－ 1.2%</div><div class="jx">痕跡を残せる人だけが応募。意思は Slack へ<b>地下化</b>する。</div></div>
+        </div>
+      </div>
+      <div class="jflip"><div class="fl2"></div><div class="ft2">▼ HMW：上司に知られずに、小さな越境から始められるには？</div><div class="fl2"></div></div>
+      <div class="jlane to">
+        <div class="jlab"><div class="jt">To-Be</div><div class="jd"><span data-sample>ウチナカ公募</span>のある<br />その後</div></div>
+        <div class="jsteps">
+          <div class="jstep"><div class="emo">▲ 届く</div><div class="jx">スキルタグに合う<b>越境ミッション</b>が通知される。探しに行かなくていい。</div></div>
+          <div class="jstep hi"><div class="emo">▲ 気軽</div><div class="jx"><span class="cs">コアシーン</span>週1日・3ヶ月で眺め、<b>匿名の「気になる」</b>で受け入れ側とだけ接点。</div></div>
+          <div class="jstep"><div class="emo">▲ 前進</div><div class="jx">お試し越境。双方合意して、初めて上司へ。<b>名前が動くのはここが初めて</b>。</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span class="internal">Prhythm story deck / ウチナカ公募</span><span></span><span class="pageno"></span></div>
+  </div>
+</section>
+
+<section class="slide" id="create-journey-map-emotion" data-skill="create-journey-map">
+  <div class="frame">
+    <div class="head">
+      <div class="eyebrow internal">02 定める<span class="sep"></span><span class="skill">create-journey-map</span><span class="sep"></span>To-Be 対比サマリー</div>
+      <h2 class="msg">感情曲線で見る体験の改善</h2>
+      <div class="lead">As-Isは探す段階で沈み、行動せずに終わる。To-Beは<span class="em">匿名の「気になる」で跳ね</span>、越境へ前進する。</div>
+    </div>
+    <div class="body">
+      <div class="curve">
+        <svg viewBox="0 0 1700 560" xmlns="http://www.w3.org/2000/svg">
+          <line x1="120" y1="40" x2="120" y2="470" stroke="#e6e4e0" stroke-width="2"/>
+          <line x1="120" y1="255" x2="1660" y2="255" stroke="#e6e4e0" stroke-width="2" stroke-dasharray="6 8"/>
+          <text class="axis" x="106" y="58" text-anchor="end">期待</text>
+          <text class="axis" x="106" y="262" text-anchor="end">中立</text>
+          <text class="axis" x="106" y="468" text-anchor="end">不安</text>
+          <line x1="140" y1="40" x2="140" y2="480" stroke="#f2f0ec" stroke-width="2"/>
+          <line x1="510" y1="40" x2="510" y2="480" stroke="#f2f0ec" stroke-width="2"/>
+          <line x1="880" y1="40" x2="880" y2="480" stroke="#f2f0ec" stroke-width="2"/>
+          <line x1="1250" y1="40" x2="1250" y2="480" stroke="#f2f0ec" stroke-width="2"/>
+          <line x1="1620" y1="40" x2="1620" y2="480" stroke="#f2f0ec" stroke-width="2"/>
+          <line x1="140" y1="62" x2="196" y2="62" stroke="#b3b0aa" stroke-width="5"/><text class="leg" x="208" y="69">As-Is（現在）</text>
+          <line x1="410" y1="62" x2="466" y2="62" stroke="#a100ff" stroke-width="5"/><text class="leg" x="478" y="69">To-Be（提案）</text>
+          <path d="M140,290 C260,302 390,315 510,330 C640,348 760,378 880,400 C1000,418 1130,427 1250,432 C1370,435 1500,437 1620,438" fill="none" stroke="#b3b0aa" stroke-width="5" stroke-linecap="round"/>
+          <path d="M140,240 C260,232 390,226 510,218 C640,209 770,198 880,182 C990,166 1140,72 1250,66 C1350,62 1500,88 1620,104" fill="none" stroke="#a100ff" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="140" cy="290" r="8" fill="#fff" stroke="#b3b0aa" stroke-width="4"/><text class="ew a" x="140" y="326" text-anchor="middle">読み流す</text>
+          <circle cx="510" cy="330" r="8" fill="#fff" stroke="#b3b0aa" stroke-width="4"/><text class="ew a" x="510" y="366" text-anchor="middle">重い</text>
+          <circle cx="880" cy="400" r="8" fill="#fff" stroke="#b3b0aa" stroke-width="4"/><text class="ew a" x="880" y="436" text-anchor="middle">断念 — 8割離脱</text>
+          <circle cx="1250" cy="432" r="8" fill="#fff" stroke="#b3b0aa" stroke-width="4"/><text class="ew a" x="1250" y="468" text-anchor="middle">1.2%</text>
+          <circle cx="1620" cy="438" r="8" fill="#fff" stroke="#b3b0aa" stroke-width="4"/><text class="ew a" x="1596" y="474" text-anchor="middle">地下化</text>
+          <circle cx="140" cy="240" r="8" fill="#a100ff"/><text class="ew t" x="140" y="216" text-anchor="middle">届く</text>
+          <circle cx="510" cy="218" r="8" fill="#a100ff"/><text class="ew t" x="510" y="194" text-anchor="middle">気軽</text>
+          <circle cx="880" cy="182" r="8" fill="#a100ff"/><text class="ew t" x="880" y="158" text-anchor="middle">匿名で近づく</text>
+          <circle cx="1250" cy="66" r="11" fill="#a100ff"/><circle cx="1250" cy="66" r="22" fill="none" stroke="#a100ff" stroke-width="2" opacity=".45"/>
+          <text class="ann" x="1250" y="34" text-anchor="middle">コアシーン — 「気になる」で跳ねる</text>
+          <circle cx="1620" cy="104" r="8" fill="#a100ff"/><text class="ew t" x="1596" y="82" text-anchor="middle">越境が成立</text>
+          <line x1="1660" y1="112" x2="1660" y2="430" stroke="#0a0a0a" stroke-width="2" stroke-dasharray="4 6"/>
+          <text class="axis" x="1654" y="278" text-anchor="end" fill="#0a0a0a">体験の差</text>
+          <text class="beat" x="140" y="536" text-anchor="middle">気づく</text>
+          <text class="beat" x="510" y="536" text-anchor="middle">探す</text>
+          <text class="beat" x="880" y="536" text-anchor="middle">相談する</text>
+          <text class="beat" x="1250" y="536" text-anchor="middle">応募・接点</text>
+          <text class="beat" x="1620" y="536" text-anchor="middle">合意・その後</text>
+        </svg>
+      </div>
+      <div class="curvenote">※ 縦軸は測定値ではなく、ヒアリングで語られた感情の言葉を相対的に並べたもの。</div>
+    </div>
+    <div class="foot"><span class="internal">Prhythm story deck / ウチナカ公募</span><span></span><span class="pageno"></span></div>
+  </div>
+</section>
