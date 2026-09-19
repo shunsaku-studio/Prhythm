@@ -25,8 +25,9 @@ Meta-skill: take raw skill output (chat and/or existing `docs/` artifacts) and f
 
 1. Identify the source skill (and mode if any: prep/analysis, asis/tobe, …)
 2. Read [references/shared-rules.md](references/shared-rules.md). For Markdown also read [references/md-grammar.md](references/md-grammar.md). For slides also read [references/slide-grammar.md](references/slide-grammar.md)
-3. Fill `skills/{skill}/templates/docs/index.md` and `sections.html` from the chat / existing docs — do not invent facts. Unused mode sections: delete whole headings. Leftover placeholders: delete the row
-4. Build the deck; never hand-write the HTML shell:
+3. If `skills/{skill}/templates/docs/example.html` exists, read it before filling. It is the filled ウチナカ公募 example of this skill's Evidence (1–3 slides). Match structure, density, and what sits on which card; replace facts. Do not copy sample names, rates, or quotes (ミライト, 佐藤, 1.2%, …)
+4. Fill `skills/{skill}/templates/docs/index.md` and `sections.html` from the chat / existing docs — do not invent facts. Unused mode sections: delete whole headings. Leftover placeholders: delete the row. Briefing grammar still applies (Cover → Frame → Answer → Evidence → Gates → Next); `example.html` is the Evidence look, not a replacement for Answer
+5. Build the deck; never hand-write the HTML shell:
 
 ```bash
 node skills/prhythm-docs/scripts/build-deck.mjs \
@@ -35,14 +36,14 @@ node skills/prhythm-docs/scripts/build-deck.mjs \
   --title "…"
 ```
 
-5. Check the budget, and the real layout if the deck matters:
+6. Check the budget, and the real layout if the deck matters:
 
 ```bash
 node skills/prhythm-docs/scripts/lint-deck.mjs docs/prhythm/{skill}/index.html --visual
 ```
 
-6. Write the Markdown to `docs/prhythm/{skill}/index.md`
-7. Report the paths written and any lint findings
+7. Write the Markdown to `docs/prhythm/{skill}/index.md`
+8. Report the paths written and any lint findings
 
 Default output: **both** md and html unless the user asks for one.
 
@@ -80,9 +81,9 @@ Shell, components and build: [references/deck-shell.md](references/deck-shell.md
 | delivery-team-plan | `skills/delivery-team-plan/templates/docs/` |
 | delivery-phase-plan | `skills/delivery-phase-plan/templates/docs/` |
 
-Each directory holds `sections.html` (slide bodies only) and `index.md` (Frame columns + Evidence specialized from [templates/docs/index.md](templates/docs/index.md)). Output path always: `docs/prhythm/{skill}/index.{md,html}` with `{skill}` matching the table above.
+Each directory holds `sections.html` (placeholder slide bodies) and `index.md` (Frame columns + Evidence specialized from [templates/docs/index.md](templates/docs/index.md)). Skills that have a ウチナカ公募見本 also hold `example.html` — filled Evidence, referenced when filling slides. Output path always: `docs/prhythm/{skill}/index.{md,html}` with `{skill}` matching the table above.
 
-To add a skill: copy the shared Markdown skeleton, replace Frame and Evidence only, add `sections.html`, then add a row here.
+To add a skill: copy the shared Markdown skeleton, replace Frame and Evidence only, add `sections.html`, then add a row here. After a first real case, add `example.html` the same way (section fragments only, no CSS).
 
 ## Relationship to skill-native docs
 

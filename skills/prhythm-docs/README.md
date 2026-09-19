@@ -23,8 +23,9 @@
 **いつ使うか:** 調査・分析スキルを走らせた直後、チャットが流れる前に共有物が欲しいときに入る。対象スキルのあとにだけ使う。複数スキルの結果をまとめて発表用 HTML デッキをつくるときは `create-html-deck`。
 
 1. ユーザーがどのスキル（とモード）の出力をまとめるか指定する。
-2. スキルがそのスキルの `templates/docs/` に事実だけを流し込む。無いものは書かない。マークダウンは結論・観測条件・そのスキル固有の表や図 1 つ・決めてほしいこと・次の行為に限る。
-3. スキルが `docs/prhythm/{skill}/index.md` と `index.html` を組む。ユーザーが文字数・件数・レイアウトの検査結果を見て、詰め込みを止める。配布用 PDF が要るときはブラウザで開いて Print から Save as PDF する。
+2. `templates/docs/example.html` があれば先に読む。ウチナカ公募の埋め済み Evidence 見本なので、構造と密度を合わせ、事実だけ案件に差し替える。
+3. スキルがそのスキルの `templates/docs/` に事実だけを流し込む。無いものは書かない。マークダウンは結論・観測条件・そのスキル固有の表や図 1 つ・決めてほしいこと・次の行為に限る。
+4. スキルが `docs/prhythm/{skill}/index.md` と `index.html` を組む。ユーザーが文字数・件数・レイアウトの検査結果を見て、詰め込みを止める。配布用 PDF が要るときはブラウザで開いて Print から Save as PDF する。
 
 ## 具体例
 
@@ -64,12 +65,12 @@ prhythm-docs/
     └── deck-shell.md
 ```
 
-新しいスキルを足すときは `templates/docs/index.md` をコピーし、Frame の列と Evidence の表や図だけを差し替える。
+新しいスキルを足すときは `templates/docs/index.md` をコピーし、Frame の列と Evidence の表や図だけを差し替える。埋め済みスライド見本は各スキルの `templates/docs/example.html`（ウチナカ公募）。
 
 ## 前提条件
 
 - 整形対象のスキル出力が会話上、または既存ファイルにあること。
-- 対象スキルに `templates/docs/index.md` があること。スライドも出すなら `sections.html` も。
+- 対象スキルに `templates/docs/index.md` があること。スライドも出すなら `sections.html` も。埋め済み見本があるスキルは `example.html` も。
 - Node.js（ビルドと lint）。`--visual` は `playwright-chromium` を使う。
 
 ## 注意事項

@@ -42,13 +42,13 @@ Cover → Frame → Answer → Evidence (1–2) → Gates → Next
 | Cover | 表紙 | `s-cover` | テーマ・一行文脈・出典と日付 |
 | Frame | 何を見て何を見なかったか | `rows` / `table.t` | スコープ・前提・モード。4〜5 行 |
 | **Answer** | **で、何？** | `s-statement` | **結論 1 文 + 根拠 2〜3 行。これが無いデッキは不合格** |
-| Evidence | 結論を支える材料 | `tracks` / `table.t` / `quadrant` / `split` | 1〜2 枚。カタログ全量は載せない |
+| Evidence | 結論を支える材料 | `tracks` / `table.t` / `quadrant` / `split`、または `example.html` の構造 | 1〜2 枚が原則。`templates/docs/example.html` があればその枚数・密度を見本にする。カタログ全量は載せない |
 | Gates | 人間が決めること | `bullets numbered` | 3 つまで。疑問形で書く |
 | Next | 次にやること | `rows` / `bullets` | 3 つまで。動詞で始める |
 
 Answer は Evidence より **前**。旧テンプレは Synthesis が 3 枚に散っていて結論スライドが存在せず、これが「クリアに伝わらない」の直接原因だった。
 
-Evidence を 3 枚以上に増やしたくなったら、それは元スキルの `docs/` 成果物やチャットに置くべき情報。デッキには載せない。
+Evidence を 3 枚より増やしたくなったら、それは元スキルの `docs/` 成果物やチャットに置くべき情報。デッキには載せない。`example.html` が 3 枚あるスキル（delivery-team-plan）だけ、Evidence 3 枚まで許可する。
 
 ---
 

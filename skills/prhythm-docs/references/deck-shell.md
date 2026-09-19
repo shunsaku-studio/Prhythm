@@ -13,9 +13,12 @@ skills/prhythm-docs/
     lint-deck.mjs   情報量バジェット検査 / --visual で実オーバーフロー検査
 
 skills/{skill}/templates/docs/
-  sections.html     <section class="slide"> だけを並べたフラグメント
+  sections.html     <section class="slide"> だけを並べたフラグメント（プレースホルダ）
+  example.html      任意。ウチナカ公募の埋め済み Evidence 見本。埋めるときの参照
   index.md          同じ内容の Markdown 版
 ```
+
+`example.html` は CSS/JS を持たない。ビルド入力は常に `sections.html`。見本のクラス名（`.findings` など）が `deck.css` に無いときは、情報の置き方だけ合わせ、部品は `deck.css` にあるものへ写す。
 
 CSS も JS もテンプレにコピーしない。**デザインを直すときは `assets/deck.css` の 1 ファイルだけを直す**。以前は同じシェルが 10 個のテンプレに複製されていて、`.trio` が一部にしか無いといったドリフトが起きていた。
 

@@ -50,6 +50,7 @@ Answer が Frame より前なのは意図的。読み手はまず結論を知り
 | Markdown skeleton (copy when adding a skill) | `skills/prhythm-docs/templates/docs/index.md` |
 | Markdown template (per skill: Frame + Evidence) | `skills/{skill}/templates/docs/index.md` |
 | Slide template (per skill) | `skills/{skill}/templates/docs/sections.html` |
+| Filled slide example (optional) | `skills/{skill}/templates/docs/example.html` |
 | Shared shell / CSS / viewer | `skills/prhythm-docs/assets/` |
 | Build & lint | `skills/prhythm-docs/scripts/` |
 | Output | `docs/prhythm/{skill}/index.md` + `index.html` |
