@@ -30,6 +30,10 @@ RFC、提案書、brief、Slack 投稿などのテキストを渡すと、提案
 
 依頼: 「この提案の前提を疑って。社内公募アプリで応募率を上げる、と書いてある。」
 
+スライドにまとめるとこうなる。
+
+![assumption-breaker のスライド見本](slide-sample.png)
+
 ::: info 出力される前提リストの抜粋:
 
 | # | 前提 | レンズ |
@@ -51,8 +55,10 @@ RFC、提案書、brief、Slack 投稿などのテキストを渡すと、提案
 assumption-breaker/
 ├── README.md
 ├── SKILL.md
+├── slide-sample.png           # ウチナカ公募のスライド見本
 ├── templates/
 │   └── docs/
+│       ├── example.html   # ウチナカ公募の埋め済みスライド見本（prhythm-docs が参照）
 │       ├── index.md       # 打ち合わせ用 Markdown の型（prhythm-docs が埋める）
 │       └── sections.html  # スライド本体の型
 └── references/

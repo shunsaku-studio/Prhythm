@@ -38,6 +38,12 @@
 
 依頼: 「このヒアリングメモから As-Is JM を作って。営業企画の佐藤さんが社内公募を見て、応募の直前で止まっている。」
 
+スライドにまとめるとこうなる。
+
+![create-journey-map のスライド見本](slide-sample.png)
+
+![感情曲線のスライド見本](slide-sample-emotion.png)
+
 ::: info 出力される台本の抜粋:
 
 【応募の直前】
@@ -68,8 +74,11 @@
 create-journey-map/
 ├── README.md
 ├── SKILL.md
+├── slide-sample.png           # ウチナカ公募のスライド見本
+├── slide-sample-emotion.png   # 感情曲線
 ├── templates/
 │   └── docs/
+│       ├── example.html   # ウチナカ公募の埋め済みスライド見本（prhythm-docs が参照）
 │       ├── index.md       # 打ち合わせ用 Markdown の型（prhythm-docs が埋める）
 │       └── sections.html  # スライド本体の型
 └── references/

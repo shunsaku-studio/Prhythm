@@ -30,6 +30,10 @@
 
 依頼: 「役割別の矢羽で検証計画を作って。社内公募アプリの応募率を 1.2% から 10% にしたい。」
 
+スライドにまとめるとこうなる。
+
+![delivery-phase-plan のスライド見本](slide-sample.png)
+
 ::: info 出力される `docs/delivery-phase-plan.md` の抜粋:
 
 | PHASE | Name | Duration | Gate | Judgment |
@@ -63,12 +67,14 @@ gantt
 delivery-phase-plan/
 ├── README.md
 ├── SKILL.md
+├── slide-sample.png           # ウチナカ公募のスライド見本
 ├── references/
 │   ├── intake.md
 │   ├── yahane-grammar.md     # レーン、矢羽、ゲートの書き方
 │   └── example-uchinaka.md   # 矢羽の見本
 └── templates/
     └── docs/
+        ├── example.html   # ウチナカ公募の埋め済みスライド見本（prhythm-docs が参照）
         ├── index.md
         └── sections.html
 ```

@@ -30,6 +30,14 @@
 
 依頼: 「社内公募アプリのパイロットを回す体制と、誰が何を決めるかを書いて。」
 
+スライドにまとめるとこうなる。
+
+![体制のスライド見本](slide-sample.png)
+
+![会議体のスライド見本](slide-sample-meetings.png)
+
+![RACI のスライド見本](slide-sample-raci.png)
+
 ::: info 出力される `docs/delivery-team-plan.md` の抜粋:
 
 | Layer | Who | Holds |
@@ -54,12 +62,16 @@
 delivery-team-plan/
 ├── README.md
 ├── SKILL.md
+├── slide-sample.png           # ウチナカ公募のスライド見本
+├── slide-sample-meetings.png
+├── slide-sample-raci.png
 ├── references/
 │   ├── intake.md
 │   ├── raci.md               # RACI の書き方と成果物の型
 │   └── example-uchinaka.md   # 体制の見本
 └── templates/
     └── docs/
+        ├── example.html   # ウチナカ公募の埋め済みスライド見本（prhythm-docs が参照）
         ├── index.md
         └── sections.html
 ```

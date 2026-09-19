@@ -31,6 +31,10 @@
 
 依頼: 「社内公募まわりの市場地図を作って。現場の声が届きにくい。」
 
+スライドにまとめるとこうなる。
+
+![market-landscape のスライド見本](slide-sample.png)
+
 ::: info 出力される 4 象限マップの抜粋:
 
 | Service / Cluster | X（現場の声が届く） | Y（部署を越えて手が挙がる） | 根拠 |
@@ -50,8 +54,10 @@
 market-landscape/
 ├── README.md
 ├── SKILL.md
+├── slide-sample.png           # ウチナカ公募のスライド見本
 ├── templates/
 │   └── docs/
+│       ├── example.html   # ウチナカ公募の埋め済みスライド見本（prhythm-docs が参照）
 │       ├── index.md       # 打ち合わせ用 Markdown の型（prhythm-docs が埋める）
 │       └── sections.html  # スライド本体の型
 └── references/

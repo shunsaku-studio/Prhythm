@@ -30,6 +30,10 @@
 
 依頼: 「社内公募アプリの To-Be とコアシーンから、提案当日5分の絵コンテを作って。」
 
+スライドにまとめるとこうなる。
+
+![proto-storyboard のスライド見本](slide-sample.png)
+
 ::: info 出力される `docs/proto-storyboard.md` の抜粋:
 
 **CUT 1 出会う  0:00–1:30  導入**
@@ -55,11 +59,13 @@
 proto-storyboard/
 ├── README.md
 ├── SKILL.md
+├── slide-sample.png           # ウチナカ公募のスライド見本
 ├── references/
 │   ├── cut-grammar.md        # 画面 / 操作 / 台本の書き方
 │   └── example-uchinaka.md   # 3 カットの見本
 └── templates/
     └── docs/
+        ├── example.html   # ウチナカ公募の埋め済みスライド見本（prhythm-docs が参照）
         ├── index.md
         └── sections.html
 ```

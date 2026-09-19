@@ -36,6 +36,10 @@
 
 依頼: 「来週の初回ヒアリング準備をしたい。社内公募アプリを検討していて、部署を越えた応募がほとんど起きていない。」
 
+スライドにまとめるとこうなる。
+
+![hearing のスライド見本](slide-sample.png)
+
 ::: info 出力される進行カードの抜粋:
 
 **1. 今日の会議目的**
@@ -59,8 +63,10 @@
 hearing/
 ├── README.md
 ├── SKILL.md
+├── slide-sample.png           # ウチナカ公募のスライド見本
 ├── templates/
 │   └── docs/
+│       ├── example.html   # ウチナカ公募の埋め済みスライド見本（prhythm-docs が参照）
 │       ├── index.md       # 打ち合わせ用 Markdown の型（prhythm-docs が埋める）
 │       └── sections.html  # スライド本体の型
 ├── questions.md                  # 会議前に選ぶ質問のライブラリ

@@ -39,6 +39,10 @@
 
 依頼: 「社内公募アプリのインタビューメモを渡すのでペルソナを整理して。」
 
+スライドにまとめるとこうなる。
+
+![defining-personas-and-segments のスライド見本](slide-sample.png)
+
 ::: info 出力される比較表の抜粋:
 
 | Persona | ラベル | 状況（一行） | 主要バリア |
@@ -55,8 +59,10 @@
 defining-personas-and-segments/
 ├── README.md
 ├── SKILL.md
+├── slide-sample.png           # ウチナカ公募のスライド見本
 ├── templates/
 │   └── docs/
+│       ├── example.html   # ウチナカ公募の埋め済みスライド見本（prhythm-docs が参照）
 │       ├── index.md       # 打ち合わせ用 Markdown の型（prhythm-docs が埋める）
 │       └── sections.html  # スライド本体の型
 ├── references/

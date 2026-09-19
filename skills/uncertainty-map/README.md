@@ -31,6 +31,10 @@
 
 依頼: 「社内公募アプリのプロトで次に何を検証すべき？」
 
+スライドにまとめるとこうなる。
+
+![uncertainty-map のスライド見本](slide-sample.png)
+
 ::: info 出力される `docs/uncertainty-map.md` の抜粋:
 
 ```mermaid
@@ -55,8 +59,10 @@ quadrantChart
 uncertainty-map/
 ├── SKILL.md
 ├── README.md
+├── slide-sample.png           # ウチナカ公募のスライド見本
 ├── templates/
 │   └── docs/
+│       ├── example.html           # ウチナカ公募の埋め済みスライド見本（prhythm-docs が参照）
 │       ├── index.md               # 打ち合わせ用 Markdown の型（prhythm-docs が埋める）
 │       └── sections.html          # スライド本体の型
 └── references/

@@ -38,6 +38,10 @@
 
 依頼: 「社内公募アプリのビジョンを一緒に作って。部署を越えた手挙げが起きるようにしたい。」
 
+スライドにまとめるとこうなる。
+
+![product-vision-and-concept のスライド見本](slide-sample.png)
+
 ::: info 出力される最終稿:
 
 | 項目 | 内容 |
@@ -56,8 +60,10 @@
 product-vision-and-concept/
 ├── README.md
 ├── SKILL.md
+├── slide-sample.png           # ウチナカ公募のスライド見本
 ├── templates/
 │   └── docs/
+│       ├── example.html   # ウチナカ公募の埋め済みスライド見本（prhythm-docs が参照）
 │       ├── index.md       # 打ち合わせ用 Markdown の型（prhythm-docs が埋める）
 │       └── sections.html  # スライド本体の型
 └── references/

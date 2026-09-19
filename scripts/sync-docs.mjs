@@ -266,8 +266,19 @@ const syncSkillMarkdown = (skillSlug, relativePath, skillsConfig) => {
   writeFile(path.join(OUT_DIR, outRel), `${frontmatter}${rewriteSkillLinks(body, skillSlug)}`);
 };
 
+const syncSkillImages = (skillSlug) => {
+  const srcDir = path.join(SKILLS_DIR, skillSlug);
+  const destDir = path.join(OUT_DIR, 'skills', skillSlug);
+  for (const name of fs.readdirSync(srcDir)) {
+    if (!/^slide-sample.*\.png$/i.test(name)) continue;
+    fs.mkdirSync(destDir, { recursive: true });
+    fs.copyFileSync(path.join(srcDir, name), path.join(destDir, name));
+  }
+};
+
 const syncSkill = (skillSlug, skillsConfig, skillMeta) => {
   syncReadme(skillSlug, skillMeta);
+  syncSkillImages(skillSlug);
   if (skillsConfig.syncReference !== false) {
     syncSkillMarkdown(skillSlug, 'reference.md', skillsConfig);
   }
