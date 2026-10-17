@@ -1,0 +1,6 @@
+::1 - - [12/Oct/2026 03:32:58] "GET / HTTP/1.1" 200 -
+::1 - - [12/Oct/2026 03:32:58] "GET /slide-styles.css HTTP/1.1" 200 -
+::1 - - [12/Oct/2026 03:32:58] "GET /deck-stage.js HTTP/1.1" 200 -
+::1 - - [12/Oct/2026 03:32:58] "GET /image-slot.js HTTP/1.1" 200 -
+::1 - - [12/Oct/2026 03:32:58] code 404, message File not found
+::1 - - [12/Oct/2026 03:32:58] "GET /favicon.ico HTTP/1.1" 404 -
